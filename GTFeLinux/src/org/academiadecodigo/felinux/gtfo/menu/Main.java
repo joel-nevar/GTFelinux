@@ -1,5 +1,4 @@
 package org.academiadecodigo.felinux.gtfo.menu;
-
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Main {
