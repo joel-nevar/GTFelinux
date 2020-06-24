@@ -1,1 +1,7 @@
 .swp
+*.iml
+out
+.idea
+build
+target
+
