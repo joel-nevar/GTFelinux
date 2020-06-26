@@ -5,10 +5,11 @@ import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Field extends Rectangle{
+public class Field extends Picture {
 
-    private Rectangle field;
+    private  Picture field;
     private final int PADDING = 5;
     private final int SIZE_COL = 1320;    //3300 a 40%
     private final int SIZE_ROW = 594;     //990 a 60%
@@ -20,8 +21,7 @@ public class Field extends Rectangle{
 
 
     public Field (Player player, Enemy[] enemy, Npc[] npcs) {
-        field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
-        field.setColor(Color.BLACK);
+        field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
         this.player = player;
         this.enemy = enemy;
         this.npcs = npcs;
@@ -30,10 +30,9 @@ public class Field extends Rectangle{
     }
 
     public Field () {
+        field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
         this.player = new Player(this);
-        field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
-        field.setColor(Color.BLACK);
-        field.draw();
+        showMap();
 
     }
 
@@ -46,7 +45,7 @@ public class Field extends Rectangle{
      */
     private void showMap(){
         field.draw();
-        drawField();
+        player.draw();
     }
 
     /**
