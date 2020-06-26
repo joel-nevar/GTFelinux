@@ -29,7 +29,7 @@ public class Player extends Character {
         super();
         this.fieldOfThePlayer = field;
         this.keyboardHandler = new PlayerKeyboard(this);
-        this.playerImage = new Picture(100,100,"C:/Users/David/Desktop/Imagens/Cortadas/sprites/tile000.png");
+        this.playerImage = new Picture(100,100,"C:/Users/David/Documents/Repository_Jogo_GTF/gtfelinux/GTFeLinux/src/org/academiadecodigo/felinux/gtfo/images/tile000.png");
         playerImage.draw();
     }
     public void moveLeft(){
