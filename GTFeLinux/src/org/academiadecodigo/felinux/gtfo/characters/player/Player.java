@@ -15,7 +15,6 @@ public class Player extends Character {
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
-    private Keyboard keyboard;
     private KeyboardHandler keyboardHandler;
 
 
@@ -23,7 +22,6 @@ public class Player extends Character {
 
         super();
         this.keyboardHandler = new PlayerKeyboard();
-        this.keyboard = new Keyboard(keyboardHandler);
     }
 
     public int attack(Enemy enemy) {
