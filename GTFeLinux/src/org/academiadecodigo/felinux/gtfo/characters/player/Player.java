@@ -14,23 +14,22 @@ public class Player extends Character {
     private boolean hasMilk = false;
     private int clawDamage = 1;
 
-
-    public Player(){
+    public Player() {
         super();
 
     }
 
 
-   public int attack(Enemy enemy){
-            return 0;
-   }
+    public int attack(Enemy enemy) {
+        return 0;
+    }
 
 
-    public void loseEnergy(){
-       this.energy--;
-   }
+    public void loseEnergy() {
+        this.energy--;
+    }
 
-    public void stealMilk(){
+    public void stealMilk() {
         this.hasMilk = true;
     }
 
@@ -41,6 +40,7 @@ public class Player extends Character {
     public int getEnergy() {
         return energy;
     }
+
     @Override
     public int getLives() {
         return super.getLives();
