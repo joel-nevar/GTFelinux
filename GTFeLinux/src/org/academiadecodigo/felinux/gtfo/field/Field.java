@@ -10,8 +10,8 @@ public class Field {
 
     private Rectangle field;
     private static final int PADDING = 5;
-    private static final int SIZE_COL = 2640;    //3300 a 80%
-    private static final int SIZE_ROW = 792;     //990 a 80%
+    private static final int SIZE_COL = 1320;    //3300 a 40%
+    private static final int SIZE_ROW = 594;     //990 a 60%
     private static final int PIXEL = 2;
     private Player player;
     private Enemy[] enemy;
