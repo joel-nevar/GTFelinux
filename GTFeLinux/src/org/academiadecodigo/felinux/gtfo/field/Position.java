@@ -1,9 +1,11 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
 /**
  * A position on the Field that is capable of moving around
  */
-public interface Position {
+public interface Position{
 
 
     /**
