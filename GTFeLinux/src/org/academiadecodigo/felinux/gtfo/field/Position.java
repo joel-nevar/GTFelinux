@@ -57,5 +57,5 @@ public interface Position{
      *
      * @return true if position is the same
      */
-    boolean comparePosition(Position position);
+    //boolean comparePosition(Position position);
 }

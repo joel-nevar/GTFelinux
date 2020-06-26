@@ -65,5 +65,9 @@ public class Field {
         BLOCK2
     }*/
 
+    public boolean comparePosition(Position position) {
+        return false;
+    }
+
 }
 

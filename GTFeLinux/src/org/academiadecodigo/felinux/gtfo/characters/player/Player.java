@@ -16,10 +16,6 @@ public class Player extends Character {
     private int clawDamage = 1;
 
 
-    public Player() {
-        super();
-    }
-
     public int attack(Enemy enemy) {
         return 0;
     }
@@ -94,8 +90,4 @@ public class Player extends Character {
         return null;
     }
 
-    @Override
-    public boolean comparePosition(Position position) {
-        return false;
-    }
 }

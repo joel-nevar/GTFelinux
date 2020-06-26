@@ -8,6 +8,9 @@ public abstract class Npc extends Character {
     private Position position;
     private boolean visited;
 
+    public Npc(){
+
+    }
 
     public String getMessage() {
         return "Return this string";

@@ -4,7 +4,7 @@ import org.academiadecodigo.felinux.gtfo.field.Position;
 import org.academiadecodigo.felinux.gtfo.field.SpriteType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public abstract class Character extends Picture {
+public abstract class Character extends Picture implements Position {
 
     private int lives;
     private int damage;
