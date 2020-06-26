@@ -5,17 +5,25 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
+/**
+ * Keyboard Handler for Player Ingame
+ */
 public class PlayerKeyboard implements KeyboardHandler {
 
 
     private Keyboard keyboard;
+    private Player player;
 
-    public PlayerKeyboard(){
+    public PlayerKeyboard(Player player){
 
+        this.player = player;
         keyboard = new Keyboard(this);
         init();
     }
 
+    /**
+     * Initialize Keyboard for player movement
+     */
     private void init(){
 
         KeyboardEvent left = new KeyboardEvent();
@@ -54,12 +62,48 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(attack);
     }
 
+    /**
+     * KeyboardEvent Handler for Player actions on key press
+     *
+     * @param keyboardEvent self explanatory
+     */
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
+        switch (keyboardEvent.getKey()){
+            case KeyboardEvent.KEY_LEFT:
+            case KeyboardEvent.KEY_A:
+                player.moveLeft();
+                break;
+            case KeyboardEvent.KEY_RIGHT:
+            case KeyboardEvent.KEY_D:
+                player.moveRight();
+                break;
+            case KeyboardEvent.KEY_UP:
+            case KeyboardEvent.KEY_W:
+                player.moveUp();
+                break;
+            case KeyboardEvent.KEY_DOWN:
+            case KeyboardEvent.KEY_S:
+                player.moveDown();
+                break;
+                /* TODO fix interact and attack keys
+            case KeyboardEvent.KEY_E:
+                player.interact();
+                break;
+            case KeyboardEvent.KEY_SPACE:
+               if()
 
+                 */
+        }
     }
 
+    /**
+     * KeyboardEvent Handler for Player actions on key released
+     * Not Implemented
+     *
+     * @param keyboardEvent self explanatory
+     */
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 

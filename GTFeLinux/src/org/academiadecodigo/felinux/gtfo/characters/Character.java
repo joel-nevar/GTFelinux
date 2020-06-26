@@ -13,11 +13,9 @@ public abstract class Character extends Picture implements Position {
     private SpriteType image;
     private String message;
 
-
-    public void interact(Character char1, Character char2) {
+    //resolver
+    public void interact(Character char1) {
         System.out.println(char1.getMessage());
-        System.out.println(char2.getMessage());
-
     }
 
 
