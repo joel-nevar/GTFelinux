@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.game.npcs;
+package org.academiadecodigo.felinux.gtfo.characters.npcs;
 import javax.swing.text.Position;
 
 public abstract class Npcs {
