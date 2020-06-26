@@ -5,11 +5,8 @@ import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.field.Position;
 import org.academiadecodigo.felinux.gtfo.field.SpriteType;
-import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-
-import java.awt.*;
 
 
 public class Player extends Character {
@@ -29,7 +26,7 @@ public class Player extends Character {
         super();
         this.fieldOfThePlayer = field;
         this.keyboardHandler = new PlayerKeyboard(this);
-        this.playerImage = new Picture(100,100,"C:/Users/David/Documents/Repository_Jogo_GTF/gtfelinux/GTFeLinux/src/org/academiadecodigo/felinux/gtfo/images/tile000.png");
+        this.playerImage = new Picture(100,100,"GTFeLinux/resources/images/tile000.png");
         playerImage.draw();
     }
     public void moveLeft(){
