@@ -3,7 +3,8 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Position;
-import org.academiadecodigo.felinux.gtfo.field.SpriteType;
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 
 public class Player extends Character {
@@ -14,7 +15,14 @@ public class Player extends Character {
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
+    private KeyboardHandler keyboardHandler;
 
+
+    public Player() {
+
+        super();
+        this.keyboardHandler = new PlayerKeyboard();
+    }
 
     public int attack(Enemy enemy) {
         return 0;
@@ -64,30 +72,4 @@ public class Player extends Character {
     public void gainLife() {
         super.setLives(super.getLives() + 1);
     }
-
-    @Override
-    public int getCol() {
-        return 0;
-    }
-
-    @Override
-    public int getRow() {
-        return 0;
-    }
-
-    @Override
-    public void setCol(int column) {
-
-    }
-
-    @Override
-    public void setRow(int row) {
-
-    }
-
-    @Override
-    public SpriteType getSprite() {
-        return null;
-    }
-
 }
