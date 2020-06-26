@@ -14,16 +14,14 @@ public class Player extends Character {
     private boolean hasMilk = false;
     private int clawDamage = 1;
 
+
     public Player() {
         super();
-
     }
-
 
     public int attack(Enemy enemy) {
         return 0;
     }
-
 
     public void loseEnergy() {
         this.energy--;

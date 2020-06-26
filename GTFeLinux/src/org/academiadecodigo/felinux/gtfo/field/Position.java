@@ -11,41 +11,41 @@ public interface Position {
      *
      * @return the column number (int)
      */
-    public int getCol();
+    int getCol();
 
     /**
      * Gets the position row
      *
      * @return the row number (int)
      */
-    public int getRow();
+    int getRow();
 
     /**
      * Changes the position column of this Position
      *
      * @param column the new column (int)
      */
-    public void setCol(int column);
+    void setCol(int column);
 
     /**
      * Changes the position row of this Position
      *
      * @param row the new row (int)
      */
-    public void setRow(int row);
+    void setRow(int row);
 
     /**
-     * Gets this position's SpryteType
+     * Gets this position's SpriteType
      *
-     * @return the SpryteType
+     * @return the SpriteType
      */
-    public SpriteType getSpryte();
+    SpriteType getSprite();
 
     /**
      * Not implemented yet
      *
      *
-     */
+     **/
     //public void move();
 
     /**
@@ -55,5 +55,5 @@ public interface Position {
      *
      * @return true if position is the same
      */
-    public boolean comparePosition(Position position);
+    boolean comparePosition(Position position);
 }
