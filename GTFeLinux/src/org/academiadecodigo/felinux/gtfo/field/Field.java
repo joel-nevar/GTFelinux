@@ -10,7 +10,8 @@ public class Field {
 
     private Rectangle field;
     private static final int PADDING = 5;
-    private static final int SIZE = 100;
+    private static final int SIZE_COL = 2640;    //3300 a 80%
+    private static final int SIZE_ROW = 792;     //990 a 80%
     private static final int PIXEL = 2;
     private Player player;
     private Enemy[] enemy;
@@ -19,7 +20,7 @@ public class Field {
 
 
     public Field (Player player, Enemy[] enemy, Npc[] npcs) {
-        field = new Rectangle(PADDING,PADDING,SIZE,SIZE);
+        field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
         field.setColor(Color.BLACK);
         this.player = player;
         this.enemy = enemy;
@@ -29,7 +30,7 @@ public class Field {
     }
 
     public Field () {
-        field = new Rectangle(PADDING,PADDING,SIZE,SIZE);
+        field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
         field.setColor(Color.BLACK);
         field.draw();
     }
