@@ -33,26 +33,26 @@ public class Player extends Character {
         playerImage.draw();
     }
     public void moveLeft(){
-        if(this.fieldOfThePlayer.getPADDING() == playerImage.getWidth()){
+        if(this.fieldOfThePlayer.getPaddingX() == playerImage.getX()){
             return;
         }
         playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
     }
     public void moveUp(){
-        if(this.fieldOfThePlayer.getPADDING() == playerImage.getHeight()){
+        if(this.fieldOfThePlayer.getPaddingY() == playerImage.getY()){
             return;
         }
         playerImage.translate(0,-fieldOfThePlayer.getCellSize());
     }
     public void moveRight(){
-        if(this.fieldOfThePlayer.getWidth() == playerImage.getWidth()){
+        if(this.fieldOfThePlayer.getWidth() == playerImage.getMaxX()){
             return;
         }
         playerImage.translate(fieldOfThePlayer.getCellSize(),0);
     }
 
     public void moveDown(){
-        if(this.fieldOfThePlayer.getHeight() == playerImage.getHeight()){
+        if(this.fieldOfThePlayer.getHeight() == playerImage.getMaxY()){
             return;
         }
         playerImage.translate(0,fieldOfThePlayer.getCellSize());

@@ -27,23 +27,35 @@ public class PlayerKeyboard implements KeyboardHandler {
     private void init(){
 
         KeyboardEvent left = new KeyboardEvent();
-        left.setKey(KeyboardEvent.KEY_LEFT);
         left.setKey(KeyboardEvent.KEY_A);
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        KeyboardEvent leftArrow = new KeyboardEvent();
+        leftArrow.setKey(KeyboardEvent.KEY_LEFT);
+        leftArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        KeyboardEvent rightArrow = new KeyboardEvent();
+        rightArrow.setKey(KeyboardEvent.KEY_RIGHT);
+        rightArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        KeyboardEvent upArrow = new KeyboardEvent();
+        upArrow.setKey(KeyboardEvent.KEY_UP);
+        upArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        KeyboardEvent downArrow = new KeyboardEvent();
+        downArrow.setKey(KeyboardEvent.KEY_DOWN);
+        downArrow.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         KeyboardEvent right = new KeyboardEvent();
-        right.setKey(KeyboardEvent.KEY_RIGHT);
-        left.setKey(KeyboardEvent.KEY_D);
+        right.setKey(KeyboardEvent.KEY_D);
         right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent up = new KeyboardEvent();
-        up.setKey(KeyboardEvent.KEY_UP);
-        left.setKey(KeyboardEvent.KEY_W);
+        up.setKey(KeyboardEvent.KEY_W);
         up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent down = new KeyboardEvent();
-        down.setKey(KeyboardEvent.KEY_DOWN);
-        left.setKey(KeyboardEvent.KEY_S);
+        down.setKey(KeyboardEvent.KEY_S);
         down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent interact = new KeyboardEvent();
@@ -58,6 +70,10 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
+        keyboard.addEventListener(leftArrow);
+        keyboard.addEventListener(rightArrow);
+        keyboard.addEventListener(upArrow);
+        keyboard.addEventListener(downArrow);
         keyboard.addEventListener(interact);
         keyboard.addEventListener(attack);
     }
@@ -72,21 +88,21 @@ public class PlayerKeyboard implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()){
             case KeyboardEvent.KEY_LEFT:
-            case KeyboardEvent.KEY_A:
-                player.moveLeft();
-                break;
+                case KeyboardEvent.KEY_A:
+                    player.moveLeft();
+                    break;
             case KeyboardEvent.KEY_RIGHT:
-            case KeyboardEvent.KEY_D:
-                player.moveRight();
-                break;
+                case KeyboardEvent.KEY_D:
+                    player.moveRight();
+                    break;
             case KeyboardEvent.KEY_UP:
-            case KeyboardEvent.KEY_W:
-                player.moveUp();
-                break;
+                case KeyboardEvent.KEY_W:
+                    player.moveUp();
+                    break;
             case KeyboardEvent.KEY_DOWN:
-            case KeyboardEvent.KEY_S:
-                player.moveDown();
-                break;
+                case KeyboardEvent.KEY_S:
+                    player.moveDown();
+                    break;
                 /* TODO fix interact and attack keys
             case KeyboardEvent.KEY_E:
                 player.interact();
