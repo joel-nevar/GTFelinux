@@ -21,7 +21,7 @@ public abstract class Character extends Picture implements Position {
     }
 
 
-    public String getMessage() {
+   public String getMessage() {
         return message;
     }
 
