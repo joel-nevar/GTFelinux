@@ -1,18 +1,16 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
-import javax.swing.text.Position;
 
-public abstract class Npcs {
+import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.field.Position;
+
+public abstract class Npc extends Character {
 
     private Position position;
     private boolean visited;
 
 
     public String getMessage() {
-        return String;
-    }
-
-    public void interect() {
-
+        return "Return this string";
     }
 
     public Position getPosition() {

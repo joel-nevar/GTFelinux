@@ -3,6 +3,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Position;
+import org.academiadecodigo.felinux.gtfo.field.SpriteType;
 
 
 public class Player extends Character {
@@ -66,5 +67,35 @@ public class Player extends Character {
 
     public void gainLife() {
         super.setLives(super.getLives() + 1);
+    }
+
+    @Override
+    public int getCol() {
+        return 0;
+    }
+
+    @Override
+    public int getRow() {
+        return 0;
+    }
+
+    @Override
+    public void setCol(int column) {
+
+    }
+
+    @Override
+    public void setRow(int row) {
+
+    }
+
+    @Override
+    public SpriteType getSprite() {
+        return null;
+    }
+
+    @Override
+    public boolean comparePosition(Position position) {
+        return false;
     }
 }

@@ -1,17 +1,28 @@
 package org.academiadecodigo.felinux.gtfo.characters;
 
-
 import org.academiadecodigo.felinux.gtfo.field.Position;
 import org.academiadecodigo.felinux.gtfo.field.SpriteType;
 
-public abstract class Character {
+public abstract class Character implements Position {
 
     private int lives;
     private int damage;
     private  int speed;
     private Position position;
     private SpriteType image;
+    private String message;
 
+
+    public void interact(Character char1, Character char2) {
+        System.out.println(char1.getMessage());
+        System.out.println(char2.getMessage());
+
+    }
+
+
+    public String getMessage() {
+        return message;
+    }
 
     public void takeDamage() {
         this.lives--;
