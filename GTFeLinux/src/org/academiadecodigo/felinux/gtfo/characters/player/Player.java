@@ -23,25 +23,30 @@ public class Player extends Character implements Moveable {
 
 
     public Player(Field field) {
-
         super();
         this.fieldOfThePlayer = field;
-        this.keyboardHandler = new PlayerKeyboard(this);
         this.playerImage = new Picture(50,50,"resources/images/tile000.png");
-        playerImage.draw();
+        this.keyboardHandler = new PlayerKeyboard(this);
     }
+
+    public Picture getPlayerImage() {
+        return playerImage;
+    }
+
     public void moveLeft(){
         if(this.fieldOfThePlayer.getPadding()  >= playerImage.getX()){
             return;
         }
         playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
     }
+
     public void moveUp(){
         if(this.fieldOfThePlayer.getPadding() >= playerImage.getY()){
             return;
         }
         playerImage.translate(0,-fieldOfThePlayer.getCellSize());
     }
+
     public void moveRight(){
         if(this.fieldOfThePlayer.getSizeCol() <= playerImage.getMaxX() - this.fieldOfThePlayer.getPadding()){
             return;

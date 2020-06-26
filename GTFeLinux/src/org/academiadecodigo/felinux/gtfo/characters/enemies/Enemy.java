@@ -10,11 +10,16 @@ public abstract class Enemy implements Moveable {
 
     private int speed;
     private Field enemyField;
-    private boolean isDead;
+    private boolean isDead = false;
     private Picture enemyPosition;
 
-    public Enemy(Field enemyField){
+    public Enemy(Field enemyField, int posX, int posY, String spriteName){
         this.enemyField = enemyField;
+        this.enemyPosition = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
+    }
+
+    public Picture getEnemyPosition() {
+        return enemyPosition;
     }
 
     public boolean isKill() {
@@ -30,6 +35,10 @@ public abstract class Enemy implements Moveable {
     }
 
     public void move(){
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 
     @Override

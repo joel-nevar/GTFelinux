@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.menu;
 
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -11,8 +12,10 @@ public class Menu implements KeyboardHandler, MouseHandler {
 
     public void start(){
         Field gameField = new Field();
-
     }
+    public void instructions(){};
+    public void DLC(){};
+    public void exit(){};
 
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
