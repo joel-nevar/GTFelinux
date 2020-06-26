@@ -58,4 +58,5 @@ public abstract class Character extends Picture implements Position {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
 }

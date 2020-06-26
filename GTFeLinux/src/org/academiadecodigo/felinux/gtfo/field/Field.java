@@ -34,6 +34,7 @@ public class Field extends Rectangle{
         field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
         field.setColor(Color.BLACK);
         field.draw();
+
     }
 
     public int getPadding() {
@@ -80,6 +81,11 @@ public class Field extends Rectangle{
 
     public boolean comparePosition(Position position) {
         return false;
+    }
+
+    private enum walkable{
+        IS_WALKABLE,
+        NOT_WALKABLE;
     }
 
 }

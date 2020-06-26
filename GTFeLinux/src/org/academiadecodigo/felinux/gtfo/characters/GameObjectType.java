@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.field;
+package org.academiadecodigo.felinux.gtfo.characters;
 
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -12,7 +12,7 @@ public enum GameObjectType {
     private Picture picture;
     private boolean hasMilk = false;
 
-    GameObjectType(int X, int Y, String image) {
+     GameObjectType(int X, int Y, String image) {
         this.picture = new Picture(X, Y, image);
 
     }
