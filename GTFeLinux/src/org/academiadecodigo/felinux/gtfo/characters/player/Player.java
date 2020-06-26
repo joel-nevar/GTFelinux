@@ -3,6 +3,8 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Position;
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 
 public class Player extends Character {
@@ -13,10 +15,15 @@ public class Player extends Character {
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
+    private Keyboard keyboard;
+    private KeyboardHandler keyboardHandler;
 
 
     public Player() {
+
         super();
+        this.keyboardHandler = new PlayerKeyboard();
+        this.keyboard = new Keyboard(keyboardHandler);
     }
 
     public int attack(Enemy enemy) {
