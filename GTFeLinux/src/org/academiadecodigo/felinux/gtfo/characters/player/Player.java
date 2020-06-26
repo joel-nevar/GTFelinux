@@ -22,7 +22,7 @@ public class Player extends Character {
     public Player() {
 
         super();
-        this.keyboardHandler = new PlayerKeyboard();
+        this.keyboardHandler = new PlayerKeyboard(this);
     }
 
     public int attack(Enemy enemy) {
