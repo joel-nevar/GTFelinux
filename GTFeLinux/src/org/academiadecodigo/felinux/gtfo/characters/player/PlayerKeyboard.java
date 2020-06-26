@@ -16,7 +16,7 @@ public class PlayerKeyboard implements KeyboardHandler {
         init();
     }
 
-    private void init(){
+    public void init(){
 
         KeyboardEvent left = new KeyboardEvent();
         left.setKey(KeyboardEvent.KEY_LEFT);
@@ -54,9 +54,12 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(attack);
     }
 
+    public Keyboard getKeyboard() {
+        return keyboard;
+    }
+
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-
 
     }
 

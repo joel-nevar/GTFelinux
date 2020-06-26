@@ -2,15 +2,18 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.field.Position;
 import org.academiadecodigo.felinux.gtfo.field.SpriteType;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class Player extends Character {
 
-
+    private Picture playerImage;
+    private static final int IMAGE_SIZE = 33;
     private boolean dead = false;
     private Position checkpoint;
     private int energy = 100;
@@ -20,9 +23,36 @@ public class Player extends Character {
 
 
     public Player() {
-
         super();
         this.keyboardHandler = new PlayerKeyboard();
+        this.playerImage = new Picture(checkpoint.getCol(),checkpoint.getRow(), "Caminho");
+        this.playerImage.draw();
+
+    }
+
+    public void moveLeft(Field field){
+        if(playerImage.getWidth() == 0){
+            return;     //Player doesn't move
+        }
+        this.playerImage.translate(-IMAGE_SIZE*checkpoint.getCol(),0);
+    }
+    public void moveRight(Field field){
+        if(playerImage.getWidth() == field.getWidth()){
+            return;
+        }
+        this.playerImage.translate(IMAGE_SIZE*checkpoint.getCol(),0);
+    }
+    public void moveUp(Field field){
+        if(playerImage.getHeight() == 0){
+            return;
+        }
+        this.playerImage.translate(0,-IMAGE_SIZE*checkpoint.getRow());
+    }
+    public void moveDown(Field field){
+        if(playerImage.getHeight() == field.getHeight()){
+            return;
+        }
+        this.playerImage.translate(0,IMAGE_SIZE*checkpoint.getRow());
     }
 
     public int attack(Enemy enemy) {

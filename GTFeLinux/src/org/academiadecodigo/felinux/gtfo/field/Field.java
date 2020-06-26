@@ -6,7 +6,7 @@ import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-public class Field {
+public class Field extends Rectangle{
 
     private Rectangle field;
     private static final int PADDING = 5;
