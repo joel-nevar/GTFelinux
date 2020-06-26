@@ -1,7 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.field.Position;
@@ -10,7 +9,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends Character implements Moveable {
+public class Player extends Character {
 
     private Picture playerImage;
     private boolean dead = false;
@@ -27,30 +26,30 @@ public class Player extends Character implements Moveable {
         super();
         this.fieldOfThePlayer = field;
         this.keyboardHandler = new PlayerKeyboard(this);
-        this.playerImage = new Picture(50,50,"resources/images/tile000.png");
+        this.playerImage = new Picture(100,100,"resources/images/tile000.png");
         playerImage.draw();
     }
     public void moveLeft(){
-        if(this.fieldOfThePlayer.getPadding()  >= playerImage.getX()){
+        if(this.fieldOfThePlayer.getPaddingX() == playerImage.getX()){
             return;
         }
         playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
     }
     public void moveUp(){
-        if(this.fieldOfThePlayer.getPadding() >= playerImage.getY()){
+        if(this.fieldOfThePlayer.getPaddingY() == playerImage.getY()){
             return;
         }
         playerImage.translate(0,-fieldOfThePlayer.getCellSize());
     }
     public void moveRight(){
-        if(this.fieldOfThePlayer.getSizeCol() <= playerImage.getMaxX() - this.fieldOfThePlayer.getPadding()){
+        if(this.fieldOfThePlayer.getWidth() == playerImage.getMaxX()){
             return;
         }
         playerImage.translate(fieldOfThePlayer.getCellSize(),0);
     }
 
     public void moveDown(){
-        if(this.fieldOfThePlayer.getSizeRow() <= playerImage.getMaxY() - this.fieldOfThePlayer.getPadding()){
+        if(this.fieldOfThePlayer.getHeight() == playerImage.getMaxY()){
             return;
         }
         playerImage.translate(0,fieldOfThePlayer.getCellSize());
