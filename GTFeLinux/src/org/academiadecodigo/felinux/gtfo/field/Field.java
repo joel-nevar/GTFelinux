@@ -30,11 +30,15 @@ public class Field extends Rectangle{
     }
 
     public Field () {
+        this.player = new Player(this);
         field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
         field.setColor(Color.BLACK);
         field.draw();
     }
 
+    public static int getPADDING() {
+        return PADDING;
+    }
 
     /**
      *Show full map

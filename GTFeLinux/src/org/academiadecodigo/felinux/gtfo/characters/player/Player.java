@@ -2,29 +2,60 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.field.Position;
 import org.academiadecodigo.felinux.gtfo.field.SpriteType;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.awt.*;
+
 
 public class Player extends Character {
 
     private Picture playerImage;
-    private static final int IMAGE_SIZE = 33;
     private boolean dead = false;
     private Position checkpoint;
+    private Field fieldOfThePlayer;
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
     private KeyboardHandler keyboardHandler;
 
 
-    public Player() {
+    public Player(Field field) {
 
         super();
+        this.fieldOfThePlayer = field;
         this.keyboardHandler = new PlayerKeyboard(this);
+        this.playerImage = new Picture(100,100,"C:/Users/David/Desktop/Imagens/Cortadas/sprites/tile000.png");
+        playerImage.draw();
+    }
+    public void moveLeft(){
+        if(this.fieldOfThePlayer.getPADDING() == playerImage.getWidth()){
+            return;
+        }
+        playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
+    }
+    public void moveUp(){
+        if(this.fieldOfThePlayer.getPADDING() == playerImage.getHeight()){
+            return;
+        }
+        playerImage.translate(0,-fieldOfThePlayer.getCellSize());
+    }
+    public void moveRight(){
+        if(this.fieldOfThePlayer.getWidth() == playerImage.getWidth()){
+            return;
+        }
+        playerImage.translate(fieldOfThePlayer.getCellSize(),0);
+    }
+
+    public void moveDown(){
+        if(this.fieldOfThePlayer.getHeight() == playerImage.getHeight()){
+            return;
+        }
+        playerImage.translate(0,fieldOfThePlayer.getCellSize());
     }
 
     public int attack(Enemy enemy) {
