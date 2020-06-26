@@ -26,17 +26,17 @@ public class Player extends Character {
         super();
         this.fieldOfThePlayer = field;
         this.keyboardHandler = new PlayerKeyboard(this);
-        this.playerImage = new Picture(100,100,"GTFeLinux/resources/images/tile000.png");
+        this.playerImage = new Picture(100,100,"resources/images/tile000.png");
         playerImage.draw();
     }
     public void moveLeft(){
-        if(this.fieldOfThePlayer.getPaddingX() == playerImage.getX()){
+        if(this.fieldOfThePlayer.getPadding() == playerImage.getX()){
             return;
         }
         playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
     }
     public void moveUp(){
-        if(this.fieldOfThePlayer.getPaddingY() == playerImage.getY()){
+        if(this.fieldOfThePlayer.getPadding() == playerImage.getY()){
             return;
         }
         playerImage.translate(0,-fieldOfThePlayer.getCellSize());
