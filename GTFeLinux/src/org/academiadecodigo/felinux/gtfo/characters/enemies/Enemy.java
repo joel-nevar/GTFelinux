@@ -8,14 +8,12 @@ public abstract class Enemy {
     private boolean isDead;
 
 
-
-
     public boolean isKill() {
-        return isDead;
+        return this.isDead;
     }
 
     public Position getPosition() {
-        return position;
+        return this.position;
     }
 
     public void movement(){

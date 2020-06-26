@@ -18,19 +18,19 @@ public abstract class Character {
     }
 
     public int getLives() {
-        return lives;
+        return this.lives;
     }
 
     public Position getPosition() {
-        return position;
+        return this.position;
     }
 
     public int getDamage() {
-        return damage;
+        return this.damage;
     }
 
     public int getSpeed() {
-        return speed;
+        return this.speed;
     }
 
     public void setLives(int lives) {

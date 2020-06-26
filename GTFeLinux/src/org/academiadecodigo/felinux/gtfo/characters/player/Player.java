@@ -34,7 +34,7 @@ public class Player extends Character {
     }
 
     public int getClawDamage() {
-        return clawDamage;
+        return this.clawDamage;
     }
 
     public int getEnergy() {
@@ -47,7 +47,7 @@ public class Player extends Character {
     }
 
     public Position getCheckpoint() {
-        return checkpoint;
+        return this.checkpoint;
     }
 
     public void setDead(boolean dead) {
