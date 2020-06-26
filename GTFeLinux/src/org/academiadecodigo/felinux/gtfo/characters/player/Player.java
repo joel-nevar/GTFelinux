@@ -26,7 +26,7 @@ public class Player extends Character {
         super();
         this.fieldOfThePlayer = field;
         this.keyboardHandler = new PlayerKeyboard(this);
-        this.playerImage = new Picture(100,100,"GTFeLinux/resources/images/tile000.png");
+        this.playerImage = new Picture(100,100,"resources/images/tile000.png");
         playerImage.draw();
     }
     public void moveLeft(){

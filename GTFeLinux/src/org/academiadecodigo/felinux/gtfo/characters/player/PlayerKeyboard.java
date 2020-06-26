@@ -6,13 +6,17 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
 /**
- * Keyboard Handler for Player Ingame
+ * Keyboard Player Ingame
  */
 public class PlayerKeyboard implements KeyboardHandler {
 
 
     private Keyboard keyboard;
     private Player player;
+    boolean goingLeft = false;
+    boolean goingRight = false;
+    boolean goingUp = false;
+    boolean goingDown = false;
 
     public PlayerKeyboard(Player player){
 
@@ -81,28 +85,37 @@ public class PlayerKeyboard implements KeyboardHandler {
     /**
      * KeyboardEvent Handler for Player actions on key press
      *
-     * @param keyboardEvent self explanatory
+     * @param keyboardEvent the keyboard event
      */
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
         switch (keyboardEvent.getKey()){
+
             case KeyboardEvent.KEY_LEFT:
-                case KeyboardEvent.KEY_A:
-                    player.moveLeft();
-                    break;
+            case KeyboardEvent.KEY_A:
+                goingLeft = true;
+                player.moveLeft();
+                break;
+
             case KeyboardEvent.KEY_RIGHT:
-                case KeyboardEvent.KEY_D:
-                    player.moveRight();
-                    break;
+            case KeyboardEvent.KEY_D:
+                goingRight = true;
+                player.moveRight();
+                break;
+
             case KeyboardEvent.KEY_UP:
-                case KeyboardEvent.KEY_W:
-                    player.moveUp();
-                    break;
+            case KeyboardEvent.KEY_W:
+                goingUp = true;
+                player.moveUp();
+                break;
+
             case KeyboardEvent.KEY_DOWN:
-                case KeyboardEvent.KEY_S:
-                    player.moveDown();
-                    break;
+            case KeyboardEvent.KEY_S:
+                goingDown = true;
+                player.moveDown();
+                break;
+
                 /* TODO fix interact and attack keys
             case KeyboardEvent.KEY_E:
                 player.interact();
@@ -116,12 +129,34 @@ public class PlayerKeyboard implements KeyboardHandler {
 
     /**
      * KeyboardEvent Handler for Player actions on key released
-     * Not Implemented
      *
-     * @param keyboardEvent self explanatory
+     * @param keyboardEvent the keyboard event
+
      */
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
+        switch (keyboardEvent.getKey()) {
+            case KeyboardEvent.KEY_LEFT:
+            case KeyboardEvent.KEY_A:
+                goingLeft = false;
+                break;
+
+            case KeyboardEvent.KEY_RIGHT:
+            case KeyboardEvent.KEY_D:
+                goingRight = false;
+                break;
+
+            case KeyboardEvent.KEY_UP:
+            case KeyboardEvent.KEY_W:
+                goingUp = false;
+                break;
+
+            case KeyboardEvent.KEY_DOWN:
+            case KeyboardEvent.KEY_S:
+                goingDown = false;
+                break;
+
+        }
     }
 }
