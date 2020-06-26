@@ -9,8 +9,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 public class Field extends Rectangle{
 
     private Rectangle field;
-    private static final int PADDING_X = 5;
-    private static final int PADDING_Y = 5;
+    private static final int PADDING = 5;
     private static final int SIZE_COL = 1320;    //3300 a 40%
     private static final int SIZE_ROW = 594;     //990 a 60%
     private static final int PIXEL = 2;
@@ -21,7 +20,7 @@ public class Field extends Rectangle{
 
 
     public Field (Player player, Enemy[] enemy, Npc[] npcs) {
-        field = new Rectangle(PADDING_X,PADDING_Y,SIZE_COL,SIZE_ROW);
+        field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
         field.setColor(Color.BLACK);
         this.player = player;
         this.enemy = enemy;
@@ -32,17 +31,13 @@ public class Field extends Rectangle{
 
     public Field () {
         this.player = new Player(this);
-        field = new Rectangle(PADDING_X,PADDING_Y,SIZE_COL,SIZE_ROW);
+        field = new Rectangle(PADDING,PADDING,SIZE_COL,SIZE_ROW);
         field.setColor(Color.BLACK);
         field.draw();
     }
 
-    public static int getPaddingX() {
-        return PADDING_X;
-    }
-
-    public static int getPaddingY() {
-        return PADDING_Y;
+    public static int getPadding() {
+        return PADDING;
     }
 
     /**
@@ -64,6 +59,14 @@ public class Field extends Rectangle{
 
     public void makePosition(){
 
+    }
+
+    public static int getSizeRow() {
+        return SIZE_ROW;
+    }
+
+    public static int getSizeCol() {
+        return SIZE_COL;
     }
 
     public int getCellSize() {
