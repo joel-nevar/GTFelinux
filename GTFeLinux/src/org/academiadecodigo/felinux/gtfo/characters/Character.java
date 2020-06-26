@@ -1,6 +1,8 @@
 package org.academiadecodigo.felinux.gtfo.characters;
 
 
+import org.academiadecodigo.felinux.gtfo.field.Position;
+import org.academiadecodigo.felinux.gtfo.field.SpriteType;
 
 public abstract class Character {
 

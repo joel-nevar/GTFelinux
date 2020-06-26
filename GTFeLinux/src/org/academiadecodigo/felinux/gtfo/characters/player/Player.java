@@ -2,7 +2,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
-
+import org.academiadecodigo.felinux.gtfo.field.Position;
 
 
 public class Player extends Character {
@@ -22,7 +22,7 @@ public class Player extends Character {
 
 
    public int attack(Enemy enemy){
-
+            return 0;
    }
 
 
@@ -69,8 +69,4 @@ public class Player extends Character {
     public void gainLife() {
         super.setLives(super.getLives() + 1);
     }
-
-
-
-
 }
