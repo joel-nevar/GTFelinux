@@ -22,10 +22,6 @@ public abstract class Enemy implements Moveable {
         return enemyPosition;
     }
 
-    public boolean isKill() {
-        return this.isDead;
-    }
-
     public Picture getPosition() {
         return this.enemyPosition;
     }

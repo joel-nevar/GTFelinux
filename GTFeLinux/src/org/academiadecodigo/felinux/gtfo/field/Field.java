@@ -1,7 +1,5 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
-import org.academiadecodigo.felinux.gtfo.characters.Factory;
-import org.academiadecodigo.felinux.gtfo.characters.GameObjectType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
@@ -21,8 +19,6 @@ public class Field extends Picture {
     private Enemy enemy;
     private Npc[] npcs;
     private SpriteType[] spriteTypes;
-    private Factory factory;
-    private Picture picture;
 
 
     public Field (Player player, Enemy enemy, Npc[] npcs) {
@@ -37,11 +33,8 @@ public class Field extends Picture {
     public Field () {
         field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
         this.player = new Player(this);
-        this.enemy = new CopCar(this, 200,200,"tile000");
+        this.enemy = new CopCar(this, 200,200,"AssaultableCat_1");
         showMap();
-        enemy.move();
-        picture = factory.gameObjectFactory(GameObjectType.MILK, this);
-
     }
 
     public int getPadding() {

@@ -11,11 +11,10 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 
 public class Menu implements KeyboardHandler, MouseHandler {
 
-    Enemy enemy;
     public void start(){
         Field gameField = new Field();
-
-
+        Enemy enemy = gameField.getEnemy();
+        enemy.move();
     }
     public void instructions(){};
     public void DLC(){};
