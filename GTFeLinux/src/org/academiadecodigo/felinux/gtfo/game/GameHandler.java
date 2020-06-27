@@ -32,8 +32,13 @@ public class GameHandler implements Runnable{
 
         field.showMap();
         player.getPlayer().draw();
-        enemies[0].getEnemy().draw();
+        enemies[0].getEnemyField().draw();
         objects[0].draw();
+
+        player.getEnergyBar().draw();
+        player.getHpBar().draw();
+        player.getEnergyAnimation().fill();
+        player.getHpAnimation().fill();
         run();
 
     }
@@ -41,17 +46,13 @@ public class GameHandler implements Runnable{
     @Override
     public void run() {
 
-        int x =0;
         while(!player.isDead()){
-
             try {
-                Thread.sleep(15);
+                Thread.sleep(15); //35
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             enemies[0].move();
-            x++;
-            System.out.println(x);
             moveAll();
             player.energyDecay();
             moveAllEnemies();

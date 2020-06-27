@@ -21,7 +21,7 @@ public abstract class Character extends Picture{
         return message;
     }
 
-    public void takeDamage() {
+    public void takeLethalDamage() {
         this.lives--;
     }
 
