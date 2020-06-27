@@ -1,6 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.menu;
 
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -10,8 +11,11 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 
 public class Menu implements KeyboardHandler, MouseHandler {
 
+    Enemy enemy;
     public void start(){
         Field gameField = new Field();
+
+
     }
     public void instructions(){};
     public void DLC(){};

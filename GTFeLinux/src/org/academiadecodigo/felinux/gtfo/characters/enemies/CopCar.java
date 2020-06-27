@@ -11,20 +11,28 @@ public class CopCar extends Enemy {
 
     @Override
     public void move() {
-        int random = (int) Math.random()*5;
-        switch (random){
-            case 0:
-                moveLeft();
-                break;
-            case 1:
-                moveRight();
-                break;
-            case 2:
-                moveUp();
-                break;
-            default:
-                moveDown();
-                break;
+        int count = 0;
+        while (count < 10) {
+            int random = (int) Math.floor(Math.random() * 5);
+            System.out.println(random);
+            switch (random) {
+                case 0:
+                    moveLeft();
+                    count++;
+                    break;
+                case 1:
+                    moveRight();
+                    count++;
+                    break;
+                case 2:
+                    moveUp();
+                    count++;
+                    break;
+                default:
+                    moveDown();
+                    count++;
+                    break;
+            }
         }
     }
 }

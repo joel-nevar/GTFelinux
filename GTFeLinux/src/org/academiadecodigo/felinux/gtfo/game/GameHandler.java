@@ -1,4 +1,13 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
-public interface GameHandler {
+import org.academiadecodigo.felinux.gtfo.characters.GameObjectType;
+import org.academiadecodigo.felinux.gtfo.menu.Menu;
+
+public class GameHandler extends Menu {
+
+
+
+
+
+
 }
