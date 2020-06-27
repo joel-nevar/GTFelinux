@@ -4,8 +4,12 @@ import org.academiadecodigo.felinux.gtfo.field.Field;
 
 public class CopCar extends Enemy {
 
+
+    private int speedlimiter;
+
     public CopCar(Field copCarField, int posX, int posY, String spriteName) {
         super(copCarField, posX, posY, spriteName);
+        this.speedlimiter = 5;
     }
 
     @Override
@@ -15,6 +19,12 @@ public class CopCar extends Enemy {
             //System.out.println("A cop car is now dead");
             return;
         }
+
+        if(speedlimiter<10){
+            speedlimiter++;
+            return;
+        }
+
         int random = (int) Math.floor(Math.random() * 4);
 
         switch (random) {
@@ -35,6 +45,8 @@ public class CopCar extends Enemy {
                 //System.out.println("Cop Here 3");
                 break;
         }
+
+        speedlimiter = 0;
     }
 }
 

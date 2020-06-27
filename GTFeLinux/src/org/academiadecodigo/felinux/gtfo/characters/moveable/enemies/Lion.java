@@ -12,7 +12,6 @@ public class Lion extends Enemy {
     public void move() {
 
         if(super.isDead()){
-            System.out.println("A cop car is now dead");
             return;
         }
 
@@ -21,19 +20,15 @@ public class Lion extends Enemy {
         switch (random){
             case 0:
                 moveLeft();
-                System.out.println("Lion Here 0");
                 break;
             case 1:
                 moveRight();
-                System.out.println("Lion Here 1");
                 break;
             case 2:
                 moveUp();
-                System.out.println("Lion Here 2");
                 break;
             default:
                 moveDown();
-                System.out.println("Lion Here 3");
                 break;
         }
     }

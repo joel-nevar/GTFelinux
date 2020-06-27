@@ -1,8 +1,8 @@
 package org.academiadecodigo.felinux.gtfo.menu;
 
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.field.Field;
+import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.mouse.MouseEvent;
@@ -10,25 +10,12 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 
 public class Menu implements KeyboardHandler, MouseHandler {
 
-    public void start() throws InterruptedException {
+    public void initializeGame(){
 
-        Field gameField = new Field();
-
-        Enemy enemy = gameField.getEnemy();
-        Player player = gameField.getPlayer();
-
-        try{
-            player.energyDecay();
-        } catch(InterruptedException error){
-            System.out.println("Erro de bosta");
-        }
-
-        while(!enemy.isDead()){
-            Thread.sleep(300);
-            enemy.move();
-        }
-
+        GameHandler game = new GameHandler(new Field());
+        game.init();
     }
+
     public void instructions(){};
     public void DLC(){};
     public void exit(){};
