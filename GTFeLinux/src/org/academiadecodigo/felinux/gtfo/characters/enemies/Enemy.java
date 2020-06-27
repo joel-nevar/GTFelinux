@@ -39,36 +39,36 @@ public abstract class Enemy implements Moveable {
     @Override
     public void moveLeft() {
         if(this.enemyField.getPadding()  >= enemyImage.getX()){
-            enemyImage.translate(enemyField.getCellSize(),0);
+            enemyImage.translate(enemyField.getCellSize()*13,0);
             return;
         }
-        enemyImage.translate(-enemyField.getCellSize(),0);
+        enemyImage.translate(-enemyField.getCellSize()*13,0);
     }
 
     @Override
     public void moveRight() {
         if(this.enemyField.getSizeCol() <= enemyImage.getMaxX() - this.enemyField.getPadding()){
-            enemyImage.translate(-enemyField.getCellSize(),0);
+            enemyImage.translate(-enemyField.getCellSize()*13,0);
             return;
         }
-        enemyImage.translate(enemyField.getCellSize(),0);
+        enemyImage.translate(enemyField.getCellSize()*13,0);
     }
 
     @Override
     public void moveUp() {
         if(this.enemyField.getPadding() >= enemyImage.getY()){
-            enemyImage.translate(0,enemyField.getCellSize());
+            enemyImage.translate(0,enemyField.getCellSize()*13);
             return;
         }
-        enemyImage.translate(0,-enemyField.getCellSize());
+        enemyImage.translate(0,-enemyField.getCellSize()*13);
     }
 
     @Override
     public void moveDown() {
         if(this.enemyField.getSizeRow() <= enemyImage.getMaxY() - this.enemyField.getPadding()){
-            enemyImage.translate(0,-enemyField.getCellSize());
+            enemyImage.translate(0,-enemyField.getCellSize()*13);
             return;
         }
-        enemyImage.translate(0,enemyField.getCellSize());
+        enemyImage.translate(0,enemyField.getCellSize()*13);
     }
 }
