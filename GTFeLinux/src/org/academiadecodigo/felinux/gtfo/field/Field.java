@@ -1,6 +1,5 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
-import org.academiadecodigo.felinux.gtfo.characters.GameObjectType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
