@@ -1,11 +1,11 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
-import org.academiadecodigo.felinux.gtfo.characters.GameObjectType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.game.Factory;
+import org.academiadecodigo.felinux.gtfo.game.GameObjectType;
 import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -13,8 +13,8 @@ public class Field extends Picture {
 
     private Picture field;
     private final int PADDING = 5;
-    private final int SIZE_COL = 1320;    //3300 a 40%
-    private final int SIZE_ROW = 594;     //990 a 60%
+    public final int SIZE_COL = 1320;    //3300 a 40%
+    public final int SIZE_ROW = 594;     //990 a 60%
     private final int PIXEL = 2;
     private Player player;
     private Enemy enemy;

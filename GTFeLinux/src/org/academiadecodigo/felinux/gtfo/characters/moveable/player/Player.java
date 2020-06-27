@@ -69,6 +69,24 @@ public class Player extends Character implements Moveable {
                                                 // AC  fica em  1126 - 1124
 
 
+    public void isDead(){
+        if(this.energy == 0){
+            super.setLives(super.getLives()- 1);
+        }
+        if (this.getLives() == 0) {
+            playerImage.delete();
+        }}
+
+        if( ){
+            this.setCheckpoint(this.checkpoint);
+            this.setPosition(this.checkpoint);
+            playerImage.draw();
+        }
+
+
+
+    }
+
     public int attack(Enemy enemy) {
         return 0;
     }
@@ -101,6 +119,8 @@ public class Player extends Character implements Moveable {
     public void setDead(boolean dead) {
         this.dead = dead;
     }
+
+
 
     public void setCheckpoint(Position checkpoint) {
         this.checkpoint = checkpoint;

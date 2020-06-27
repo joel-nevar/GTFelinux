@@ -9,6 +9,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Enemy implements Moveable {
 
+
     private int speed;
     private Field enemyField;
     private boolean isDead = false;
