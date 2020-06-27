@@ -12,12 +12,16 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 public class Menu implements KeyboardHandler, MouseHandler {
 
     public void start() throws InterruptedException {
+
         Field gameField = new Field();
+
         Enemy enemy = gameField.getEnemy();
-        for (int i = 0; i < 70 ; i++) {
-            Thread.sleep(180);
+
+        while(!enemy.isDead()){
+            Thread.sleep(300);
             enemy.move();
         }
+
     }
     public void instructions(){};
     public void DLC(){};
@@ -35,7 +39,6 @@ public class Menu implements KeyboardHandler, MouseHandler {
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-
     }
 
     @Override
