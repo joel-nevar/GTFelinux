@@ -53,7 +53,7 @@ public class Field extends Picture {
      */
     private void showMap(){
         field.draw();
-        player.getPlayerImage().draw();
+        player.getPlayer().draw();
         enemy.getEnemyImage().draw();
         milkTest.draw();
     }
@@ -81,13 +81,9 @@ public class Field extends Picture {
         return PIXEL;
     }
 
-    /*public Enum TerranType{
+    public enum TerranType{
         BLOCK1,
         BLOCK2
-    }*/
-
-    public boolean comparePosition(Position position) {
-        return false;
     }
 
     private enum walkable{

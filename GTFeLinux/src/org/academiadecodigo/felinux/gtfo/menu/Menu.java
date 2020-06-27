@@ -12,7 +12,6 @@ public class Menu implements KeyboardHandler, MouseHandler {
     public void start() throws InterruptedException {
 
         Field gameField = new Field();
-
         Enemy enemy = gameField.getEnemy();
 
         while(!enemy.isDead()){
