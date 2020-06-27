@@ -12,7 +12,7 @@ public class CopCar extends Enemy {
     public void move() {
 
         if (super.isDead()) {
-            System.out.println("A cop car is now dead");
+            //System.out.println("A cop car is now dead");
             return;
         }
         int random = (int) Math.floor(Math.random() * 4);
@@ -20,19 +20,19 @@ public class CopCar extends Enemy {
         switch (random) {
             case 0:
                 moveLeft();
-                System.out.println("Cop Here 0");
+                //System.out.println("Cop Here 0");
                 break;
             case 1:
                 moveRight();
-                System.out.println("Cop Here 1");
+                //System.out.println("Cop Here 1");
                 break;
             case 2:
                 moveUp();
-                System.out.println("Cop Here 2");
+                //System.out.println("Cop Here 2");
                 break;
             default:
                 moveDown();
-                System.out.println("Cop Here 3");
+                //System.out.println("Cop Here 3");
                 break;
         }
     }

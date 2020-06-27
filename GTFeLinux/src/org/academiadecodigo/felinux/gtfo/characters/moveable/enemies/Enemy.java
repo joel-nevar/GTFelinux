@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
 
+import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -44,7 +45,7 @@ public abstract class Enemy implements Moveable {
         this.directionType = DirectionType.LEFT;
 
         if(this.lastDirectionType == DirectionType.RIGHT){
-            System.out.println("This Direction is: " + DirectionType.LEFT + " Last Direction was: " + DirectionType.RIGHT);
+            //System.out.println("This Direction is: " + DirectionType.LEFT + " Last Direction was: " + DirectionType.RIGHT);
             return;
         }
 

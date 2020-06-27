@@ -44,7 +44,7 @@ public class Factory extends Picture{
         }
 
     }
-
+/*
     public static Picture playerFactory (PlayerType playerType) {
        return new Player();
     }
@@ -53,6 +53,6 @@ public class Factory extends Picture{
         }
             public static Picture npcFactory(NpcType npcType) {
                 return new AssaultableCat();
-            }
+            }*/
 
 }
