@@ -81,8 +81,9 @@ public class Player extends Character implements Moveable{
         }
     }
 
-    public int attack(Enemy enemy) {
-        return 0;
+    public void attack(Enemy enemy) {
+        //mudar tirar o argumento e verificar quem está na posicao que queremos atacar
+        enemy.setLife(enemy.getLife() - 1);
     }
 
     public void loseEnergy() {
