@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.characters.enemies;
+package org.academiadecodigo.felinux.gtfo.characters.moveable;
 
 public enum DirectionType {
     UP,
