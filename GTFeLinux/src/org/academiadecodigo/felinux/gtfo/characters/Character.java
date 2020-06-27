@@ -1,7 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters;
 
 import org.academiadecodigo.felinux.gtfo.field.Position;
-import org.academiadecodigo.felinux.gtfo.field.SpriteType;
+import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Character extends Picture implements Position {

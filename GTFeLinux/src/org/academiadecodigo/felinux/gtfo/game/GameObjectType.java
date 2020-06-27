@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.field;
+package org.academiadecodigo.felinux.gtfo.game;
 
 public enum GameObjectType {
     MILK(),

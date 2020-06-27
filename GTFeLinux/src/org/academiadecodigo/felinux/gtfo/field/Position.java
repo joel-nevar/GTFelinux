@@ -1,13 +1,12 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
-import org.academiadecodigo.simplegraphics.pictures.Picture;
+import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 
 /**
  * A position on the Field that is capable of moving around
  */
 public interface Position{
-
-
+    
     /**
      * Gets the position column
      *

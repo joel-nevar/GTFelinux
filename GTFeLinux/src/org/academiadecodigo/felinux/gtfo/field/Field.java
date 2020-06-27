@@ -1,9 +1,12 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
-import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.GameObjectType;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
-import org.academiadecodigo.felinux.gtfo.characters.player.Player;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
+import org.academiadecodigo.felinux.gtfo.game.Factory;
+import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Field extends Picture {
@@ -17,6 +20,7 @@ public class Field extends Picture {
     private Enemy enemy;
     private Npc[] npcs;
     private SpriteType[] spriteTypes;
+    private  Picture milkTest;
 
 
     public Field (Player player, Enemy enemy, Npc[] npcs) {
@@ -32,6 +36,7 @@ public class Field extends Picture {
         field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
         this.player = new Player(this);
         this.enemy = new CopCar(this, 200,200,"AssaultableCat_1");
+        this.milkTest =  new Factory().gameObjectFactory(GameObjectType.MILK);
         showMap();
     }
 
@@ -50,6 +55,7 @@ public class Field extends Picture {
         field.draw();
         player.getPlayerImage().draw();
         enemy.getEnemyImage().draw();
+        milkTest.draw();
     }
 
     /**
