@@ -10,8 +10,8 @@ public class Field extends Picture {
 
     private Picture field;
     private final int PADDING = 5;
-    private final int SIZE_COL = 1320;    //3300 a 40%
-    private final int SIZE_ROW = 594;     //990 a 60%
+    public final int SIZE_COL = 1320;    //3300 a 40%
+    public final int SIZE_ROW = 594;     //990 a 60%
     private final int PIXEL = 2;
     private Player player;
     private Enemy enemy;

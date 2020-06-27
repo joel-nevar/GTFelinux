@@ -1,11 +1,17 @@
 package org.academiadecodigo.felinux.gtfo.characters;
 
+import org.academiadecodigo.felinux.gtfo.characters.npcs.Rat;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Factory extends Picture{
 
+
     Field field;
+    private Rat[] ratArray;
+    private int ratCounter = 0;
+    private static final int maxRats = 10;
+
 
     public void setField(Field field) {
         this.field = field;
@@ -44,7 +50,32 @@ public class Factory extends Picture{
 
     }
 
-     /*public Player playerFactory(Field field) {
+    /**
+     * Instantiates a new Rat on every call, at random location
+     *
+     * @return Rat[] with every Rat created,
+     */
+    public Rat[] makeRat(){
+
+        if(ratArray == null){
+            ratArray = new Rat[maxRats];
+        }
+
+        if(ratCounter<=maxRats){
+
+            ratArray[ratCounter] = new Rat(field,(int)(Math.random()*field.SIZE_COL), (int)(Math.random()*field.SIZE_ROW));
+            ratCounter++;
+        }
+
+        return ratArray;
+    }
+
+
+    public int getRatCounter() {
+        return ratCounter;
+    }
+
+    /*public Player playerFactory(Field field) {
 
         return new Player(field);
     }
