@@ -4,9 +4,11 @@ import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
-import org.academiadecodigo.felinux.gtfo.game.SpriteType;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+
 
 
 public class Player extends Character implements Moveable{
@@ -18,19 +20,48 @@ public class Player extends Character implements Moveable{
     private boolean hasMilk = false;
     private int clawDamage = 1;
     private KeyboardHandler keyboardHandler;
+    private Picture energyBar;
+    private Rectangle energyAnimation;
+    private Picture hpBar;
+    private Rectangle hpAnimation;
 
 
     public Player(Field field) {
         super();
+        super.setLives(7);
         this.playerField = field;
         this.player = new Picture(50,50,"resources/images/tobias.png");
+        this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
+        this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         this.keyboardHandler = new PlayerKeyboard(this);
+        //ENERGY BAR
+        this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
+        energyAnimation.setColor(new Color(255,255,0));
+        //HP BAR
+        this.hpAnimation = new Rectangle(207, 26, 100, 10);
+        hpAnimation.setColor(new Color(255,0,0));
     }
 
-    public Picture getPlayer() {
-        return player;
+    public void energyDecay(){
+        //energyBarHolder = new Picture();
+        if(super.getLives() <= 0){
+            System.out.println("U dead.");
+            this.dead = true;
+            return;
+        }
+        if(this.energy <= 0){
+            this.takeLethalDamage();
+            this.energyReset();
+            //HP BAR
+            hpAnimation.translate( -7,0);       //tentativa erro xD Nao percebi mas fiz
+            hpAnimation.grow(-7,0);
+            System.out.println("You have " + getLives() + " lives left!");
+        }else if(this.energy > 0){
+            this.loseEnergy();
+            energyAnimation.translate(-0.5,0);
+            energyAnimation.grow(-0.5,0);
+        }
     }
-
     public void moveLeft(){
         if(this.playerField.getPadding()  >= player.getX()){
             return;
@@ -65,18 +96,31 @@ public class Player extends Character implements Moveable{
                                                 // AC  fica em  1126 - 1124
 
 
-    public void energyDecay(){
-
-        if(this.energy == 0){
-            super.setLives(super.getLives()- 1);
-            System.out.println(getLives());
-           //TODO implement
-
-        }
-        System.out.println("Player energy is: " + this.energy);
-        this.energy--;
+    public Picture getPlayer() {
+        return player;
     }
 
+    public Picture getEnergyBar() {
+        return energyBar;
+    }
+
+    public Picture getHpBar() {
+        return hpBar;
+    }
+
+    public Rectangle getEnergyAnimation() {
+        return energyAnimation;
+    }
+
+    public Rectangle getHpAnimation() {
+        return hpAnimation;
+    }
+
+    public void energyReset(){
+        this.setEnergy(100);
+        energyAnimation.translate(50,0);  //funciona com metade dos valores, dunno why
+        energyAnimation.grow(50,0);
+    }
     public boolean isDead() {
         return dead;
     }
@@ -113,13 +157,9 @@ public class Player extends Character implements Moveable{
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
-    public void takeDamage() {
-        super.takeDamage();
-    }
-
     public void gainLife() {
         super.setLives(super.getLives() + 1);
+        hpAnimation.translate( 29,0);
     }
 
 }

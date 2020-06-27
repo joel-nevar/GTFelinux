@@ -55,13 +55,13 @@ public class Factory extends Picture {
             case TOBIAS:
                 return new Picture(50,50,"Image");
             case ROBIN:
-                return new Picture(50,50,"Image1");
+                return new Picture(150,150,"Image1");
             case MARIANA:
-                return  new Picture(50,50,"Image2");
+                return  new Picture(250,250,"Image2");
             case SARA:
-                return new Picture(50,50,"Image3");
+                return new Picture(350,350,"Image3");
             default:
-                return new Picture(50,50,"Image4");
+                return new Picture(450,450,"Image4");
         }
     }
 
