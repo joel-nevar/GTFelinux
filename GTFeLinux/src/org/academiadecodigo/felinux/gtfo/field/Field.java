@@ -33,9 +33,8 @@ public class Field extends Picture {
     public Field () {
         field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
         this.player = new Player(this);
-        this.enemy = new CopCar(this, 200,200,"tile000");
+        this.enemy = new CopCar(this, 200,200,"AssaultableCat_1");
         showMap();
-        enemy.move();
     }
 
     public int getPadding() {
