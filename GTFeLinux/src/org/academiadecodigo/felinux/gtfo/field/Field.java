@@ -4,8 +4,6 @@ import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Field extends Picture {
@@ -51,7 +49,7 @@ public class Field extends Picture {
     private void showMap(){
         field.draw();
         player.getPlayerImage().draw();
-        enemy.getEnemyPosition().draw();
+        enemy.getEnemyImage().draw();
     }
 
     /**

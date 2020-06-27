@@ -14,7 +14,9 @@ public class Menu implements KeyboardHandler, MouseHandler {
     public void start(){
         Field gameField = new Field();
         Enemy enemy = gameField.getEnemy();
-        enemy.move();
+        for (int i = 0; i < 30 ; i++) {
+            enemy.move();
+        }
     }
     public void instructions(){};
     public void DLC(){};

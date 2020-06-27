@@ -11,19 +11,19 @@ public abstract class Enemy implements Moveable {
     private int speed;
     private Field enemyField;
     private boolean isDead = false;
-    private Picture enemyPosition;
+    private Picture enemyImage;
 
     public Enemy(Field enemyField, int posX, int posY, String spriteName){
         this.enemyField = enemyField;
-        this.enemyPosition = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
+        this.enemyImage = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
     }
 
-    public Picture getEnemyPosition() {
-        return enemyPosition;
+    public Picture getEnemyImage() {
+        return enemyImage;
     }
 
     public Picture getPosition() {
-        return this.enemyPosition;
+        return this.enemyImage;
     }
 
     public Field getEnemyField() {
@@ -38,33 +38,37 @@ public abstract class Enemy implements Moveable {
 
     @Override
     public void moveLeft() {
-        if(this.enemyField.getPadding()  >= enemyPosition.getX()){
+        if(this.enemyField.getPadding()  >= enemyImage.getX()){
+            enemyImage.translate(enemyField.getCellSize(),0);
             return;
         }
-        enemyPosition.translate(-enemyField.getCellSize(),0);
+        enemyImage.translate(-enemyField.getCellSize(),0);
     }
 
     @Override
     public void moveRight() {
-        if(this.enemyField.getSizeCol() <= enemyPosition.getMaxX() - this.enemyField.getPadding()){
+        if(this.enemyField.getSizeCol() <= enemyImage.getMaxX() - this.enemyField.getPadding()){
+            enemyImage.translate(-enemyField.getCellSize(),0);
             return;
         }
-        enemyPosition.translate(enemyField.getCellSize(),0);
+        enemyImage.translate(enemyField.getCellSize(),0);
     }
 
     @Override
     public void moveUp() {
-        if(this.enemyField.getPadding() >= enemyPosition.getY()){
+        if(this.enemyField.getPadding() >= enemyImage.getY()){
+            enemyImage.translate(0,enemyField.getCellSize());
             return;
         }
-        enemyPosition.translate(0,-enemyField.getCellSize());
+        enemyImage.translate(0,-enemyField.getCellSize());
     }
 
     @Override
     public void moveDown() {
-        if(this.enemyField.getSizeRow() <= enemyPosition.getMaxY() - this.enemyField.getPadding()){
+        if(this.enemyField.getSizeRow() <= enemyImage.getMaxY() - this.enemyField.getPadding()){
+            enemyImage.translate(0,-enemyField.getCellSize());
             return;
         }
-        enemyPosition.translate(0,enemyField.getCellSize());
+        enemyImage.translate(0,enemyField.getCellSize());
     }
 }
