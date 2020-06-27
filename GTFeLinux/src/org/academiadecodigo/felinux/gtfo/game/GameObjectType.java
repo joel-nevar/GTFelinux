@@ -5,5 +5,5 @@ public enum GameObjectType {
     BUSH(),
     WOODEN_BOX(),
     SAND(),
-    STAIRS;
+    STAIRS();
 }
