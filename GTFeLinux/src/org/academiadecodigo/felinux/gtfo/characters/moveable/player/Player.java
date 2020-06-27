@@ -10,7 +10,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends Character implements Moveable {
+public class Player extends Character implements Moveable{
 
     private Picture playerImage;
     private int col = 72;       //Y
@@ -69,22 +69,15 @@ public class Player extends Character implements Moveable {
                                                 // AC  fica em  1126 - 1124
 
 
-    public void isDead(){
+    public void energyDecay() throws InterruptedException {
+        System.out.println("Player energy is: " + this.energy);
         if(this.energy == 0){
             super.setLives(super.getLives()- 1);
         }
-        if (this.getLives() == 0) {
-            playerImage.delete();
-        }}
-
-        if( ){
-            this.setCheckpoint(this.checkpoint);
-            this.setPosition(this.checkpoint);
-            playerImage.draw();
+        while(this.energy > 0){
+            Thread.sleep(100);
+            this.energy--;
         }
-
-
-
     }
 
     public int attack(Enemy enemy) {
