@@ -121,4 +121,5 @@ public class Player extends Character implements Moveable{
     public void gainLife() {
         super.setLives(super.getLives() + 1);
     }
+
 }

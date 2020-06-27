@@ -14,23 +14,20 @@ public abstract class Enemy implements Moveable {
     private int life = 10;
     private Field enemyField;
     private boolean isDead = false;
-    private Picture enemyImage;
+    private Picture enemy;
     private DirectionType directionType = DirectionType.LEFT;
     private DirectionType lastDirectionType = DirectionType.RIGHT;
 
 
     public Enemy(Field enemyField, int posX, int posY, String spriteName){
         this.enemyField = enemyField;
-        this.enemyImage = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
+        this.enemy = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
     }
 
-    public Picture getEnemyImage() {
-        return enemyImage;
+    public Picture getEnemy() {
+        return enemy;
     }
 
-    public Picture getPosition() {
-        return this.enemyImage;
-    }
 
     public Field getEnemyField() {
         return enemyField;
@@ -60,11 +57,11 @@ public abstract class Enemy implements Moveable {
             return;
         }
 
-        if(this.enemyField.getPadding()  >= enemyImage.getX()){
-            enemyImage.translate(enemyField.getCellSize()*2,0);
+        if(this.enemyField.getPadding()  >= enemy.getX()){
+            enemy.translate(enemyField.getCellSize()*2,0);
             return;
         }
-        enemyImage.translate(-enemyField.getCellSize()*2,0);
+        enemy.translate(-enemyField.getCellSize()*2,0);
 
         this.lastDirectionType = DirectionType.LEFT;
     }
@@ -78,11 +75,11 @@ public abstract class Enemy implements Moveable {
             return;
         }
 
-        if(this.enemyField.getSizeCol() <= enemyImage.getMaxX() - this.enemyField.getPadding()){
-            enemyImage.translate(-enemyField.getCellSize()*2,0);
+        if(this.enemyField.getSizeCol() <= enemy.getMaxX() - this.enemyField.getPadding()){
+            enemy.translate(-enemyField.getCellSize()*2,0);
             return;
         }
-        enemyImage.translate(enemyField.getCellSize()*2,0);
+        enemy.translate(enemyField.getCellSize()*2,0);
 
         this.lastDirectionType = DirectionType.RIGHT;
     }
@@ -96,11 +93,11 @@ public abstract class Enemy implements Moveable {
             return;
         }
 
-        if(this.enemyField.getPadding() >= enemyImage.getY()){
-            enemyImage.translate(0,enemyField.getCellSize()*2);
+        if(this.enemyField.getPadding() >= enemy.getY()){
+            enemy.translate(0,enemyField.getCellSize()*2);
             return;
         }
-        enemyImage.translate(0,-enemyField.getCellSize()*2);
+        enemy.translate(0,-enemyField.getCellSize()*2);
 
         this.lastDirectionType = DirectionType.UP;
     }
@@ -114,11 +111,11 @@ public abstract class Enemy implements Moveable {
             return;
         }
 
-        if(this.enemyField.getSizeRow() <= enemyImage.getMaxY() - this.enemyField.getPadding()){
-            enemyImage.translate(0,-enemyField.getCellSize()*2);
+        if(this.enemyField.getSizeRow() <= enemy.getMaxY() - this.enemyField.getPadding()){
+            enemy.translate(0,-enemyField.getCellSize()*2);
             return;
         }
-        enemyImage.translate(0,enemyField.getCellSize()*2);
+        enemy.translate(0,enemyField.getCellSize()*2);
 
         this.lastDirectionType = DirectionType.DOWN;
     }

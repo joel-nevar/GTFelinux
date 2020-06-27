@@ -1,6 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Npc extends Character {
 
