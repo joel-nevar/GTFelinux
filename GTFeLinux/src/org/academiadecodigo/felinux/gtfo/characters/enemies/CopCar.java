@@ -16,32 +16,31 @@ public class CopCar extends Enemy {
             System.out.println("A cop car is now dead");
             return;
         }
-        int count = 0;
-        while (count < 10) {
+
+
             int random = (int) Math.floor(Math.random() * 4);
 
             switch (random) {
                 case 0:
                     moveLeft();
                     System.out.println("Cop Here 0");
-                    count++;
                     break;
-                case 1:
+
+                 case 1:
                     moveRight();
                     System.out.println("Cop Here 1");
-                    count++;
                     break;
+
                 case 2:
                     moveUp();
                     System.out.println("Cop Here 2");
-                    count++;
                     break;
+
                 default:
                     moveDown();
                     System.out.println("Cop Here 3");
-                    count++;
                     break;
             }
         }
     }
-}
+
