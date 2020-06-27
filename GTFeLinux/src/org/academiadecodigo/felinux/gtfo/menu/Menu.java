@@ -11,10 +11,11 @@ import org.academiadecodigo.simplegraphics.mouse.MouseHandler;
 
 public class Menu implements KeyboardHandler, MouseHandler {
 
-    public void start(){
+    public void start() throws InterruptedException {
         Field gameField = new Field();
         Enemy enemy = gameField.getEnemy();
-        for (int i = 0; i < 30 ; i++) {
+        for (int i = 0; i < 70 ; i++) {
+            Thread.sleep(180);
             enemy.move();
         }
     }
