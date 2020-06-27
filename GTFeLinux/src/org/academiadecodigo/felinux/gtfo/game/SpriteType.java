@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.field;
+package org.academiadecodigo.felinux.gtfo.game;
 
 
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -10,4 +10,5 @@ public enum SpriteType {
     SPRITE_TYPE4;
 
     Picture picture = new Picture();
+
     }
