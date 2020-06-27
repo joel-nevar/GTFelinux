@@ -1,7 +1,6 @@
-package org.academiadecodigo.felinux.gtfo.characters.enemies;
+package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
 
 import org.academiadecodigo.felinux.gtfo.field.Field;
-import org.academiadecodigo.felinux.gtfo.field.Position;
 
 public class CopCar extends Enemy {
 

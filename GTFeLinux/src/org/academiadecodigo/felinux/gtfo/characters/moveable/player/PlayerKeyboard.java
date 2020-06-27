@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.characters.player;
+package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;

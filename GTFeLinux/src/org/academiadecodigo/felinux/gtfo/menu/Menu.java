@@ -1,8 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.menu;
 
-import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.player.Player;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
