@@ -15,7 +15,7 @@ public class Player extends Character implements Moveable {
     private Picture playerImage;
     private boolean dead = false;
     private Position checkpoint;
-    private Field fieldOfThePlayer;
+    private Field playerField;
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
@@ -24,7 +24,7 @@ public class Player extends Character implements Moveable {
 
     public Player(Field field) {
         super();
-        this.fieldOfThePlayer = field;
+        this.playerField = field;
         this.playerImage = new Picture(50,50,"resources/images/tobias.png");
         this.keyboardHandler = new PlayerKeyboard(this);
     }
@@ -34,27 +34,27 @@ public class Player extends Character implements Moveable {
     }
 
     public void moveLeft(){
-        if(this.fieldOfThePlayer.getPadding()  >= playerImage.getX()){
+        if(this.playerField.getPadding()  >= playerImage.getX()){
             return;
-        } playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
+        } playerImage.translate(-playerField.getCellSize(),0);
     }
 
     public void moveUp(){
-        if(this.fieldOfThePlayer.getPadding() >= playerImage.getY()){
+        if(this.playerField.getPadding() >= playerImage.getY()){
             return;
-        } playerImage.translate(0,-fieldOfThePlayer.getCellSize());
+        } playerImage.translate(0,-playerField.getCellSize());
     }
 
     public void moveRight(){
-        if(this.fieldOfThePlayer.getSizeCol() <= playerImage.getMaxX() - this.fieldOfThePlayer.getPadding()){
+        if(this.playerField.getSizeCol() <= playerImage.getMaxX() - this.playerField.getPadding()){
             return;
-        } playerImage.translate(fieldOfThePlayer.getCellSize(),0);
+        } playerImage.translate(playerField.getCellSize(),0);
     }
 
     public void moveDown(){
-        if(this.fieldOfThePlayer.getSizeRow() <= playerImage.getMaxY() - this.fieldOfThePlayer.getPadding()){
+        if(this.playerField.getSizeRow() <= playerImage.getMaxY() - this.playerField.getPadding()){
             return;
-        } playerImage.translate(0,fieldOfThePlayer.getCellSize());
+        } playerImage.translate(0, playerField.getCellSize());
     }
 
     public int attack(Enemy enemy) {
