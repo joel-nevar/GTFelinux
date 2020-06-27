@@ -65,15 +65,20 @@ public class Player extends Character implements Moveable{
                                                 // AC  fica em  1126 - 1124
 
 
-    public void energyDecay() throws InterruptedException {
-        System.out.println("Player energy is: " + this.energy);
+    public void energyDecay(){
+
         if(this.energy == 0){
             super.setLives(super.getLives()- 1);
+            System.out.println(getLives());
+           //TODO implement
+
         }
-        while(this.energy > 0){
-            Thread.sleep(100);
-            this.energy--;
-        }
+        System.out.println("Player energy is: " + this.energy);
+        this.energy--;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 
     public int attack(Enemy enemy) {

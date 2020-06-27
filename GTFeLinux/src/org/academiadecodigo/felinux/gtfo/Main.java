@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Menu gameMenu = new Menu();
-        gameMenu.start();
+        gameMenu.initializeGame();
 
     }
 }

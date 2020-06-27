@@ -18,6 +18,7 @@ public abstract class Enemy implements Moveable {
     private DirectionType directionType = DirectionType.LEFT;
     private DirectionType lastDirectionType = DirectionType.RIGHT;
 
+
     public Enemy(Field enemyField, int posX, int posY, String spriteName){
         this.enemyField = enemyField;
         this.enemyImage = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
