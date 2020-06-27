@@ -32,7 +32,7 @@ public class GameHandler implements Runnable{
 
         field.showMap();
         player.getPlayer().draw();
-        enemies[0].getEnemyImage().draw();
+        enemies[0].getEnemy().draw();
         objects[0].draw();
         run();
 
