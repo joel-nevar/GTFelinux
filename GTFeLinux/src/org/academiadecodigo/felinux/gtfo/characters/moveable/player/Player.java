@@ -1,11 +1,11 @@
-package org.academiadecodigo.felinux.gtfo.characters.player;
+package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.Moveable;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.field.Position;
-import org.academiadecodigo.felinux.gtfo.field.SpriteType;
+import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 

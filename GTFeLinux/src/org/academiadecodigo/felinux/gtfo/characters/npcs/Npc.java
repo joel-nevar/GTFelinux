@@ -9,7 +9,6 @@ public abstract class Npc extends Character {
     private boolean visited;
 
     public Npc(){
-
     }
 
     public String getMessage() {

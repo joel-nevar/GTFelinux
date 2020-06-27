@@ -1,8 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
-import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.field.Position;
-import org.academiadecodigo.felinux.gtfo.field.SpriteType;
+import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 
 public class AssaultableCat extends Npc {
     private boolean robbed;
