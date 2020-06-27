@@ -34,8 +34,7 @@ public abstract class Enemy implements Moveable {
         return enemyField;
     }
 
-    public void move(){
-    }
+    public void move(){}
 
     public boolean isDead() {
         return isDead;

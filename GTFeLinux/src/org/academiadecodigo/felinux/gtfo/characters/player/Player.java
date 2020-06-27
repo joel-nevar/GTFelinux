@@ -25,7 +25,7 @@ public class Player extends Character implements Moveable {
     public Player(Field field) {
         super();
         this.fieldOfThePlayer = field;
-        this.playerImage = new Picture(50,50,"resources/images/tile000.png");
+        this.playerImage = new Picture(50,50,"resources/images/tobias.png");
         this.keyboardHandler = new PlayerKeyboard(this);
     }
 
@@ -36,29 +36,25 @@ public class Player extends Character implements Moveable {
     public void moveLeft(){
         if(this.fieldOfThePlayer.getPadding()  >= playerImage.getX()){
             return;
-        }
-        playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
+        } playerImage.translate(-fieldOfThePlayer.getCellSize(),0);
     }
 
     public void moveUp(){
         if(this.fieldOfThePlayer.getPadding() >= playerImage.getY()){
             return;
-        }
-        playerImage.translate(0,-fieldOfThePlayer.getCellSize());
+        } playerImage.translate(0,-fieldOfThePlayer.getCellSize());
     }
 
     public void moveRight(){
         if(this.fieldOfThePlayer.getSizeCol() <= playerImage.getMaxX() - this.fieldOfThePlayer.getPadding()){
             return;
-        }
-        playerImage.translate(fieldOfThePlayer.getCellSize(),0);
+        } playerImage.translate(fieldOfThePlayer.getCellSize(),0);
     }
 
     public void moveDown(){
         if(this.fieldOfThePlayer.getSizeRow() <= playerImage.getMaxY() - this.fieldOfThePlayer.getPadding()){
             return;
-        }
-        playerImage.translate(0,fieldOfThePlayer.getCellSize());
+        } playerImage.translate(0,fieldOfThePlayer.getCellSize());
     }
 
     public int attack(Enemy enemy) {
