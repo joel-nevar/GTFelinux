@@ -11,6 +11,7 @@ public abstract class Enemy implements Moveable {
 
 
     private int speed;
+    private int life = 10;
     private Field enemyField;
     private boolean isDead = false;
     private Picture enemyImage;
@@ -35,6 +36,14 @@ public abstract class Enemy implements Moveable {
     }
 
     public void move(){}
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
 
     public boolean isDead() {
         return isDead;
