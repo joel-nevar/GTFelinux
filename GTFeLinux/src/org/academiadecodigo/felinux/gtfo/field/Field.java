@@ -48,6 +48,10 @@ public class Field extends Picture {
         return enemy;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     /**
      *Show full map
      */

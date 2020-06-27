@@ -63,20 +63,21 @@ public class Player extends Character implements Moveable{
         if(this.playerField.getSizeRow() <= playerImage.getMaxY() - this.playerField.getPadding()){
             return;
         } playerImage.translate(0, playerField.getCellSize());
-        System.out.println(playerImage.getY());  //284 - 318    Y road size Left
-        System.out.println(playerImage.getX());  //004                                                 //1292 X
+        //System.out.println(playerImage.getY());  //284 - 318    Y road size Left
+        //System.out.println(playerImage.getX());  //004                                                 //1292 X
     }                                            //Castelo fica em 1180x - 100y
                                                 // AC  fica em  1126 - 1124
 
 
     public void energyDecay() throws InterruptedException {
-        System.out.println("Player energy is: " + this.energy);
         if(this.energy == 0){
             super.setLives(super.getLives()- 1);
+            System.out.println("Player energy is: " + this.energy + " which means he's dead");
         }
         while(this.energy > 0){
-            Thread.sleep(100);
+            Thread.sleep(300);
             this.energy--;
+            System.out.println("Player energy is: " + this.energy);
         }
     }
 
