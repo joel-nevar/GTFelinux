@@ -125,7 +125,7 @@ public class Factory extends Picture {
             default:
 
 
-                return new Picture(50, 50, "Image2");
+                return new Picture(50, 50, "Image3");
         }
     }
 }

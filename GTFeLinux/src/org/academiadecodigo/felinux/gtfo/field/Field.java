@@ -5,6 +5,7 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.game.Factory;
+import org.academiadecodigo.felinux.gtfo.game.GameObjectType;
 import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
