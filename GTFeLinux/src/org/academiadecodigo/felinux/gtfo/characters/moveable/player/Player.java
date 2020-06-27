@@ -64,7 +64,7 @@ public class Player extends Character implements Moveable{
             return;
         } playerImage.translate(0, playerField.getCellSize());
         //System.out.println(playerImage.getY());  //284 - 318    Y road size Left
-        //System.out.println(playerImage.getX());  //004                                                 //1292 X
+        //System.out.println(playerImage.getX());  //004          //1292 X
     }                                            //Castelo fica em 1180x - 100y
                                                 // AC  fica em  1126 - 1124
 
