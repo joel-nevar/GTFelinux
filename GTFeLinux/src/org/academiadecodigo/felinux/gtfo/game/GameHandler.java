@@ -5,7 +5,9 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.PlayerKeyboard;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -21,16 +23,22 @@ public class GameHandler implements Runnable {
     //private Picture[] objects = new Picture[10];
     private final PlayerKeyboard playerKeyboard;
 
+    //Assautable cats amount and Array
+    private final int ASSAULTABLE_CATS = 8;
+    private Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
 
-    public GameHandler() {
+    public void init() {
+
         this.field = new Field();
         this.milk = new Milk();
         this.enemies[0] = new CopCar(110, 300, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
-    }
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
 
-    public void init() {
+            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,(int) (Math.random()*field.getSizeCol()),(int) (Math.random()*field.getSizeRow()));
+        }
+
         showAll();
         run();
     }
@@ -50,6 +58,13 @@ public class GameHandler implements Runnable {
 
 
 
+        //Npcs
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            assaultableCats[i].getNpc().draw();
+        }
+
+        //player on top
+        player.getPlayer().draw();
         //Assets / UI
         player.getEnergyBar().draw();
         player.getHpBar().draw();
@@ -84,5 +99,8 @@ public class GameHandler implements Runnable {
         player.energyDecay();
         enemies[0].move();
         //insert for loop to run enemies with an enemy counter, avoid nullpointer
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            assaultableCats[i].move();
+        }
     }
 }

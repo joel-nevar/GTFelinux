@@ -192,7 +192,7 @@ public class PlayerKeyboard implements KeyboardHandler {
             case KeyboardEvent.KEY_S:
                 player.moveDown();
                 break;
-            //TODO fix interact and attack keys
+            //TODO fix interact and attack keys - DONE
 
          */
         }

@@ -19,15 +19,21 @@ public class Factory extends Picture {
         }
     }
 
-    public static Npc npcFactory(NpcType npcType, int posX, int posY, String image) {
+    public static Npc npcFactory(NpcType npcType, int posX, int posY) {
 
+        String image;
         switch (npcType) {
+
             case ASSAULTABLE_CAT:
+                image ="AssaultableCat_"+(int)Math.ceil(Math.random()*8);
                 return new AssaultableCat(posX, posY, image);
             case CAT_PROSTITUTE:
+                image = "";
                 return new CatProstitute(posX, posY, image);
             case RAT:
+
             default:
+                image = "";
                 return new Rat(posX, posY, image);
         }
     }
