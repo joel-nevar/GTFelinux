@@ -62,7 +62,7 @@ public class Player extends Character implements Moveable{
     }
 
     public void moveLeft(){
-        if(field.getPADDING_X()  >= player.getX()){
+        if(field.getPADDING_X() >= player.getX()){
             return;
         } player.translate(-field.getCellSize(),0);
        // System.out.println(player.getY());

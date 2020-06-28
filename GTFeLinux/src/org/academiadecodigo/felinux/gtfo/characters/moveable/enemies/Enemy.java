@@ -3,9 +3,10 @@ package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-
 
 
 public abstract class Enemy extends Character implements Moveable {
@@ -73,7 +74,7 @@ public abstract class Enemy extends Character implements Moveable {
 
         this.directionType = DirectionType.LEFT;
 
-        if(this.lastDirectionType == DirectionType.RIGHT){
+        if (this.lastDirectionType == DirectionType.RIGHT) {
             return;
         }
 
@@ -91,6 +92,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.RIGHT;
 
         if (this.lastDirectionType == DirectionType.LEFT) {
+            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -136,6 +138,4 @@ public abstract class Enemy extends Character implements Moveable {
 
         this.lastDirectionType = DirectionType.DOWN;
     }
-
-
 }

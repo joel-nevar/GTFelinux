@@ -19,7 +19,7 @@ public class GameHandler implements Runnable {
 
     public GameHandler() {
         this.field = new Field();
-        this.enemies[0] = new CopCar(800, 400, "AssaultableCat_1");
+        this.enemies[0] = new CopCar(110, 300, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.objects[0] = new Factory().gameObjectFactory(GameObjectType.MILK, 50, 65);
     }
@@ -33,6 +33,7 @@ public class GameHandler implements Runnable {
         field.getMap().draw();
         player.getPlayer().draw();
         enemies[0].getEnemy().draw();
+        enemies[0].getEnemyField().getArea().getShowArea().draw();
         objects[0].draw();
 
         player.getEnergyBar().draw();
@@ -44,16 +45,17 @@ public class GameHandler implements Runnable {
     @Override
     public void run() {
 
-        while (!player.isDead()) {
+        while (true) {      //!player.isDead()
             try {
                 Thread.sleep(5); //35
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } finally {
+                enemies[0].move();
+                moveAll();
+                player.energyDecay();
+                moveAllEnemies();
             }
-            enemies[0].move();
-            moveAll();
-            player.energyDecay();
-            moveAllEnemies();
         }
     }
 
