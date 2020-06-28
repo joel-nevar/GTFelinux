@@ -15,14 +15,14 @@ public class Player extends Character implements Moveable{
 
     private Picture player;
     private boolean dead = false;
-    private int energy = 100;
+    private int energy = 1000;
     private boolean hasMilk = false;
     private int clawDamage = 1;
-    private KeyboardHandler keyboardHandler;
     private Picture energyBar;
     private Rectangle energyAnimation;
     private Picture hpBar;
     private Rectangle hpAnimation;
+
     //284 - 318    Y road size Left
     //004                                                 //1292 X
     //Castelo fica em 1180x - 100y
@@ -35,7 +35,6 @@ public class Player extends Character implements Moveable{
         this.player = new Picture(50,100,"resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
-        this.keyboardHandler = new PlayerKeyboard(this);
         //ENERGY BAR
         this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
         energyAnimation.setColor(new Color(255,255,0));
@@ -121,13 +120,18 @@ public class Player extends Character implements Moveable{
     }
 
     public void attack(Enemy enemy) throws NullPointerException {
-        //TODO fix this
-        if (this.getX() == enemy.getEnemyField()) {
+        //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
+        if (enemy.getLives() <= 1) {
+            enemy.setDead();
+            return;
+        }
+        if ( Math.abs((this.getMaxX() - this.getX())/2 - (enemy.getMaxX() - enemy.getX()) / 2) < 5
+        && Math.abs((this.getMaxY() - this.getY())/2 - (enemy.getMaxY() - enemy.getY()) / 2) < 5) {
             enemy.setLives(enemy.getLives() - 1);
             System.out.println(enemy.getLives());
-            if (enemy.getLives() <= 0) {
-                enemy.setDead(true);
-            }
         }
     }
 

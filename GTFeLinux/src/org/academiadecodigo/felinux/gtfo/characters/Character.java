@@ -11,8 +11,6 @@ public abstract class Character extends Picture{
     private String message;
     protected static final Field field = new Field();
 
-
-
     //resolver
     public void interact() {
         System.out.println("Qualuqercoisa");
@@ -59,7 +57,6 @@ public abstract class Character extends Picture{
 
     public int getPositionY(){
         return this.getY();
-
     }
 
 }

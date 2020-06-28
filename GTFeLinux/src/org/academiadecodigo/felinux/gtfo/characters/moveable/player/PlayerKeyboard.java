@@ -6,6 +6,7 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.EnemyType;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
+import org.academiadecodigo.felinux.gtfo.game.Factory;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -22,11 +23,10 @@ public class PlayerKeyboard implements KeyboardHandler {
 
     private Keyboard keyboard;
     private Player player;
-    private Character character;
     private Enemy enemy;
 
-    public PlayerKeyboard(Player player){
-
+    public PlayerKeyboard(Player player, Enemy enemy){
+        this.enemy = enemy;
         this.player = player;
         keyboard = new Keyboard(this);
         init();
@@ -123,7 +123,8 @@ public class PlayerKeyboard implements KeyboardHandler {
                 try {
                     player.attack(enemy);
                 } catch (NullPointerException npe) {
-                    System.out.println("Your attacking the air");
+
+                    System.out.println("You're attacking the air");
                 }
         }
     }

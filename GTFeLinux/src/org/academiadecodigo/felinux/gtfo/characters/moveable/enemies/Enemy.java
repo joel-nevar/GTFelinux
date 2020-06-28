@@ -11,9 +11,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Enemy extends Character implements Moveable {
 
-
-    private int speed;
-    private int life = 10;
     private EnemyAreaType enemyField;
     private boolean isDead = false;
     private Picture enemy;
@@ -21,7 +18,8 @@ public abstract class Enemy extends Character implements Moveable {
     private DirectionType lastDirectionType = DirectionType.RIGHT;
 
 
-    public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName) {
+    public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName, int lifeAmount) {
+        super.setLives(lifeAmount);
         this.enemyField = enemyField;
         this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
     }
@@ -65,8 +63,9 @@ public abstract class Enemy extends Character implements Moveable {
         return isDead;
     }
 
-    public void setDead(boolean dead) {
-        isDead = dead;
+    public void setDead() {
+        isDead = true;
+        System.out.println("Enemy déd");
     }
 
     @Override
@@ -92,7 +91,6 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.RIGHT;
 
         if (this.lastDirectionType == DirectionType.LEFT) {
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
