@@ -50,17 +50,18 @@ public class GameHandler implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            enemies[0].move();
             moveAll();
-            player.energyDecay();
-            moveAllEnemies();
         }
     }
 
-    private void moveAllEnemies() {
-    }
 
     private void moveAll() {
+
+        player.move();
+        player.energyDecay();
+
+        enemies[0].move();
+        //insert for loop to run enemies with an enemy counter, avoid nullpointer
 
     }
 }

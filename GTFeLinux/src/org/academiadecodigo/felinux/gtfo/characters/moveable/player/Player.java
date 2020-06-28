@@ -1,6 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -15,6 +16,7 @@ public class Player extends Character implements Moveable{
 
     private Picture player;
     private boolean dead = false;
+    private Field playerField;
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
@@ -25,10 +27,16 @@ public class Player extends Character implements Moveable{
     private Rectangle hpAnimation;
 
 
-    public Player(String name) {
+    //These are used for movement
+
+    public DirectionType direction;
+    public boolean stopped;
+
+    public Player(Field field) {
         super();
         super.setLives(7);
-        this.player = new Picture(50,100,"resources/images/" + name);
+        this.playerField = field;
+        this.player = new Picture(50,50,"resources/images/tobias.png");
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         this.keyboardHandler = new PlayerKeyboard(this);
@@ -60,38 +68,53 @@ public class Player extends Character implements Moveable{
             energyAnimation.grow(-0.5,0);
         }
     }
+
+    /**
+     * GameHandler calls this method to move Player
+     */
+    public void move(){
+
+        if(stopped){
+            return;
+        }
+        switch(direction){
+            case RIGHT : moveRight();
+                break;
+            case LEFT :moveLeft();
+                break;
+            case UP : moveUp();
+                break;
+            case DOWN: moveDown();
+        }
+    }
+
+    /**
+     * Actual movement called by method move()
+     */
     public void moveLeft(){
         if(field.getPADDING_X()  >= player.getX()){
             return;
-        } player.translate(-field.getCellSize(),0);
-        System.out.println(player.getY());
-        System.out.println(player.getX());
+        } player.translate(-playerField.getCellSize(),0);
     }
 
     public void moveUp(){
         if(field.getPADDING_Y() >= player.getY()){
             return;
-        } player.translate(0,-field.getCellSize());
-        System.out.println(player.getY());
-        System.out.println(player.getX());
+        } player.translate(0,-playerField.getCellSize());
     }
 
     public void moveRight(){
-        if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
+        if(field.getPADDING_X()  <= player.getMaxX() - field.getPADDING_X()  ){
             return;
-        } player.translate(field.getCellSize(),0);
-        System.out.println(player.getY());
-        System.out.println(player.getX());
+        } player.translate(playerField.getCellSize(),0);
     }
 
-    public void moveDown(){
-        if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
+    public void moveDown() {
+        if (field.getPADDING_Y() <= player.getMaxY() - field.getPADDING_Y()) {
             return;
-        } player.translate(0, field.getCellSize());
-        System.out.println(player.getY());  //284 - 318    Y road size Left
-        System.out.println(player.getX());  //004                                                 //1292 X
-    }                                            //Castelo fica em 1180x - 100y
-                                                // AC  fica em  1126 - 1124
+        }
+        player.translate(0, playerField.getCellSize());
+    }
 
 
     public Picture getPlayer() {
@@ -160,7 +183,4 @@ public class Player extends Character implements Moveable{
         hpAnimation.translate( 29,0);
     }
 
-    private boolean isWalkable() {
-        return (field.isWalkable(player.getX(), player.getY()));
-    }
 }
