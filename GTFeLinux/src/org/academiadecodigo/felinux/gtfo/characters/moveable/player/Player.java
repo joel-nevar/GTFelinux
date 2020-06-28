@@ -12,31 +12,24 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Player extends Character implements Moveable{
 
-    private Picture player;
-    private Picture clawAnimation;
-    private boolean dead = false;
-    private int energy = 300; //animation scaled to 300
-    private boolean hasMilk = false;
-    private int clawDamage = 1;
-    private Picture energyBar;
-    private Rectangle energyAnimation;
-    private Picture hpBar;
-    private Rectangle hpAnimation;
-    private int clawTick = 0;
-    private boolean clawUsed = false;
-
-    //284 - 318    Y road size Left
-    //004                                                 //1292 X
-    //Castelo fica em 1180x - 100y
-    // AC  fica em  1126 - 1124
-
+    private Picture player;                     //Draws player on the field
+    private Picture clawAnimation;              //Draws claws on the field
+    private int clawTick = 0;                   //Timer to make the claw disappear from the field
+    private boolean clawUsed = false;           //Checks if the claw was used or not
+    private boolean dead = false;               //Checks if the player is dead
+    private int energy = 300;                   //Animation scaled to 300
+    private boolean hasMilk = false;            //Doesn't have Milk yet
+    private int clawDamage = 1;                 //Damage when attacking
+    private Picture energyBar;                  //Background image for the Energy bar
+    private Rectangle energyAnimation;          //The actual energy bar
+    private Picture hpBar;                      //Background image for the Energy bar
+    private Rectangle hpAnimation;              //The actual energy bar
 
     //These are used for movement
     public static float dx;
     public static float dy;
 
-
-     public Player(String name) {
+    public Player(String name) {
         super();
         super.setLives(7);
         this.player = new Picture(50,100,"resources/images/" + name);
@@ -49,6 +42,15 @@ public class Player extends Character implements Moveable{
         this.hpAnimation = new Rectangle(207, 26, 100, 10);
         hpAnimation.setColor(new Color(255,0,0));
     }
+
+
+    @Override
+    public void interact(){
+
+    }
+
+
+
 
     public void energyDecay(){
         if(this.energy <= 0){
@@ -70,10 +72,12 @@ public class Player extends Character implements Moveable{
         energyAnimation.translate(-0.16,0);
         energyAnimation.grow(-0.16,0);
     }
+
     public void gainLife() {
         super.setLives(super.getLives() + 1);
         hpAnimation.translate( 29,0);   //size / 7 vidas
     }
+
     public void energyReset(){
         this.setEnergy(300);
         energyAnimation.translate(48, 0);   // 0.16 * 300
@@ -99,10 +103,6 @@ public class Player extends Character implements Moveable{
 
     public void attack(Enemy enemy){
 
-        //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
-        //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
-        //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
-        //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
         this.clawUsed = true;
         clawAnimation = new Picture(this.getPlayer().getX(),this.getPlayer().getY(), "resources/images/Claw_attack.png");
 
@@ -173,7 +173,7 @@ public class Player extends Character implements Moveable{
         if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
             return;
         } player.translate(0, field.getCellSize());
-    }                                            //Castelo fica em 1180x - 100y
+    }
 
     public Picture getPlayer() {
         return player;

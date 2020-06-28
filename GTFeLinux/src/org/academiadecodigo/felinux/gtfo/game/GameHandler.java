@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
+import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
@@ -15,16 +16,17 @@ public class GameHandler implements Runnable {
     private Player player;
     private Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
+    private Milk milk;
     private Field field;
-    private Picture[] objects = new Picture[10];
+    //private Picture[] objects = new Picture[10];
     private final PlayerKeyboard playerKeyboard;
 
 
     public GameHandler() {
         this.field = new Field();
+        this.milk = new Milk();
         this.enemies[0] = new CopCar(110, 300, "AssaultableCat_1");
         this.player = new Player("tobias.png");
-        this.objects[0] = new Factory().gameObjectFactory(GameObjectType.MILK, 50, 65);
         this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
     }
 
@@ -35,12 +37,18 @@ public class GameHandler implements Runnable {
 
     private void showAll(){
 
-        //Characters and Objects
+        //Game map
         field.getMap().draw();
+
+        //Objects
+        milk.getMilk().draw();
+
+        //Characters
         player.getPlayer().draw();
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getShowArea().draw();
-        objects[0].draw();
+
+
 
         //Assets / UI
         player.getEnergyBar().draw();
@@ -55,15 +63,16 @@ public class GameHandler implements Runnable {
 
     @Override
     public void run() {
-
+        //Game loop to create movement
         while (!player.isDead()) {
             try {
-                Thread.sleep(35); //35
-
+                Thread.sleep(35);
+                //Check if player is attacking
                 player.playerAttackVerification();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            //Moves all the movable classes
             moveAll();
         }
         System.out.println("GAME OVER");
@@ -75,6 +84,5 @@ public class GameHandler implements Runnable {
         player.energyDecay();
         enemies[0].move();
         //insert for loop to run enemies with an enemy counter, avoid nullpointer
-
     }
 }

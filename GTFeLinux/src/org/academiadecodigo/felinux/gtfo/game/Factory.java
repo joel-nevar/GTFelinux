@@ -9,23 +9,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Factory extends Picture {
 
-
-    public static Picture gameObjectFactory(GameObjectType gameObject, int posX, int posY) {
-
-        switch (gameObject) {
-            case MILK:
-                return new Picture(posX, posY,"resources/images/tile000.png");
-            case BUSH:
-                return new Picture(posX, posY, "BUSH");
-            case WOODEN_BOX:
-                return new Picture(posX, posY, "WOODEN BOX");
-            case STAIRS:
-                return new Picture(posX, posY, "STAIRS");
-            default:
-                return new Picture(posX, posY, "SAND");
-        }
-    }
-
     public static Enemy enemyFactory(EnemyType enemyType, int posX, int posY, String image) {
 
         switch(enemyType) {
