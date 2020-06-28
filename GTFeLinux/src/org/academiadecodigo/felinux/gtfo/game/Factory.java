@@ -1,8 +1,10 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.EnemyType;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.player.PlayerType;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Lion;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Factory extends Picture {
@@ -33,62 +35,42 @@ public class Factory extends Picture {
     } */
 
 
-    public static Picture gameObjectFactory(GameObjectType gameObject) {
+    public static Picture gameObjectFactory(GameObjectType gameObject, int posX, int posY) {
 
         switch (gameObject) {
             case MILK:
-                return new Picture(70, 70, "resources/images/tile000.png");
+                return new Picture(posX, posY,"resources/images/tile000.png");
             case BUSH:
-                return new Picture(50, 50, "BUSH");
+                return new Picture(posX, posY, "BUSH");
             case WOODEN_BOX:
-                return new Picture(50, 50, "WOODEN BOX");
+                return new Picture(posX, posY, "WOODEN BOX");
             case STAIRS:
-                return new Picture(50, 50, "STAIRS");
+                return new Picture(posX, posY, "STAIRS");
             default:
-                return new Picture(50, 50, "SAND");
+                return new Picture(posX, posY, "SAND");
         }
     }
 
-    public static Picture playerFactory(PlayerType playerType) {
-
-        switch (playerType) {
-            case TOBIAS:
-                return new Picture(50,50,"Image");
-            case ROBIN:
-                return new Picture(150,150,"Image1");
-            case MARIANA:
-                return  new Picture(250,250,"Image2");
-            case SARA:
-                return new Picture(350,350,"Image3");
-            default:
-                return new Picture(450,450,"Image4");
-        }
-    }
-
-    public static Picture enemyFactory(EnemyType enemyType) {
+    public static Enemy enemyFactory(EnemyType enemyType, int x, int y, String image) {
 
         switch(enemyType) {
             case COP_CAR:
-                return new Picture(50, 50, "Image");
+                return new CopCar(x, y, image);
             case LION:
-                return new Picture(50,50,"Image1");
-             default:
-                 return new Picture(50,50,"Image3");
-
+             default:return new Lion(x, y, image);
         }
     }
 
-    public static Picture npcFactory(NpcType npcType) {
+    public static Npc npcFactory(NpcType npcType, int posX, int posY, String image) {
 
         switch (npcType) {
             case ASSAULTABLE_CAT:
-                return new Picture(50, 50, "Image");
+                return new AssaultableCat(posX, posY, image);
             case CAT_PROSTITUTE:
-                return new Picture(50, 50, "Image1");
+                return new CatProstitute(posX, posY, image);
             case RAT:
-                return new Picture(50,50,"Image2");
             default:
-                return new Picture(50, 50, "Image3");
+                return new Rat(posX, posY, image);
         }
     }
 }
