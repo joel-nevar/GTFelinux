@@ -14,6 +14,9 @@ public abstract class Npc extends Character {
     }
 
 
+    public void move(){
+
+    }
 
     public Picture getNpc() {
         return npc;

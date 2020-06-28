@@ -4,6 +4,7 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.PlayerKeyboard;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.field.Area;
@@ -16,10 +17,13 @@ public class GameHandler implements Runnable {
 
     private Player player;
     private Enemy[] enemies = new Enemy[10];
-    private Npc[] npcs = new Npc[10];
     private Field field;
     private Picture[] objects = new Picture[10];
     private final PlayerKeyboard playerKeyboard;
+
+    //Assautable cats amount and Array
+    private final int ASSAULTABLE_CATS = 8;
+    private Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
 
     public void init() {
 
@@ -28,10 +32,9 @@ public class GameHandler implements Runnable {
         this.player = new Player("tobias.png");
         this.objects[0] = new Factory().gameObjectFactory(GameObjectType.MILK, 50, 65);
         this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
 
-            this.npcs[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,(int) (Math.random()*field.getSizeCol()),(int) (Math.random()*field.getSizeRow()),"AssaultableCat_"+(i+1)); {
-            }
+            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,(int) (Math.random()*field.getSizeCol()),(int) (Math.random()*field.getSizeRow()));
         }
 
         showAll();
@@ -47,6 +50,13 @@ public class GameHandler implements Runnable {
         enemies[0].getEnemyField().getArea().getShowArea().draw();
         objects[0].draw();
 
+        //Npcs
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            assaultableCats[i].getNpc().draw();
+        }
+
+        //player on top
+        player.getPlayer().draw();
         //Assets / UI
         player.getEnergyBar().draw();
         player.getHpBar().draw();
@@ -89,6 +99,8 @@ public class GameHandler implements Runnable {
         player.energyDecay();
         enemies[0].move();
         //insert for loop to run enemies with an enemy counter, avoid nullpointer
-
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            assaultableCats[i].move();
+        }
     }
 }
