@@ -53,7 +53,6 @@ public abstract class Enemy implements Moveable {
         this.directionType = DirectionType.LEFT;
 
         if(this.lastDirectionType == DirectionType.RIGHT){
-            //System.out.println("This Direction is: " + DirectionType.LEFT + " Last Direction was: " + DirectionType.RIGHT);
             return;
         }
 
@@ -71,7 +70,6 @@ public abstract class Enemy implements Moveable {
         this.directionType = DirectionType.RIGHT;
 
         if(this.lastDirectionType == DirectionType.LEFT){
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -89,7 +87,6 @@ public abstract class Enemy implements Moveable {
         this.directionType = DirectionType.UP;
 
         if(this.lastDirectionType == DirectionType.DOWN){
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -107,7 +104,6 @@ public abstract class Enemy implements Moveable {
         this.directionType = DirectionType.DOWN;
 
         if(this.lastDirectionType == DirectionType.UP){
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
