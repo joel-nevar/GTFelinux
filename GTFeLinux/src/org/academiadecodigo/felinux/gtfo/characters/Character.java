@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters;
 
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Character extends Picture{
@@ -8,8 +9,9 @@ public abstract class Character extends Picture{
     private int damage;
     private  int speed;
     private String message;
-    private int x;
-    private int y;
+    protected static final Field  field = new Field();
+
+
 
     //resolver
     public void interact(Character char1) {
@@ -50,13 +52,4 @@ public abstract class Character extends Picture{
         this.speed = speed;
     }
 
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
 }

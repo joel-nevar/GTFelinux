@@ -12,7 +12,7 @@ public class Menu implements KeyboardHandler, MouseHandler {
 
     public void initializeGame(){
 
-        GameHandler game = new GameHandler(new Field());
+        GameHandler game = new GameHandler();
         game.init();
     }
 
