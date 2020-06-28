@@ -46,7 +46,7 @@ public class Area {
     }
 
     public boolean include(int x, int y) {
-        return (x >= xMin && x <= xMax && y >= yMin && y <= yMax);
+        return (x >= xMin + Field.PADDING_X && x <= xMax - xMin && y >= yMin + Field.PADDING_Y && y <= yMax - yMin);
     }
 
     public Rectangle getShowArea() {

@@ -149,28 +149,28 @@ public class Player extends Character implements Moveable{
      */
     @Override
     public void moveLeft(){
-        if(field.getPADDING_X()  >= player.getX()){
+        if((field.getPADDING_X()  >= player.getX()) || !isWalkable()){
             return;
         } player.translate(-field.getCellSize(),0);
     }
 
     @Override
     public void moveUp(){
-        if(field.getPADDING_Y() >= player.getY()){
+        if((field.getPADDING_Y() >= player.getY()) || !isWalkable()){
             return;
         } player.translate(0,-field.getCellSize());
     }
 
     @Override
     public void moveRight(){
-        if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
+        if((field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()) || !isWalkable()){
             return;
         } player.translate(field.getCellSize(),0);
     }
 
     @Override
     public void moveDown(){
-        if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
+        if((field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()) || !isWalkable()){
             return;
         } player.translate(0, field.getCellSize());
     }                                            //Castelo fica em 1180x - 100y
