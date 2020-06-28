@@ -5,6 +5,8 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.awt.*;
+
 
 public abstract class Enemy extends Character implements Moveable {
 
@@ -13,12 +15,16 @@ public abstract class Enemy extends Character implements Moveable {
     private Picture enemy;
     private DirectionType directionType = DirectionType.LEFT;
     private DirectionType lastDirectionType = DirectionType.RIGHT;
+    private Rectangle bounds;
 
 
     public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName, int lifeAmount) {
         super.setLives(lifeAmount);
         this.enemyField = enemyField;
         this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
+        this.bounds.setSize(50,50);
+        this.bounds.setLocation(posX,posY);
+
     }
 
     //Used to draw the enemy
@@ -32,7 +38,7 @@ public abstract class Enemy extends Character implements Moveable {
     }
 
     //Moves the enemy randomly (not backwards)
-    public void move() {
+    public void move(){
         if (isDead()) {
             return;
         }
