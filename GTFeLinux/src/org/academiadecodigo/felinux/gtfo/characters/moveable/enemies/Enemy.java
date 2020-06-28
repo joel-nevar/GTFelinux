@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
 
+import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -7,7 +8,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 
-public abstract class Enemy implements Moveable {
+public abstract class Enemy extends Character implements Moveable {
 
 
     private int speed;
@@ -19,7 +20,7 @@ public abstract class Enemy implements Moveable {
     private DirectionType lastDirectionType = DirectionType.RIGHT;
 
 
-    public Enemy((EnemyAreaType enemyField, int posX, int posY, String spriteName){
+    public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName){
         this.enemyField = enemyField;
         this.enemy = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
     }
@@ -107,7 +108,6 @@ public abstract class Enemy implements Moveable {
         this.directionType = DirectionType.UP;
 
         if (this.lastDirectionType == DirectionType.DOWN) {
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 

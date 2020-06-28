@@ -9,7 +9,7 @@ public abstract class Character extends Picture{
     private int damage;
     private  int speed;
     private String message;
-    protected static final Field  field = new Field();
+    protected static final Field field = new Field();
 
 
 
