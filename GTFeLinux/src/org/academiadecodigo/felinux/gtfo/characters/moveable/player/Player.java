@@ -16,7 +16,6 @@ public class Player extends Character implements Moveable{
 
     private Picture player;
     private boolean dead = false;
-    private Field playerField;
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
@@ -32,11 +31,10 @@ public class Player extends Character implements Moveable{
     public DirectionType direction;
     public boolean stopped;
 
-    public Player(Field field) {
+     public Player(String name) {
         super();
         super.setLives(7);
-        this.playerField = field;
-        this.player = new Picture(50,50,"resources/images/tobias.png");
+        this.player = new Picture(50,100,"resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         this.keyboardHandler = new PlayerKeyboard(this);
@@ -49,24 +47,23 @@ public class Player extends Character implements Moveable{
     }
 
     public void energyDecay(){
-        //energyBarHolder = new Picture();
-        if(super.getLives() <= 0){
-            System.out.println("U dead.");
-            this.dead = true;
-            return;
-        }
         if(this.energy <= 0){
+            if(super.getLives() <= 1) {
+                this.dead = true;
+                //HP BAR
+                hpAnimation.translate( -7,0);
+                hpAnimation.grow(-7,0);
+                return;
+            }
             this.takeLethalDamage();
             this.energyReset();
             //HP BAR
-            hpAnimation.translate( -7,0);       //tentativa erro xD Nao percebi mas fiz
+            hpAnimation.translate( -7,0);
             hpAnimation.grow(-7,0);
-            System.out.println("You have " + getLives() + " lives left!");
-        }else if(this.energy > 0){
-            this.loseEnergy();
-            energyAnimation.translate(-0.5,0);
-            energyAnimation.grow(-0.5,0);
         }
+        this.loseEnergy();
+        energyAnimation.translate(-0.5,0);
+        energyAnimation.grow(-0.5,0);
     }
 
     /**
@@ -94,27 +91,27 @@ public class Player extends Character implements Moveable{
     public void moveLeft(){
         if(field.getPADDING_X()  >= player.getX()){
             return;
-        } player.translate(-playerField.getCellSize(),0);
+        } player.translate(-field.getCellSize(),0);
     }
 
     public void moveUp(){
         if(field.getPADDING_Y() >= player.getY()){
             return;
-        } player.translate(0,-playerField.getCellSize());
+        } player.translate(0,-field.getCellSize());
     }
 
     public void moveRight(){
-        if(field.getPADDING_X()  <= player.getMaxX() - field.getPADDING_X()  ){
+        if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
             return;
-        } player.translate(playerField.getCellSize(),0);
+        } player.translate(field.getCellSize(),0);
     }
 
-    public void moveDown() {
-        if (field.getPADDING_Y() <= player.getMaxY() - field.getPADDING_Y()) {
+    public void moveDown(){
+        if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
             return;
-        }
-        player.translate(0, playerField.getCellSize());
-    }
+        } player.translate(0, field.getCellSize());
+    }                                            //Castelo fica em 1180x - 100y
+                                                // AC  fica em  1126 - 1124
 
 
     public Picture getPlayer() {
@@ -183,4 +180,7 @@ public class Player extends Character implements Moveable{
         hpAnimation.translate( 29,0);
     }
 
+    private boolean isWalkable() {
+        return (field.isWalkable(player.getX(), player.getY()));
+    }
 }
