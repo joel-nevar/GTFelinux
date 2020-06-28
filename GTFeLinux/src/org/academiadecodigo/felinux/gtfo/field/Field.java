@@ -54,7 +54,7 @@ public class Field extends Picture {
     private void showMap(){
         field.draw();
         player.getPlayerImage().draw();
-        enemy.getEnemyImage().draw();
+        enemy.getEnemy().draw();
         milkTest.draw();
     }
 

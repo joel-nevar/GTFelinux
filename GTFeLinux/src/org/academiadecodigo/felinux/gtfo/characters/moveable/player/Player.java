@@ -57,23 +57,26 @@ public class Player extends Character implements Moveable {
         } playerImage.translate(0, playerField.getCellSize());
     }
 
-    public void isDead(){
+    public int energyDecay(){
         if(this.energy == 0){
             super.setLives(super.getLives()- 1);
         }
+        if(this.getLives() == 0){
+            playerImage.delete();
+        }
+        return energyDecay() -1;
+    }
+
+    public int deathByEnemy(Enemy enemy) {
+        if (enemy.shoot(this)) {
+            super.setLives(super.getLives() - 1);
+        }
         if (this.getLives() == 0) {
             playerImage.delete();
-        }}
-
-        if( ){
-            this.setCheckpoint(this.checkpoint);
-            this.setPosition(this.checkpoint);
-            playerImage.draw();
         }
-
-
-
+        return getLives();
     }
+
 
     public int attack(Enemy enemy) {
         return 0;
