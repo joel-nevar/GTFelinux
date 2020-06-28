@@ -59,17 +59,8 @@ public class GameHandler implements Runnable {
         while (!player.isDead()) {
             try {
                 Thread.sleep(35); //35
-                //Animacao de atacar
-                if(player.isClawUsed() == true){
-                    player.getClawAnimation().draw();
-                    player.setClawTick(player.getClawTick() + 1);
-                    if(player.getClawTick() == 4){
-                        System.out.println("ou entao aqui");
-                        player.setClawUsed(false);
-                        player.getClawAnimation().delete();
-                        player.setClawTick(0);
-                    }
-                }
+
+                player.playerAttackVerification();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
