@@ -5,7 +5,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Milk extends Picture{
 
     private Picture milk;
-    private final int posX = 50; //1040
+    private final int posX = 1040; //1040
     private final int posY = 50;
 
     public Milk(){

@@ -21,7 +21,7 @@ public class GameHandler implements Runnable {
     private Milk milk;
     private Field field;
     //private Picture[] objects = new Picture[10];
-    private final PlayerKeyboard playerKeyboard;
+    private PlayerKeyboard playerKeyboard;
 
     //Assautable cats amount and Array
     private final int ASSAULTABLE_CATS = 8;
