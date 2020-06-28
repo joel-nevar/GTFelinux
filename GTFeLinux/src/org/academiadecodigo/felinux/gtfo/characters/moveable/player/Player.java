@@ -4,10 +4,8 @@ import jdk.swing.interop.SwingInterOpUtils;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
@@ -24,6 +22,8 @@ public class Player extends Character implements Moveable{
     private Rectangle energyAnimation;
     private Picture hpBar;
     private Rectangle hpAnimation;
+    private int clawTick = 0;
+    private boolean clawUsed = false;
 
     //284 - 318    Y road size Left
     //004                                                 //1292 X
@@ -80,14 +80,14 @@ public class Player extends Character implements Moveable{
         energyAnimation.grow(48, 0);
     }
 
-    public void attack(Enemy enemy) throws NullPointerException {
-
-
+    public void attack(Enemy enemy){
 
         //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
         //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
         //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
         //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
+        this.clawUsed = true;
+        clawAnimation = new Picture(this.getPlayer().getX(),this.getPlayer().getY(), "resources/images/Claw_attack.png");
 
         if (200>(Math.abs(this.getX()-enemy.getEnemy().getX()))&&200>(Math.abs(this.getY()-enemy.getEnemy().getY()))) {
 
@@ -100,11 +100,31 @@ public class Player extends Character implements Moveable{
         }
     }
 
+    public int getClawTick() {
+        return clawTick;
+    }
+
+    public void setClawTick(int clawTick) {
+        this.clawTick = clawTick;
+    }
+
+    public void setClawUsed(boolean clawUsed) {
+        this.clawUsed = clawUsed;
+    }
+
+    public boolean isClawUsed() {
+        return clawUsed;
+    }
+
     /**
      * GameHandler calls this method to move Player
      */
     public void move(){
         player.translate(Player.dx,Player.dy);
+    }
+
+    public Picture getClawAnimation() throws NullPointerException {
+        return clawAnimation;
     }
 
     /**

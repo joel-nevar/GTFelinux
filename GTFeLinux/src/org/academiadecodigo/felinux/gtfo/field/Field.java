@@ -1,4 +1,5 @@
 package org.academiadecodigo.felinux.gtfo.field;
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Field extends Picture {
 
     public Field () {
         map = new Picture(PADDING_X, PADDING_Y,"resources/images/backGround.png");
+        setNotWalkable();
     }
 
     public int getPADDING_X() {
@@ -53,7 +55,6 @@ public class Field extends Picture {
     }
 
     public boolean isWalkable(int x, int y) {
-        setNotWalkable();
         for (Area area : notWalkable) {
             if (area.include(x,y)){
                 return false;
@@ -63,11 +64,13 @@ public class Field extends Picture {
     }
 
     private void addNotWalkable(int xMin, int yMin, int xMax, int yMax){
-        notWalkable.add(new Area(xMin, yMin, xMax, yMax));
+        Area area =new Area(xMin, yMin, xMax, yMax);
+        area.getShowArea().setColor(Color.RED);
+        notWalkable.add(area);
     }
 
-    private void setNotWalkable(){
-        addNotWalkable(50,400,300,500);
+    public void setNotWalkable(){
+        addNotWalkable(50,282,1320,318);
     }
 
 }

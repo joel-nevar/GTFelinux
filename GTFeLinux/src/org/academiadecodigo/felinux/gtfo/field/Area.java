@@ -18,7 +18,7 @@ public class Area {
         this.xMax = xMax;
         this.yMax = yMax;
         this.showArea = new Rectangle (xMin,yMin,xMax,yMax);
-        showArea.setColor(Color.RED);
+        showArea.setColor(Color.BLACK);
     }
 
     public int getxMin() {
