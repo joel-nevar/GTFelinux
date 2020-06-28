@@ -5,6 +5,7 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
+import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -46,6 +47,9 @@ public class GameHandler implements Runnable {
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
+        for (Area area : field.getNotWalkable()) {
+            area.getShowArea().draw();
+        }
 
     }
 
