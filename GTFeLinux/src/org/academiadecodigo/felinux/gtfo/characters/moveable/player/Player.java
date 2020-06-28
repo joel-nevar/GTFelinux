@@ -31,8 +31,8 @@ public class Player extends Character implements Moveable{
 
 
     //These are used for movement
-    public static int dx;
-    public static int dy;
+    public static float dx;
+    public static float dy;
 
 
      public Player(String name) {
@@ -140,16 +140,18 @@ public class Player extends Character implements Moveable{
     }
 
     public void attack(Enemy enemy) throws NullPointerException {
+
         //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
         //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
         //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
         //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
-        if (enemy.getLives() <= 1) {
-            enemy.setDead();
-            return;
-        }
-        if ( Math.abs((this.getMaxX() - this.getX())/2 - (enemy.getMaxX() - enemy.getX()) / 2) < 5
-        && Math.abs((this.getMaxY() - this.getY())/2 - (enemy.getMaxY() - enemy.getY()) / 2) < 5) {
+        if (200>(Math.abs(this.getX()-enemy.getEnemy().getX()))&&200>(Math.abs(this.getY()-enemy.getEnemy().getY()))) {
+
+
+            if (enemy.getLives() <= 1) {
+                enemy.setDead();
+                return;
+            }
             enemy.setLives(enemy.getLives() - 1);
             System.out.println(enemy.getLives());
         }

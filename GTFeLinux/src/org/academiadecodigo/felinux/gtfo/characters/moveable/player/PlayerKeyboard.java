@@ -1,19 +1,11 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
-import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.EnemyType;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
-import org.academiadecodigo.felinux.gtfo.game.Factory;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.text.CharacterIterator;
 
 /**
  * Keyboard Handler for Player Ingame
@@ -24,6 +16,8 @@ public class PlayerKeyboard implements KeyboardHandler {
     private Keyboard keyboard;
     private Player player;
     private Enemy enemy;
+    private float moveSpeed = 3f;
+
 
     public PlayerKeyboard(Player player, Enemy enemy){
         this.enemy = enemy;
@@ -150,17 +144,20 @@ public class PlayerKeyboard implements KeyboardHandler {
 
         //Reset Movement
 
+        Player.dx = 0f;
+        Player.dy = 0f;
+
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
-            Player.dx -=2;
+            Player.dx -= moveSpeed;
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
-            Player.dx +=2;
+            Player.dx += moveSpeed;
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
-            Player.dy -=2;
+            Player.dy -= moveSpeed;
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
-            Player.dy +=2;
+            Player.dy += moveSpeed;
         }
 
         switch (keyboardEvent.getKey()){
@@ -208,21 +205,19 @@ public class PlayerKeyboard implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-       /* switch (keyboardEvent.getKey()){
-            case KeyboardEvent.KEY_LEFT:
-            case KeyboardEvent.KEY_A:
-            case KeyboardEvent.KEY_RIGHT:
-            case KeyboardEvent.KEY_D:
-                Player.dx = 0;
-                break;
-            case KeyboardEvent.KEY_UP:
-            case KeyboardEvent.KEY_W:
-            case KeyboardEvent.KEY_DOWN:
-            case KeyboardEvent.KEY_S:
-                Player.dy = 0;
-                break;
+
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
+            Player.dx = 0f;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
+            Player.dx = 0f;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
+            Player.dy = 0f;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
+            Player.dy = 0f;
         }
 
-        */
     }
 }
