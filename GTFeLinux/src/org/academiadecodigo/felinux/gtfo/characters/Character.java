@@ -11,16 +11,14 @@ public abstract class Character extends Picture{
     private String message;
     protected static final Field field = new Field();
 
-
-
     //resolver
-    public void interact(Character char1) {
-        System.out.println(char1.getMessage());
+    public void interact() {
+        System.out.println("Qualuqercoisa");
     }
 
 
-   public String getMessage() {
-        return message;
+    public String getMessage() {
+        return "Return this string";
     }
 
     public void takeLethalDamage() {
@@ -50,6 +48,15 @@ public abstract class Character extends Picture{
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+
+    public int getPositionX(){
+        return this.getX();
+    }
+
+    public int getPositionY(){
+        return this.getY();
     }
 
 }

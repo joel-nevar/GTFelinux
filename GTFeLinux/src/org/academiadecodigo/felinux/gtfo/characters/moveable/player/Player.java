@@ -1,9 +1,10 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
@@ -15,14 +16,18 @@ public class Player extends Character implements Moveable{
 
     private Picture player;
     private boolean dead = false;
-    private int energy = 100;
+    private int energy = 1000; //animation scalled to 100
     private boolean hasMilk = false;
     private int clawDamage = 1;
-    private KeyboardHandler keyboardHandler;
     private Picture energyBar;
     private Rectangle energyAnimation;
     private Picture hpBar;
     private Rectangle hpAnimation;
+
+    //284 - 318    Y road size Left
+    //004                                                 //1292 X
+    //Castelo fica em 1180x - 100y
+    // AC  fica em  1126 - 1124
 
 
     //These are used for movement
@@ -36,7 +41,6 @@ public class Player extends Character implements Moveable{
         this.player = new Picture(50,100,"resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
-        this.keyboardHandler = new PlayerKeyboard(this);
         //ENERGY BAR
         this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
         energyAnimation.setColor(new Color(255,255,0));
@@ -104,8 +108,6 @@ public class Player extends Character implements Moveable{
             return;
         } player.translate(0, field.getCellSize());
     }                                            //Castelo fica em 1180x - 100y
-                                                // AC  fica em  1126 - 1124
-
 
     public Picture getPlayer() {
         return player;
@@ -129,15 +131,28 @@ public class Player extends Character implements Moveable{
 
     public void energyReset(){
         this.setEnergy(100);
-        energyAnimation.translate(50,0);  //funciona com metade dos valores, dunno why
-        energyAnimation.grow(50,0);
+        energyAnimation.translate(50, 0);  //funciona com metade dos valores, dunno why
+        energyAnimation.grow(50, 0);
     }
+
     public boolean isDead() {
         return dead;
     }
 
-    public int attack(Enemy enemy) {
-        return 0;
+    public void attack(Enemy enemy) throws NullPointerException {
+        //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
+        if (enemy.getLives() <= 1) {
+            enemy.setDead();
+            return;
+        }
+        if ( Math.abs((this.getMaxX() - this.getX())/2 - (enemy.getMaxX() - enemy.getX()) / 2) < 5
+        && Math.abs((this.getMaxY() - this.getY())/2 - (enemy.getMaxY() - enemy.getY()) / 2) < 5) {
+            enemy.setLives(enemy.getLives() - 1);
+            System.out.println(enemy.getLives());
+        }
     }
 
     public void loseEnergy() {

@@ -4,6 +4,12 @@ public class CatProstitute extends Npc {
 
         private boolean visited;
 
+
+        @Override
+        public String getMessage() {
+                return "I am a Cat Prostitute";
+        }
+
         public CatProstitute(int posX, int posY, String spriteName) {
                 super(posX, posY, spriteName);
         }

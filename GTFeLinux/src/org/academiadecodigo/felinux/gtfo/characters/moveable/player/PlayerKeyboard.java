@@ -1,10 +1,19 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
-import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
+import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.EnemyType;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
+import org.academiadecodigo.felinux.gtfo.game.Factory;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import java.text.CharacterIterator;
 
 /**
  * Keyboard Handler for Player Ingame
@@ -14,9 +23,10 @@ public class PlayerKeyboard implements KeyboardHandler {
 
     private Keyboard keyboard;
     private Player player;
+    private Enemy enemy;
 
-    public PlayerKeyboard(Player player){
-
+    public PlayerKeyboard(Player player, Enemy enemy){
+        this.enemy = enemy;
         this.player = player;
         keyboard = new Keyboard(this);
         init();
@@ -78,6 +88,9 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(rightArrow);
         keyboard.addEventListener(upArrow);
         keyboard.addEventListener(downArrow);
+        keyboard.addEventListener(interact);
+        keyboard.addEventListener(attack);
+
 
         /*
          * Key Released
@@ -125,7 +138,6 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(stopDownArrow);
 
 
-
     }
 
     /**
@@ -151,34 +163,42 @@ public class PlayerKeyboard implements KeyboardHandler {
             Player.dy +=2;
         }
 
-        /*switch (keyboardEvent.getKey()){
+        switch (keyboardEvent.getKey()){
+            /*
 
             case KeyboardEvent.KEY_LEFT:
-            case KeyboardEvent.KEY_A:
-                Player.dx -=2;
-                break;
+                case KeyboardEvent.KEY_A:
+                    player.moveLeft();
+                    break;
             case KeyboardEvent.KEY_RIGHT:
-            case KeyboardEvent.KEY_D:
-                Player.dx +=2;
-                break;
+                case KeyboardEvent.KEY_D:
+                    player.moveRight();
+                    break;
             case KeyboardEvent.KEY_UP:
-            case KeyboardEvent.KEY_W:
-                Player.dy -= 2;
-                break;
+                case KeyboardEvent.KEY_W:
+                    player.moveUp();
+                    break;
             case KeyboardEvent.KEY_DOWN:
             case KeyboardEvent.KEY_S:
-                Player.dy += 2;
+                player.moveDown();
                 break;
-                /* TODO fix interact and attack keys
+            //TODO fix interact and attack keys
+
+         */
             case KeyboardEvent.KEY_E:
                 player.interact();
                 break;
-            case KeyboardEvent.KEY_SPACE:
-               if()
 
+            case KeyboardEvent.KEY_SPACE:
+                try {
+                    player.attack(enemy);
+                } catch (NullPointerException npe) {
+
+                    System.out.println("You're attacking the air");
+                }
         }
-        */
     }
+
 
     /**
      * KeyboardEvent Handler for Player actions on key released

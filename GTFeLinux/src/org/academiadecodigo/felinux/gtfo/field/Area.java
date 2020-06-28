@@ -1,18 +1,24 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+
 public class Area {
 
     private int xMin;
     private int yMin;
     private int xMax;
     private int yMax;
+    private Rectangle showArea;
 
     public Area(int xMin, int yMin, int xMax, int yMax) {
         this.xMin = xMin;
         this.yMin = yMin;
         this.xMax = xMax;
         this.yMax = yMax;
+        this.showArea = new Rectangle (xMin,yMin,xMax,yMax);
+        showArea.setColor(Color.RED);
     }
 
     public int getxMin() {
@@ -39,7 +45,11 @@ public class Area {
         return (y >= yMin && y <= yMax);
     }
 
-    public boolean isArea(int x, int y) {
+    public boolean include(int x, int y) {
         return (x >= xMin && x <= xMax && y >= yMin && y <= yMax);
+    }
+
+    public Rectangle getShowArea() {
+        return showArea;
     }
 }
