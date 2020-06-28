@@ -5,11 +5,13 @@ import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class GameHandler implements Runnable {
+
 
     private Player player;
     private Enemy[] enemies = new Enemy[10];
@@ -18,16 +20,19 @@ public class GameHandler implements Runnable {
     private Picture[] objects = new Picture[10];
     private PlayerKeyboard playerKeyboard;
 
+    public void init() {
 
-    public GameHandler() {
         this.field = new Field();
         this.enemies[0] = new CopCar(110, 300, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.objects[0] = new Factory().gameObjectFactory(GameObjectType.MILK, 50, 65);
         this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
-    }
+        for (int i = 0; i < 7; i++) {
 
-    public void init() {
+            this.npcs[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,(int) (Math.random()*field.getSizeCol()),(int) (Math.random()*field.getSizeRow()),"AssaultableCat_"+(i+1)); {
+            }
+        }
+
         showAll();
         run();
     }
@@ -43,6 +48,7 @@ public class GameHandler implements Runnable {
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
+
     }
 
     @Override

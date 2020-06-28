@@ -9,8 +9,9 @@ public abstract class Npc extends Character {
     private Picture npc;
 
     public Npc(int posX, int posY, String spriteName){
-            this.npc = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
-        }
+
+        this.npc = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
+    }
 
 
 
