@@ -3,16 +3,13 @@ package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public abstract class Enemy extends Character implements Moveable {
 
     private EnemyAreaType enemyField;
-    private boolean isDead = false;
+    private boolean dead = false;
     private Picture enemy;
     private DirectionType directionType = DirectionType.LEFT;
     private DirectionType lastDirectionType = DirectionType.RIGHT;
@@ -60,12 +57,12 @@ public abstract class Enemy extends Character implements Moveable {
 
     //Checks if the enemy is dead to make him disappear out of the game
     public boolean isDead() {
-        return isDead;
+        return dead;
     }
 
     //Makes the enemy die
     public void setDead() {
-        isDead = true;
+        dead = true;
         System.out.println("Enemy déd");
     }
 

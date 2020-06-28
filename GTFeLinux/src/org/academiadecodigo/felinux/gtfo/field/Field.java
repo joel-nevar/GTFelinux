@@ -6,16 +6,21 @@ import java.util.ArrayList;
 
 public class Field extends Picture {
 
+
     private Picture map;
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
     private final int PIXEL = 2;
     private ArrayList<Area> notWalkable = new ArrayList<>();
-
+    //yep, they are static, why shouldnt they
+    public static int height;
+    public static int width;
 
     public Field () {
         map = new Picture(PADDING_X, PADDING_Y,"resources/images/backGround.png");
         setNotWalkable();
+        map.getHeight();
+        map.getWidth();
     }
 
     public int getPADDING_X() {
