@@ -16,7 +16,7 @@ public class Player extends Character implements Moveable{
 
     private Picture player;
     private boolean dead = false;
-    private int energy = 1000; //animation scalled to 100
+    private int energy = 300; //animation scaled to 300
     private boolean hasMilk = false;
     private int clawDamage = 1;
     private Picture energyBar;
@@ -60,22 +60,29 @@ public class Player extends Character implements Moveable{
             }
             this.takeLethalDamage();
             this.energyReset();
-            //HP BAR
+            //HP Bar
             hpAnimation.translate( -7,0);
             hpAnimation.grow(-7,0);
         }
+        //Energy Bar
         this.loseEnergy();
-        energyAnimation.translate(-0.5,0);
-        energyAnimation.grow(-0.5,0);
+        energyAnimation.translate(-0.16,0);
+        energyAnimation.grow(-0.16,0);
     }
-
+    public void gainLife() {
+        super.setLives(super.getLives() + 1);
+        hpAnimation.translate( 29,0);   //size / 7 vidas
+    }
+    public void energyReset(){
+        this.setEnergy(300);
+        energyAnimation.translate(48, 0);   // 0.16 * 300
+        energyAnimation.grow(48, 0);
+    }
     /**
      * GameHandler calls this method to move Player
      */
     public void move(){
-
         player.translate(Player.dx,Player.dy);
-
     }
 
     /**
@@ -129,12 +136,6 @@ public class Player extends Character implements Moveable{
         return hpAnimation;
     }
 
-    public void energyReset(){
-        this.setEnergy(100);
-        energyAnimation.translate(50, 0);  //funciona com metade dos valores, dunno why
-        energyAnimation.grow(50, 0);
-    }
-
     public boolean isDead() {
         return dead;
     }
@@ -184,10 +185,6 @@ public class Player extends Character implements Moveable{
 
     public void setEnergy(int energy) {
         this.energy = energy;
-    }
-    public void gainLife() {
-        super.setLives(super.getLives() + 1);
-        hpAnimation.translate( 29,0);
     }
 
     private boolean isWalkable() {
