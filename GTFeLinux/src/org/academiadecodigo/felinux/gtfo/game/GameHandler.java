@@ -46,7 +46,7 @@ public class GameHandler implements Runnable {
 
         while (!player.isDead()) {
             try {
-                Thread.sleep(15); //35
+                Thread.sleep(5); //35
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

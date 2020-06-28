@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
@@ -41,25 +42,25 @@ public class Player extends Character implements Moveable{
     }
 
     public void energyDecay(){
-        //energyBarHolder = new Picture();
-        if(super.getLives() <= 0){
-            System.out.println("U dead.");
-            this.dead = true;
-            return;
-        }
         if(this.energy <= 0){
+            if(super.getLives() <= 1) {
+                this.dead = true;
+                //HP BAR
+                hpAnimation.translate( -7,0);
+                hpAnimation.grow(-7,0);
+                return;
+            }
             this.takeLethalDamage();
             this.energyReset();
             //HP BAR
-            hpAnimation.translate( -7,0);       //tentativa erro xD Nao percebi mas fiz
+            hpAnimation.translate( -7,0);
             hpAnimation.grow(-7,0);
-            System.out.println("You have " + getLives() + " lives left!");
-        }else if(this.energy > 0){
-            this.loseEnergy();
-            energyAnimation.translate(-0.5,0);
-            energyAnimation.grow(-0.5,0);
         }
+        this.loseEnergy();
+        energyAnimation.translate(-0.5,0);
+        energyAnimation.grow(-0.5,0);
     }
+
     public void moveLeft(){
         if(field.getPADDING_X()  >= player.getX()){
             return;
