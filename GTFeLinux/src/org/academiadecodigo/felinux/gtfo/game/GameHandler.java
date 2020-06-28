@@ -16,7 +16,7 @@ public class GameHandler implements Runnable {
     private Npc[] npcs = new Npc[10];
     private Field field;
     private Picture[] objects = new Picture[10];
-    private PlayerKeyboard playerKeyboard;
+    private final PlayerKeyboard playerKeyboard;
 
 
     public GameHandler() {
@@ -32,18 +32,21 @@ public class GameHandler implements Runnable {
         run();
     }
 
-    private void showAll() {
+    private void showAll(){
+
         //Characters and Objects
         field.getMap().draw();
         player.getPlayer().draw();
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getShowArea().draw();
         objects[0].draw();
+
         //Assets / UI
         player.getEnergyBar().draw();
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
+
     }
 
     @Override
@@ -52,6 +55,17 @@ public class GameHandler implements Runnable {
         while (!player.isDead()) {
             try {
                 Thread.sleep(35); //35
+                //Animacao de atacar
+                if(player.isClawUsed() == true){
+                    player.getClawAnimation().draw();
+                    player.setClawTick(player.getClawTick() + 1);
+                    if(player.getClawTick() == 4){
+                        System.out.println("ou entao aqui");
+                        player.setClawUsed(false);
+                        player.getClawAnimation().delete();
+                        player.setClawTick(0);
+                    }
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
