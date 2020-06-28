@@ -64,32 +64,32 @@ public class Player extends Character implements Moveable{
         if(field.getPADDING_X()  >= player.getX()){
             return;
         } player.translate(-field.getCellSize(),0);
-        System.out.println(player.getY());
-        System.out.println(player.getX());
+       // System.out.println(player.getY());
+        //System.out.println(player.getX());
     }
 
     public void moveUp(){
         if(field.getPADDING_Y() >= player.getY()){
             return;
         } player.translate(0,-field.getCellSize());
-        System.out.println(player.getY());
-        System.out.println(player.getX());
+       // System.out.println(player.getY());
+        //System.out.println(player.getX());
     }
 
     public void moveRight(){
         if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
             return;
         } player.translate(field.getCellSize(),0);
-        System.out.println(player.getY());
-        System.out.println(player.getX());
+       // System.out.println(player.getY());
+        //System.out.println(player.getX());
     }
 
     public void moveDown(){
         if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
             return;
         } player.translate(0, field.getCellSize());
-        System.out.println(player.getY());  //284 - 318    Y road size Left
-        System.out.println(player.getX());  //004                                                 //1292 X
+        //System.out.println(player.getY());  //284 - 318    Y road size Left
+        //System.out.println(player.getX());  //004                                                 //1292 X
     }                                            //Castelo fica em 1180x - 100y
                                                 // AC  fica em  1126 - 1124
 
@@ -116,16 +116,26 @@ public class Player extends Character implements Moveable{
 
     public void energyReset(){
         this.setEnergy(100);
-        energyAnimation.translate(50,0);  //funciona com metade dos valores, dunno why
-        energyAnimation.grow(50,0);
+        energyAnimation.translate(50, 0);  //funciona com metade dos valores, dunno why
+        energyAnimation.grow(50, 0);
     }
+
     public boolean isDead() {
         return dead;
     }
 
-    public int attack(Enemy enemy) {
-        return 0;
+    public void attack(Enemy enemy) throws NullPointerException {
+        //TODO fix this
+        if (this.getX() == enemy.getEnemyField()) {
+            enemy.setLives(enemy.getLives() - 1);
+            System.out.println(enemy.getLives());
+            if (enemy.getLives() <= 0) {
+                enemy.setDead(true);
+            }
+
+        }
     }
+
 
     public void loseEnergy() {
         this.energy--;

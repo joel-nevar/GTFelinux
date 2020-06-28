@@ -56,16 +56,17 @@ public abstract class Enemy extends Character implements Moveable {
         }
     }
 
-    public int getLife() {
-        return life;
-    }
 
-    public void setLife(int life) {
-        this.life = life;
-    }
+
+
 
     public boolean isDead() {
         return isDead;
+    }
+
+    public void setDead(boolean dead) {
+
+        isDead = dead;
     }
 
     @Override
@@ -92,7 +93,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.RIGHT;
 
         if (this.lastDirectionType == DirectionType.LEFT) {
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
+           // System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -110,7 +111,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.UP;
 
         if (this.lastDirectionType == DirectionType.DOWN) {
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
+            //System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -128,7 +129,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.DOWN;
 
         if (this.lastDirectionType == DirectionType.UP) {
-            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
+            //System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -140,4 +141,6 @@ public abstract class Enemy extends Character implements Moveable {
 
         this.lastDirectionType = DirectionType.DOWN;
     }
+
+
 }
