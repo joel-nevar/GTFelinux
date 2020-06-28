@@ -4,8 +4,8 @@ import org.academiadecodigo.felinux.gtfo.field.Area;
 
 public enum EnemyAreaType {
 
-    LION(100,200,1200,400),
-    COP_CAR(200,100,100,100);
+    LION(5,290,1320,295),
+    COP_CAR(5,347,1315,100);
 
     private Area area;
 
