@@ -15,6 +15,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Player extends Character implements Moveable{
 
     private Picture player;
+    private Picture clawAnimation;
     private boolean dead = false;
     private int energy = 300; //animation scaled to 300
     private boolean hasMilk = false;
@@ -78,6 +79,27 @@ public class Player extends Character implements Moveable{
         energyAnimation.translate(48, 0);   // 0.16 * 300
         energyAnimation.grow(48, 0);
     }
+
+    public void attack(Enemy enemy) throws NullPointerException {
+
+
+
+        //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
+        //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
+
+        if (200>(Math.abs(this.getX()-enemy.getEnemy().getX()))&&200>(Math.abs(this.getY()-enemy.getEnemy().getY()))) {
+
+            if (enemy.getLives() <= 1) {
+                enemy.setDead();
+                return;
+            }
+            enemy.setLives(enemy.getLives() - 1);
+            System.out.println(enemy.getLives());
+        }
+    }
+
     /**
      * GameHandler calls this method to move Player
      */
@@ -138,24 +160,6 @@ public class Player extends Character implements Moveable{
 
     public boolean isDead() {
         return dead;
-    }
-
-    public void attack(Enemy enemy) throws NullPointerException {
-
-        //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
-        //Fazer diferenca entre o YMIN deles e ser menor que 5, por exemplo  - valores absolutos
-        //Fazer diferenca entre o xMAX deles e ser menor que 5, por exemplo  - valores absolutos
-        //Fazer diferenca entre o YMAX deles e ser menor que 5, por exemplo  - valores absolutos
-        if (200>(Math.abs(this.getX()-enemy.getEnemy().getX()))&&200>(Math.abs(this.getY()-enemy.getEnemy().getY()))) {
-
-
-            if (enemy.getLives() <= 1) {
-                enemy.setDead();
-                return;
-            }
-            enemy.setLives(enemy.getLives() - 1);
-            System.out.println(enemy.getLives());
-        }
     }
 
     public void loseEnergy() {

@@ -33,12 +33,13 @@ public class GameHandler implements Runnable {
     }
 
     private void showAll() {
+        //Characters and Objects
         field.getMap().draw();
         player.getPlayer().draw();
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getShowArea().draw();
         objects[0].draw();
-
+        //Assets / UI
         player.getEnergyBar().draw();
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
@@ -56,16 +57,13 @@ public class GameHandler implements Runnable {
             }
             moveAll();
         }
-
         System.out.println("GAME OVER");
     }
 
 
     private void moveAll() {
-
         player.move();
         player.energyDecay();
-
         enemies[0].move();
         //insert for loop to run enemies with an enemy counter, avoid nullpointer
 
