@@ -1,9 +1,18 @@
 package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
 
+import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.EnemyType;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import java.text.CharacterIterator;
 
 /**
  * Keyboard Handler for Player Ingame
@@ -13,6 +22,8 @@ public class PlayerKeyboard implements KeyboardHandler {
 
     private Keyboard keyboard;
     private Player player;
+    private Character character;
+    private Enemy enemy;
 
     public PlayerKeyboard(Player player){
 
@@ -100,19 +111,23 @@ public class PlayerKeyboard implements KeyboardHandler {
                     player.moveUp();
                     break;
             case KeyboardEvent.KEY_DOWN:
-                case KeyboardEvent.KEY_S:
-                    player.moveDown();
-                    break;
-                /* TODO fix interact and attack keys
+            case KeyboardEvent.KEY_S:
+                player.moveDown();
+                break;
+            //TODO fix interact and attack keys
             case KeyboardEvent.KEY_E:
                 player.interact();
                 break;
-            case KeyboardEvent.KEY_SPACE:
-               if()
 
-                 */
+            case KeyboardEvent.KEY_SPACE:
+                try {
+                    player.attack(enemy);
+                } catch (NullPointerException npe) {
+                    System.out.println("Your attacking the air");
+                }
         }
     }
+
 
     /**
      * KeyboardEvent Handler for Player actions on key released

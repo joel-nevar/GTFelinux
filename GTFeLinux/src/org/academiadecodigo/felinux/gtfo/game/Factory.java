@@ -10,31 +10,6 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Factory extends Picture {
 
 
-  /*  private Rat[] ratArray;
-    private int ratCounter = 0;
-    private static final int maxRats = 10;
-
-    public Rat[] makeRat(){
-
-        if(ratArray == null){
-            ratArray = new Rat[maxRats];
-        }
-
-        if(ratCounter<=maxRats){
-
-            ratArray[ratCounter] = new Rat(field,(int)(Math.random()*field.SIZE_COL), (int)(Math.random()*field.SIZE_ROW));
-            ratCounter++;
-        }
-
-        return ratArray;
-    }
-
-
-    public int getRatCounter() {
-        return ratCounter;
-    } */
-
-
     public static Picture gameObjectFactory(GameObjectType gameObject, int posX, int posY) {
 
         switch (gameObject) {
@@ -51,13 +26,13 @@ public class Factory extends Picture {
         }
     }
 
-    public static Enemy enemyFactory(EnemyType enemyType, int x, int y, String image) {
+    public static Enemy enemyFactory(EnemyType enemyType, int posX, int posY, String image) {
 
         switch(enemyType) {
             case COP_CAR:
-                return new CopCar(x, y, image);
+                return new CopCar(posX, posY, image);
             case LION:
-             default:return new Lion(x, y, image);
+             default:return new Lion(posX, posY, image);
         }
     }
 

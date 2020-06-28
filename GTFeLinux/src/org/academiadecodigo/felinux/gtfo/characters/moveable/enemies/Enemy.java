@@ -3,9 +3,10 @@ package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-
 
 
 public abstract class Enemy extends Character implements Moveable {
@@ -20,9 +21,9 @@ public abstract class Enemy extends Character implements Moveable {
     private DirectionType lastDirectionType = DirectionType.RIGHT;
 
 
-    public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName){
+    public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName) {
         this.enemyField = enemyField;
-        this.enemy = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
+        this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
     }
 
     public Picture getEnemy() {
@@ -33,6 +34,7 @@ public abstract class Enemy extends Character implements Moveable {
     public EnemyAreaType getEnemyField() {
         return enemyField;
     }
+
 
     public void move() {
         if (isDead()) {
@@ -56,16 +58,15 @@ public abstract class Enemy extends Character implements Moveable {
                 break;
         }
     }
-    public int getLife() {
-        return life;
-    }
 
-    public void setLife(int life) {
-        this.life = life;
-    }
+
 
     public boolean isDead() {
         return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     @Override
@@ -73,7 +74,7 @@ public abstract class Enemy extends Character implements Moveable {
 
         this.directionType = DirectionType.LEFT;
 
-        if(this.lastDirectionType == DirectionType.RIGHT){
+        if (this.lastDirectionType == DirectionType.RIGHT) {
             return;
         }
 
@@ -91,6 +92,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.RIGHT;
 
         if (this.lastDirectionType == DirectionType.LEFT) {
+            System.out.println("This Direction is: " + directionType + " Last Direction was: " + lastDirectionType);
             return;
         }
 
@@ -124,7 +126,7 @@ public abstract class Enemy extends Character implements Moveable {
     public void moveDown() {
         this.directionType = DirectionType.DOWN;
 
-        if(this.lastDirectionType == DirectionType.UP){
+        if (this.lastDirectionType == DirectionType.UP) {
             return;
         }
 

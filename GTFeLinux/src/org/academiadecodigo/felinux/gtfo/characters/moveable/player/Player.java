@@ -4,7 +4,6 @@ import jdk.swing.interop.SwingInterOpUtils;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
@@ -24,6 +23,10 @@ public class Player extends Character implements Moveable{
     private Rectangle energyAnimation;
     private Picture hpBar;
     private Rectangle hpAnimation;
+    //284 - 318    Y road size Left
+    //004                                                 //1292 X
+    //Castelo fica em 1180x - 100y
+    // AC  fica em  1126 - 1124
 
 
     public Player(String name) {
@@ -79,14 +82,12 @@ public class Player extends Character implements Moveable{
         } player.translate(field.getCellSize(),0);
     }
 
-    public void moveDown(){
-        if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
+    public void moveDown() {
+        if (field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()) {
             return;
-        } player.translate(0, field.getCellSize());
-          //284 - 318    Y road size Left
-         //004                                                 //1292 X
-    }                                            //Castelo fica em 1180x - 100y
-                                                // AC  fica em  1126 - 1124
+        }
+        player.translate(0, field.getCellSize());
+    }
 
 
     public Picture getPlayer() {
@@ -111,15 +112,23 @@ public class Player extends Character implements Moveable{
 
     public void energyReset(){
         this.setEnergy(100);
-        energyAnimation.translate(50,0);  //funciona com metade dos valores, dunno why
-        energyAnimation.grow(50,0);
+        energyAnimation.translate(50, 0);  //funciona com metade dos valores, dunno why
+        energyAnimation.grow(50, 0);
     }
+
     public boolean isDead() {
         return dead;
     }
 
-    public int attack(Enemy enemy) {
-        return 0;
+    public void attack(Enemy enemy) throws NullPointerException {
+        //TODO fix this
+        if (this.getX() == enemy.getEnemyField()) {
+            enemy.setLives(enemy.getLives() - 1);
+            System.out.println(enemy.getLives());
+            if (enemy.getLives() <= 0) {
+                enemy.setDead(true);
+            }
+        }
     }
 
     public void loseEnergy() {

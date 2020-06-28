@@ -48,12 +48,6 @@ public class Field extends Picture {
         return PIXEL;
     }
 
-
-    private void addNotWalkable(int xMin, int yMin, int xMax, int yMax){
-        notWalkable.add(new Area(xMin, yMin, xMax, yMax));
-    }
-
-
     public ArrayList<Area> getNotWalkable() {
         return notWalkable;
     }
@@ -61,15 +55,19 @@ public class Field extends Picture {
     public boolean isWalkable(int x, int y) {
         setNotWalkable();
         for (Area area : notWalkable) {
-            if (area.isArea(x,y)){
+            if (area.include(x,y)){
                 return false;
             }
         }
         return true;
     }
 
+    private void addNotWalkable(int xMin, int yMin, int xMax, int yMax){
+        notWalkable.add(new Area(xMin, yMin, xMax, yMax));
+    }
+
     private void setNotWalkable(){
-        addNotWalkable(4,554,306,628);
+        addNotWalkable(50,400,300,500);
     }
 
 }
