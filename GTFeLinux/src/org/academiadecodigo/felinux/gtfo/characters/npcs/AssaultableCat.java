@@ -18,7 +18,7 @@ public class AssaultableCat extends Npc {
     private int routeY;
     private int moveCounter;
     private boolean forward;
-    private final int DISTANCE = 100;
+    private int distance = 100;
     private Rectangle redLifeBar;
     private Rectangle greenLifeBar;
 
@@ -36,7 +36,11 @@ public class AssaultableCat extends Npc {
         this.greenLifeBar.setColor(new Color(0,255,0));
 
         defineRoute();
+        defineDistance();
+        defineDirection();
     }
+
+
 
     public Rectangle getGreenLifeBar() {
         return greenLifeBar;
@@ -70,7 +74,7 @@ public class AssaultableCat extends Npc {
                 redLifeBar.translate(routeX,routeY);
                 greenLifeBar.translate(routeX,routeY);
 
-                if(moveCounter > DISTANCE){
+                if(moveCounter > distance){
                 forward = false;
             }
             return;
@@ -91,7 +95,7 @@ public class AssaultableCat extends Npc {
     }
 
     /**
-     * Defines how this will move
+     * Defines how this cat will move
      */
     private void defineRoute(){
 
@@ -102,5 +106,25 @@ public class AssaultableCat extends Npc {
 
         }
         routeY = 1;
+    }
+
+    /**
+     * Defines how long
+     */
+    private void defineDistance() {
+
+        distance = (int) (Math.random()*120)+50;
+    }
+
+    /**
+     * Defines this cat direction
+     */
+    private void defineDirection() {
+
+        if(Math.random()<0.5){
+            forward = true;
+            return;
+        }
+        forward = false;
     }
 }

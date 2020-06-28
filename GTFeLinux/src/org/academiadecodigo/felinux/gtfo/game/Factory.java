@@ -13,7 +13,7 @@ public class Factory extends Picture {
 
         switch(enemyType) {
             case COP_CAR:
-                return new CopCar(posX, posY, image);
+                return new CopCar(posX, 700, image); //SPECIAL CASE copCars Spawn on Y =350
             case LION:
              default:return new Lion(posX, posY, image);
         }

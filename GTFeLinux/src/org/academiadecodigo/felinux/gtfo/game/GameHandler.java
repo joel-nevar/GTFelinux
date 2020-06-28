@@ -10,7 +10,6 @@ import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public class GameHandler implements Runnable {
@@ -29,7 +28,8 @@ public class GameHandler implements Runnable {
         //Creates everything that is visual in the Canvas
         this.field = new Field();
         this.milk = new Milk();
-        this.enemies[0] = new CopCar(110, 300, "AssaultableCat_1");
+        // call this on the factory thx, also 350 on Y
+        this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
 
