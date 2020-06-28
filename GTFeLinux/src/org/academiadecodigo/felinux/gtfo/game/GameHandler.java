@@ -22,20 +22,18 @@ public class GameHandler implements Runnable {
     private Field field;
     //private Picture[] objects = new Picture[10];
     private PlayerKeyboard playerKeyboard;
-
-    //Assautable cats amount and Array
     private final int ASSAULTABLE_CATS = 8;
     private Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
 
     public void init() {
-
+        //Creates everything that is visual in the Canvas
         this.field = new Field();
         this.milk = new Milk();
         this.enemies[0] = new CopCar(110, 300, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
-        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
 
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,(int) (Math.random()*field.getSizeCol()),(int) (Math.random()*field.getSizeRow()));
         }
 
@@ -51,20 +49,16 @@ public class GameHandler implements Runnable {
         //Objects
         milk.getMilk().draw();
 
-        //Characters
-        player.getPlayer().draw();
-        enemies[0].getEnemy().draw();
-        enemies[0].getEnemyField().getArea().getShowArea().draw();
-
-
-
-        //Npcs
+        //NPCs
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
         }
 
-        //player on top
+        //Characters
+        enemies[0].getEnemy().draw();
+        enemies[0].getEnemyField().getArea().getShowArea().draw();
         player.getPlayer().draw();
+
         //Assets / UI
         player.getEnergyBar().draw();
         player.getHpBar().draw();
@@ -82,8 +76,10 @@ public class GameHandler implements Runnable {
         while (!player.isDead()) {
             try {
                 Thread.sleep(35);
+
                 //Check if player is attacking
                 player.playerAttackVerification();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -98,7 +94,8 @@ public class GameHandler implements Runnable {
         player.move();
         player.energyDecay();
         enemies[0].move();
-        //insert for loop to run enemies with an enemy counter, avoid nullpointer
+
+        //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].move();
         }

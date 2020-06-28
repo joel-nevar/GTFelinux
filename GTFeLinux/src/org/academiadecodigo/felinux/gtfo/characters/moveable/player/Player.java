@@ -50,8 +50,6 @@ public class Player extends Character implements Moveable{
     }
 
 
-
-
     public void energyDecay(){
         if(this.energy <= 0){
             if(super.getLives() <= 1) {

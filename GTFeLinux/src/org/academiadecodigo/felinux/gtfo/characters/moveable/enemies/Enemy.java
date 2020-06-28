@@ -24,16 +24,17 @@ public abstract class Enemy extends Character implements Moveable {
         this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
     }
 
+    //Used to draw the enemy
     public Picture getEnemy() {
         return enemy;
     }
 
-
+    //Used to make a walkable area for the enemy
     public EnemyAreaType getEnemyField() {
         return enemyField;
     }
 
-
+    //Moves the enemy randomly (not backwards)
     public void move() {
         if (isDead()) {
             return;
@@ -57,17 +58,18 @@ public abstract class Enemy extends Character implements Moveable {
         }
     }
 
-
-
+    //Checks if the enemy is dead to make him disappear out of the game
     public boolean isDead() {
         return isDead;
     }
 
+    //Makes the enemy die
     public void setDead() {
         isDead = true;
         System.out.println("Enemy déd");
     }
 
+    //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveLeft() {
 
@@ -86,6 +88,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.lastDirectionType = DirectionType.LEFT;
     }
 
+    //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveRight() {
         this.directionType = DirectionType.RIGHT;
@@ -103,6 +106,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.lastDirectionType = DirectionType.RIGHT;
     }
 
+    //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveUp() {
         this.directionType = DirectionType.UP;
@@ -120,6 +124,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.lastDirectionType = DirectionType.UP;
     }
 
+    //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveDown() {
         this.directionType = DirectionType.DOWN;
