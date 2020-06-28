@@ -80,6 +80,23 @@ public class Player extends Character implements Moveable{
         energyAnimation.grow(48, 0);
     }
 
+    public void playerAttackVerification(){
+        //Attack animation appear
+        if(clawUsed == true){
+            this.getClawAnimation().draw();
+
+            //Tick to measure animation time
+            this.setClawTick(getClawTick() + 1);
+
+            //Attack animation disappear
+            if(getClawTick() == 4){
+                this.setClawUsed(false);
+                this.getClawAnimation().delete();
+                this.setClawTick(0);
+            }
+        }
+    }
+
     public void attack(Enemy enemy){
 
         //Fazer diferenca entre o xMIN deles e ser menor que 5, por exemplo  - valores absolutos
