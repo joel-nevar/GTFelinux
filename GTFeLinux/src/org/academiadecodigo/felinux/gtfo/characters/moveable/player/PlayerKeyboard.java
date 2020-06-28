@@ -5,6 +5,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 /**
@@ -17,7 +18,6 @@ public class PlayerKeyboard implements KeyboardHandler {
     private Player player;
     private Enemy enemy;
     private float moveSpeed = 3f;
-
 
     public PlayerKeyboard(Player player, Enemy enemy){
         this.enemy = enemy;
@@ -161,6 +161,19 @@ public class PlayerKeyboard implements KeyboardHandler {
         }
 
         switch (keyboardEvent.getKey()){
+            case KeyboardEvent.KEY_E:
+                player.interact();
+                break;
+
+            case KeyboardEvent.KEY_SPACE:
+                if(player.isClawUsed()){
+                    return;
+                }
+                try {
+                    player.attack(enemy);
+                } catch (NullPointerException npe) {
+                    System.out.println("You're attacking the air");
+                }
             /*
 
             case KeyboardEvent.KEY_LEFT:
@@ -182,20 +195,8 @@ public class PlayerKeyboard implements KeyboardHandler {
             //TODO fix interact and attack keys
 
          */
-            case KeyboardEvent.KEY_E:
-                player.interact();
-                break;
-
-            case KeyboardEvent.KEY_SPACE:
-                try {
-                    player.attack(enemy);
-                } catch (NullPointerException npe) {
-
-                    System.out.println("You're attacking the air");
-                }
         }
     }
-
 
     /**
      * KeyboardEvent Handler for Player actions on key released
