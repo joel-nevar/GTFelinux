@@ -4,7 +4,6 @@ import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
@@ -27,9 +26,9 @@ public class Player extends Character implements Moveable{
 
 
     //These are used for movement
+    public static int dx;
+    public static int dy;
 
-    public DirectionType direction;
-    public boolean stopped;
 
      public Player(String name) {
         super();
@@ -71,41 +70,35 @@ public class Player extends Character implements Moveable{
      */
     public void move(){
 
-        if(stopped){
-            return;
-        }
-        switch(direction){
-            case RIGHT : moveRight();
-                break;
-            case LEFT :moveLeft();
-                break;
-            case UP : moveUp();
-                break;
-            case DOWN: moveDown();
-        }
+        player.translate(Player.dx,Player.dy);
+
     }
 
     /**
      * Actual movement called by method move()
      */
+    @Override
     public void moveLeft(){
         if(field.getPADDING_X()  >= player.getX()){
             return;
         } player.translate(-field.getCellSize(),0);
     }
 
+    @Override
     public void moveUp(){
         if(field.getPADDING_Y() >= player.getY()){
             return;
         } player.translate(0,-field.getCellSize());
     }
 
+    @Override
     public void moveRight(){
         if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
             return;
         } player.translate(field.getCellSize(),0);
     }
 
+    @Override
     public void moveDown(){
         if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
             return;

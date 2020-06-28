@@ -70,6 +70,15 @@ public class PlayerKeyboard implements KeyboardHandler {
         attack.setKey(KeyboardEvent.KEY_SPACE);
         attack.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        keyboard.addEventListener(left);
+        keyboard.addEventListener(right);
+        keyboard.addEventListener(up);
+        keyboard.addEventListener(down);
+        keyboard.addEventListener(leftArrow);
+        keyboard.addEventListener(rightArrow);
+        keyboard.addEventListener(upArrow);
+        keyboard.addEventListener(downArrow);
+
         /*
          * Key Released
          */
@@ -115,6 +124,8 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(stopUpArrow);
         keyboard.addEventListener(stopDownArrow);
 
+
+
     }
 
     /**
@@ -124,22 +135,39 @@ public class PlayerKeyboard implements KeyboardHandler {
      */
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-        switch (keyboardEvent.getKey()){
+
+        //Reset Movement
+
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
+            Player.dx -=2;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
+            Player.dx +=2;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
+            Player.dy -=2;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
+            Player.dy +=2;
+        }
+
+        /*switch (keyboardEvent.getKey()){
+
             case KeyboardEvent.KEY_LEFT:
             case KeyboardEvent.KEY_A:
-                player.direction = DirectionType.LEFT;
+                Player.dx -=2;
                 break;
             case KeyboardEvent.KEY_RIGHT:
             case KeyboardEvent.KEY_D:
-                player.direction = DirectionType.RIGHT;
+                Player.dx +=2;
                 break;
             case KeyboardEvent.KEY_UP:
             case KeyboardEvent.KEY_W:
-                player.direction = DirectionType.UP;
+                Player.dy -= 2;
                 break;
             case KeyboardEvent.KEY_DOWN:
             case KeyboardEvent.KEY_S:
-                player.direction = DirectionType.DOWN;
+                Player.dy += 2;
                 break;
                 /* TODO fix interact and attack keys
             case KeyboardEvent.KEY_E:
@@ -148,8 +176,8 @@ public class PlayerKeyboard implements KeyboardHandler {
             case KeyboardEvent.KEY_SPACE:
                if()
 
-                 */
         }
+        */
     }
 
     /**
@@ -160,17 +188,21 @@ public class PlayerKeyboard implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-        switch (keyboardEvent.getKey()){
+       /* switch (keyboardEvent.getKey()){
             case KeyboardEvent.KEY_LEFT:
             case KeyboardEvent.KEY_A:
             case KeyboardEvent.KEY_RIGHT:
             case KeyboardEvent.KEY_D:
+                Player.dx = 0;
+                break;
             case KeyboardEvent.KEY_UP:
             case KeyboardEvent.KEY_W:
             case KeyboardEvent.KEY_DOWN:
             case KeyboardEvent.KEY_S:
-                player.stopped = true;
+                Player.dy = 0;
                 break;
         }
+
+        */
     }
 }
