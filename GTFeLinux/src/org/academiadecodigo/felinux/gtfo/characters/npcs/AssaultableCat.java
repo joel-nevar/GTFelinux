@@ -1,5 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 /**
@@ -17,6 +19,8 @@ public class AssaultableCat extends Npc {
     private int moveCounter;
     private boolean forward;
     private final int DISTANCE = 100;
+    private Rectangle redLifeBar;
+    private Rectangle greenLifeBar;
 
     @Override
     public String getMessage() {
@@ -25,10 +29,22 @@ public class AssaultableCat extends Npc {
 
     public AssaultableCat(int posX, int posY, String spriteName) {
         super(posX, posY, spriteName);
-        defineRoute();
 
+        this.redLifeBar = new Rectangle(posX - 9, posY - 8, 50,7);
+        this.redLifeBar.setColor(new Color(255,0,0));
+        this.greenLifeBar = new Rectangle(posX - 9, posY - 8, 50,7);
+        this.greenLifeBar.setColor(new Color(0,255,0));
+
+        defineRoute();
     }
 
+    public Rectangle getGreenLifeBar() {
+        return greenLifeBar;
+    }
+
+    public Rectangle getRedLifeBar() {
+        return redLifeBar;
+    }
 
     public boolean isRobbed() {
         return robbed;
@@ -48,20 +64,21 @@ public class AssaultableCat extends Npc {
             return;
         }
         if (forward) {
-            System.out.println(1);
 
                 moveCounter++;
                 getNpc().translate(routeX, routeY);
+                redLifeBar.translate(routeX,routeY);
+                greenLifeBar.translate(routeX,routeY);
 
-            if(moveCounter>DISTANCE){
+                if(moveCounter > DISTANCE){
                 forward = false;
             }
-
             return;
         }
-
         moveCounter--;
         getNpc().translate(-routeX, -routeY);
+        redLifeBar.translate(-routeX,-routeY);
+        greenLifeBar.translate(-routeX,-routeY);
 
         if(moveCounter<0){
             forward = true;

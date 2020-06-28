@@ -76,6 +76,7 @@ public abstract class Enemy extends Character implements Moveable {
         this.directionType = DirectionType.LEFT;
 
         if (this.lastDirectionType == DirectionType.RIGHT) {
+            //aqui
             return;
         }
 

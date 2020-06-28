@@ -52,11 +52,17 @@ public class GameHandler implements Runnable {
         //NPCs
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
+            ((AssaultableCat)assaultableCats[i]).getRedLifeBar().fill();
+            ((AssaultableCat)assaultableCats[i]).getGreenLifeBar().fill();
         }
 
         //Characters
+        //Make a for loop when more enemies here
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getShowArea().draw();
+        ((CopCar)enemies[0]).getRedLifeBar().fill();
+        ((CopCar)enemies[0]).getGreenLifeBar().fill();
+
         player.getPlayer().draw();
 
         //Assets / UI
