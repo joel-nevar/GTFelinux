@@ -15,7 +15,6 @@ public class Player extends Character implements Moveable{
 
     private Picture player;
     private boolean dead = false;
-    private Field playerField;
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
@@ -26,11 +25,10 @@ public class Player extends Character implements Moveable{
     private Rectangle hpAnimation;
 
 
-    public Player(Field field) {
+    public Player(String name) {
         super();
         super.setLives(7);
-        this.playerField = field;
-        this.player = new Picture(50,50,"resources/images/tobias.png");
+        this.player = new Picture(50,100,"resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         this.keyboardHandler = new PlayerKeyboard(this);
@@ -63,33 +61,33 @@ public class Player extends Character implements Moveable{
         }
     }
     public void moveLeft(){
-        if(this.playerField.getPadding()  >= player.getX()){
+        if(field.getPADDING_X()  >= player.getX()){
             return;
-        } player.translate(-playerField.getCellSize(),0);
+        } player.translate(-field.getCellSize(),0);
         System.out.println(player.getY());
         System.out.println(player.getX());
     }
 
     public void moveUp(){
-        if(this.playerField.getPadding() >= player.getY()){
+        if(field.getPADDING_Y() >= player.getY()){
             return;
-        } player.translate(0,-playerField.getCellSize());
+        } player.translate(0,-field.getCellSize());
         System.out.println(player.getY());
         System.out.println(player.getX());
     }
 
     public void moveRight(){
-        if(this.playerField.getSizeCol() <= player.getMaxX() - this.playerField.getPadding()){
+        if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
             return;
-        } player.translate(playerField.getCellSize(),0);
+        } player.translate(field.getCellSize(),0);
         System.out.println(player.getY());
         System.out.println(player.getX());
     }
 
     public void moveDown(){
-        if(this.playerField.getSizeRow() <= player.getMaxY() - this.playerField.getPadding()){
+        if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
             return;
-        } player.translate(0, playerField.getCellSize());
+        } player.translate(0, field.getCellSize());
         System.out.println(player.getY());  //284 - 318    Y road size Left
         System.out.println(player.getX());  //004                                                 //1292 X
     }                                            //Castelo fica em 1180x - 100y
@@ -162,4 +160,7 @@ public class Player extends Character implements Moveable{
         hpAnimation.translate( 29,0);
     }
 
+    private boolean isWalkable() {
+        return (field.isWalkable(player.getX(), player.getY()));
+    }
 }

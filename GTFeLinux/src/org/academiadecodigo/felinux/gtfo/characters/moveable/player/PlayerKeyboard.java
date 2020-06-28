@@ -76,6 +76,7 @@ public class PlayerKeyboard implements KeyboardHandler {
         keyboard.addEventListener(downArrow);
         keyboard.addEventListener(interact);
         keyboard.addEventListener(attack);
+
     }
 
     /**
@@ -85,7 +86,6 @@ public class PlayerKeyboard implements KeyboardHandler {
      */
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
-
         switch (keyboardEvent.getKey()){
             case KeyboardEvent.KEY_LEFT:
                 case KeyboardEvent.KEY_A:

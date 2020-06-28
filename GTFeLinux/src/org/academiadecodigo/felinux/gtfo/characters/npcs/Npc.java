@@ -1,24 +1,22 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public abstract class Npc extends Character {
 
-    private boolean visited;
+    private Picture npc;
 
-    public Npc(){
-    }
+    public Npc(int posX, int posY, String spriteName){
+            this.npc = new Picture(posX,posY,"resources/images/" + spriteName + ".png");
+        }
 
     public String getMessage() {
         return "Return this string";
     }
 
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
+    public Picture getNpc() {
+        return npc;
     }
 }

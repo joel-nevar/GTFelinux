@@ -8,45 +8,43 @@ import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class GameHandler implements Runnable{
-
+public class GameHandler implements Runnable {
 
     private Player player;
     private Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
     private Field field;
-    private Picture map;
     private Picture[] objects = new Picture[10];
 
-    public GameHandler(Field field){
 
-        this.field = field;
-        this.map = new Picture(field.getPadding(),field.getPadding(),"resources/images/backGround.png");
-        this.enemies[0] = new CopCar(field, 200,200,"AssaultableCat_1");
-        this.player = new Player(field);
-        this.objects[0] =  new Factory().gameObjectFactory(GameObjectType.MILK);
-        field.showMap();
+    public GameHandler() {
+        this.field = new Field();
+        this.enemies[0] = new CopCar(800, 400, "AssaultableCat_1");
+        this.player = new Player("tobias.png");
+        this.objects[0] = new Factory().gameObjectFactory(GameObjectType.MILK, 50, 65);
     }
 
-    public void init(){
+    public void init() {
+        showAll();
+        run();
+    }
 
-        field.showMap();
+    private void showAll() {
+        field.getMap().draw();
         player.getPlayer().draw();
-        enemies[0].getEnemyField().draw();
+        enemies[0].getEnemy().draw();
         objects[0].draw();
 
         player.getEnergyBar().draw();
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
-        run();
-
     }
 
     @Override
     public void run() {
 
-        while(!player.isDead()){
+        while (!player.isDead()) {
             try {
                 Thread.sleep(15); //35
             } catch (InterruptedException e) {
