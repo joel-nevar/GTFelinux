@@ -1,11 +1,14 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
-import org.academiadecodigo.felinux.gtfo.game.SpriteType;
-
 public class AssaultableCat extends Npc {
+
+
     private boolean robbed;
     private boolean dead;
 
+    public AssaultableCat(int posX, int posY, String spriteName) {
+        super(posX, posY, spriteName);
+    }
 
 
     public boolean isRobbed() {
@@ -17,28 +20,4 @@ public class AssaultableCat extends Npc {
     }
 
 
-    @Override
-    public int getCol() {
-        return 0;
-    }
-
-    @Override
-    public int getRow() {
-        return 0;
-    }
-
-    @Override
-    public void setCol(int column) {
-
-    }
-
-    @Override
-    public void setRow(int row) {
-
-    }
-
-    @Override
-    public SpriteType getSprite() {
-        return null;
-    }
 }

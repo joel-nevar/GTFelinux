@@ -1,33 +1,20 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
-import org.academiadecodigo.felinux.gtfo.game.SpriteType;
-
 public class CatProstitute extends Npc {
+
         private boolean visited;
 
-        @Override
-        public int getCol() {
-                return 0;
+        public CatProstitute(int posX, int posY, String spriteName) {
+                super(posX, posY, spriteName);
         }
 
-        @Override
-        public int getRow() {
-                return 0;
+
+        public boolean isVisited() {
+                return visited;
         }
 
-        @Override
-        public void setCol(int column) {
-
-        }
-
-        @Override
-        public void setRow(int row) {
-
-        }
-
-        @Override
-        public SpriteType getSprite() {
-                return null;
+        public void setVisited(boolean visited) {
+                this.visited = visited;
         }
 }
 

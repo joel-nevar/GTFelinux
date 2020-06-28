@@ -1,98 +1,75 @@
 package org.academiadecodigo.felinux.gtfo.field;
-
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
-import org.academiadecodigo.felinux.gtfo.game.Factory;
-import org.academiadecodigo.felinux.gtfo.game.GameObjectType;
-import org.academiadecodigo.felinux.gtfo.game.SpriteType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import java.util.ArrayList;
 
 public class Field extends Picture {
 
-    private Picture field;
-    private final int PADDING = 5;
-    public final int SIZE_COL = 1320;    //3300 a 40%
-    public final int SIZE_ROW = 594;     //990 a 60%
+    private Picture map;
+    private final int PADDING_X = 5;
+    private final int PADDING_Y = 65;
     private final int PIXEL = 2;
-    private Player player;
-    private Enemy enemy;
-    private Npc[] npcs;
-    private SpriteType[] spriteTypes;
-    private  Picture milkTest;
+    private ArrayList<Area> notWalkable = new ArrayList<>();
 
-
-    public Field (Player player, Enemy enemy, Npc[] npcs) {
-        field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
-        showMap();
-        this.player = player;
-        this.enemy = enemy;
-        this.npcs = npcs;
-        this.spriteTypes = SpriteType.values();
-    }
 
     public Field () {
-        field = new Picture(PADDING,PADDING,"resources/images/backGround.png");
-        this.player = new Player(this);
-        this.enemy = new CopCar(this, 200,200,"AssaultableCat_1");
-        this.milkTest =  new Factory().gameObjectFactory(GameObjectType.MILK);
-        showMap();
+        map = new Picture(PADDING_X, PADDING_Y,"resources/images/backGround.png");
     }
 
-    public int getPadding() {
-        return PADDING;
+    public int getPADDING_X() {
+        return PADDING_X;
     }
 
-    public Enemy getEnemy() {
-        return enemy;
+    public int getPADDING_Y() {
+        return PADDING_Y;
     }
 
+    public Picture getMap() {
+        return map;
+    }
     /**
      *Show full map
      */
-    private void showMap(){
-        field.draw();
-        player.getPlayerImage().draw();
-        enemy.getEnemy().draw();
-        milkTest.draw();
-    }
+
 
     /**
      * fill sprites on the field
      */
-    private void drawField(){
-        player.draw();
-    }
-
-    public void makePosition(){
-
-    }
 
     public int getSizeRow() {
-        return SIZE_ROW;
+        return map.getHeight();
     }
 
     public int getSizeCol() {
-        return SIZE_COL;
+        return map.getWidth();
     }
 
     public int getCellSize() {
         return PIXEL;
     }
 
-    /*public Enum TerranType{
-        BLOCK1,
-        BLOCK2
-    }*/
 
-    public boolean comparePosition(Position position) {
-        return false;
+    private void addNotWalkable(int xMin, int yMin, int xMax, int yMax){
+        notWalkable.add(new Area(xMin, yMin, xMax, yMax));
     }
 
-    private enum walkable{
-        IS_WALKABLE,
-        NOT_WALKABLE;
+
+    public ArrayList<Area> getNotWalkable() {
+        return notWalkable;
+    }
+
+    public boolean isWalkable(int x, int y) {
+        setNotWalkable();
+        for (Area area : notWalkable) {
+            if (area.isArea(x,y)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void setNotWalkable(){
+        addNotWalkable(4,554,306,628);
     }
 
 }

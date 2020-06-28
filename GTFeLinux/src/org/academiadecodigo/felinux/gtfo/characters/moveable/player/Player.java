@@ -4,79 +4,124 @@ import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
-import org.academiadecodigo.felinux.gtfo.field.Position;
-import org.academiadecodigo.felinux.gtfo.game.SpriteType;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends Character implements Moveable {
 
-    private Picture playerImage;
+public class Player extends Character implements Moveable{
+
+    private Picture player;
     private boolean dead = false;
-    private Position checkpoint;
-    private Field playerField;
     private int energy = 100;
     private boolean hasMilk = false;
     private int clawDamage = 1;
     private KeyboardHandler keyboardHandler;
+    private Picture energyBar;
+    private Rectangle energyAnimation;
+    private Picture hpBar;
+    private Rectangle hpAnimation;
 
 
-    public Player(Field field) {
+    public Player(String name) {
         super();
-        this.playerField = field;
-        this.playerImage = new Picture(50,50,"resources/images/tobias.png");
+        super.setLives(7);
+        this.player = new Picture(50,100,"resources/images/" + name);
+        this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
+        this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         this.keyboardHandler = new PlayerKeyboard(this);
+        //ENERGY BAR
+        this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
+        energyAnimation.setColor(new Color(255,255,0));
+        //HP BAR
+        this.hpAnimation = new Rectangle(207, 26, 100, 10);
+        hpAnimation.setColor(new Color(255,0,0));
     }
 
-    public Picture getPlayerImage() {
-        return playerImage;
-    }
-
-    public void moveLeft(){
-        if(this.playerField.getPadding()  >= playerImage.getX()){
+    public void energyDecay(){
+        //energyBarHolder = new Picture();
+        if(super.getLives() <= 0){
+            System.out.println("U dead.");
+            this.dead = true;
             return;
-        } playerImage.translate(-playerField.getCellSize(),0);
+        }
+        if(this.energy <= 0){
+            this.takeLethalDamage();
+            this.energyReset();
+            //HP BAR
+            hpAnimation.translate( -7,0);       //tentativa erro xD Nao percebi mas fiz
+            hpAnimation.grow(-7,0);
+            System.out.println("You have " + getLives() + " lives left!");
+        }else if(this.energy > 0){
+            this.loseEnergy();
+            energyAnimation.translate(-0.5,0);
+            energyAnimation.grow(-0.5,0);
+        }
+    }
+    public void moveLeft(){
+        if(field.getPADDING_X()  >= player.getX()){
+            return;
+        } player.translate(-field.getCellSize(),0);
+        System.out.println(player.getY());
+        System.out.println(player.getX());
     }
 
     public void moveUp(){
-        if(this.playerField.getPadding() >= playerImage.getY()){
+        if(field.getPADDING_Y() >= player.getY()){
             return;
-        } playerImage.translate(0,-playerField.getCellSize());
+        } player.translate(0,-field.getCellSize());
+        System.out.println(player.getY());
+        System.out.println(player.getX());
     }
 
     public void moveRight(){
-        if(this.playerField.getSizeCol() <= playerImage.getMaxX() - this.playerField.getPadding()){
+        if(field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()){
             return;
-        } playerImage.translate(playerField.getCellSize(),0);
+        } player.translate(field.getCellSize(),0);
+        System.out.println(player.getY());
+        System.out.println(player.getX());
     }
 
     public void moveDown(){
-        if(this.playerField.getSizeRow() <= playerImage.getMaxY() - this.playerField.getPadding()){
+        if(field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()){
             return;
-        } playerImage.translate(0, playerField.getCellSize());
+        } player.translate(0, field.getCellSize());
+        System.out.println(player.getY());  //284 - 318    Y road size Left
+        System.out.println(player.getX());  //004                                                 //1292 X
+    }                                            //Castelo fica em 1180x - 100y
+                                                // AC  fica em  1126 - 1124
+
+
+    public Picture getPlayer() {
+        return player;
     }
 
-    public int energyDecay(){
-        if(this.energy == 0){
-            super.setLives(super.getLives()- 1);
-        }
-        if(this.getLives() == 0){
-            playerImage.delete();
-        }
-        return energyDecay() -1;
+    public Picture getEnergyBar() {
+        return energyBar;
     }
 
-    public int deathByEnemy(Enemy enemy) {
-        if (enemy.shoot(this)) {
-            super.setLives(super.getLives() - 1);
-        }
-        if (this.getLives() == 0) {
-            playerImage.delete();
-        }
-        return getLives();
+    public Picture getHpBar() {
+        return hpBar;
     }
 
+    public Rectangle getEnergyAnimation() {
+        return energyAnimation;
+    }
+
+    public Rectangle getHpAnimation() {
+        return hpAnimation;
+    }
+
+    public void energyReset(){
+        this.setEnergy(100);
+        energyAnimation.translate(50,0);  //funciona com metade dos valores, dunno why
+        energyAnimation.grow(50,0);
+    }
+    public boolean isDead() {
+        return dead;
+    }
 
     public int attack(Enemy enemy) {
         return 0;
@@ -103,54 +148,19 @@ public class Player extends Character implements Moveable {
         return super.getLives();
     }
 
-    public Position getCheckpoint() {
-        return this.checkpoint;
-    }
-
     public void setDead(boolean dead) {
         this.dead = dead;
-    }
-
-
-
-    public void setCheckpoint(Position checkpoint) {
-        this.checkpoint = checkpoint;
     }
 
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
-    public void takeDamage() {
-        super.takeDamage();
-    }
-
     public void gainLife() {
         super.setLives(super.getLives() + 1);
+        hpAnimation.translate( 29,0);
     }
 
-    @Override
-    public int getCol() {
-        return 0;
-    }
-
-    @Override
-    public int getRow() {
-        return 0;
-    }
-
-    @Override
-    public void setCol(int column) {
-
-    }
-
-    @Override
-    public void setRow(int row) {
-
-    }
-
-    @Override
-    public SpriteType getSprite() {
-        return null;
+    private boolean isWalkable() {
+        return (field.isWalkable(player.getX(), player.getY()));
     }
 }

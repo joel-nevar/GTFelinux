@@ -1,17 +1,17 @@
 package org.academiadecodigo.felinux.gtfo.characters;
 
-import org.academiadecodigo.felinux.gtfo.field.Position;
-import org.academiadecodigo.felinux.gtfo.game.SpriteType;
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public abstract class Character extends Picture implements Position {
+public abstract class Character extends Picture{
 
     private int lives;
     private int damage;
     private  int speed;
-    private Position position;
-    private SpriteType image;
     private String message;
+    protected static final Field  field = new Field();
+
+
 
     //resolver
     public void interact(Character char1) {
@@ -23,16 +23,12 @@ public abstract class Character extends Picture implements Position {
         return message;
     }
 
-    public void takeDamage() {
+    public void takeLethalDamage() {
         this.lives--;
     }
 
     public int getLives() {
         return this.lives;
-    }
-
-    public Position getPosition() {
-        return this.position;
     }
 
     public int getDamage() {
@@ -47,9 +43,6 @@ public abstract class Character extends Picture implements Position {
         this.lives = lives;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 
     public void setDamage(int damage) {
         this.damage = damage;
