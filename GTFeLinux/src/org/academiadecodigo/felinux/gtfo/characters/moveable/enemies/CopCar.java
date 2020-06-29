@@ -50,65 +50,65 @@ public class CopCar extends Enemy {
      */
     @Override
     public void move() {
+        /*Cars dont die bud
 
-        //check death
-        if(isDead()){
-            return;
-        }
-
+            //check death
+            if(isDead()){
+                return;
+        }*/
         //check if turning
         if(turning) {
 
             cSpeed = 1;
             turnCar();
-            System.out.println(turningCounter);
 
             if(turningCounter > 4) {
 
                 if(forward){
-
+                    System.out.println("forward false, turning false");
                     forward = false;
                     turning = false;
                     turningCounter = 0;
                     return;
                 }
+                System.out.println("forward true, turning false");
                 forward = true;
                 turning = false;
                 turningCounter = 0;
             }
-
             return;
         }
 
         //if it is not turning it gains speed
         //and moves accordingly
-        if(cSpeed <MAX_SPEED) {
+        if(cSpeed < MAX_SPEED) {
             cSpeed += ACCEL;
         }
 
         //direction that the car is moving and the movement
         if (forward) {
-            if(getEnemy().getX()< Field.width){
+            if(getEnemy().getX() < Field.width){        //Horizontal
 
-                System.out.println(4);
+                System.out.println("Moving horizontally");
                 getEnemy().translate(cSpeed,0);
                 redLifeBar.translate(cSpeed,0);
                 greenLifeBar.translate(cSpeed,0);
                 return;
+            } else if(getEnemy().getX() >= Field.width){
+                turning = true;
+                return;
             }
-            turning = true;
-            return;
         }
 
-        //other direction
-        if(getEnemy().getX()> Field.PADDING_X){
+        /*//other direction
+        if(getEnemy().getX() > Field.PADDING_X){
 
             getEnemy().translate(-cSpeed,0);
             redLifeBar.translate(-cSpeed,0);
             greenLifeBar.translate(-cSpeed,0);
             return;
         }
-        turning = false;
+        turning = false;*/
     }
 
     //handles turning
@@ -120,6 +120,9 @@ public class CopCar extends Enemy {
             redLifeBar.translate(0, cSpeed);
             greenLifeBar.translate(0, cSpeed);
             turningCounter++;
+            if(turningCounter == 5){
+                forward = true;
+            }
             return;
 
         }
