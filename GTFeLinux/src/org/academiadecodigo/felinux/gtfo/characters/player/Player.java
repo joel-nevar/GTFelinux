@@ -3,6 +3,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -146,30 +147,30 @@ public class Player extends Character{
      */
     @Override
     public void moveLeft(){
-        if((field.getPADDING_X()  >= player.getX()) || !isWalkable()){
+        if((Field.getPADDING_X()  >= player.getX())){
             return;
-        } player.translate(-field.getCellSize(),0);
+        } player.translate(-Field.getCellSize(),0);
     }
 
     @Override
     public void moveUp(){
-        if((field.getPADDING_Y() >= player.getY()) || !isWalkable()){
+        if((Field.getPADDING_Y() >= player.getY())){
             return;
-        } player.translate(0,-field.getCellSize());
+        } player.translate(0,-Field.getCellSize());
     }
 
     @Override
     public void moveRight(){
-        if((field.getSizeCol() <= player.getMaxX() - field.getPADDING_X()) || !isWalkable()){
+        if((Field.getSizeCol() <= player.getMaxX() - Field.getPADDING_X())){
             return;
-        } player.translate(field.getCellSize(),0);
+        } player.translate(Field.getCellSize(),0);
     }
 
     @Override
     public void moveDown(){
-        if((field.getSizeRow() <= player.getMaxY() - field.getPADDING_Y()) || !isWalkable()){
+        if((Field.getSizeRow() <= player.getMaxY() - Field.getPADDING_Y())){
             return;
-        } player.translate(0, field.getCellSize());
+        } player.translate(0, Field.getCellSize());
     }
 
     public Picture getPlayer() {
@@ -224,8 +225,8 @@ public class Player extends Character{
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
+/*
     private boolean isWalkable() {
-        return (field.isWalkable(player.getX(), player.getY()));
-    }
+        return (Field.isWalkable(player.getX(), player.getY()));
+    }*/
 }

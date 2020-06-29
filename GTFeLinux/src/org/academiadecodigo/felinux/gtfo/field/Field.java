@@ -7,28 +7,48 @@ import java.util.ArrayList;
 public class Field extends Picture {
 
 
-    private Picture map;
+    private static Picture map;
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
-    private final int PIXEL = 2;
+    private boolean drawed = true;
+    private static final int PIXEL = 2;
     private ArrayList<Area> notWalkable = new ArrayList<>();
     //yep, they are static, why shouldnt they
     public static int height;
     public static int width;
+    private String fieldName;
 
-    public Field () {
-        map = new Picture(PADDING_X, PADDING_Y,"resources/images/backGround.png");
+    public Field (String fieldName) {
+        this.fieldName = fieldName;
+        map = new Picture(PADDING_X, PADDING_Y,"resources/images/" + fieldName + ".png");
+        System.out.println(fieldName + " was created!");
         setNotWalkable();
         height = map.getHeight();
         width = map.getWidth();
     }
 
-    public int getPADDING_X() {
+    public String getFieldName() {
+        return fieldName;
+    }
+
+    public void setFieldName(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
+    public static int getPADDING_X() {
         return PADDING_X;
     }
 
-    public int getPADDING_Y() {
+    public static int getPADDING_Y() {
         return PADDING_Y;
+    }
+
+    public boolean isDrawed() {
+        return drawed;
+    }
+
+    public void setDrawed(boolean drawed) {
+        this.drawed = drawed;
     }
 
     public Picture getMap() {
@@ -43,30 +63,30 @@ public class Field extends Picture {
      * fill sprites on the field
      */
 
-    public int getSizeRow() {
+    public static int getSizeRow() {
         return map.getHeight();
     }
 
-    public int getSizeCol() {
+    public static int getSizeCol() {
         return map.getWidth();
     }
 
-    public int getCellSize() {
+    public static int getCellSize() {
         return PIXEL;
     }
 
     public ArrayList<Area> getNotWalkable() {
         return notWalkable;
     }
-
-    public boolean isWalkable(int x, int y) {
+/*
+    public static boolean isWalkable(int x, int y) {
         for (Area area : notWalkable) {
             if (area.include(x,y)){
                 return false;
             }
         }
         return true;
-    }
+    }*/
 
     private void addNotWalkable(int xMin, int yMin, int xMax, int yMax){
         Area area =new Area(xMin, yMin, xMax, yMax);

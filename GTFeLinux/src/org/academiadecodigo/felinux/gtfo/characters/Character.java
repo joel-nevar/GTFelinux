@@ -9,7 +9,6 @@ public abstract class Character extends Picture implements Moveable{
     private int damage;
     private  int speed;
     private String message;
-    protected static final Field field = new Field();
 
     //resolver
     public void interact() {

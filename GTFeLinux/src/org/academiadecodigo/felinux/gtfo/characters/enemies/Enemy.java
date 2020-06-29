@@ -3,6 +3,7 @@ package org.academiadecodigo.felinux.gtfo.characters.enemies;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.Moveable;
+import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
@@ -78,10 +79,10 @@ public abstract class Enemy extends Character{
         }
 
         if(enemyField.getArea().getxMin()  >= enemy.getX()){
-            enemy.translate(field.getCellSize()*2,0);
+            enemy.translate(Field.getCellSize()*2,0);
             return;
         }
-        enemy.translate(-field.getCellSize()*2,0);
+        enemy.translate(-Field.getCellSize()*2,0);
 
         this.lastDirectionType = DirectionType.LEFT;
     }
@@ -96,10 +97,10 @@ public abstract class Enemy extends Character{
         }
 
         if (enemyField.getArea().getxMax() <= enemy.getMaxX() - enemyField.getArea().getxMin()) {
-            enemy.translate(-field.getCellSize() * 2, 0);
+            enemy.translate(-Field.getCellSize() * 2, 0);
             return;
         }
-        enemy.translate(field.getCellSize() * 2, 0);
+        enemy.translate(Field.getCellSize() * 2, 0);
 
         this.lastDirectionType = DirectionType.RIGHT;
     }
@@ -114,10 +115,10 @@ public abstract class Enemy extends Character{
         }
 
         if (enemyField.getArea().getyMin() >= enemy.getY()) {
-            enemy.translate(0, field.getCellSize() * 2);
+            enemy.translate(0, Field.getCellSize() * 2);
             return;
         }
-        enemy.translate(0, -field.getCellSize() * 2);
+        enemy.translate(0, -Field.getCellSize() * 2);
 
         this.lastDirectionType = DirectionType.UP;
     }
@@ -132,10 +133,10 @@ public abstract class Enemy extends Character{
         }
 
         if (enemyField.getArea().getyMax() <= enemy.getMaxY() - enemyField.getArea().getyMin()) {
-            enemy.translate(0, -field.getCellSize() * 2);
+            enemy.translate(0, -Field.getCellSize() * 2);
             return;
         }
-        enemy.translate(0, field.getCellSize() * 2);
+        enemy.translate(0, Field.getCellSize() * 2);
 
         this.lastDirectionType = DirectionType.DOWN;
     }
