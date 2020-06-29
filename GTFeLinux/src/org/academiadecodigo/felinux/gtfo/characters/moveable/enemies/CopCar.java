@@ -10,10 +10,10 @@ public class CopCar extends Enemy {
 
     private Rectangle redLifeBar;
     private Rectangle greenLifeBar;
-    private boolean forward = true;
+    private boolean forward;
     private boolean turning;
     private final float MAX_SPEED = 3.5f;
-    private final float ACCEL = 0.7f;
+    private final float ACCEL = 0.3f;
     private float cSpeed;
     private int turningCounter;
 
@@ -45,8 +45,6 @@ public class CopCar extends Enemy {
 
     /**
      * Traces the route for the policeCar
-     * and calls the methods on the super class
-     * or should
      */
     @Override
     public void move() {
@@ -60,22 +58,21 @@ public class CopCar extends Enemy {
         if(turning) {
 
             cSpeed = 1;
-            turnCar();
 
             if(turningCounter > 4) {
 
+                turningCounter = 0;
+                turning = false;
+
                 if(forward){
-                    System.out.println("forward false, turning false");
+
                     forward = false;
-                    turning = false;
-                    turningCounter = 0;
                     return;
                 }
-                System.out.println("forward true, turning false");
                 forward = true;
-                turning = false;
-                turningCounter = 0;
+                return;
             }
+            turnCar();
             return;
         }
 
@@ -86,50 +83,45 @@ public class CopCar extends Enemy {
         }
 
         //direction that the car is moving and the movement
-        if (forward) {
-            if(getEnemy().getX() < Field.width){        //Horizontal
+        if (!forward) {
 
-                System.out.println("Moving horizontally");
+            if(getEnemy().getX() < Field.width-50){
+
                 getEnemy().translate(cSpeed,0);
                 redLifeBar.translate(cSpeed,0);
                 greenLifeBar.translate(cSpeed,0);
                 return;
-            } else if(getEnemy().getX() >= Field.width){
-                turning = true;
-                return;
             }
+            turning = true;
+            return;
         }
 
-        /*//other direction
-        if(getEnemy().getX() > Field.PADDING_X){
+        //other direction
+        if(getEnemy().getX()> Field.PADDING_X+50){
 
             getEnemy().translate(-cSpeed,0);
             redLifeBar.translate(-cSpeed,0);
             greenLifeBar.translate(-cSpeed,0);
             return;
         }
-        turning = false;*/
+        turning = true;
     }
 
     //handles turning
     private void turnCar(){
 
-        if(forward = false) {
+        turningCounter++;
+        if(forward) {
 
             getEnemy().translate(0, cSpeed);
             redLifeBar.translate(0, cSpeed);
             greenLifeBar.translate(0, cSpeed);
-            turningCounter++;
-            if(turningCounter == 5){
-                forward = true;
-            }
             return;
 
         }
-        getEnemy().translate(0, cSpeed);
-        redLifeBar.translate(0, cSpeed);
-        greenLifeBar.translate(0, cSpeed);
-        turningCounter++;
+        getEnemy().translate(0, -cSpeed);
+        redLifeBar.translate(0, -cSpeed);
+        greenLifeBar.translate(0, -cSpeed);
 
     }
 }

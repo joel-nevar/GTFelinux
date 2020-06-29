@@ -19,8 +19,8 @@ public class Field extends Picture {
     public Field () {
         map = new Picture(PADDING_X, PADDING_Y,"resources/images/backGround.png");
         setNotWalkable();
-        map.getHeight();
-        map.getWidth();
+        height = map.getHeight();
+        width = map.getWidth();
     }
 
     public int getPADDING_X() {
