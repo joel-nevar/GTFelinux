@@ -22,5 +22,6 @@ public class CatProstitute extends Npc {
         public void setVisited(boolean visited) {
                 this.visited = visited;
         }
+
 }
 

@@ -1,6 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
-import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
+import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 
 public class Rat extends Npc implements Moveable {
 

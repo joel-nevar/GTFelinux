@@ -58,6 +58,8 @@ public class AssaultableCat extends Npc {
         return dead;
     }
 
+
+
     /**
      * Move all assaultable cat
      */

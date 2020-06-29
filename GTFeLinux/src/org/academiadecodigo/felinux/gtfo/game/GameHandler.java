@@ -1,10 +1,10 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.player.PlayerKeyboard;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.player.Player;
+import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;

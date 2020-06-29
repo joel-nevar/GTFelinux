@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
+package org.academiadecodigo.felinux.gtfo.characters.enemies;
 
 import org.academiadecodigo.felinux.gtfo.field.Area;
 

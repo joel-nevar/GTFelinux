@@ -1,14 +1,12 @@
-package org.academiadecodigo.felinux.gtfo.characters.moveable.enemies;
+package org.academiadecodigo.felinux.gtfo.characters.enemies;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.DirectionType;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
+import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
+import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.awt.*;
 
-
-public abstract class Enemy extends Character implements Moveable {
+public abstract class Enemy extends Character{
 
     private EnemyAreaType enemyField;
     private boolean dead = false;

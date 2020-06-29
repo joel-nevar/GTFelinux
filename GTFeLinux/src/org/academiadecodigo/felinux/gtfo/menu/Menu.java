@@ -1,7 +1,5 @@
 package org.academiadecodigo.felinux.gtfo.menu;
 
-import org.academiadecodigo.felinux.gtfo.characters.moveable.player.Player;
-import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;

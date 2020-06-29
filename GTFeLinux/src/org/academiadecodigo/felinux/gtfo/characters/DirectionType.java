@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.characters.moveable;
+package org.academiadecodigo.felinux.gtfo.characters;
 
 public enum DirectionType {
     UP,

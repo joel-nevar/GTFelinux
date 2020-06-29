@@ -3,7 +3,7 @@ package org.academiadecodigo.felinux.gtfo.characters;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public abstract class Character extends Picture{
+public abstract class Character extends Picture implements Moveable{
 
     private int lives;
     private int damage;
@@ -57,6 +57,31 @@ public abstract class Character extends Picture{
 
     public int getPositionY(){
         return this.getY();
+    }
+
+    @Override
+    public void move() {
+
+    }
+
+    @Override
+    public void moveLeft() {
+
+    }
+
+    @Override
+    public void moveRight() {
+
+    }
+
+    @Override
+    public void moveUp() {
+
+    }
+
+    @Override
+    public void moveDown() {
+
     }
 
 }

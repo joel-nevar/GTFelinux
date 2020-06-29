@@ -1,9 +1,9 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.CopCar;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.EnemyType;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Lion;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 

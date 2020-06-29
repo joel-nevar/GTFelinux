@@ -1,16 +1,15 @@
-package org.academiadecodigo.felinux.gtfo.characters.moveable.player;
+package org.academiadecodigo.felinux.gtfo.characters.player;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.Moveable;
-import org.academiadecodigo.felinux.gtfo.characters.moveable.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.Moveable;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 
-public class Player extends Character implements Moveable{
+public class Player extends Character{
 
     private Picture player;                     //Draws player on the field
     private Picture clawAnimation;              //Draws claws on the field

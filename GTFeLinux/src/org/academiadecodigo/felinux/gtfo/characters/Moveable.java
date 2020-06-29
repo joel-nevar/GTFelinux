@@ -1,4 +1,4 @@
-package org.academiadecodigo.felinux.gtfo.characters.moveable;
+package org.academiadecodigo.felinux.gtfo.characters;
 
 public interface Moveable {
 
@@ -6,4 +6,5 @@ public interface Moveable {
     void moveRight();
     void moveUp();
     void moveDown();
+    void move();
 }
