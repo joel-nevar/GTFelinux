@@ -4,7 +4,7 @@ import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public abstract class Npc <T>  extends Character {
+public abstract class Npc extends Character {
 
     private Picture npc;
 

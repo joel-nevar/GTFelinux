@@ -19,7 +19,7 @@ public class GameHandler implements Runnable {
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
-    private static Npc[] rats = new Npc[5];
+    private static Npc [] rats = new  Npc[5];
     private static Milk milk;
     private static Field field;
     private PlayerKeyboard playerKeyboard;
@@ -37,11 +37,7 @@ public class GameHandler implements Runnable {
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
 
-
-        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
-            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT, (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
-        }
-
+        instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
         showAllMap1();
@@ -130,13 +126,10 @@ public class GameHandler implements Runnable {
             area.getShowArea().draw();
 
         }
-        Canvas.getInstance().show(milk.getMilk());
+
+        milk.getMilk().draw();
         for (int i = 0; i < rats.length; i++) {
-            Canvas.getInstance().show(rats[i].getNpc());
-            Canvas.getInstance().show(((Rat) rats[i]));
-            Canvas.getInstance().show(((Rat) rats[i]));
-
-
+            rats[i].getNpc().draw();
 
         }
     }
@@ -147,11 +140,11 @@ public class GameHandler implements Runnable {
 
         }
         Canvas.getInstance().hide(milk.getMilk());
+
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().hide(rats[i].getNpc());
-            Canvas.getInstance().hide(((Rat) rats[i]));
-            Canvas.getInstance().hide(((Rat) rats[i]));
-
+            //Canvas.getInstance().hide(((Rat) rats[i]));
+            //Canvas.getInstance().hide(((Rat) rats[i]));
         }
     }
 
@@ -208,8 +201,15 @@ public class GameHandler implements Runnable {
 
     private void instanceOfRats(Npc[] rats) {
         for (int index = 0; index < rats.length; index++) {
-            rats[index] = Factory.npcFactory(NpcType.RAT, (int) (Math.random() * field.getSizeCol()),
-                    (int) (Math.random() * field.getSizeRow()));
+            rats[index] = Factory.npcFactory (NpcType.RAT, Randomizer.getRandom(1200,200),
+                    Randomizer.getRandom(400,200));
+        }
+    }
+
+    private void instanceOfAssaultableCats(Npc[] assaultableCats){
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,
+                    (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
         }
     }
 }
