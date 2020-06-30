@@ -24,7 +24,7 @@ public class GameHandler implements Runnable {
     private PlayerKeyboard playerKeyboard;
     private static final int ASSAULTABLE_CATS = 8;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
-    public static boolean firstMap = false;
+    public static boolean firstMap = true ;
 
     public void init() {
         field = new Field();
@@ -40,7 +40,7 @@ public class GameHandler implements Runnable {
         }
 
         showAlways();
-        showAllMap1();
+        showAll();
         run();
     }
 
@@ -56,19 +56,19 @@ public class GameHandler implements Runnable {
         /** User Interface **/
         player.getEnergyBar().draw();
         player.getHpBar().draw();
-        player.getEnergyAnimation().draw();
-        player.getHpAnimation().draw();
+        player.getEnergyAnimation().fill();
+        player.getHpAnimation().fill();
     }
 
-    private static void showAllMap1() {
+    private static void showAll() {
 
         //Objects
 
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
-            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().draw();
-            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().draw();
+            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().fill();
+            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().fill();
         }
 
         /**Characters **/
@@ -88,11 +88,11 @@ public class GameHandler implements Runnable {
     }
 
 
-    private static void hideAllMap1() {
+    private static void hideAll() {
 
         /** First Game Map **/
 
-
+        Canvas.getInstance().hide(milk.getMilk());
 
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
@@ -114,7 +114,6 @@ public class GameHandler implements Runnable {
             Canvas.getInstance().hide(area.getShowArea());
         }
         /** User Interface **/
-
         player.getEnergyBar().draw();
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
@@ -165,18 +164,16 @@ public class GameHandler implements Runnable {
 
     public static void changeMap() {
 
-        if (firstMap == true) {
+        if (firstMap) {
 
             Field.map.load("resources/images/SecondMap.png");
-            hideAllMap1();
-            showAllMap2();
+            hideAll();
             firstMap = false;
             return;
         }
 
         Field.map.load("resources/images/FirstMap.png");
-        hideAllMap2();
-        showAllMap1();
+        showAll();
         firstMap = true;
         }
     }
