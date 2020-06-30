@@ -2,6 +2,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
+import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -9,7 +10,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends Character {
+public class Player extends Character implements Moveable {
 
     private Field map;
     private Picture player;                     //Draws player on the field

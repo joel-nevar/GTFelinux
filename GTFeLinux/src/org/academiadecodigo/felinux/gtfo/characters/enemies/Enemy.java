@@ -7,7 +7,7 @@ import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public abstract class Enemy extends Character{
+public abstract class Enemy extends Character implements Moveable{
 
     private EnemyAreaType enemyField;
     private boolean dead = false;

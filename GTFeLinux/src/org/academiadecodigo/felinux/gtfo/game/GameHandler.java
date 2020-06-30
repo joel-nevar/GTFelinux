@@ -18,9 +18,8 @@ public class GameHandler implements Runnable {
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
-    private Milk milk;
-    private Field firstMap = new Field("FirstMap");
-    private Field secondMap = new Field("SecondMap");
+    private static Milk milk;
+    private static Field field;
     //private Picture[] objects = new Picture[10];
     private PlayerKeyboard playerKeyboard;
     private static final int ASSAULTABLE_CATS = 8;
