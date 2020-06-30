@@ -58,7 +58,6 @@ public class Player extends Character{
 
     }
 
-
     public void energyDecay() {
         if (this.energy <= 0) {
             if (super.getLives() <= 1) {
@@ -155,8 +154,8 @@ public class Player extends Character{
         }
 
         if(collisionCheck()){
-            System.out.println("colide");
-            return;
+            System.out.println("collide");
+            //return;  //not working YET!
         }
 
         //checkUp
@@ -273,8 +272,10 @@ public class Player extends Character{
 
         for ( Area area : Field.notWalkable ) {
 
-            Area.contains(playerArea ,area);
-            return true;
+            if(Area.contains(playerArea ,area)){
+
+                return true;
+            }
         }
        return false;
     }
