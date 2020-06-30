@@ -150,23 +150,25 @@ public class PlayerKeyboard implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
 
+        Player.dx = 0;
+        Player.dy = 0;
+
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
+            Player.dx -= moveSpeed;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
+            Player.dx += moveSpeed;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
+            Player.dy -= moveSpeed;
+        }
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
+            Player.dy += moveSpeed;
+        }
+
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_E){
             GameHandler.changeMap();
         }
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
-            player.moveLeft();
-        }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
-            player.moveRight();
-        }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
-            player.moveUp();
-        }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
-            player.moveDown();
-        }
-
         switch (keyboardEvent.getKey()){
             case KeyboardEvent.KEY_E:
                 player.interact();
@@ -181,27 +183,6 @@ public class PlayerKeyboard implements KeyboardHandler {
                 } catch (NullPointerException npe) {
                     System.out.println("You're attacking the air");
                 }
-            /*
-
-            case KeyboardEvent.KEY_LEFT:
-                case KeyboardEvent.KEY_A:
-                    player.moveLeft();
-                    break;
-            case KeyboardEvent.KEY_RIGHT:
-                case KeyboardEvent.KEY_D:
-                    player.moveRight();
-                    break;
-            case KeyboardEvent.KEY_UP:
-                case KeyboardEvent.KEY_W:
-                    player.moveUp();
-                    break;
-            case KeyboardEvent.KEY_DOWN:
-            case KeyboardEvent.KEY_S:
-                player.moveDown();
-                break;
-            //TODO fix interact and attack keys - DONE
-
-         */
         }
     }
 
@@ -213,18 +194,17 @@ public class PlayerKeyboard implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
-            player.setLastDirection(DirectionType.STOP);
+            Player.dx = 0f;
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
-            player.setLastDirection(DirectionType.STOP);
+            Player.dx = 0f;
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
-            player.setLastDirection(DirectionType.STOP);
+            Player.dy = 0f;
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
-            player.setLastDirection(DirectionType.STOP);
+            Player.dy = 0f;
         }
 
     }

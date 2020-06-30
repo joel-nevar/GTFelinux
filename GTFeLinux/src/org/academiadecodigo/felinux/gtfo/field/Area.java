@@ -1,55 +1,61 @@
 package org.academiadecodigo.felinux.gtfo.field;
 
-
-import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Area {
 
     private int xMin;
     private int yMin;
-    private int xMax;
-    private int yMax;
-    private Rectangle showArea;
+    private int xSize;
+    private int ySize;
+    private Rectangle boundArea;
 
-    public Area(int xMin, int yMin, int xMax, int yMax) {
+    public Area(int xMin, int yMin, int xSize, int ySize) {
         this.xMin = xMin;
         this.yMin = yMin;
-        this.xMax = xMax;
-        this.yMax = yMax;
-        this.showArea = new Rectangle (xMin,yMin,xMax,yMax);
-        showArea.setColor(Color.BLACK);
+        this.xSize = xSize;
+        this.ySize = ySize;
+        boundArea = new Rectangle(xMin,yMin,xSize,ySize);
     }
 
-    public int getxMin() {
+    public int getX() {
         return xMin;
     }
 
-    public int getyMin() {
+    public int getY() {
         return yMin;
     }
 
-    public int getxMax() {
-        return xMax;
+    public int getxSize() {
+        return xSize;
     }
 
-    public int getyMax() {
-        return yMax;
+    public int getySize() {
+        return ySize;
     }
 
-    public boolean isXArea(int x) {
-        return (x >= xMin && x <= xMax);
+    public Rectangle getBoundArea(){
+        return boundArea;
     }
 
-    public boolean isYArea(int y) {
-        return (y >= yMin && y <= yMax);
-    }
+    /**
+     * Pure dark magic, DONT FKN TOUCH
+     * @param player the player Area
+     * @param rect the area to compare with
+     * @return true if collide, false if not
+     */
+    public static boolean contains (Area player, Area rect){
 
-    public boolean include(int x, int y) {
-        return (x >= xMin + Field.PADDING_X && x <= xMax - xMin && y >= yMin + Field.PADDING_Y && y <= yMax - yMin);
-    }
+        int xA = ((player.getBoundArea().getX())*2+player.getBoundArea().getWidth())/2;
+        int yA = ((player.getBoundArea().getY())*2+player.getBoundArea().getHeight())/2;
 
-    public Rectangle getShowArea() {
-        return showArea;
+        int xB = (rect.getBoundArea().getX()*2+rect.getBoundArea().getWidth())/2;
+        int yB = (rect.getBoundArea().getY()*2+rect.getBoundArea().getHeight())/2;
+
+        System.out.println(xA);
+        int distance = player.getBoundArea().getWidth()/2;
+
+        return Math.sqrt(Math.pow((xA-xB),2)+Math.pow((yA-yB),2))<=distance;
+
     }
 }

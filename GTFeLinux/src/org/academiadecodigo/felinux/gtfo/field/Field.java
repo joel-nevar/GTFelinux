@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class Field extends Picture {
 
 
+    //yep, they are static, why shouldnt they
     public static Picture map;
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
     private static final int PIXEL = 2;
-    private ArrayList<Area> notWalkable = new ArrayList<>();
-    //yep, they are static, why shouldnt they
+    public static ArrayList<Area> notWalkable = new ArrayList<>();
     public static int height;
     public static int width;
 
@@ -35,10 +35,6 @@ public class Field extends Picture {
     public Picture getMap() {
         return map;
     }
-    /**
-     *Show full map
-     */
-
 
     /**
      * fill sprites on the field
@@ -60,6 +56,7 @@ public class Field extends Picture {
         return notWalkable;
     }
 
+    /*
     public boolean isWalkable(int x, int y) {
         for (Area area : notWalkable) {
             if (area.include(x,y)){
@@ -69,9 +66,10 @@ public class Field extends Picture {
         return true;
     }
 
-    private void addNotWalkable(int xMin, int yMin, int xMax, int yMax){
-        Area area =new Area(xMin, yMin, xMax, yMax);
-        area.getShowArea().setColor(Color.RED);
+     */
+
+    private void addNotWalkable(int xMin, int yMin, int xSize, int ySize){
+        Area area =new Area(xMin, yMin, xSize, ySize);
         notWalkable.add(area);
     }
 
@@ -114,6 +112,7 @@ public class Field extends Picture {
         addNotWalkable(330 + PADDING_X,61 + PADDING_Y,727 - 330,99 - 61); // Water
         addNotWalkable(390 + PADDING_X,40 + PADDING_Y,727 - 390,61 - 40); // Water
     }
+
 
 }
 

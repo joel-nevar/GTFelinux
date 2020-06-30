@@ -2,8 +2,8 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
-import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -27,16 +27,18 @@ public class Player extends Character{
     private Rectangle hpAnimation;              //The actual energy bar
     private DirectionType lastDirection = DirectionType.STOP;
 
-
     //These are used for movement
     public static float dx;
     public static float dy;
+
+    //used for collision UPDATE ON PLAYER MOVE
+    private Area playerArea;
 
     public Player(String name) {
         super();
         super.setLives(7);
         map = new Field();
-        this.player = new Picture(50, 100, "resources/images/" + name);
+        this.player = new Picture(50, 300, "resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         //ENERGY BAR
@@ -45,6 +47,9 @@ public class Player extends Character{
         //HP BAR
         this.hpAnimation = new Rectangle(207, 26, 100, 10);
         hpAnimation.setColor(new Color(255, 0, 0));
+
+        //collisionBox
+        playerArea = new Area(getPlayer().getX(),getPlayer().getY(),getPlayer().getWidth(),getPlayer().getHeight());
     }
 
 
@@ -135,10 +140,6 @@ public class Player extends Character{
         return clawUsed;
     }
 
-    /**
-     * GameHandler calls this method to move Player
-     */
-
     public Picture getClawAnimation() throws NullPointerException {
         return clawAnimation;
     }
@@ -148,62 +149,62 @@ public class Player extends Character{
      */
     @Override
     public void move() {
+
         if (isDead()) {
             return;
         }
 
-        switch (lastDirection) {
-            case LEFT:
-                moveLeft();
-                break;
-            case RIGH:
-                moveRight();
-                break;
-            case UP:
-                moveUp();
-                break;
-            case DOWN:
-                moveDown();
-                break;
-            default:
-                break;
+        if(collisionCheck()){
+            System.out.println("colide");
+            return;
         }
+
+        //checkUp
+        if ((Field.getPADDING_Y() >= player.getY())) {
+            if(dy<=0){
+                dy=0;
+            }
+        }
+
+        //checkRight
+        if ((Field.width <= player.getMaxX() - Field.getPADDING_X())) {
+            if(dx==2){
+                dx=0;
+            }
+        }
+
+        //checkDown
+        if ((Field.height <= player.getMaxY() - Field.getPADDING_Y())) {
+            if(dy==2){
+                dy=0;
+            }
+        }
+
+        //checkLeft
+        if ((Field.getPADDING_X() >= player.getX())) {
+            if(dx==-2){
+                dx=0;
+            }
+        }
+
+        player.translate(dx,dy);
+        playerArea.getBoundArea().translate(dx,dy);
     }
 
     @Override
     public void moveLeft() {
-        if ((map.getPADDING_X() >= player.getX())) {
-            return;
-        }
-        player.translate(-Field.getCellSize(), 0);
-        lastDirection = DirectionType.LEFT;
     }
 
     @Override
     public void moveUp() {
-        if ((map.getPADDING_Y() >= player.getY())) {
-            return;
-        }
-        player.translate(0, -Field.getCellSize());
-        lastDirection = DirectionType.UP;
     }
 
     @Override
     public void moveRight() {
-        if ((map.getSizeCol() <= player.getMaxX() - Field.getPADDING_X())) {
-            return;
-        }
-        player.translate(Field.getCellSize(), 0);
-        lastDirection = DirectionType.RIGH;
     }
 
     @Override
     public void moveDown() {
-        if ((map.getSizeRow() <= player.getMaxY() - Field.getPADDING_Y())) {
-            return;
-        }
-        player.translate(0, Field.getCellSize());
-        lastDirection = DirectionType.DOWN;
     }
 
     public Picture getPlayer() {
@@ -268,4 +269,13 @@ public class Player extends Character{
         return (Field.isWalkable(player.getX(), player.getY()));
     }*/
 
+    public boolean collisionCheck(){
+
+        for ( Area area : Field.notWalkable ) {
+
+            Area.contains(playerArea ,area);
+            return true;
+        }
+       return false;
+    }
 }

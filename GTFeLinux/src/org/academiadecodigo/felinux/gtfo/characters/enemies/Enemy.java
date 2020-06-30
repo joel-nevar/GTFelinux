@@ -2,7 +2,6 @@ package org.academiadecodigo.felinux.gtfo.characters.enemies;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
-import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -75,7 +74,7 @@ public abstract class Enemy extends Character{
             return;
         }
 
-        if(enemyField.getArea().getxMin()  >= enemy.getX()){
+        if(enemyField.getArea().getX()  >= enemy.getX()){
             enemy.translate(Field.getCellSize()*2,0);
             return;
         }
@@ -92,7 +91,7 @@ public abstract class Enemy extends Character{
             return;
         }
 
-        if (enemyField.getArea().getxMax() <= enemy.getMaxX() - enemyField.getArea().getxMin()) {
+        if (enemyField.getArea().getxSize() <= enemy.getMaxX() - enemyField.getArea().getX()) {
             enemy.translate(-Field.getCellSize() * 2, 0);
             return;
         }
@@ -109,7 +108,7 @@ public abstract class Enemy extends Character{
             return;
         }
 
-        if (enemyField.getArea().getyMin() >= enemy.getY()) {
+        if (enemyField.getArea().getY() >= enemy.getY()) {
             enemy.translate(0, Field.getCellSize() * 2);
             return;
         }
@@ -126,7 +125,7 @@ public abstract class Enemy extends Character{
             return;
         }
 
-        if (enemyField.getArea().getyMax() <= enemy.getMaxY() - enemyField.getArea().getyMin()) {
+        if (enemyField.getArea().getySize() <= enemy.getMaxY() - enemyField.getArea().getY()) {
             enemy.translate(0, -Field.getCellSize() * 2);
             return;
         }

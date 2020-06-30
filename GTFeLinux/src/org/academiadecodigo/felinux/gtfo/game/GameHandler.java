@@ -74,7 +74,7 @@ public class GameHandler implements Runnable {
         /**Characters **/
         //Make a for loop when more enemies here
         enemies[0].getEnemy().draw();
-        enemies[0].getEnemyField().getArea().getShowArea().draw();
+        enemies[0].getEnemyField().getArea().getBoundArea().draw();
         ((CopCar) enemies[0]).getRedLifeBar().fill();
         ((CopCar) enemies[0]).getGreenLifeBar().fill();
 
@@ -82,7 +82,7 @@ public class GameHandler implements Runnable {
 
         /**Assets**/
         for (Area area : field.getNotWalkable()) {
-            area.getShowArea().draw();
+            area.getBoundArea().draw();
         }
 
     }
@@ -104,14 +104,14 @@ public class GameHandler implements Runnable {
         /**Characters **/
         //Make a for loop when more enemies here
         Canvas.getInstance().hide(enemies[0].getEnemy());
-        Canvas.getInstance().hide(enemies[0].getEnemyField().getArea().getShowArea());
+        Canvas.getInstance().hide(enemies[0].getEnemyField().getArea().getBoundArea());
         Canvas.getInstance().hide(((CopCar) enemies[0]).getRedLifeBar());
         Canvas.getInstance().hide(((CopCar) enemies[0]).getGreenLifeBar());
 
 
         /**Assets**/
         for (Area area : field.getNotWalkable()) {
-            Canvas.getInstance().hide(area.getShowArea());
+            Canvas.getInstance().hide(area.getBoundArea());
         }
         /** User Interface **/
         player.getEnergyBar().draw();
