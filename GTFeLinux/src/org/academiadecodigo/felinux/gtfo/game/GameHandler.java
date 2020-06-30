@@ -18,8 +18,8 @@ public class GameHandler implements Runnable {
     private Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
     private Milk milk;
-    private Field firstMap = new Field("FirstMap");
     private Field secondMap = new Field("SecondMap");
+    private Field firstMap = new Field("FirstMap");
     //private Picture[] objects = new Picture[10];
     private PlayerKeyboard playerKeyboard;
     private final int ASSAULTABLE_CATS = 8;
@@ -91,9 +91,7 @@ public class GameHandler implements Runnable {
         //Game loop to create movement
         while (!player.isDead()) {
             try {
-                if(!player.isDead()){
-                    firstMap.setDrawed(true);
-                }
+
                 Thread.sleep(35);
 
                 //Check if player is attacking
