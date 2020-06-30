@@ -12,8 +12,8 @@ public abstract class Enemy extends Character{
     private EnemyAreaType enemyField;
     private boolean dead = false;
     private Picture enemy;
-    private DirectionType directionType = DirectionType.LEFT;
-    private DirectionType lastDirectionType = DirectionType.RIGHT;
+
+    private DirectionType lastDirectionType = DirectionType.STOP;
 
 
     public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName, int lifeAmount) {
@@ -71,10 +71,7 @@ public abstract class Enemy extends Character{
     @Override
     public void moveLeft() {
 
-        this.directionType = DirectionType.LEFT;
-
-        if (this.lastDirectionType == DirectionType.RIGHT) {
-            //aqui
+        if (this.lastDirectionType == DirectionType.RIGH) {
             return;
         }
 
@@ -90,7 +87,6 @@ public abstract class Enemy extends Character{
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveRight() {
-        this.directionType = DirectionType.RIGHT;
 
         if (this.lastDirectionType == DirectionType.LEFT) {
             return;
@@ -102,13 +98,12 @@ public abstract class Enemy extends Character{
         }
         enemy.translate(Field.getCellSize() * 2, 0);
 
-        this.lastDirectionType = DirectionType.RIGHT;
+        lastDirectionType = DirectionType.RIGH;
     }
 
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveUp() {
-        this.directionType = DirectionType.UP;
 
         if (this.lastDirectionType == DirectionType.DOWN) {
             return;
@@ -126,7 +121,6 @@ public abstract class Enemy extends Character{
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
     @Override
     public void moveDown() {
-        this.directionType = DirectionType.DOWN;
 
         if (this.lastDirectionType == DirectionType.UP) {
             return;

@@ -1,7 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.Moveable;
+import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -9,9 +9,9 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
+public class Player extends Character {
 
-public class Player extends Character{
-
+    private Field map;
     private Picture player;                     //Draws player on the field
     private Picture clawAnimation;              //Draws claws on the field
     private int clawTick = 0;                   //Timer to make the claw disappear from the field
@@ -24,6 +24,8 @@ public class Player extends Character{
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
+    private DirectionType lastDirection = DirectionType.STOP;
+
 
     //These are used for movement
     public static float dx;
@@ -32,66 +34,67 @@ public class Player extends Character{
     public Player(String name) {
         super();
         super.setLives(7);
-        this.player = new Picture(50,100,"resources/images/" + name);
+        map = new Field();
+        this.player = new Picture(50, 100, "resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
         //ENERGY BAR
         this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
-        energyAnimation.setColor(new Color(255,255,0));
+        energyAnimation.setColor(new Color(255, 255, 0));
         //HP BAR
         this.hpAnimation = new Rectangle(207, 26, 100, 10);
-        hpAnimation.setColor(new Color(255,0,0));
+        hpAnimation.setColor(new Color(255, 0, 0));
     }
 
 
     @Override
-    public void interact(){
+    public void interact() {
 
     }
 
 
-    public void energyDecay(){
-        if(this.energy <= 0){
-            if(super.getLives() <= 1) {
+    public void energyDecay() {
+        if (this.energy <= 0) {
+            if (super.getLives() <= 1) {
                 this.dead = true;
                 //HP BAR
-                hpAnimation.translate( -7,0);
-                hpAnimation.grow(-7,0);
+                hpAnimation.translate(-7, 0);
+                hpAnimation.grow(-7, 0);
                 return;
             }
             this.takeLethalDamage();
             this.energyReset();
             //HP Bar
-            hpAnimation.translate( -7,0);
-            hpAnimation.grow(-7,0);
+            hpAnimation.translate(-7, 0);
+            hpAnimation.grow(-7, 0);
         }
         //Energy Bar
         this.loseEnergy();
-        energyAnimation.translate(-0.16,0);
-        energyAnimation.grow(-0.16,0);
+        energyAnimation.translate(-0.16, 0);
+        energyAnimation.grow(-0.16, 0);
     }
 
     public void gainLife() {
         super.setLives(super.getLives() + 1);
-        hpAnimation.translate( 29,0);   //size / 7 vidas
+        hpAnimation.translate(29, 0);   //size / 7 vidas
     }
 
-    public void energyReset(){
+    public void energyReset() {
         this.setEnergy(300);
         energyAnimation.translate(48, 0);   // 0.16 * 300
         energyAnimation.grow(48, 0);
     }
 
-    public void playerAttackVerification(){
+    public void playerAttackVerification() {
         //Attack animation appear
-        if(clawUsed == true){
+        if (clawUsed == true) {
             this.getClawAnimation().draw();
 
             //Tick to measure animation time
             this.setClawTick(getClawTick() + 1);
 
             //Attack animation disappear
-            if(getClawTick() == 4){
+            if (getClawTick() == 4) {
                 this.setClawUsed(false);
                 this.getClawAnimation().delete();
                 this.setClawTick(0);
@@ -99,12 +102,12 @@ public class Player extends Character{
         }
     }
 
-    public void attack(Enemy enemy){
+    public void attack(Enemy enemy) {
 
         this.clawUsed = true;
-        clawAnimation = new Picture(this.getPlayer().getX(),this.getPlayer().getY(), "resources/images/Claw_attack.png");
+        clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/images/Claw_attack.png");
 
-        if (200>(Math.abs(this.getX()-enemy.getEnemy().getX()))&&200>(Math.abs(this.getY()-enemy.getEnemy().getY()))) {
+        if (200 > (Math.abs(this.getX() - enemy.getEnemy().getX())) && 200 > (Math.abs(this.getY() - enemy.getEnemy().getY()))) {
 
             if (enemy.getLives() <= 1) {
                 enemy.setDead();
@@ -134,9 +137,6 @@ public class Player extends Character{
     /**
      * GameHandler calls this method to move Player
      */
-    public void move(){
-        player.translate(Player.dx,Player.dy);
-    }
 
     public Picture getClawAnimation() throws NullPointerException {
         return clawAnimation;
@@ -146,31 +146,63 @@ public class Player extends Character{
      * Actual movement called by method move()
      */
     @Override
-    public void moveLeft(){
-        if((Field.getPADDING_X()  >= player.getX())){
+    public void move() {
+        if (isDead()) {
             return;
-        } player.translate(-Field.getCellSize(),0);
+        }
+
+        switch (lastDirection) {
+            case LEFT:
+                moveLeft();
+                break;
+            case RIGH:
+                moveRight();
+                break;
+            case UP:
+                moveUp();
+                break;
+            case DOWN:
+                moveDown();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
-    public void moveUp(){
-        if((Field.getPADDING_Y() >= player.getY())){
+    public void moveLeft() {
+        if ((map.getPADDING_X() >= player.getX())) {
             return;
-        } player.translate(0,-Field.getCellSize());
+        }
+        player.translate(-Field.getCellSize(), 0);
+        lastDirection = DirectionType.LEFT;
     }
 
     @Override
-    public void moveRight(){
-        if((Field.getSizeCol() <= player.getMaxX() - Field.getPADDING_X())){
+    public void moveUp() {
+        if ((map.getPADDING_Y() >= player.getY())) {
             return;
-        } player.translate(Field.getCellSize(),0);
+        }
+        player.translate(0, -Field.getCellSize());
+        lastDirection = DirectionType.UP;
     }
 
     @Override
-    public void moveDown(){
-        if((Field.getSizeRow() <= player.getMaxY() - Field.getPADDING_Y())){
+    public void moveRight() {
+        if ((map.getSizeCol() <= player.getMaxX() - Field.getPADDING_X())) {
             return;
-        } player.translate(0, Field.getCellSize());
+        }
+        player.translate(Field.getCellSize(), 0);
+        lastDirection = DirectionType.RIGH;
+    }
+
+    @Override
+    public void moveDown() {
+        if ((map.getSizeRow() <= player.getMaxY() - Field.getPADDING_Y())) {
+            return;
+        }
+        player.translate(0, Field.getCellSize());
+        lastDirection = DirectionType.DOWN;
     }
 
     public Picture getPlayer() {
@@ -225,8 +257,14 @@ public class Player extends Character{
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-/*
+
+    public void setLastDirection(DirectionType lastDirection) {
+        this.lastDirection = lastDirection;
+    }
+
+    /*
     private boolean isWalkable() {
         return (Field.isWalkable(player.getX(), player.getY()));
     }*/
+
 }

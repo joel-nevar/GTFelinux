@@ -1,6 +1,9 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
+import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.field.Field;
+import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -33,6 +36,10 @@ public class PlayerKeyboard implements KeyboardHandler {
         /**
          * Key pressed
          */
+        KeyboardEvent eAction = new KeyboardEvent();
+        eAction.setKey(KeyboardEvent.KEY_E);
+        eAction.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         KeyboardEvent left = new KeyboardEvent();
         left.setKey(KeyboardEvent.KEY_A);
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -73,6 +80,7 @@ public class PlayerKeyboard implements KeyboardHandler {
         attack.setKey(KeyboardEvent.KEY_SPACE);
         attack.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        keyboard.addEventListener(eAction);
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
@@ -141,22 +149,22 @@ public class PlayerKeyboard implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 
-        //Reset Movement
 
-        Player.dx = 0f;
-        Player.dy = 0f;
+        if(keyboardEvent.getKey() == KeyboardEvent.KEY_E){
+            GameHandler.changeMap();
+        }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
-            Player.dx -= moveSpeed;
+            player.moveLeft();
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
-            Player.dx += moveSpeed;
+            player.moveRight();
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
-            Player.dy -= moveSpeed;
+            player.moveUp();
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
-            Player.dy += moveSpeed;
+            player.moveDown();
         }
 
         switch (keyboardEvent.getKey()){
@@ -207,16 +215,16 @@ public class PlayerKeyboard implements KeyboardHandler {
 
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
-            Player.dx = 0f;
+            player.setLastDirection(DirectionType.STOP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
-            Player.dx = 0f;
+            player.setLastDirection(DirectionType.STOP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
-            Player.dy = 0f;
+            player.setLastDirection(DirectionType.STOP);
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
-            Player.dy = 0f;
+            player.setLastDirection(DirectionType.STOP);
         }
 
     }
