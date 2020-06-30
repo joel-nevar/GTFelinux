@@ -1,7 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.Moveable;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Color;
@@ -12,6 +11,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Player extends Character{
 
+    private Field map;
     private Picture player;                     //Draws player on the field
     private Picture clawAnimation;              //Draws claws on the field
     private int clawTick = 0;                   //Timer to make the claw disappear from the field
@@ -25,6 +25,7 @@ public class Player extends Character{
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
 
+
     //These are used for movement
     public static float dx;
     public static float dy;
@@ -32,6 +33,7 @@ public class Player extends Character{
     public Player(String name) {
         super();
         super.setLives(7);
+        map = new Field();
         this.player = new Picture(50,100,"resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
@@ -147,28 +149,28 @@ public class Player extends Character{
      */
     @Override
     public void moveLeft(){
-        if((Field.getPADDING_X()  >= player.getX())){
+        if((map.getPADDING_X()  >= player.getX())){
             return;
         } player.translate(-Field.getCellSize(),0);
     }
 
     @Override
     public void moveUp(){
-        if((Field.getPADDING_Y() >= player.getY())){
+        if((map.getPADDING_Y() >= player.getY())){
             return;
         } player.translate(0,-Field.getCellSize());
     }
 
     @Override
     public void moveRight(){
-        if((Field.getSizeCol() <= player.getMaxX() - Field.getPADDING_X())){
+        if((map.getSizeCol() <= player.getMaxX() - Field.getPADDING_X())){
             return;
         } player.translate(Field.getCellSize(),0);
     }
 
     @Override
     public void moveDown(){
-        if((Field.getSizeRow() <= player.getMaxY() - Field.getPADDING_Y())){
+        if((map.getSizeRow() <= player.getMaxY() - Field.getPADDING_Y())){
             return;
         } player.translate(0, Field.getCellSize());
     }
@@ -229,4 +231,5 @@ public class Player extends Character{
     private boolean isWalkable() {
         return (Field.isWalkable(player.getX(), player.getY()));
     }*/
+
 }

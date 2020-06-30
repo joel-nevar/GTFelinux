@@ -85,7 +85,7 @@ public class CopCar extends Enemy {
         //direction that the car is moving and the movement
         if (!forward) {
 
-            if(getEnemy().getX() < Field.width-50){
+            if(getEnemy().getX() <  Field.width-50){
 
                 getEnemy().translate(cSpeed,0);
                 redLifeBar.translate(cSpeed,0);

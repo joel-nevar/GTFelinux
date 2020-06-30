@@ -10,75 +10,49 @@ import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
+import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
 
 public class GameHandler implements Runnable {
 
-    private Player player;
-    private Enemy[] enemies = new Enemy[10];
+    private static Player player;
+    private static Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
-    private Milk milk;
-    private Field firstMap = new Field("FirstMap");
-    private Field secondMap = new Field("SecondMap");
+    private static Milk milk;
+    private static Field field;
     //private Picture[] objects = new Picture[10];
     private PlayerKeyboard playerKeyboard;
-    private final int ASSAULTABLE_CATS = 8;
-    private Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
+    private static final int ASSAULTABLE_CATS = 8;
+    private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
+    public static boolean firstMap = false;
 
     public void init() {
+        field = new Field();
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
-        this.playerKeyboard =  new PlayerKeyboard(player, enemies[0]);
+        this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
 
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
-            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,(int) (Math.random()* firstMap.getSizeCol()),(int) (Math.random()* firstMap.getSizeRow()));
+            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT, (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
         }
 
+        showAlways();
         showAll();
         run();
     }
 
-    private void showAll(){
+    private void showAlways(){
 
-        if(firstMap.isDrawed()) {
+        /** First Game Map **/
+         field.getMap().draw();
 
-            /** First Game Map **/
-            firstMap.getMap().draw();
-            System.out.println("first map drawed");
-            //Objects
-            milk.getMilk().draw();
+        /**Show Player**/
+        player.getPlayer().draw();
 
-            /**NPCs**/
-            for (int i = 0; i < ASSAULTABLE_CATS; i++) {
-                assaultableCats[i].getNpc().draw();
-                ((AssaultableCat) assaultableCats[i]).getRedLifeBar().fill();
-                ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().fill();
-            }
-
-            /**Characters **/
-            //Make a for loop when more enemies here
-            enemies[0].getEnemy().draw();
-            enemies[0].getEnemyField().getArea().getShowArea().draw();
-            ((CopCar) enemies[0]).getRedLifeBar().fill();
-            ((CopCar) enemies[0]).getGreenLifeBar().fill();
-
-            player.getPlayer().draw();
-
-            /**Assets**/
-            for (Area area : firstMap.getNotWalkable()) {
-                area.getShowArea().draw();
-            }
-        }
         /** Second Game Map **/
-        if(!firstMap.isDrawed()) {
-            //Desenhar outras coisas && esconder tudo o resto atras, provavelmente
-            firstMap.getMap().delete();
-            secondMap.getMap().draw();
-            System.out.println("first map deleted, second drawed");
-        }
         /** User Interface **/
         player.getEnergyBar().draw();
         player.getHpBar().draw();
@@ -86,14 +60,66 @@ public class GameHandler implements Runnable {
         player.getHpAnimation().fill();
     }
 
+    private static void showAll() {
+
+        //Objects
+         milk.getMilk().draw();
+        /**NPCs**/
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            assaultableCats[i].getNpc().draw();
+            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().fill();
+            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().fill();
+        }
+
+        /**Characters **/
+        //Make a for loop when more enemies here
+        enemies[0].getEnemy().draw();
+        enemies[0].getEnemyField().getArea().getShowArea().draw();
+        ((CopCar) enemies[0]).getRedLifeBar().fill();
+        ((CopCar) enemies[0]).getGreenLifeBar().fill();
+
+
+        /**Assets**/
+        for (Area area : field.getNotWalkable()) {
+            area.getShowArea().draw();
+        }
+
+    }
+
+
+    private static void hideAll() {
+
+        /** First Game Map **/
+
+        Canvas.getInstance().hide(milk.getMilk());
+
+        /**NPCs**/
+        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+            Canvas.getInstance().hide(assaultableCats[i].getNpc());
+            Canvas.getInstance().hide(((AssaultableCat) assaultableCats[i]).getRedLifeBar());
+            Canvas.getInstance().hide(((AssaultableCat) assaultableCats[i]).getGreenLifeBar());
+        }
+
+        /**Characters **/
+        //Make a for loop when more enemies here
+        Canvas.getInstance().hide(enemies[0].getEnemy());
+        Canvas.getInstance().hide(enemies[0].getEnemyField().getArea().getShowArea());
+        Canvas.getInstance().hide(((CopCar) enemies[0]).getRedLifeBar());
+        Canvas.getInstance().hide(((CopCar) enemies[0]).getGreenLifeBar());
+
+
+        /**Assets**/
+        for (Area area : field.getNotWalkable()) {
+            Canvas.getInstance().hide(area.getShowArea());
+        }
+    }
+
+
     @Override
     public void run() {
         //Game loop to create movement
         while (!player.isDead()) {
             try {
-                if(!player.isDead()){
-                    firstMap.setDrawed(true);
-                }
                 Thread.sleep(35);
 
                 //Check if player is attacking
@@ -119,4 +145,20 @@ public class GameHandler implements Runnable {
             assaultableCats[i].move();
         }
     }
-}
+
+
+    public static void changeMap() {
+
+        if (firstMap == true) {
+            Field.map.load("resources/images/SecondMap.png");
+            hideAll();
+            firstMap = false;
+            return;
+        }
+
+        Field.map.load("resources/images/FirstMap.png");
+        showAll();
+        firstMap = true;
+        }
+    }
+
