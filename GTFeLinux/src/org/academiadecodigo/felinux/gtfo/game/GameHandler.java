@@ -3,6 +3,7 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.Rat;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
@@ -18,13 +19,14 @@ public class GameHandler implements Runnable {
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
+    private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
-    //private Picture[] objects = new Picture[10];
     private PlayerKeyboard playerKeyboard;
     private static final int ASSAULTABLE_CATS = 8;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
-    public static boolean firstMap = true ;
+    public static boolean firstMap = true;
+
 
     public void init() {
         field = new Field();
@@ -35,19 +37,21 @@ public class GameHandler implements Runnable {
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
 
+
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT, (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
         }
 
+        instanceOfRats(rats);
         showAlways();
         showAll();
         run();
     }
 
-    private void showAlways(){
+    private void showAlways() {
 
         /** First Game Map **/
-         field.getMap().draw();
+        field.getMap().draw();
 
         /**Show Player**/
         player.getPlayer().draw();
@@ -78,7 +82,7 @@ public class GameHandler implements Runnable {
         ((CopCar) enemies[0]).getRedLifeBar().fill();
         ((CopCar) enemies[0]).getGreenLifeBar().fill();
 
-            player.getPlayer().draw();
+        player.getPlayer().draw();
 
         /**Assets**/
         for (Area area : field.getNotWalkable()) {
@@ -122,11 +126,23 @@ public class GameHandler implements Runnable {
 
     public static void showAllMap2() {
         Canvas.getInstance().show(milk.getMilk());
+        for (int i = 0; i < rats.length; i++) {
+            Canvas.getInstance().show(rats[i].getNpc());
+            Canvas.getInstance().show(((Rat) rats[i]));
+            Canvas.getInstance().show(((Rat) rats[i]));
 
+
+        }
     }
 
-    public static void hideAllMap2(){
+    public static void hideAllMap2() {
         Canvas.getInstance().hide(milk.getMilk());
+        for (int i = 0; i < rats.length; i++) {
+            Canvas.getInstance().hide(rats[i].getNpc());
+            Canvas.getInstance().hide(((Rat) rats[i]));
+            Canvas.getInstance().hide(((Rat) rats[i]));
+
+        }
     }
 
     @Override
@@ -168,13 +184,22 @@ public class GameHandler implements Runnable {
 
             Field.map.load("resources/images/SecondMap.png");
             hideAll();
+            showAllMap2();
             firstMap = false;
             return;
         }
 
         Field.map.load("resources/images/FirstMap.png");
+        hideAllMap2();
         showAll();
         firstMap = true;
+    }
+
+    private void instanceOfRats(Npc[] rats) {
+        for (int index = 0; index < rats.length; index++) {
+            rats[index] = Factory.npcFactory(NpcType.RAT, (int) (Math.random() * field.getSizeCol()),
+                    (int) (Math.random() * field.getSizeRow()));
         }
     }
+}
 
