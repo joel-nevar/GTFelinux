@@ -24,7 +24,7 @@ public class GameHandler implements Runnable {
     private PlayerKeyboard playerKeyboard;
     private static final int ASSAULTABLE_CATS = 8;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
-    public static boolean firstMap = false;
+    public static boolean firstMap = true ;
 
     public void init() {
         field = new Field();
@@ -44,10 +44,10 @@ public class GameHandler implements Runnable {
         run();
     }
 
-    private void showAlways(){
+    private void showAlways() {
 
         /** First Game Map **/
-         field.getMap().draw();
+        field.getMap().draw();
 
         /**Show Player**/
         player.getPlayer().draw();
@@ -63,7 +63,7 @@ public class GameHandler implements Runnable {
     private static void showAll() {
 
         //Objects
-         milk.getMilk().draw();
+        milk.getMilk().draw();
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
@@ -78,7 +78,7 @@ public class GameHandler implements Runnable {
         ((CopCar) enemies[0]).getRedLifeBar().fill();
         ((CopCar) enemies[0]).getGreenLifeBar().fill();
 
-            player.getPlayer().draw();
+        player.getPlayer().draw();
 
         /**Assets**/
         for (Area area : field.getNotWalkable()) {
@@ -155,17 +155,16 @@ public class GameHandler implements Runnable {
 
     public static void changeMap() {
 
-        if (firstMap == true) {
+        if (firstMap) {
 
             Field.map.load("resources/images/SecondMap.png");
             hideAll();
             firstMap = false;
             return;
         }
-
         Field.map.load("resources/images/FirstMap.png");
         showAll();
         firstMap = true;
-        }
     }
+}
 
