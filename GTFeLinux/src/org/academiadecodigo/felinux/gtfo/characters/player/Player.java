@@ -10,7 +10,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends Character implements Moveable {
+public class Player extends Character{
 
     private Field map;
     private Picture player;                     //Draws player on the field
