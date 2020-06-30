@@ -44,7 +44,7 @@ public class GameHandler implements Runnable {
 
         instanceOfRats(rats);
         showAlways();
-        showAll();
+        showAllMap1();
         run();
     }
 
@@ -64,7 +64,7 @@ public class GameHandler implements Runnable {
         player.getHpAnimation().fill();
     }
 
-    private static void showAll() {
+    private static void showAllMap1() {
 
         //Objects
 
@@ -89,10 +89,11 @@ public class GameHandler implements Runnable {
             area.getShowArea().draw();
         }
 
+
     }
 
 
-    private static void hideAll() {
+    private static void hideAllMap1() {
 
         /** First Game Map **/
 
@@ -125,6 +126,10 @@ public class GameHandler implements Runnable {
     }
 
     public static void showAllMap2() {
+        for (Area area : field.getNotWalkableMap2()) {
+            area.getShowArea().draw();
+
+        }
         Canvas.getInstance().show(milk.getMilk());
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().show(rats[i].getNpc());
@@ -132,10 +137,15 @@ public class GameHandler implements Runnable {
             Canvas.getInstance().show(((Rat) rats[i]));
 
 
+
         }
     }
 
     public static void hideAllMap2() {
+        for (Area area : field.getNotWalkableMap2()) {
+            Canvas.getInstance().hide(area.getShowArea());
+
+        }
         Canvas.getInstance().hide(milk.getMilk());
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().hide(rats[i].getNpc());
@@ -183,15 +193,16 @@ public class GameHandler implements Runnable {
         if (firstMap) {
 
             Field.map.load("resources/images/SecondMap.png");
-            hideAll();
+            hideAllMap1();
             showAllMap2();
+
             firstMap = false;
             return;
         }
 
         Field.map.load("resources/images/FirstMap.png");
         hideAllMap2();
-        showAll();
+        showAllMap1();
         firstMap = true;
     }
 
