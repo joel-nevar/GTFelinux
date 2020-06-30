@@ -150,6 +150,7 @@ public class GameHandler implements Runnable {
     public static void changeMap() {
 
         if (firstMap == true) {
+
             Field.map.load("resources/images/SecondMap.png");
             hideAll();
             firstMap = false;
