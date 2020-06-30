@@ -40,7 +40,7 @@ public class GameHandler implements Runnable {
         }
 
         showAlways();
-        showAll();
+        showAllMap1();
         run();
     }
 
@@ -56,19 +56,19 @@ public class GameHandler implements Runnable {
         /** User Interface **/
         player.getEnergyBar().draw();
         player.getHpBar().draw();
-        player.getEnergyAnimation().fill();
-        player.getHpAnimation().fill();
+        player.getEnergyAnimation().draw();
+        player.getHpAnimation().draw();
     }
 
-    private static void showAll() {
+    private static void showAllMap1() {
 
         //Objects
-         milk.getMilk().draw();
+
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
-            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().fill();
-            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().fill();
+            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().draw();
+            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().draw();
         }
 
         /**Characters **/
@@ -88,11 +88,11 @@ public class GameHandler implements Runnable {
     }
 
 
-    private static void hideAll() {
+    private static void hideAllMap1() {
 
         /** First Game Map **/
 
-        Canvas.getInstance().hide(milk.getMilk());
+
 
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
@@ -114,10 +114,20 @@ public class GameHandler implements Runnable {
             Canvas.getInstance().hide(area.getShowArea());
         }
         /** User Interface **/
+
         player.getEnergyBar().draw();
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
+    }
+
+    public static void showAllMap2() {
+        Canvas.getInstance().show(milk.getMilk());
+
+    }
+
+    public static void hideAllMap2(){
+        Canvas.getInstance().hide(milk.getMilk());
     }
 
     @Override
@@ -158,13 +168,15 @@ public class GameHandler implements Runnable {
         if (firstMap == true) {
 
             Field.map.load("resources/images/SecondMap.png");
-            hideAll();
+            hideAllMap1();
+            showAllMap2();
             firstMap = false;
             return;
         }
 
         Field.map.load("resources/images/FirstMap.png");
-        showAll();
+        hideAllMap2();
+        showAllMap1();
         firstMap = true;
         }
     }

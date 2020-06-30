@@ -23,6 +23,12 @@ public class Field extends Picture {
         height = map.getHeight();
         width = map.getWidth();
     }
+    public Field (String string) {
+        map = new Picture(PADDING_X, PADDING_Y,"resources/images/SecondMap.png");
+        setNotWalkable();
+        height = map.getHeight();
+        width = map.getWidth();
+    }
 
     public static int getPADDING_X() {
         return PADDING_X;
