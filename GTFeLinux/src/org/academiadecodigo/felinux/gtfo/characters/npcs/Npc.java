@@ -25,6 +25,7 @@ public abstract class Npc extends Character {
     private int horizontalVertical = 0;
 
     public Npc(int posX, int posY, String spriteName, int direction) {
+
         horizontalVertical = direction;
         this.npc = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
         this.area = new Area(getNpc().getX(),getNpc().getY(),getNpc().getWidth(),getNpc().getHeight());
@@ -37,7 +38,15 @@ public abstract class Npc extends Character {
 
         defineRoute();
         defineDistance();
+    }
 
+    /**
+     * Call this to add objects to the interactables list
+     */
+    @Override
+    public void addToInteractables() {
+
+        super.addToInteractables(area, this);
     }
 
     /**

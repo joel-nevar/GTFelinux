@@ -1,5 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
+import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
@@ -22,7 +23,6 @@ public class GameHandler implements Runnable {
 
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
-    private Npc[] npcs = new Npc[10];
     private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
@@ -32,8 +32,8 @@ public class GameHandler implements Runnable {
     public static boolean firstMap = true;
 
 
-
-    public static HashMap<Area, Character> hashMap;
+    public static HashMap<Area,Character> hashMap;
+    private static final int INTERACT_RANGE = 25;
 
     public void init() {
 
@@ -56,9 +56,21 @@ public class GameHandler implements Runnable {
         instanceOfAssaultableCats(assaultableCats);
         instanceOfEnemies(enemies);
         instanceOfRats(rats);
+        addInteractables();
         showAlways();
         showAllMap1();
         run();
+    }
+
+    private void addInteractables() {
+
+        for (Npc rat: rats) {
+            rat.addToInteractables();
+        }
+
+        for (Npc cat : assaultableCats ) {
+            cat.addToInteractables();
+        }
     }
 
     private void showAlways() {
@@ -112,8 +124,8 @@ public class GameHandler implements Runnable {
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             Canvas.getInstance().hide(assaultableCats[i].getNpc());
-            Canvas.getInstance().hide(((AssaultableCat) assaultableCats[i]).getRedLifeBar());
-            Canvas.getInstance().hide(((AssaultableCat) assaultableCats[i]).getGreenLifeBar());
+            Canvas.getInstance().hide(assaultableCats[i].getRedLifeBar());
+            Canvas.getInstance().hide(assaultableCats[i].getGreenLifeBar());
         }
 
         /**Characters **/
@@ -142,6 +154,7 @@ public class GameHandler implements Runnable {
     }
 
     public static void showAllMap2() {
+
         for (Area area : field.getNotWalkableMap2()) {
             area.getBoundArea().draw();
 
@@ -161,6 +174,7 @@ public class GameHandler implements Runnable {
     }
 
     public static void hideAllMap2() {
+
         for (Area area : field.getNotWalkableMap2()) {
             Canvas.getInstance().hide(area.getBoundArea());
 
@@ -182,7 +196,7 @@ public class GameHandler implements Runnable {
     @Override
     public void run() {
 
-        //Game loop to create movement
+        //Game loop to create everything!
         while (!player.isDead()) {
             try {
 
@@ -202,6 +216,7 @@ public class GameHandler implements Runnable {
 
 
     private void moveAll() {
+
         player.move();
         player.energyDecay();
         enemies[0].move();
@@ -312,15 +327,40 @@ public class GameHandler implements Runnable {
         }
     }
 
-    public static Character checkInteraction() {
+    /**
+     * Check for interactions
+     *
+     * @return Character to interact with,
+     * or player reference if no interactible objects in range
+     */
+    public static Character checkInteraction(){
 
-        //TODO - this crap, after dinner
-        //PLEASE - fill the hashMap with Area and the reference of the object, in this case, Character
-        //at the respective constructors!!!!
+        Area interactTarger;
 
-        return null;
+        for(int i = 0 ; i < hashMap.size(); i++){
+
+            interactTarger = hashMap.keySet().iterator().next();
+
+            if(Area.checkInteract(player.getArea(),interactTarger, INTERACT_RANGE)){
+                return hashMap.get(interactTarger);
+            }
+        }
+
+        return player;
     }
 
+    /**
+     * Check milk location
+     * @return true if u got it right
+     */
+    public static boolean checkMilk(){
+
+        if(!firstMap){
+
+            return Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
+        }
+        return false;
+    }
 
     public enum GameSound {
         CATMEOW(new Sounds("/music/MEOW.wav")),
@@ -336,11 +376,7 @@ public class GameHandler implements Runnable {
         GameSound(Sounds sounds) {
             this.sounds = sounds;
         }
-
-
     }
-
-
 }
 
 //com mp3

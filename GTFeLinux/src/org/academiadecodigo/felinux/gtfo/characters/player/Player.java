@@ -1,12 +1,9 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
-import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
-import org.academiadecodigo.felinux.gtfo.game.GameHandler;
-import org.academiadecodigo.felinux.gtfo.game.Sounds;
 import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
@@ -36,8 +33,6 @@ public class Player extends Character{
     //used for collision UPDATE ON PLAYER MOVE
     private Area playerArea;
 
-    private int collideCounter;
-
     public Player(String name) {
 
         super();
@@ -61,7 +56,19 @@ public class Player extends Character{
     @Override
     public void interact() {
 
+        Character interactWith = GameHandler.checkInteraction();
 
+        if(interactWith instanceof Player){
+            System.out.println("too far");
+
+            if(GameHandler.checkMilk()){
+                hasMilk = true;
+            }
+            return;
+        }
+
+        interactWith.interact();
+        System.out.println("interacted");
     }
 
     public void energyDecay() {
@@ -226,10 +233,6 @@ public class Player extends Character{
         this.energy--;
     }
 
-    public void stealMilk() {
-        this.hasMilk = true;
-    }
-
     public int getClawDamage() {
         return this.clawDamage;
     }
@@ -273,5 +276,9 @@ public class Player extends Character{
             }
         }
         return false;
+    }
+
+    public Area getArea() {
+        return playerArea;
     }
 }

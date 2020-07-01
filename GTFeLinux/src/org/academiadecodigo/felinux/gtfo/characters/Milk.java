@@ -3,7 +3,7 @@ package org.academiadecodigo.felinux.gtfo.characters;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Milk extends Character{
+public class Milk extends Picture{
 
 
     private Picture milk;
@@ -24,5 +24,9 @@ public class Milk extends Character{
     //Used to delete the Milk when the player catches it
     public void drinkMeTillIDisappear(){
         this.milk.delete();
+    }
+
+    public Area getArea() {
+        return area;
     }
 }
