@@ -104,6 +104,7 @@ public class Area {
         for(int i = 0; i < 4; i++){
 
             triangleAreas[i] = calcArea(semiPerimeter(distances[i], distances[i+1], distances[i+4]),distances[i],distances[i+1],distances[i+4]);
+
         }
 
         int rectArea = rect.getBoundArea().getWidth()*rect.getBoundArea().getHeight();
@@ -114,7 +115,10 @@ public class Area {
             triangleArea += triangle;
         }
 
-        return !(triangleArea>rectArea);
+        System.out.println(triangleArea);
+        System.out.println(rectArea);
+
+        return !(triangleArea > rectArea);
     }
 
     /**

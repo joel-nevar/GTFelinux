@@ -123,7 +123,7 @@ public class GameHandler implements Runnable {
 
     public static void showAllMap2() {
         for (Area area : field.getNotWalkableMap2()) {
-            area.getShowArea().draw();
+            area.getBoundArea().draw();
 
         }
 
@@ -136,7 +136,7 @@ public class GameHandler implements Runnable {
 
     public static void hideAllMap2() {
         for (Area area : field.getNotWalkableMap2()) {
-            Canvas.getInstance().hide(area.getShowArea());
+            Canvas.getInstance().hide(area.getBoundArea());
 
         }
         Canvas.getInstance().hide(milk.getMilk());

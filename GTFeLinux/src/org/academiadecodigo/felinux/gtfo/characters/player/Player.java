@@ -167,21 +167,21 @@ public class Player extends Character{
 
         //checkRight
         if ((Field.width <= player.getMaxX() - Field.getPADDING_X())) {
-            if(dx==2){
+            if(dx>=0){
                 dx=0;
             }
         }
 
         //checkDown
         if ((Field.height <= player.getMaxY() - Field.getPADDING_Y())) {
-            if(dy==2){
+            if(dy>=0){
                 dy=0;
             }
         }
 
         //checkLeft
         if ((Field.getPADDING_X() >= player.getX())) {
-            if(dx==-2){
+            if(dx<=0){
                 dx=0;
             }
         }
