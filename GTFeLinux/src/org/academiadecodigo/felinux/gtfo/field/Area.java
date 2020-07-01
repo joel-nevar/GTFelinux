@@ -86,7 +86,7 @@ public class Area {
     }
 
     /**
-     * check method above
+     * check commentary of method above
      * Overload
      */
     public static boolean contains (float dx, float dy, Area rect){
@@ -176,7 +176,7 @@ public class Area {
     }
 
     /**
-     * Another calc, area of triangle -Z Heron's formula
+     * Another calc, area of triangle -> Heron's formula
      * @param s semiPerimeter
      * @param a
      * @param b

@@ -36,11 +36,6 @@ public class CopCar extends Enemy {
         return redLifeBar;
     }
 
-    /**
-     * TODO - work interaction
-     *
-     * @return needs to return Area
-     */
     @Override
     public Picture getEnemy() {
         return super.getEnemy();

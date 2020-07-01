@@ -12,6 +12,11 @@ public class AssaultableCat extends Npc {
         super(posX, posY, spriteName, direction);
     }
 
+    @Override
+    public void interact() {
+        //TODO - MEXER AQUI
+    }
+
     private boolean robbed;
 
     @Override

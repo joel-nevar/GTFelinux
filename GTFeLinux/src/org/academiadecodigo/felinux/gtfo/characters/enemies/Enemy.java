@@ -14,6 +14,7 @@ public abstract class Enemy extends Character{
     private boolean dead = false;
     private Picture enemy;
     private Area area;
+    private Character name;
 
     private DirectionType lastDirectionType = DirectionType.STOP;
 
@@ -24,6 +25,15 @@ public abstract class Enemy extends Character{
         this.enemyField = enemyField;
         this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
         this.area = new Area(getEnemy().getX(),getEnemy().getY(), getEnemy().getWidth(), getEnemy().getHeight());
+    }
+
+    /**
+     * Call this to add objects to the interactables list
+     */
+    @Override
+    public void addToInteractables() {
+
+        super.addToInteractables(area, name);
     }
 
     //Area for collisions and interactions
