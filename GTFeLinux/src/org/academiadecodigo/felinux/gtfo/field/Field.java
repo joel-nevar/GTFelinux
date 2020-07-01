@@ -12,7 +12,7 @@ public class Field extends Picture {
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
     private static final int PIXEL = 2;
-    private static ArrayList<Area> notWalkableMap2 = new ArrayList<>();
+    public static ArrayList<Area> notWalkableMap2 = new ArrayList<>();
     public static ArrayList<Area> notWalkable = new ArrayList<>();
     public static int height;
     public static int width;

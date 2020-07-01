@@ -13,7 +13,7 @@ public class Factory extends Picture {
 
         switch(enemyType) {
             case COP_CAR:
-                return new CopCar(posX, 350, image); //SPECIAL CASE copCars Spawn on Y =350
+                return new CopCar(posX,posY, image); //SPECIAL CASE copCars Spawn on Y =350
             case LION:
              default:return new Lion(posX, posY, image);
         }
@@ -21,10 +21,9 @@ public class Factory extends Picture {
 
     public static Npc npcFactory(NpcType npcType, int posX, int posY, int direction) {
 
-        String image="";
+        String image ="AssaultableCat_"+(int)Math.ceil(Math.random()*8);
         switch (npcType) {
             case ASSAULTABLE_CAT:
-                image ="AssaultableCat_"+(int)Math.ceil(Math.random()*8);
                 return new AssaultableCat(posX, posY, image, direction);
             case CAT_PROSTITUTE:
                 return new CatProstitute(posX, posY, image, direction);

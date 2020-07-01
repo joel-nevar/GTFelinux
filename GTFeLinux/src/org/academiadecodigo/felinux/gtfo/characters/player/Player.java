@@ -5,6 +5,9 @@ import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
+import org.academiadecodigo.felinux.gtfo.game.GameHandler;
+import org.academiadecodigo.felinux.gtfo.game.Sounds;
+import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -58,6 +61,7 @@ public class Player extends Character{
     @Override
     public void interact() {
 
+
     }
 
     public void energyDecay() {
@@ -96,6 +100,7 @@ public class Player extends Character{
         //Attack animation appear
         if (clawUsed == true) {
             this.getClawAnimation().draw();
+           GameHandler.GameSound.CATCLAW.sounds.play(true);
 
             //Tick to measure animation time
             this.setClawTick(getClawTick() + 1);
@@ -248,13 +253,25 @@ public class Player extends Character{
 
     public boolean collisionCheck(float dx, float dy){
 
-        for ( Area area : Field.notWalkable ) {
+        if(GameHandler.firstMap){
 
-            if(Area.contains(playerArea ,area, dx, dy)){
+            for ( Area area : Field.notWalkable ) {
+
+                if(Area.contains(playerArea ,area, dx, dy)){
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        for ( Area area : Field.notWalkableMap2) {
+
+            if (Area.contains(playerArea, area, dx, dy)) {
 
                 return true;
             }
         }
-       return false;
+        return false;
     }
 }

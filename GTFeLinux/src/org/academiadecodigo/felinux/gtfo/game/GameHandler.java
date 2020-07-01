@@ -12,8 +12,11 @@ import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
+import java.util.HashMap;
+
 
 public class GameHandler implements Runnable {
+
 
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
@@ -25,21 +28,28 @@ public class GameHandler implements Runnable {
     private static final int ASSAULTABLE_CATS = 13;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
-    private  Sounds gameMusic;
 
+
+    public static HashMap<Area, Character> hashMap;
 
     public void init() {
+
         field = new Field();
-        gameMusic = new Sounds("/music/backgroundMusic.wav");
+        GameSound.BACKMUSIC.sounds.play(true);
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
+
+        //interaction
+        hashMap = new HashMap<>();
     }
-    public void startGame(){
-        //gameMusic.play(!player.isDead());
+
+    public void startGame() {
+
+        GameSound.BACKMUSIC.sounds.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
@@ -70,8 +80,8 @@ public class GameHandler implements Runnable {
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
-            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().fill();
-            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().fill();
+            assaultableCats[i].getRedLifeBar().fill();
+            assaultableCats[i].getGreenLifeBar().fill();
         }
 
         /**Characters **/
@@ -87,10 +97,7 @@ public class GameHandler implements Runnable {
         for (Area area : field.getNotWalkable()) {
             area.getBoundArea().draw();
         }
-
-
     }
-
 
     private static void hideAllMap1() {
 
@@ -146,8 +153,8 @@ public class GameHandler implements Runnable {
 
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().hide(rats[i].getNpc());
-            //Canvas.getInstance().hide(((Rat) rats[i]));
-            //Canvas.getInstance().hide(((Rat) rats[i]));
+            // Canvas.getInstance().hide(((Rat) rats[i]));
+            //nvas.getInstance().hide(((Rat) rats[i]));
         }
     }
 
@@ -157,7 +164,7 @@ public class GameHandler implements Runnable {
         //Game loop to create movement
         while (!player.isDead()) {
             try {
-                System.out.println(player.getPlayer().getX() + " " + " " + player.getPlayer().getY());
+
                 Thread.sleep(35);
 
                 //Check if player is attacking
@@ -178,7 +185,6 @@ public class GameHandler implements Runnable {
         player.energyDecay();
         enemies[0].move();
 
-
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].move();
@@ -197,7 +203,7 @@ public class GameHandler implements Runnable {
             Field.map.load("resources/images/SecondMap.png");
             hideAllMap1();
             showAllMap2();
-
+            GameSound.DOOR.sounds.play(true);
             firstMap = false;
             return;
         }
@@ -205,6 +211,7 @@ public class GameHandler implements Runnable {
         Field.map.load("resources/images/FirstMap.png");
         hideAllMap2();
         showAllMap1();
+        GameSound.DOOR.sounds.play(true);
         firstMap = true;
     }
 
@@ -214,7 +221,6 @@ public class GameHandler implements Runnable {
                     Randomizer.getRandom(400, 200), index);
         }
     }
-
 
     private void instanceOfAssaultableCats(Npc[] assaultableCats) {
         int[][] assaultableCatPos = new int[13][2];
@@ -272,17 +278,37 @@ public class GameHandler implements Runnable {
             assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT, assaultableCatPos[i][0], assaultableCatPos[i][1], i);
         }
     }
-}
 
-    /*
-    Class gameSounds(){
+    public static Character checkInteraction() {
 
-        Sounds die;
-        Sounds ok;
+        //TODO - this crap, after dinner
+        //PLEASE - fill the hashMap with Area and the reference of the object, in this case, Character
+        //at the respective constructors!!!!
+
+        return null;
+    }
+
+
+    public enum GameSound {
+        CATMEOW(new Sounds("/music/MEOW.wav")),
+        CATCLAW(new Sounds("/music/knife_hit17.wav")),
+        CATDIE(new Sounds("/music/catdie.wav")),
+        CLICK(new Sounds("/music/click.wav")),
+        DOOR(new Sounds("/music/dooropen.wav")),
+        SHOOT(new Sounds("/music/shoot.wav")),
+        BACKMUSIC(new Sounds("/music/backgroundMusic.wav"));
+
+        public Sounds sounds;
+
+        GameSound(Sounds sounds) {
+            this.sounds = sounds;
+        }
 
 
     }
 
-*/
 
+}
+
+//com mp3
 

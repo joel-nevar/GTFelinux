@@ -7,10 +7,7 @@ public abstract class Character extends Picture implements Moveable{
     private int lives;
     private String message;
 
-    //resolver
     public void interact() {
-        //TODO tem de interagir com o leite e prostitutas
-        System.out.println("Qualuqercoisa");
     }
 
     public String getMessage() {
