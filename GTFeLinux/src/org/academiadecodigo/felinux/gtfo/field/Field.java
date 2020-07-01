@@ -12,11 +12,10 @@ public class Field extends Picture {
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
     private static final int PIXEL = 2;
-    private ArrayList<Area> notWalkableMap2 = new ArrayList<>();
+    public static ArrayList<Area> notWalkableMap2 = new ArrayList<>();
     public static ArrayList<Area> notWalkable = new ArrayList<>();
     public static int height;
     public static int width;
-
 
     public Field () {
         map = new Picture(PADDING_X, PADDING_Y,"resources/images/FirstMap.png");
@@ -25,7 +24,6 @@ public class Field extends Picture {
         height = map.getHeight();
         width = map.getWidth();
     }
-
 
     public static int getPADDING_X() {
         return PADDING_X;
@@ -43,7 +41,7 @@ public class Field extends Picture {
      * fill sprites on the field
      */
 
-    public  int getSizeRow() {
+    public int getSizeRow() {
         return map.getHeight();
     }
 
@@ -133,10 +131,10 @@ public class Field extends Picture {
 
 
     public void setNotWalkableMap2() {
-    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,1499 -(-1),135 - (-1)); // TOP BORDER MAP2
-    addNotWalkable2(-1 + PADDING_X,314 + PADDING_Y,1499 - (-1),450 - 314); // LOWER BORDER MAP2
-    addNotWalkable2(1328 + PADDING_X,-1 + PADDING_Y,1499 - 1328,449 - (-1)); // RIGHT BORDER MAP2
-    addNotWalkable2(-1 + PADDING_X,1 + PADDING_Y,179 - (-1),449 - 1); // LEFT BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,1499 - 1,90 -1); // TOP BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,361 + PADDING_Y,1499 - 1,449 - 361); // LOWER BORDER MAP2
+    addNotWalkable2(1380 + PADDING_X,-1 + PADDING_Y,1499 - 1380,449 - (-1)); // RIGHT BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,135 - (-1),449 - (-1)); // LEFT BORDER MAP2
 
 
     }

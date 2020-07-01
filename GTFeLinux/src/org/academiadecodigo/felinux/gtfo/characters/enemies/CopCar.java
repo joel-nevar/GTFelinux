@@ -13,18 +13,21 @@ public class CopCar extends Enemy {
     private boolean forward;
     private boolean turning;
     private final float MAX_SPEED = 3.5f;
-    private final float ACCEL = 0.3f;
+    private final float ACCEL = 0.2f;
     private float cSpeed;
     private int turningCounter;
 
     public CopCar(int posX, int posY, String spriteName) {
 
         super(EnemyAreaType.COP_CAR, posX, posY, spriteName, 10);
+
+        //hp animations
         this.redLifeBar = new Rectangle(posX - 9, posY - 8, 50,7);
         this.redLifeBar.setColor(new Color(255,0,0));
         this.greenLifeBar = new Rectangle(posX - 9, posY - 8, 50,7);
         this.greenLifeBar.setColor(new Color(0,255,0));
     }
+
     public Rectangle getGreenLifeBar() {
         return greenLifeBar;
     }
@@ -34,9 +37,9 @@ public class CopCar extends Enemy {
     }
 
     /**
-     * Gets the position, kinda, for now thats how it works
+     * TODO - work interaction
      *
-     * @return Picture that has the position of the stuff, like i said, for now
+     * @return needs to return Area
      */
     @Override
     public Picture getEnemy() {
@@ -45,6 +48,7 @@ public class CopCar extends Enemy {
 
     /**
      * Traces the route for the policeCar
+     * And makes the movement
      */
     @Override
     public void move() {
@@ -88,6 +92,7 @@ public class CopCar extends Enemy {
             if(getEnemy().getX() <  Field.width-50){
 
                 getEnemy().translate(cSpeed,0);
+                getArea().getBoundArea().translate(cSpeed,0);
                 redLifeBar.translate(cSpeed,0);
                 greenLifeBar.translate(cSpeed,0);
                 return;
@@ -100,6 +105,7 @@ public class CopCar extends Enemy {
         if(getEnemy().getX()> Field.PADDING_X+50){
 
             getEnemy().translate(-cSpeed,0);
+            getArea().getBoundArea().translate(-cSpeed,0);
             redLifeBar.translate(-cSpeed,0);
             greenLifeBar.translate(-cSpeed,0);
             return;
@@ -114,12 +120,14 @@ public class CopCar extends Enemy {
         if(forward) {
 
             getEnemy().translate(0, cSpeed);
+            getArea().getBoundArea().translate(0, cSpeed);
             redLifeBar.translate(0, cSpeed);
             greenLifeBar.translate(0, cSpeed);
             return;
 
         }
         getEnemy().translate(0, -cSpeed);
+        getArea().getBoundArea().translate(0, -cSpeed);
         redLifeBar.translate(0, -cSpeed);
         greenLifeBar.translate(0, -cSpeed);
 
