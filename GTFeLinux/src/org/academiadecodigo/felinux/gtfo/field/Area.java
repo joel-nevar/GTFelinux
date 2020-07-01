@@ -48,29 +48,44 @@ public class Area {
      */
     public static boolean checkInteract (Area player, Area rect){
 
+        int distance = player.getBoundArea().getWidth()/2; //this line is touchable
+
+        return checkInteract(player, rect, distance);
+    }
+
+    public static boolean checkInteract (Area player, Area rect, int distance){
+
         int xA = ((player.getBoundArea().getX())*2+player.getBoundArea().getWidth())/2;
         int yA = ((player.getBoundArea().getY())*2+player.getBoundArea().getHeight())/2;
 
         int xB = (rect.getBoundArea().getX()*2+rect.getBoundArea().getWidth())/2;
         int yB = (rect.getBoundArea().getY()*2+rect.getBoundArea().getHeight())/2;
 
-        int distance = player.getBoundArea().getWidth()/2; //this line is touchable
-
         return getDistance(xA,yA,xB,yB)<=distance;
-
     }
 
     /**
      * If U didnt understand the previous Spell, you can't handle this one (trust me)
      * Simple Trigonometry
-     * @param player the player Area
-     * @param rect the Area to verify if the player is into
-     * @return true if player is inside the Rectangle, false if not
+     * @param player Area
+     * @param rect Area
+     * @param dx distance to move on X
+     * @param dy distance to move on Y
+     * @return true if it collides, false if not
      */
-    public static boolean contains (Area player, Area rect){
+    public static boolean contains (Area player, Area rect, float dx, float dy){
 
-        int xP = ((player.getBoundArea().getX())*2+player.getBoundArea().getWidth())/2;
-        int yP = ((player.getBoundArea().getY())*2+player.getBoundArea().getHeight())/2;
+        float nextPosX = player.getBoundArea().getX()+dx+16;
+        float nextPosY = player.getBoundArea().getY()+dy+16;
+
+        return contains(nextPosX, nextPosY, rect);
+    }
+
+    /**
+     * check method above
+     * Overload
+     */
+    public static boolean contains (float dx, float dy, Area rect){
 
         int xA = rect.getBoundArea().getX();
         int yA = rect.getBoundArea().getY();
@@ -81,8 +96,8 @@ public class Area {
         int xD = rect.getBoundArea().getX();
         int yD = rect.getBoundArea().getY()+rect.getBoundArea().getHeight();
 
-        int[] xCoords = new int[]{xP,xA,xB,xC,xD};
-        int[] yCoords = new int[]{yP,yA,yB,yC,yD};
+        int[] xCoords = new int[]{(int)dx,xA,xB,xC,xD};
+        int[] yCoords = new int[]{(int)dy,yA,yB,yC,yD};
 
         double[] distances = new double[8];
 
@@ -95,6 +110,13 @@ public class Area {
                 break;
             }
             distances[i+4] = getDistance(xCoords[i+1],yCoords[i+1],xCoords[i+2],yCoords[i+2]);
+        }
+
+        //here for the cat's collisionBox
+        //testing purposes only
+        for (int i = 0; i < 4; i++) {
+
+            distances[i] = (distances[i]-2);
         }
 
         //now is the semi-perimeter
