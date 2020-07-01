@@ -35,7 +35,7 @@ public class GameHandler implements Runnable {
     public void init() {
 
         field = new Field();
-         GameSound.BACKMUSIC.sounds.play(true);
+        GameSound.BACKMUSIC.sounds.play(true);
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
@@ -80,8 +80,8 @@ public class GameHandler implements Runnable {
         /**NPCs**/
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].getNpc().draw();
-            ((AssaultableCat) assaultableCats[i]).getRedLifeBar().fill();
-            ((AssaultableCat) assaultableCats[i]).getGreenLifeBar().fill();
+            assaultableCats[i].getRedLifeBar().fill();
+            assaultableCats[i].getGreenLifeBar().fill();
         }
 
         /**Characters **/
@@ -153,7 +153,7 @@ public class GameHandler implements Runnable {
 
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().hide(rats[i].getNpc());
-         // Canvas.getInstance().hide(((Rat) rats[i]));
+            // Canvas.getInstance().hide(((Rat) rats[i]));
             //nvas.getInstance().hide(((Rat) rats[i]));
         }
     }
@@ -267,8 +267,8 @@ public class GameHandler implements Runnable {
         assaultableCatPos[10][1] = 420;
 
         //H
-          assaultableCatPos[11][0] = 320;
-          assaultableCatPos[11][0] = 402;
+        assaultableCatPos[11][0] = 320;
+        assaultableCatPos[11][1] = 402;
 
         assaultableCatPos[12][0] = 1253;
         assaultableCatPos[12][1] = 230;
