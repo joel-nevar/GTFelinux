@@ -2,6 +2,8 @@ package org.academiadecodigo.felinux.gtfo.field;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
+import java.util.Arrays;
+
 public class Area {
 
     private int xMin;
@@ -67,7 +69,6 @@ public class Area {
      */
     public static boolean contains (Area player, Area rect){
 
-        //not functional yet will look at it, when i wake up
         int xP = ((player.getBoundArea().getX())*2+player.getBoundArea().getWidth())/2;
         int yP = ((player.getBoundArea().getY())*2+player.getBoundArea().getHeight())/2;
 
@@ -85,7 +86,7 @@ public class Area {
 
         double[] distances = new double[8];
 
-        for (int i = 0; i < 4 ; i++ ){
+        for (int i = 0; i < 4 ; i++){
 
             distances[i] = getDistance(xCoords[0],yCoords[0],xCoords[i+1],yCoords[i+1]);
 
@@ -97,26 +98,30 @@ public class Area {
         }
 
         //now is the semi-perimeter
-        //immediately into triangle area
+        //right into triangle Area
 
         double[] triangleAreas = new double[4];
 
         for(int i = 0; i < 4; i++){
 
-            triangleAreas[i] = calcArea(semiPerimeter(distances[i], distances[i+1], distances[i+4]),distances[i],distances[i+1],distances[i+4]);
+            if(i==3){
 
+                triangleAreas[i] = calcArea(semiPerimeter(distances[i], distances[0], distances[i+4]),distances[i],distances[0],distances[i+4]);
+                break;
+            }
+            triangleAreas[i] = calcArea(semiPerimeter(distances[i], distances[i+1], distances[i+4]),distances[i],distances[i+1],distances[i+4]);
         }
 
+
         int rectArea = rect.getBoundArea().getWidth()*rect.getBoundArea().getHeight();
-        double triangleArea = 0;
+
+        //forcing an int for rounding problems
+        int triangleArea = 0;
 
         for (double triangle: triangleAreas ) {
 
             triangleArea += triangle;
         }
-
-        System.out.println(triangleArea);
-        System.out.println(rectArea);
 
         return !(triangleArea > rectArea);
     }
@@ -128,7 +133,7 @@ public class Area {
      * @param yA
      * @param xB
      * @param yB
-     * @return the distance between the 2 points
+     * @return the distance between 2 points
      */
     private static double getDistance(double xA, double yA, double xB, double yB){
 
