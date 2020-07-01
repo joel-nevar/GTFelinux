@@ -127,7 +127,7 @@ public class Field extends Picture {
 
     private void addNotWalkable2(int xMin, int yMin, int xMax, int yMax){
         Area area =new Area(xMin, yMin, xMax, yMax);
-        area.getShowArea().setColor(Color.RED);
+        area.getBoundArea().setColor(Color.RED);
         notWalkableMap2.add(area);
     }
 
