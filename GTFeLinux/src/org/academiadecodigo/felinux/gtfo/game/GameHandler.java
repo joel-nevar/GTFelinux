@@ -262,7 +262,7 @@ public class GameHandler implements Runnable {
 
         //H
         assaultableCatPos[11][0] = 320;
-        assaultableCatPos[11][0] = 402;
+        assaultableCatPos[11][1] = 402;
 
         assaultableCatPos[12][0] = 1253;
         assaultableCatPos[12][1] = 230;
