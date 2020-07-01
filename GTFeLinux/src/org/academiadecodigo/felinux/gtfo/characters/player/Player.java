@@ -100,7 +100,7 @@ public class Player extends Character{
         //Attack animation appear
         if (clawUsed == true) {
             this.getClawAnimation().draw();
-            GameHandler.GameSound.CATCLAW.sounds.play(true);
+           GameHandler.GameSound.CATCLAW.sounds.play(true);
 
             //Tick to measure animation time
             this.setClawTick(getClawTick() + 1);

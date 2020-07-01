@@ -28,14 +28,14 @@ public class GameHandler implements Runnable {
     private static final int ASSAULTABLE_CATS = 13;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
-    private Sounds gameMusic;
 
-    public static HashMap<Area,Character> hashMap;
+
+    public static HashMap<Area, Character> hashMap;
 
     public void init() {
 
         field = new Field();
-        GameSound.BACKMUSIC.sounds.play(true);
+         GameSound.BACKMUSIC.sounds.play(true);
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
@@ -153,8 +153,8 @@ public class GameHandler implements Runnable {
 
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().hide(rats[i].getNpc());
-            //Canvas.getInstance().hide(((Rat) rats[i]));
-            //Canvas.getInstance().hide(((Rat) rats[i]));
+         // Canvas.getInstance().hide(((Rat) rats[i]));
+            //nvas.getInstance().hide(((Rat) rats[i]));
         }
     }
 
@@ -267,8 +267,8 @@ public class GameHandler implements Runnable {
         assaultableCatPos[10][1] = 420;
 
         //H
-        assaultableCatPos[11][0] = 320;
-        assaultableCatPos[11][0] = 402;
+          assaultableCatPos[11][0] = 320;
+          assaultableCatPos[11][0] = 402;
 
         assaultableCatPos[12][0] = 1253;
         assaultableCatPos[12][1] = 230;
@@ -279,7 +279,7 @@ public class GameHandler implements Runnable {
         }
     }
 
-    public static Character checkInteraction(){
+    public static Character checkInteraction() {
 
         //TODO - this crap, after dinner
         //PLEASE - fill the hashMap with Area and the reference of the object, in this case, Character
@@ -287,7 +287,6 @@ public class GameHandler implements Runnable {
 
         return null;
     }
-
 
 
     public enum GameSound {
@@ -311,4 +310,5 @@ public class GameHandler implements Runnable {
 
 }
 
+//com mp3
 
