@@ -5,8 +5,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class Milk extends Picture{
 
     private Picture milk;
-    private final int posX = 100; //1040
-    private final int posY = 70;
+    private final int posX = 1280; //1040
+    private final int posY = 280;
 
     public Milk(){
         this.milk = new Picture(posX, posY,"resources/images/Milk.png");

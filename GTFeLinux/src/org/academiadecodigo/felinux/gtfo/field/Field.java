@@ -12,6 +12,7 @@ public class Field extends Picture {
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
     private static final int PIXEL = 2;
+    private ArrayList<Area> notWalkableMap2 = new ArrayList<>();
     public static ArrayList<Area> notWalkable = new ArrayList<>();
     public static int height;
     public static int width;
@@ -20,9 +21,11 @@ public class Field extends Picture {
     public Field () {
         map = new Picture(PADDING_X, PADDING_Y,"resources/images/FirstMap.png");
         setNotWalkable();
+        setNotWalkableMap2();
         height = map.getHeight();
         width = map.getWidth();
     }
+
 
     public static int getPADDING_X() {
         return PADDING_X;
@@ -56,6 +59,10 @@ public class Field extends Picture {
         return notWalkable;
     }
 
+    public ArrayList<Area> getNotWalkableMap2() {
+        return notWalkableMap2;
+    }
+
     /*
     public boolean isWalkable(int x, int y) {
         for (Area area : notWalkable) {
@@ -67,6 +74,8 @@ public class Field extends Picture {
     }
 
      */
+
+
 
     private void addNotWalkable(int xMin, int yMin, int xSize, int ySize){
         Area area =new Area(xMin, yMin, xSize, ySize);
@@ -111,8 +120,26 @@ public class Field extends Picture {
         addNotWalkable(119 + PADDING_X,60 + PADDING_Y,315 - 119,100 - 60); // Water
         addNotWalkable(330 + PADDING_X,61 + PADDING_Y,727 - 330,99 - 61); // Water
         addNotWalkable(390 + PADDING_X,40 + PADDING_Y,727 - 390,61 - 40); // Water
+
+
     }
 
+
+    private void addNotWalkable2(int xMin, int yMin, int xMax, int yMax){
+        Area area =new Area(xMin, yMin, xMax, yMax);
+        area.getShowArea().setColor(Color.RED);
+        notWalkableMap2.add(area);
+    }
+
+
+    public void setNotWalkableMap2() {
+    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,1499 -(-1),135 - (-1)); // TOP BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,314 + PADDING_Y,1499 - (-1),450 - 314); // LOWER BORDER MAP2
+    addNotWalkable2(1328 + PADDING_X,-1 + PADDING_Y,1499 - 1328,449 - (-1)); // RIGHT BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,1 + PADDING_Y,179 - (-1),449 - 1); // LEFT BORDER MAP2
+
+
+    }
 
 }
 
