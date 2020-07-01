@@ -19,18 +19,18 @@ public class Factory extends Picture {
         }
     }
 
-    public static Npc npcFactory(NpcType npcType, int posX, int posY) {
+    public static Npc npcFactory(NpcType npcType, int posX, int posY, int direction) {
 
         String image="";
         switch (npcType) {
             case ASSAULTABLE_CAT:
                 image ="AssaultableCat_"+(int)Math.ceil(Math.random()*8);
-                return new AssaultableCat(posX, posY, image);
+                return new AssaultableCat(posX, posY, image, direction);
             case CAT_PROSTITUTE:
-                return new CatProstitute(posX, posY, image);
+                return new CatProstitute(posX, posY, image, direction);
             case RAT:
             default:
-                return new Rat(posX, posY,"rat");
+                return new Rat(posX, posY,"rat", direction);
         }
     }
 }

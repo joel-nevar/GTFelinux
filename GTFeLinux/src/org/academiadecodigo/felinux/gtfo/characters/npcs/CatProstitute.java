@@ -10,8 +10,8 @@ public class CatProstitute extends Npc {
                 return "I am a Cat Prostitute";
         }
 
-        public CatProstitute(int posX, int posY, String spriteName) {
-                super(posX, posY, spriteName);
+        public CatProstitute(int posX, int posY, String spriteName, int direction) {
+                super(posX, posY, spriteName, direction);
         }
 
 

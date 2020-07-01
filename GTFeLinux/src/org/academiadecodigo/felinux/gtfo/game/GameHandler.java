@@ -22,7 +22,7 @@ public class GameHandler implements Runnable {
     private static Milk milk;
     private static Field field;
     private PlayerKeyboard playerKeyboard;
-    private static final int ASSAULTABLE_CATS = 8;
+    private static final int ASSAULTABLE_CATS = 13;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
     private  Sounds gameMusic;
@@ -39,7 +39,7 @@ public class GameHandler implements Runnable {
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
     }
     public void startGame(){
-        gameMusic.play(!player.isDead());
+        //gameMusic.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
@@ -157,7 +157,7 @@ public class GameHandler implements Runnable {
         //Game loop to create movement
         while (!player.isDead()) {
             try {
-
+                System.out.println(player.getPlayer().getX() + " " + " " + player.getPlayer().getY());
                 Thread.sleep(35);
 
                 //Check if player is attacking
@@ -177,6 +177,7 @@ public class GameHandler implements Runnable {
         player.move();
         player.energyDecay();
         enemies[0].move();
+
 
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
@@ -210,18 +211,70 @@ public class GameHandler implements Runnable {
     private void instanceOfRats(Npc[] rats) {
         for (int index = 0; index < rats.length; index++) {
             rats[index] = Factory.npcFactory(NpcType.RAT, Randomizer.getRandom(1200, 200),
-                    Randomizer.getRandom(400, 200));
+                    Randomizer.getRandom(400, 200), index);
         }
     }
+
 
     private void instanceOfAssaultableCats(Npc[] assaultableCats) {
-        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
-            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,
-                    (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
+        int[][] assaultableCatPos = new int[13][2];
+        //Vertical
+        assaultableCatPos[0][0] = 440;
+        assaultableCatPos[0][1] = 235;
+
+        //Horizontal
+        assaultableCatPos[1][0] = 671;
+        assaultableCatPos[1][1] = 300;
+
+        // Vertical
+        assaultableCatPos[2][0] = 488;
+        assaultableCatPos[2][1] = 456;
+
+        //Horizontal
+        assaultableCatPos[3][0] = 764;
+        assaultableCatPos[3][1] = 594;
+
+
+        //Vertical
+        assaultableCatPos[4][0] = 950;
+        assaultableCatPos[4][1] = 105;
+
+        //Horizontal
+        assaultableCatPos[5][0] = 1082;
+        assaultableCatPos[5][1] = 528;
+
+        // Vertical
+        assaultableCatPos[6][0] = 641;
+        assaultableCatPos[6][1] = 429;
+        //H
+        assaultableCatPos[7][0] = 1091;
+        assaultableCatPos[7][1] = 609;
+        //V
+        assaultableCatPos[8][0] = 908;
+        assaultableCatPos[8][1] = 462;
+        //H
+        assaultableCatPos[9][0] = 158;
+        assaultableCatPos[9][1] = 531;
+
+        // V
+        assaultableCatPos[10][0] = 23;
+        assaultableCatPos[10][1] = 420;
+
+        //H
+        assaultableCatPos[11][0] = 320;
+        assaultableCatPos[11][0] = 402;
+
+        assaultableCatPos[12][0] = 1253;
+        assaultableCatPos[12][1] = 230;
+
+        // CREATE ASSAULTABLE CATS
+        for (int i = 0; i < 13; i++) {
+            assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT, assaultableCatPos[i][0], assaultableCatPos[i][1], i);
         }
     }
+}
 
-
+    /*
     Class gameSounds(){
 
         Sounds die;
@@ -230,5 +283,6 @@ public class GameHandler implements Runnable {
 
     }
 
-}
+*/
+
 

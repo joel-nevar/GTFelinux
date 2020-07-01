@@ -36,6 +36,7 @@ public class Player extends Character{
     private int collideCounter;
 
     public Player(String name) {
+
         super();
         super.setLives(7);
         map = new Field();

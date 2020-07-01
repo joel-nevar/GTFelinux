@@ -13,8 +13,8 @@ public abstract class Npc extends Character {
 
 
     private Picture npc;
-    private int routeX;
-    private int routeY;
+    private  int routeX = 0;
+    private  int routeY = 0;
     private int moveCounter;
     private boolean forward;
     private int distance = 100;
@@ -22,9 +22,10 @@ public abstract class Npc extends Character {
     private Rectangle greenLifeBar;
     private Area area;
     private boolean dead;
+    private int horizontalVertical = 0;
 
-    public Npc(int posX, int posY, String spriteName) {
-
+    public Npc(int posX, int posY, String spriteName, int direction) {
+        horizontalVertical = direction;
         this.npc = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
         this.area = new Area(getNpc().getX(),getNpc().getY(),getNpc().getWidth(),getNpc().getHeight());
 
@@ -36,7 +37,7 @@ public abstract class Npc extends Character {
 
         defineRoute();
         defineDistance();
-        defineDirection();
+
     }
 
     /**
@@ -55,6 +56,7 @@ public abstract class Npc extends Character {
             area.getBoundArea().translate(routeX, routeY);
             redLifeBar.translate(routeX, routeY);
             greenLifeBar.translate(routeX, routeY);
+
 
             if (moveCounter > distance) {
                 forward = false;
@@ -77,39 +79,34 @@ public abstract class Npc extends Character {
      * Defines how this cat will move
      */
     private void defineRoute() {
+        horizontalVertical++;
+        if (horizontalVertical % 2 == 1) {
 
-        if (Math.ceil(Math.random() * 2) == 2) {
-
-            routeX = 1;
+          routeY = 2;
             return;
-
         }
-        routeY = 1;
-    }
 
-    /**
-     * Defines how long
-     */
-    private void defineDistance() {
-
-        distance = (int) (Math.random() * 120) + 50;
+       routeX = 2;
     }
 
     /**
      * Defines this cat direction
      */
-    private void defineDirection() {
 
-        if (Math.random() < 0.5) {
-            forward = true;
-            return;
-        }
-        forward = false;
-    }
+
+
 
     public Picture getNpc() {
         return npc;
     }
+    /**
+     * Defines how long
+     */
+    private void defineDistance() {
+
+        distance = (int) (Math.random() * 25 ) + 20;
+    }
+
 
     public Rectangle getGreenLifeBar() {
         return greenLifeBar;

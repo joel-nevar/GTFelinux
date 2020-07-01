@@ -131,10 +131,10 @@ public class Field extends Picture {
 
 
     public void setNotWalkableMap2() {
-    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,1499 -(-1),135 - (-1)); // TOP BORDER MAP2
-    addNotWalkable2(-1 + PADDING_X,314 + PADDING_Y,1499 - (-1),450 - 314); // LOWER BORDER MAP2
-    addNotWalkable2(1328 + PADDING_X,-1 + PADDING_Y,1499 - 1328,449 - (-1)); // RIGHT BORDER MAP2
-    addNotWalkable2(-1 + PADDING_X,1 + PADDING_Y,179 - (-1),449 - 1); // LEFT BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,1499 - 1,90 -1); // TOP BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,361 + PADDING_Y,1499 - 1,449 - 361); // LOWER BORDER MAP2
+    addNotWalkable2(1380 + PADDING_X,-1 + PADDING_Y,1499 - 1380,449 - (-1)); // RIGHT BORDER MAP2
+    addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,135 - (-1),449 - (-1)); // LEFT BORDER MAP2
 
 
     }

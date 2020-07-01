@@ -8,8 +8,8 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public class AssaultableCat extends Npc {
 
 
-    public AssaultableCat (int posX, int posY, String spriteName) {
-        super(posX, posY, spriteName);
+    public AssaultableCat (int posX, int posY, String spriteName, int direction) {
+        super(posX, posY, spriteName, direction);
     }
 
     private boolean robbed;
