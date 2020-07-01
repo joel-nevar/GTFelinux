@@ -5,6 +5,8 @@ import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
+import org.academiadecodigo.felinux.gtfo.game.GameHandler;
+import org.academiadecodigo.felinux.gtfo.game.Sounds;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
@@ -96,6 +98,7 @@ public class Player extends Character{
         //Attack animation appear
         if (clawUsed == true) {
             this.getClawAnimation().draw();
+            GameHandler.GameSound.CATCLAW.sounds.play(true);
 
             //Tick to measure animation time
             this.setClawTick(getClawTick() + 1);

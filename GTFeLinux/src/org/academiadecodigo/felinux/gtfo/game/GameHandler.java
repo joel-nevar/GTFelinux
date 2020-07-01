@@ -25,12 +25,12 @@ public class GameHandler implements Runnable {
     private static final int ASSAULTABLE_CATS = 8;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
-    private  Sounds gameMusic;
+    private Sounds gameMusic;
 
 
     public void init() {
         field = new Field();
-        gameMusic = new Sounds("/music/backgroundMusic.wav");
+        GameSound.BACKMUSIC.sounds.play(true);
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
@@ -38,13 +38,15 @@ public class GameHandler implements Runnable {
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
     }
-    public void startGame(){
-        gameMusic.play(!player.isDead());
+
+    public void startGame() {
+        GameSound.BACKMUSIC.sounds.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
         showAllMap1();
         run();
+
     }
 
     private void showAlways() {
@@ -196,7 +198,7 @@ public class GameHandler implements Runnable {
             Field.map.load("resources/images/SecondMap.png");
             hideAllMap1();
             showAllMap2();
-
+            GameSound.DOOR.sounds.play(true);
             firstMap = false;
             return;
         }
@@ -204,6 +206,7 @@ public class GameHandler implements Runnable {
         Field.map.load("resources/images/FirstMap.png");
         hideAllMap2();
         showAllMap1();
+        GameSound.DOOR.sounds.play(true);
         firstMap = true;
     }
 
@@ -221,14 +224,25 @@ public class GameHandler implements Runnable {
         }
     }
 
+    public enum GameSound {
+        CATMEOW(new Sounds("/music/MEOW.wav")),
+        CATCLAW(new Sounds("/music/knife_hit17.wav")),
+        CATDIE(new Sounds("/music/catdie.wav")),
+        CLICK(new Sounds("/music/click.wav")),
+        DOOR(new Sounds("/music/dooropen.wav")),
+        SHOOT(new Sounds("/music/shoot.wav")),
+        BACKMUSIC(new Sounds("/music/backgroundMusic.wav"));
 
-    Class gameSounds(){
+        public Sounds sounds;
 
-        Sounds die;
-        Sounds ok;
+        GameSound(Sounds sounds) {
+            this.sounds = sounds;
+        }
 
 
     }
 
 }
+
+
 
