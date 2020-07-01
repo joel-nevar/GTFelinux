@@ -8,5 +8,7 @@ public class Main {
         Menu gameMenu = new Menu();
         gameMenu.initializeGame();
 
+
+
     }
 }

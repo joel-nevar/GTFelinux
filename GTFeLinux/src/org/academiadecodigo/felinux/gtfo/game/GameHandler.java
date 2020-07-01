@@ -3,7 +3,6 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.Rat;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
@@ -14,12 +13,14 @@ import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
 
+
+
 public class GameHandler implements Runnable {
 
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
-    private static Npc [] rats = new  Npc[5];
+    private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
     private PlayerKeyboard playerKeyboard;
@@ -36,7 +37,6 @@ public class GameHandler implements Runnable {
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
-
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
@@ -178,6 +178,10 @@ public class GameHandler implements Runnable {
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i].move();
         }
+
+        for (int i = 0; i < rats.length; i++) {
+            rats[i].move();
+        }
     }
 
 
@@ -201,16 +205,17 @@ public class GameHandler implements Runnable {
 
     private void instanceOfRats(Npc[] rats) {
         for (int index = 0; index < rats.length; index++) {
-            rats[index] = Factory.npcFactory (NpcType.RAT, Randomizer.getRandom(1200,200),
-                    Randomizer.getRandom(400,200));
+            rats[index] = Factory.npcFactory(NpcType.RAT, Randomizer.getRandom(1200, 200),
+                    Randomizer.getRandom(400, 200));
         }
     }
 
-    private void instanceOfAssaultableCats(Npc[] assaultableCats){
+    private void instanceOfAssaultableCats(Npc[] assaultableCats) {
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
             assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,
                     (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
         }
     }
+
 }
 
