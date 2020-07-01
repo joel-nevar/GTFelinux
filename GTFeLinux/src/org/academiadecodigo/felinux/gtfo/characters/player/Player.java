@@ -61,6 +61,7 @@ public class Player extends Character{
     @Override
     public void interact() {
 
+
     }
 
     public void energyDecay() {

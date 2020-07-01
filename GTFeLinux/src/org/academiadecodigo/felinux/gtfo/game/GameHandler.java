@@ -12,6 +12,8 @@ import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
+import java.util.HashMap;
+
 
 public class GameHandler implements Runnable {
 
@@ -28,8 +30,10 @@ public class GameHandler implements Runnable {
     public static boolean firstMap = true;
     private Sounds gameMusic;
 
+    public static HashMap<Area,Character> hashMap;
 
     public void init() {
+
         field = new Field();
         GameSound.BACKMUSIC.sounds.play(true);
         //Creates everything that is visual in the Canvas
@@ -38,9 +42,13 @@ public class GameHandler implements Runnable {
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
+
+        //interaction
+        hashMap = new HashMap<>();
     }
 
     public void startGame() {
+
         GameSound.BACKMUSIC.sounds.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
@@ -271,6 +279,17 @@ public class GameHandler implements Runnable {
         }
     }
 
+    public static Character checkInteraction(){
+
+        //TODO - this crap, after dinner
+        //PLEASE - fill the hashMap with Area and the reference of the object, in this case, Character
+        //at the respective constructors!!!!
+
+        return null;
+    }
+
+
+
     public enum GameSound {
         CATMEOW(new Sounds("/music/MEOW.wav")),
         CATCLAW(new Sounds("/music/knife_hit17.wav")),
@@ -289,5 +308,7 @@ public class GameHandler implements Runnable {
 
     }
 
+
 }
+
 
