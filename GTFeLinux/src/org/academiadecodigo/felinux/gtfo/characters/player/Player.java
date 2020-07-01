@@ -34,6 +34,8 @@ public class Player extends Character{
     //used for collision UPDATE ON PLAYER MOVE
     private Area playerArea;
 
+    private int collideCounter;
+
     public Player(String name) {
         super();
         super.setLives(7);
@@ -153,9 +155,10 @@ public class Player extends Character{
             return;
         }
 
-        if(collisionCheck()){
-            System.out.println("collide");
-            //return;  //not working YET!
+        if(collisionCheck(dx, dy)){
+
+            dx=0;
+            dy=0;
         }
 
         //checkUp
@@ -268,11 +271,11 @@ public class Player extends Character{
         return (Field.isWalkable(player.getX(), player.getY()));
     }*/
 
-    public boolean collisionCheck(){
+    public boolean collisionCheck(float dx, float dy){
 
         for ( Area area : Field.notWalkable ) {
 
-            if(Area.contains(playerArea ,area)){
+            if(Area.contains(playerArea ,area, dx, dy)){
 
                 return true;
             }
