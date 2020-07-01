@@ -176,23 +176,15 @@ public class PlayerKeyboard implements KeyboardHandler {
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){
-            player.interact();
-        }
-
-        switch (keyboardEvent.getKey()){
-
-            case KeyboardEvent.KEY_E:
-                break;
-
-            case KeyboardEvent.KEY_SPACE:
-                if(player.isClawUsed()){
-                    return;
-                }
-                try {
-                    player.attack(enemy);
-                } catch (NullPointerException npe) {
-                    System.out.println("You're attacking the air");
-                }
+            //TODO - Claw fix
+            if(player.isClawUsed()){
+                return;
+            }
+            try {
+                player.attack(enemy);
+            } catch (NullPointerException npe) {
+                System.out.println("You're attacking the air");
+            }
         }
     }
 
@@ -204,16 +196,19 @@ public class PlayerKeyboard implements KeyboardHandler {
     @Override
     public void keyReleased(KeyboardEvent keyboardEvent) {
 
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_A){
+        if((keyboardEvent.getKey() == KeyboardEvent.KEY_A)||(keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT)){
             Player.dx = 0f;
         }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_D){
+
+        if((keyboardEvent.getKey() == KeyboardEvent.KEY_D)||(keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT)){
             Player.dx = 0f;
         }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_W){
+
+        if((keyboardEvent.getKey() == KeyboardEvent.KEY_W)||(keyboardEvent.getKey() == KeyboardEvent.KEY_UP)){
             Player.dy = 0f;
         }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_S){
+
+        if((keyboardEvent.getKey() == KeyboardEvent.KEY_S)||(keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN)){
             Player.dy = 0f;
         }
 

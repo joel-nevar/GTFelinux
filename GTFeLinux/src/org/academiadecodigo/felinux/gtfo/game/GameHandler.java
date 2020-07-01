@@ -15,6 +15,7 @@ import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
 public class GameHandler implements Runnable {
 
+
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
     private Npc[] npcs = new Npc[10];
@@ -25,10 +26,11 @@ public class GameHandler implements Runnable {
     private static final int ASSAULTABLE_CATS = 13;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
-    private  Sounds gameMusic;
+    private Sounds gameMusic;
 
 
     public void init() {
+
         field = new Field();
         gameMusic = new Sounds("/music/backgroundMusic.wav");
         //Creates everything that is visual in the Canvas
@@ -39,7 +41,9 @@ public class GameHandler implements Runnable {
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
     }
     public void startGame(){
+
         //gameMusic.play(!player.isDead());
+        gameMusic.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
@@ -87,10 +91,7 @@ public class GameHandler implements Runnable {
         for (Area area : field.getNotWalkable()) {
             area.getBoundArea().draw();
         }
-
-
     }
-
 
     private static void hideAllMap1() {
 
@@ -177,7 +178,6 @@ public class GameHandler implements Runnable {
         player.move();
         player.energyDecay();
         enemies[0].move();
-
 
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
         for (int i = 0; i < ASSAULTABLE_CATS; i++) {
@@ -283,6 +283,7 @@ public class GameHandler implements Runnable {
 
     }
 
-*/
+}
 
 
+     */
