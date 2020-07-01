@@ -7,7 +7,7 @@ import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public abstract class Enemy extends Character{
+public abstract class Enemy extends Character {
 
 
     private EnemyAreaType enemyField;
@@ -24,7 +24,7 @@ public abstract class Enemy extends Character{
         super.setLives(lifeAmount);
         this.enemyField = enemyField;
         this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
-        this.area = new Area(getEnemy().getX(),getEnemy().getY(), getEnemy().getWidth(), getEnemy().getHeight());
+        this.area = new Area(getEnemy().getX(), getEnemy().getY(), getEnemy().getWidth(), getEnemy().getHeight());
     }
 
     /**
@@ -35,6 +35,8 @@ public abstract class Enemy extends Character{
 
         super.addToInteractables(area, name);
     }
+
+ //a comment
 
     //Area for collisions and interactions
 
