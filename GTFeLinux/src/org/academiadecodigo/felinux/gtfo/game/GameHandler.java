@@ -13,8 +13,6 @@ import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
 
 
-
-
 public class GameHandler implements Runnable {
 
     private static Player player;
@@ -27,16 +25,21 @@ public class GameHandler implements Runnable {
     private static final int ASSAULTABLE_CATS = 8;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
+    private  Sounds gameMusic;
 
 
     public void init() {
         field = new Field();
+        gameMusic = new Sounds("/music/backgroundMusic.wav");
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
+    }
+    public void startGame(){
+        gameMusic.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
         instanceOfRats(rats);
         showAlways();
@@ -150,6 +153,7 @@ public class GameHandler implements Runnable {
 
     @Override
     public void run() {
+
         //Game loop to create movement
         while (!player.isDead()) {
             try {
@@ -215,6 +219,15 @@ public class GameHandler implements Runnable {
             assaultableCats[i] = Factory.npcFactory(NpcType.ASSAULTABLE_CAT,
                     (int) (Math.random() * field.getSizeCol()), (int) (Math.random() * field.getSizeRow()));
         }
+    }
+
+
+    Class gameSounds(){
+
+        Sounds die;
+        Sounds ok;
+
+
     }
 
 }
