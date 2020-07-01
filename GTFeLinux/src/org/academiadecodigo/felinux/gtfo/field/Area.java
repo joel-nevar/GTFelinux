@@ -2,9 +2,13 @@ package org.academiadecodigo.felinux.gtfo.field;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-import java.util.Arrays;
-
+/**
+ * Responsible for collisions and interactions
+ * Almighty calculator
+ * Handle with care
+ */
 public class Area {
+
 
     private int xMin;
     private int yMin;
@@ -127,13 +131,11 @@ public class Area {
         for(int i = 0; i < 4; i++){
 
             if(i==3){
-
                 triangleAreas[i] = calcArea(semiPerimeter(distances[i], distances[0], distances[i+4]),distances[i],distances[0],distances[i+4]);
                 break;
             }
             triangleAreas[i] = calcArea(semiPerimeter(distances[i], distances[i+1], distances[i+4]),distances[i],distances[i+1],distances[i+4]);
         }
-
 
         int rectArea = rect.getBoundArea().getWidth()*rect.getBoundArea().getHeight();
 
@@ -144,7 +146,6 @@ public class Area {
 
             triangleArea += triangle;
         }
-
         return !(triangleArea > rectArea);
     }
 

@@ -6,7 +6,11 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+/**
+ * Npc class
+ */
 public abstract class Npc extends Character {
+
 
     private Picture npc;
     private int routeX;
@@ -16,11 +20,15 @@ public abstract class Npc extends Character {
     private int distance = 100;
     private Rectangle redLifeBar;
     private Rectangle greenLifeBar;
+    private Area area;
     private boolean dead;
 
     public Npc(int posX, int posY, String spriteName) {
 
         this.npc = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
+        this.area = new Area(getNpc().getX(),getNpc().getY(),getNpc().getWidth(),getNpc().getHeight());
+
+        //hp animations
         this.redLifeBar = new Rectangle(posX - 9, posY - 8, 50, 7);
         this.redLifeBar.setColor(new Color(255, 0, 0));
         this.greenLifeBar = new Rectangle(posX - 9, posY - 8, 50, 7);
@@ -44,6 +52,7 @@ public abstract class Npc extends Character {
 
             moveCounter++;
             getNpc().translate(routeX, routeY);
+            area.getBoundArea().translate(routeX, routeY);
             redLifeBar.translate(routeX, routeY);
             greenLifeBar.translate(routeX, routeY);
 
@@ -52,8 +61,10 @@ public abstract class Npc extends Character {
             }
             return;
         }
+
         moveCounter--;
         getNpc().translate(-routeX, -routeY);
+        area.getBoundArea().translate(-routeX, -routeY);
         redLifeBar.translate(-routeX, -routeY);
         greenLifeBar.translate(-routeX, -routeY);
 
@@ -61,7 +72,6 @@ public abstract class Npc extends Character {
             forward = true;
         }
     }
-
 
     /**
      * Defines how this cat will move
@@ -101,7 +111,6 @@ public abstract class Npc extends Character {
         return npc;
     }
 
-
     public Rectangle getGreenLifeBar() {
         return greenLifeBar;
     }
@@ -109,8 +118,6 @@ public abstract class Npc extends Character {
     public Rectangle getRedLifeBar() {
         return redLifeBar;
     }
-
-
 
     public boolean isDead() {
         return dead;

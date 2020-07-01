@@ -12,11 +12,10 @@ public class Field extends Picture {
     public static final int PADDING_X = 5;
     public static final int PADDING_Y = 65;
     private static final int PIXEL = 2;
-    private ArrayList<Area> notWalkableMap2 = new ArrayList<>();
+    private static ArrayList<Area> notWalkableMap2 = new ArrayList<>();
     public static ArrayList<Area> notWalkable = new ArrayList<>();
     public static int height;
     public static int width;
-
 
     public Field () {
         map = new Picture(PADDING_X, PADDING_Y,"resources/images/FirstMap.png");
@@ -25,7 +24,6 @@ public class Field extends Picture {
         height = map.getHeight();
         width = map.getWidth();
     }
-
 
     public static int getPADDING_X() {
         return PADDING_X;
@@ -43,7 +41,7 @@ public class Field extends Picture {
      * fill sprites on the field
      */
 
-    public  int getSizeRow() {
+    public int getSizeRow() {
         return map.getHeight();
     }
 

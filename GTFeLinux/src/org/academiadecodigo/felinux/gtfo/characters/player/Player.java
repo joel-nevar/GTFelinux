@@ -25,7 +25,6 @@ public class Player extends Character{
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
-    private DirectionType lastDirection = DirectionType.STOP;
 
     //These are used for movement
     public static float dx;
@@ -193,22 +192,6 @@ public class Player extends Character{
         playerArea.getBoundArea().translate(dx,dy);
     }
 
-    @Override
-    public void moveLeft() {
-    }
-
-    @Override
-    public void moveUp() {
-    }
-
-    @Override
-    public void moveRight() {
-    }
-
-    @Override
-    public void moveDown() {
-    }
-
     public Picture getPlayer() {
         return player;
     }
@@ -261,15 +244,6 @@ public class Player extends Character{
     public void setEnergy(int energy) {
         this.energy = energy;
     }
-
-    public void setLastDirection(DirectionType lastDirection) {
-        this.lastDirection = lastDirection;
-    }
-
-    /*
-    private boolean isWalkable() {
-        return (Field.isWalkable(player.getX(), player.getY()));
-    }*/
 
     public boolean collisionCheck(float dx, float dy){
 

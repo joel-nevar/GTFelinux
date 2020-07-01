@@ -7,15 +7,12 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class AssaultableCat extends Npc {
 
+
     public AssaultableCat (int posX, int posY, String spriteName) {
         super(posX, posY, spriteName);
     }
 
     private boolean robbed;
-
-
-    //control the route taken
-
 
     @Override
     public String getMessage() {
@@ -31,6 +28,4 @@ public class AssaultableCat extends Npc {
     public Picture getNpc() {
         return super.getNpc();
     }
-
-
 }

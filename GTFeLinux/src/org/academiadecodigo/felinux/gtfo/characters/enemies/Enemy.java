@@ -2,23 +2,34 @@ package org.academiadecodigo.felinux.gtfo.characters.enemies;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
+import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
 public abstract class Enemy extends Character{
 
+
     private EnemyAreaType enemyField;
     private boolean dead = false;
     private Picture enemy;
+    private Area area;
 
     private DirectionType lastDirectionType = DirectionType.STOP;
 
 
     public Enemy(EnemyAreaType enemyField, int posX, int posY, String spriteName, int lifeAmount) {
+
         super.setLives(lifeAmount);
         this.enemyField = enemyField;
         this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
+        this.area = new Area(getEnemy().getX(),getEnemy().getY(), getEnemy().getWidth(), getEnemy().getHeight());
+    }
+
+    //Area for collisions and interactions
+
+    public Area getArea() {
+        return area;
     }
 
     //Used to draw the enemy
@@ -32,7 +43,9 @@ public abstract class Enemy extends Character{
     }
 
     //Moves the enemy randomly (not backwards)
+    @Override
     public void move(){
+
         if (isDead()) {
             return;
         }
@@ -67,7 +80,6 @@ public abstract class Enemy extends Character{
     }
 
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
-    @Override
     public void moveLeft() {
 
         if (this.lastDirectionType == DirectionType.RIGH) {
@@ -84,7 +96,6 @@ public abstract class Enemy extends Character{
     }
 
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
-    @Override
     public void moveRight() {
 
         if (this.lastDirectionType == DirectionType.LEFT) {
@@ -101,7 +112,6 @@ public abstract class Enemy extends Character{
     }
 
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
-    @Override
     public void moveUp() {
 
         if (this.lastDirectionType == DirectionType.DOWN) {
@@ -118,7 +128,6 @@ public abstract class Enemy extends Character{
     }
 
     //Override from character, checks direction to make enemy not walk backwards in case of being a car
-    @Override
     public void moveDown() {
 
         if (this.lastDirectionType == DirectionType.UP) {
