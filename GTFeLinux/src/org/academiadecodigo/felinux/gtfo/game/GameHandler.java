@@ -328,21 +328,23 @@ public class GameHandler implements Runnable {
     }
 
     /**
-     * Check for interactions
+     * CALL THIS TO INTERACT WITH STUFF
      *
      * @return Character to interact with,
      * or player reference if no interactible objects in range
+     *
+     * PLAYER BY DEFAULT
      */
     public static Character checkInteraction(){
 
-        Area interactTarger;
+        Area interactTarget;
 
-        for(int i = 0 ; i < hashMap.size(); i++){
+        for (Area area : hashMap.keySet()){
 
-            interactTarger = hashMap.keySet().iterator().next();
+            interactTarget = area;
 
-            if(Area.checkInteract(player.getArea(),interactTarger, INTERACT_RANGE)){
-                return hashMap.get(interactTarger);
+            if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
+                return hashMap.get(interactTarget);
             }
         }
 

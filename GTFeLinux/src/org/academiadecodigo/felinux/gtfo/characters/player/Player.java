@@ -53,13 +53,17 @@ public class Player extends Character{
     }
 
 
+    /**
+     * Call this method to check interactions
+     * Remove the milk part, to reuse this
+     */
     @Override
     public void interact() {
 
         Character interactWith = GameHandler.checkInteraction();
 
+        //this is to check the default
         if(interactWith instanceof Player){
-            System.out.println("too far");
 
             if(GameHandler.checkMilk()){
                 hasMilk = true;
@@ -67,8 +71,8 @@ public class Player extends Character{
             return;
         }
 
+        //In range for interaction, interact with
         interactWith.interact();
-        System.out.println("interacted");
     }
 
     public void energyDecay() {
