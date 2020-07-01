@@ -12,6 +12,7 @@ public class Menu implements KeyboardHandler, MouseHandler {
 
         GameHandler game = new GameHandler();
         game.init();
+        game.startGame();
     }
 
     public void instructions(){};
