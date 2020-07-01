@@ -14,8 +14,9 @@ public class Factory extends Picture {
         switch(enemyType) {
             case COP_CAR:
                 return new CopCar(posX,posY, image); //SPECIAL CASE copCars Spawn on Y =350
-            case LION:
-             default:return new Lion(posX, posY, image);
+             // Lion
+            default:
+                return new Lion(posX, posY, image);
         }
     }
 
@@ -27,7 +28,7 @@ public class Factory extends Picture {
                 return new AssaultableCat(posX, posY, image, direction);
             case CAT_PROSTITUTE:
                 return new CatProstitute(posX, posY, image, direction);
-            case RAT:
+                // RAT
             default:
                 return new Rat(posX, posY,"rat", direction);
         }

@@ -7,7 +7,7 @@ public class Milk extends Character{
 
 
     private Picture milk;
-    private final int posX = 1280; //1040
+    private final int posX = 170; //1040
     private final int posY = 280;
     private Area area;
 

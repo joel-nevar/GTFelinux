@@ -3,6 +3,8 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
@@ -30,6 +32,7 @@ public class GameHandler implements Runnable {
     public static boolean firstMap = true;
 
 
+
     public static HashMap<Area, Character> hashMap;
 
     public void init() {
@@ -51,6 +54,7 @@ public class GameHandler implements Runnable {
 
         GameSound.BACKMUSIC.sounds.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
+        instanceOfEnemies(enemies);
         instanceOfRats(rats);
         showAlways();
         showAllMap1();
@@ -129,13 +133,25 @@ public class GameHandler implements Runnable {
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
+
+        Canvas.getInstance().hide(enemies[1].getEnemy());
+        Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
+        Canvas.getInstance().hide(((Lion) enemies[1]).getRedLifeBar());
+        Canvas.getInstance().hide(((Lion) enemies[1]).getGreenLifeBar());
+
     }
 
     public static void showAllMap2() {
         for (Area area : field.getNotWalkableMap2()) {
             area.getBoundArea().draw();
 
+
         }
+
+        enemies[1].getEnemy().draw();
+        enemies[1].getEnemyField().getArea().getBoundArea().draw();
+        ((Lion) enemies[1]).getRedLifeBar().fill();
+        ((Lion) enemies[1]).getGreenLifeBar().fill();
 
         milk.getMilk().draw();
         for (int i = 0; i < rats.length; i++) {
@@ -156,6 +172,11 @@ public class GameHandler implements Runnable {
             // Canvas.getInstance().hide(((Rat) rats[i]));
             //nvas.getInstance().hide(((Rat) rats[i]));
         }
+
+        Canvas.getInstance().hide(enemies[1].getEnemy());
+        Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
+        Canvas.getInstance().hide(((Lion) enemies[1]).getRedLifeBar());
+        Canvas.getInstance().hide(((Lion) enemies[1]).getGreenLifeBar());
     }
 
     @Override
@@ -220,6 +241,18 @@ public class GameHandler implements Runnable {
             rats[index] = Factory.npcFactory(NpcType.RAT, Randomizer.getRandom(1200, 200),
                     Randomizer.getRandom(400, 200), index);
         }
+    }
+
+    private void instanceOfEnemies(Enemy[] enemies){
+
+        int[][] enemyPos = new int[13][2];
+        enemyPos[0][0] = 110;
+        enemyPos[0][1] = 350;
+        enemyPos[1][0] = 220;
+        enemyPos[1][1] = 260;
+
+        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Claw_attack");
+        enemies[1] = Factory.enemyFactory(EnemyType.LION, enemyPos[1][0], enemyPos[1][1], "Cow");
     }
 
     private void instanceOfAssaultableCats(Npc[] assaultableCats) {
