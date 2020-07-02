@@ -46,9 +46,11 @@ public class CowBoss extends Enemy {
 
         if (enemyField.getArea().getY() >= getEnemy().getY()) {
             getEnemy().translate(0, Field.getCellSize() * 2);
+            getArea().getBoundArea().translate(0, Field.getCellSize() * 2);
             return;
         }
         getEnemy().translate(0, -Field.getCellSize() * 2);
+        getArea().getBoundArea().translate(0, -Field.getCellSize() * 2);
 
     }
 
@@ -58,10 +60,11 @@ public class CowBoss extends Enemy {
 
         if (enemyField.getArea().getySize() <= getEnemy().getMaxY() - enemyField.getArea().getY()) {
             getEnemy().translate(0, -Field.getCellSize() * 2);
+            getArea().getBoundArea().translate(0, -Field.getCellSize() * 2);
             return;
         }
         getEnemy().translate(0, Field.getCellSize() * 2);
-
+        getArea().getBoundArea().translate(0, Field.getCellSize() * 2);
 
     }
 
