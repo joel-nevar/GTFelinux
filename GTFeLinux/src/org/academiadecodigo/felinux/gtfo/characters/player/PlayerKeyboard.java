@@ -1,8 +1,6 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
-import org.academiadecodigo.felinux.gtfo.characters.DirectionType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -182,6 +180,7 @@ public class PlayerKeyboard implements KeyboardHandler {
             }
             try {
                 player.attack(enemy);
+                player.interact();
             } catch (NullPointerException npe) {
                 System.out.println("You're attacking the air");
             }

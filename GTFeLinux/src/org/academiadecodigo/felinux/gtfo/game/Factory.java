@@ -27,7 +27,7 @@ public class Factory extends Picture {
             case ASSAULTABLE_CAT:
                 return new AssaultableCat(posX, posY, image, direction);
             case CAT_PROSTITUTE:
-                return new CatProstitute(posX, posY, image, direction);
+                return new CatProstitute(posX, posY,"prostirute1", direction);
                 // RAT
             default:
                 return new Rat(posX, posY,"rat", direction);

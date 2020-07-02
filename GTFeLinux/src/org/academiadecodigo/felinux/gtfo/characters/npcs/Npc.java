@@ -45,7 +45,6 @@ public abstract class Npc extends Character {
      */
     @Override
     public void addToInteractables() {
-
         super.addToInteractables(area, this);
     }
 
@@ -98,13 +97,6 @@ public abstract class Npc extends Character {
        routeX = 2;
     }
 
-    /**
-     * Defines this cat direction
-     */
-
-
-
-
     public Picture getNpc() {
         return npc;
     }
@@ -127,5 +119,13 @@ public abstract class Npc extends Character {
 
     public boolean isDead() {
         return dead;
+    }
+
+    public void kill() {
+        this.area.delete();
+        this.npc.delete();
+        this.greenLifeBar.delete();
+        this.redLifeBar.delete();
+        this.dead = true;
     }
 }

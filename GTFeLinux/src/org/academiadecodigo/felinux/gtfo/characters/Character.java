@@ -7,7 +7,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public abstract class Character extends Picture implements Moveable{
 
 
-    private int lives;
+    private int lives = 5;
     private String message;
 
     public void interact() {

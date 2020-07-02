@@ -21,8 +21,9 @@ public class Milk extends Picture{
     public Picture getMilk() {
         return milk;
     }
+
     //Used to delete the Milk when the player catches it
-    public void drinkMeTillIDisappear(){
+    public void makeMilkDisappear(){
         this.milk.delete();
     }
 

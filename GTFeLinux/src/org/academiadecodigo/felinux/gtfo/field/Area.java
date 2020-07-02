@@ -24,6 +24,11 @@ public class Area {
         boundArea = new Rectangle(xMin,yMin,xSize,ySize);
     }
 
+    //Used to kill enemies
+    public void delete(){
+        this.boundArea.translate(10000,10000);
+    }
+
     public int getX() {
         return xMin;
     }
