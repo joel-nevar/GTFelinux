@@ -31,7 +31,7 @@ public class GameHandler implements Runnable {
     private static Npc[] assaultableCats = new Npc[13];
     private static Npc[] catProstitute = new Npc[3];
     public static boolean firstMap = true;
-
+    private int oneUpTimer;
 
     public static HashMap<Area, Character> hashMap;
     private static final int INTERACT_RANGE = 25;
@@ -49,7 +49,6 @@ public class GameHandler implements Runnable {
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
         this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
-
 
 
 
@@ -217,13 +216,18 @@ public class GameHandler implements Runnable {
         enemies[0].move();
 
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
-        for (int i = 0; i < assaultableCats.length; i++) {
-            assaultableCats[i].move();
+        try {
+            for (int i = 0; i < assaultableCats.length; i++) {
+                assaultableCats[i].move();
+            }
+        } catch (Exception e) {
+            //do nothing
         }
 
         for (int i = 0; i < rats.length; i++) {
             rats[i].move();
         }
+
     }
 
     public static void changeMap() {
@@ -384,7 +388,7 @@ public class GameHandler implements Runnable {
     public static boolean canEnterCastle() {
 
         if (firstMap) {
-            return(Area.checkInteract(player.getArea(), mapArea, 150));
+            return(Area.checkInteract(player.getArea(), mapArea, 100));
         }
         return false;
     }
@@ -412,12 +416,17 @@ public class GameHandler implements Runnable {
         }
         if(player.isOneUpExists()){
 
+            if(oneUpTimer ==0){
+
+                oneUpTimer = player.getOneUp().getY();
+            }
             player.getOneUp().translate(0,-1);
 
-            if(player.getOneUp().getY() == player.getOneUp().getY()-5){
+            if(player.getOneUp().getY() <= oneUpTimer-20){
 
                 player.getOneUp().delete();
                 player.setOneUpExists(false);
+                oneUpTimer = 0;
             }
         }
     }

@@ -6,6 +6,8 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.util.ConcurrentModificationException;
+
 /**
  * Npc class
  */
@@ -52,7 +54,7 @@ public abstract class Npc extends Character {
      * Move all assaultable cat
      */
     @Override
-    public void move() {
+    public void move() throws ConcurrentModificationException {
 
         if (isDead()) {
             return;
