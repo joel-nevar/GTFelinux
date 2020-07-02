@@ -3,6 +3,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -17,10 +18,13 @@ public class Player extends Character {
     private Field map;
     private Picture player;                     //Draws player on the field
     private Picture clawAnimation;              //Draws claws on the field
+    private Picture oneUp;                      //Animation for 1 life gained
+    private int oneUpTimer = 5;                 //Timer for oneUp animation to disappear
+    private boolean oneUpExists = false;        //Checks if player won a life
     private int clawTick = 0;                   //Timer to make the claw disappear from the field
     private boolean clawUsed = false;           //Checks if the claw was used or not
     private boolean dead = false;               //Checks if the player is dead
-    private int energy = 300;                   //Animation scaled to 300
+    private int energy = 150;                   //Animation scaled to 300
     private boolean hasMilk = false;            //Doesn't have Milk yet
     private int clawDamage = 1;                 //Damage when attacking
     private Picture energyBar;                  //Background image for the Energy bar
@@ -28,7 +32,10 @@ public class Player extends Character {
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
     private CheckpointType checkpoint;
-    private  int loseLife;
+    private int loseLife;
+    private int lifeCounter = 0;                //Used to check death of cat and set animation
+    private boolean assaultableCatIsDead = false;
+    private boolean cowIsDead = false;
 
     //These are used for movement
     public static float dx;
@@ -59,7 +66,6 @@ public class Player extends Character {
         playerArea = new Area(getPlayer().getX(), getPlayer().getY(), getPlayer().getWidth(), getPlayer().getHeight());
     }
 
-
     /**
      * Call this method to check interactions
      * Remove the milk part, to reuse this
@@ -71,7 +77,6 @@ public class Player extends Character {
 
         //this is to check the default
         if (interactWith instanceof Player) {
-
             if (GameHandler.checkMilk()) {
                 this.hasMilk = true;
             }
@@ -82,18 +87,57 @@ public class Player extends Character {
             if(this.isClawUsed()){
                 //Gives damage to that instance
                 interactWith.setLives( interactWith.getLives() - 1 );
-                ((AssaultableCat) interactWith).getGreenLifeBar().grow(-4,0);
+                ((AssaultableCat) interactWith).getGreenLifeBar().grow(-5,0);
                 ((AssaultableCat) interactWith).getGreenLifeBar().translate(-6,0);
+                //kills the cat and gives hp to the player
                 if(interactWith.getLives() == 0){
+                    this.assaultableCatIsDead = true;
                     ((AssaultableCat) interactWith).kill();
                     this.gainLife();
                 }
+                this.assaultableCatIsDead = false;
             }
             return;
         }
 
+        if(interactWith instanceof Lion){
+            if(this.isClawUsed()){
+                //Gives damage to that instance
+                interactWith.setLives( interactWith.getLives() - 1 );
+                ((Lion) interactWith).getGreenLifeBar().grow(-4,0);
+                ((Lion) interactWith).getGreenLifeBar().translate(-6,0);
+                //kills the cow and gives hp to the player
+                if(interactWith.getLives() == 0){
+                    this.cowIsDead = true;
+                    ((Lion) interactWith).kill();
+                    this.gainLife();
+                }
+                this.cowIsDead = false;
+            }
+            return;
+        }
         //In range for interaction, interact with
         interactWith.interact();
+    }
+
+    public boolean isOneUpExists() {
+        return oneUpExists;
+    }
+
+    public void setOneUpExists(boolean oneUpExists) {
+        this.oneUpExists = oneUpExists;
+    }
+
+    public boolean isAssaultableCatIsDead() {
+        return assaultableCatIsDead;
+    }
+
+    public Picture getOneUp() {
+        return oneUp;
+    }
+
+    public boolean HasMilk(){
+        return hasMilk;
     }
 
     public void energyDecay() {
@@ -113,40 +157,51 @@ public class Player extends Character {
         }
         //Energy Bar
         this.loseEnergy();
-        energyAnimation.translate(-0.16, 0);
-        energyAnimation.grow(-0.16, 0);
+        energyAnimation.translate(-0.32, 0);
+        energyAnimation.grow(-0.32, 0);
     }
 
     public void gainLife() {
+
         if(super.getLives() >= 7){
             return;
         }
+
+        this.oneUpExists = true;
+        this.oneUp = new Picture(this.getArea().getBoundArea().getX() + 20, this.getArea().getBoundArea().getY() - 20, "resources/images/1life.png");
+        oneUp.draw();
+        System.out.println("Oneup exists");
+
         super.setLives(super.getLives() + 1);
-        System.out.println(super.getLives());
+        System.out.println("Player has " + super.getLives() + " lives");
         this.hpAnimation.translate(7, 0);  // TRANSLATE 7 FOR 7 LIVES OMEGALUL
         this.hpAnimation.grow(7, 0);
     }
 
     public void energyReset() {
-        this.setEnergy(300);
+        this.setEnergy(150);
         energyAnimation.translate(48, 0);   // 0.16 * 300
         energyAnimation.grow(48, 0);
+    }
+
+    public void setAssaultableCatDead(boolean assaultableCatDead) {
+        this.assaultableCatIsDead = assaultableCatDead;
     }
 
     public void playerAttackVerification() throws NullPointerException {
         //Attack animation appear
         if (clawUsed == true) {
-            this.getClawAnimation().draw();
+            this.clawAnimation.draw();
             GameHandler.GameSound.CATCLAW.sounds.play(true);
 
             //Tick to measure animation time
-            this.setClawTick(getClawTick() + 1);
+            this.clawTick += 1;
 
             //Attack animation disappear
-            if (getClawTick() == 4) {
-                this.setClawUsed(false);
-                this.getClawAnimation().delete();
-                this.setClawTick(0);
+            if (clawTick == 4) {
+                this.clawUsed = false;
+                this.clawAnimation.delete();
+                this.clawTick = 0;
             }
         }
     }
@@ -187,6 +242,11 @@ public class Player extends Character {
         if (isDead()) {
             return;
         }
+
+        if (interactCollisionCheck(dx,dy)){
+            energyDecay();
+        }
+
 
         if (collisionCheck(dx, dy)) {
 
@@ -289,6 +349,22 @@ public class Player extends Character {
             return false;
         }
 
+        return false;
+    }
+
+    public Area getArea() {
+        return playerArea;
+    }
+
+    public boolean interactCollisionCheck(float dx, float dy){
+
+        if(GameHandler.canEnterCastle()){
+
+            GameHandler.changeMap();
+
+            return false;
+        }
+
         for (Area area : Field.notWalkableMap2) {
 
             if (Area.contains(playerArea, area, dx, dy)) {
@@ -297,10 +373,6 @@ public class Player extends Character {
             }
         }
         return false;
-    }
-
-    public Area getArea() {
-        return playerArea;
     }
 
     public void toCheckpoint(){

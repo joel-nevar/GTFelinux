@@ -40,6 +40,7 @@ public class GameHandler implements Runnable {
 
     public static HashMap<Area, Character> hashMap;
     private static final int INTERACT_RANGE = 25;
+    private static Area mapArea;
 
     public void init() {
 
@@ -52,13 +53,14 @@ public class GameHandler implements Runnable {
         //Player
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
-        this.oldLady = new Picture(104,110,"resources/images/OldLady.png");
+        this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
 
 
 
 
         //interaction
         hashMap = new HashMap<>();
+        mapArea = new Area(1169,189,100,100);
     }
 
     public void startGame() {
@@ -85,6 +87,10 @@ public class GameHandler implements Runnable {
             cat.addToInteractables();
         }
 
+        /**
+         * Game Boss
+         */
+        enemies[1].addToInteractables();
 
     }
 
@@ -227,6 +233,7 @@ public class GameHandler implements Runnable {
         }
     }
 
+    }
 
     public static void changeMap() {
 
@@ -260,6 +267,8 @@ public class GameHandler implements Runnable {
         catPro[0][1] = 350;
         catPro[1][0] = 220;
         catPro[1][1] = 260;
+        catPro[2][0] = 500;
+        catPro[2][1] = 600;
 
         catProstitute[0] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE,"prostirute1", catPro[0][0], catPro[0][1]);
         catProstitute[2] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE, ,catPro[1][0], catPro[1][1]);
@@ -354,6 +363,7 @@ public class GameHandler implements Runnable {
 
             if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
                 //Returns a character
+                System.out.println("interact");
                 return hashMap.get(interactTarget);
             }
         }
@@ -370,10 +380,19 @@ public class GameHandler implements Runnable {
 
         if (!firstMap) {
 
-
-                milk.makeMilkDisappear();
+            //THIS IS WRONG
+            //TODO FIX THIS
+            milk.makeMilkDisappear();
             Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
 
+        }
+        return false;
+    }
+
+    public static boolean canEnterCastle() {
+
+        if (firstMap) {
+            return(Area.checkInteract(player.getArea(), mapArea, 100));
         }
         return false;
     }
@@ -392,7 +411,31 @@ public class GameHandler implements Runnable {
         GameSound(Sounds sounds) {
             this.sounds = sounds;
         }
+
     }
+
+    public void checkIfPlayerGainsLife() {
+
+        if(player.isAssaultableCatIsDead()){
+            player.gainLife();
+        }
+        if(player.isOneUpExists()){
+
+            if(oneUpTimer ==0){
+
+                oneUpTimer = player.getOneUp().getY();
+            }
+            player.getOneUp().translate(0,-1);
+
+            if(player.getOneUp().getY() <= oneUpTimer-15){
+
+                player.getOneUp().delete();
+                player.setOneUpExists(false);
+                oneUpTimer = 0;
+            }
+        }
+    }
+
     @Override
     public void run() {
 
@@ -404,6 +447,8 @@ public class GameHandler implements Runnable {
 
                 //Check if player is attacking
                 player.playerAttackVerification();
+                checkIfPlayerGainsLife();
+
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -413,6 +458,7 @@ public class GameHandler implements Runnable {
             //Moves all the movable classes
             moveAll();
         }
+        GameSound.BACKMUSIC.sounds.stop();
         System.out.println("GAME OVER");
     }
 }
