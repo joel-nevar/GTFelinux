@@ -7,6 +7,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
  */
 public class AssaultableCat extends Npc {
 
+    private boolean robbed;
 
     public AssaultableCat (int posX, int posY, String spriteName, int direction) {
         super(posX, posY, spriteName, direction);
@@ -17,8 +18,6 @@ public class AssaultableCat extends Npc {
         //TODO - MEXER AQUI
     }
 
-    private boolean robbed;
-
     @Override
     public String getMessage() {
         return "I am an Assaultable Cat";
@@ -27,8 +26,6 @@ public class AssaultableCat extends Npc {
     public void takeDamage(){
         //Character, lose lives
         super.takeLethalDamage();
-        //Npc make healthBar decrease
-        super.takeDamage();
     }
 
 

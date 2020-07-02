@@ -80,8 +80,11 @@ public class Player extends Character{
 
                 //Gives damage to that instance
                 interactWith.setLives( interactWith.getLives() - 1 );
+                ((AssaultableCat) interactWith).getGreenLifeBar().grow(-4,0);
+                ((AssaultableCat) interactWith).getGreenLifeBar().translate(-6,0);
                 if(interactWith.getLives() == 0){
-
+                    ((AssaultableCat) interactWith).kill();
+                    this.gainLife();
                 }
                 System.out.println(interactWith.getLives());
             }
@@ -114,8 +117,13 @@ public class Player extends Character{
     }
 
     public void gainLife() {
+        if(super.getLives() >= 7){
+            return;
+        }
         super.setLives(super.getLives() + 1);
-        hpAnimation.translate(29, 0);   //size / 7 vidas
+        System.out.println(super.getLives());
+        this.hpAnimation.translate(7, 0);  // TRANSLATE 7 FOR 7 LIVES OMEGALUL
+        this.hpAnimation.grow(7, 0);
     }
 
     public void energyReset() {
@@ -124,7 +132,7 @@ public class Player extends Character{
         energyAnimation.grow(48, 0);
     }
 
-    public void playerAttackVerification() {
+    public void playerAttackVerification() throws NullPointerException {
         //Attack animation appear
         if (clawUsed == true) {
             this.getClawAnimation().draw();

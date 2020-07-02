@@ -373,6 +373,8 @@ public class GameHandler implements Runnable {
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } catch (NullPointerException exception){
+                System.out.println("Garra nao conseguiu ser instanciada ( Por alguma razao )");
             }
             //Moves all the movable classes
             moveAll();

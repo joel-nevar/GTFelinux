@@ -45,7 +45,6 @@ public abstract class Npc extends Character {
      */
     @Override
     public void addToInteractables() {
-
         super.addToInteractables(area, this);
     }
 
@@ -118,11 +117,15 @@ public abstract class Npc extends Character {
         return redLifeBar;
     }
 
-    public void takeDamage(){
-        this.greenLifeBar.translate(-29,0);
-    }
-
     public boolean isDead() {
         return dead;
+    }
+
+    public void kill() {
+        this.area.delete();
+        this.npc.delete();
+        this.greenLifeBar.delete();
+        this.redLifeBar.delete();
+        this.dead = true;
     }
 }
