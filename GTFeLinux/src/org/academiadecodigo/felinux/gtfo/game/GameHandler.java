@@ -32,8 +32,6 @@ public class GameHandler implements Runnable {
     private static Npc[] catProstitute = new Npc[4];
     public static boolean firstMap = true;
     private int oneUpTimer;
-    private int wastedTimer;
-    private boolean wastedExists = false;
 
     public static HashMap<Area, Character> hashMap;
     private static final int INTERACT_RANGE = 25;
