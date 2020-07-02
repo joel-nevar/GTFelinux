@@ -355,6 +355,7 @@ public class GameHandler implements Runnable {
             }
         }
 
+
         return player;
     }
 
@@ -366,7 +367,7 @@ public class GameHandler implements Runnable {
 
         if (!firstMap) {
 
-            milk.drinkMeTillIDisappear();
+            milk.makeMilkDisappear();
             Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
 
         }
