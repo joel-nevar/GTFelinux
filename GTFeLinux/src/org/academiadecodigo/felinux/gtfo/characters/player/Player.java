@@ -93,7 +93,7 @@ public class Player extends Character {
     public Picture getWasted() {
         return wasted;
     }
-
+//comment
     public boolean isOneUpExists() {
         return oneUpExists;
     }
