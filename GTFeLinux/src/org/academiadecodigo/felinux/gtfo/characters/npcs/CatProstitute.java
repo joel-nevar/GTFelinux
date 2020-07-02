@@ -27,6 +27,10 @@ public class CatProstitute extends Npc {
                 this.visited = visited;
         }
 
+        public void setCheckpoint(CheckpointType checkpoint) {
+                this.checkpoint = checkpoint;
+        }
+
         public CheckpointType getCheckpoint() {
                 return checkpoint;
         }

@@ -15,7 +15,7 @@ public class AssaultableCat extends Npc {
 
     @Override
     public void interact() {
-        //TODO - MEXER AQUI
+        //Do nothing
     }
 
     @Override

@@ -176,16 +176,11 @@ public class PlayerKeyboard implements KeyboardHandler {
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){
-            //TODO - Claw fix
             if(player.isClawUsed()){
                 return;
             }
-            try {
-                player.attack(enemy);
-                player.interact();
-            } catch (NullPointerException npe) {
-                System.out.println("You're attacking the air");
-            }
+            player.attack();
+            player.setClawUsed();
         }
     }
 
