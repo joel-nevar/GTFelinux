@@ -1,6 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
@@ -16,6 +17,7 @@ public class Player extends Character {
     private Field map;
     private Picture player;                     //Draws player on the field
     private Picture clawAnimation;              //Draws claws on the field
+    private Picture oneUp;                      //Animation for 1 life gained
     private int clawTick = 0;                   //Timer to make the claw disappear from the field
     private boolean clawUsed = false;           //Checks if the claw was used or not
     private boolean dead = false;               //Checks if the player is dead
@@ -27,7 +29,9 @@ public class Player extends Character {
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
     private CheckpointType checkpoint;
-    private  int loseLife;
+    private int loseLife;
+    private int lifeCounter = 0;                //Used to check death of cat and set animation
+    private boolean assaultableCatIsDead = false;
 
     //These are used for movement
     public static float dx;
@@ -44,6 +48,7 @@ public class Player extends Character {
         this.player = new Picture(50, 300, "resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
+        this.oneUp = new Picture(this.getX(), this.getY(), "resources/images/1life.png");
         //ENERGY BAR
         this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
         energyAnimation.setColor(new Color(255, 255, 0));
@@ -85,15 +90,38 @@ public class Player extends Character {
                 ((AssaultableCat) interactWith).getGreenLifeBar().translate(-6,0);
                 //kills the cat and gives hp to the player
                 if(interactWith.getLives() == 0){
+                    this.assaultableCatIsDead = true;
                     ((AssaultableCat) interactWith).kill();
                     this.gainLife();
+                    this.lifeCounter++;
                 }
+                this.assaultableCatIsDead = false;
             }
             return;
         }
 
         //In range for interaction, interact with
         interactWith.interact();
+    }
+
+    public boolean isAssaultableCatIsDead() {
+        return assaultableCatIsDead;
+    }
+
+    public Picture getOneUp() {
+        return oneUp;
+    }
+
+    public int getLifeCounter() {
+        return lifeCounter;
+    }
+
+    public void setLifeCounter(int lifeCounter) {
+        this.lifeCounter = lifeCounter;
+    }
+
+    public void setOneUp(Picture oneUp) {
+        this.oneUp = oneUp;
     }
 
     public void energyDecay() {

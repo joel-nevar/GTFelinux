@@ -6,8 +6,6 @@ import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
-import org.academiadecodigo.felinux.gtfo.characters.player.Player;
-import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
@@ -389,6 +387,21 @@ public class GameHandler implements Runnable {
             this.sounds = sounds;
         }
     }
+//TODO resolver intanciacao deste draw
+    public void checkIfPlayerGainsLife(){
+
+        if(player.isAssaultableCatIsDead()){
+            player.getOneUp().draw();
+            player.getOneUp().translate(0,1);
+            System.out.println("Oneup exists");
+        }
+
+        if(player.getLifeCounter() >= 10){
+            player.setLifeCounter(0);
+            player.getOneUp().delete();
+        }
+    }
+
     @Override
     public void run() {
 
@@ -400,6 +413,8 @@ public class GameHandler implements Runnable {
 
                 //Check if player is attacking
                 player.playerAttackVerification();
+
+                checkIfPlayerGainsLife();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
