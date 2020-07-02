@@ -50,7 +50,7 @@ public class GameHandler implements Runnable {
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
-        this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
+
         //Player
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
@@ -285,7 +285,7 @@ public class GameHandler implements Runnable {
         enemyPos[1][0] = 220;
         enemyPos[1][1] = 260;
 
-        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
+        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "policecar");
         enemies[1] = Factory.enemyFactory(EnemyType.LION, enemyPos[1][0], enemyPos[1][1], "Cow2");
     }
 
@@ -401,7 +401,6 @@ public class GameHandler implements Runnable {
     public enum GameSound {
         CATMEOW(new Sounds("/music/MEOW.wav")),
         CATCLAW(new Sounds("/music/knife_hit17.wav")),
-        CATDIE(new Sounds("/music/catdie.wav")),
         CLICK(new Sounds("/music/click.wav")),
         DOOR(new Sounds("/music/dooropen.wav")),
         SHOOT(new Sounds("/music/shoot.wav")),
