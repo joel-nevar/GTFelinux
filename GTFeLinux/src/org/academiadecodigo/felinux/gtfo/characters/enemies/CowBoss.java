@@ -3,15 +3,15 @@ package org.academiadecodigo.felinux.gtfo.characters.enemies;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
-public class Lion extends Enemy {
+public class CowBoss extends Enemy {
 
 
     private Rectangle redLifeBar;
     private Rectangle greenLifeBar;
 
-    public Lion(int posX, int posY, String spriteName) {
+    public CowBoss(int posX, int posY, String spriteName) {
 
-        super(EnemyAreaType.LION, posX, posY, spriteName, 10);
+        super(EnemyAreaType.COW_BOSS, posX, posY, spriteName, 10);
 
         //hp animation stuff
         this.redLifeBar = new Rectangle(posX - 9, posY - 8, 50,7);

@@ -3,9 +3,9 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
@@ -31,6 +31,8 @@ public class GameHandler implements Runnable {
     private static Npc[] catProstitute = new Npc[3];
     public static boolean firstMap = true;
     private int oneUpTimer;
+    private int wastedTimer;
+    private boolean wastedExists = false;
 
     public static HashMap<Area, Character> hashMap;
     private static final int INTERACT_RANGE = 25;
@@ -48,8 +50,6 @@ public class GameHandler implements Runnable {
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
         this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
-
-
 
         //interaction
         hashMap = new HashMap<>();
@@ -165,8 +165,8 @@ public class GameHandler implements Runnable {
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
-        Canvas.getInstance().hide(((Lion) enemies[1]).getRedLifeBar());
-        Canvas.getInstance().hide(((Lion) enemies[1]).getGreenLifeBar());
+        Canvas.getInstance().hide(((CowBoss) enemies[1]).getRedLifeBar());
+        Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
 
     }
 
@@ -179,8 +179,8 @@ public class GameHandler implements Runnable {
 
         enemies[1].getEnemy().draw();
         enemies[1].getEnemyField().getArea().getBoundArea().draw();
-        ((Lion) enemies[1]).getRedLifeBar().fill();
-        ((Lion) enemies[1]).getGreenLifeBar().fill();
+        ((CowBoss) enemies[1]).getRedLifeBar().fill();
+        ((CowBoss) enemies[1]).getGreenLifeBar().fill();
 
         milk.getMilk().draw();
         for (int i = 0; i < rats.length; i++) {
@@ -204,8 +204,8 @@ public class GameHandler implements Runnable {
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
-        Canvas.getInstance().hide(((Lion) enemies[1]).getRedLifeBar());
-        Canvas.getInstance().hide(((Lion) enemies[1]).getGreenLifeBar());
+        Canvas.getInstance().hide(((CowBoss) enemies[1]).getRedLifeBar());
+        Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
     }
 
     private void moveAll() {
@@ -282,7 +282,7 @@ public class GameHandler implements Runnable {
         enemyPos[1][1] = 260;
 
         enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
-        enemies[1] = Factory.enemyFactory(EnemyType.LION, enemyPos[1][0], enemyPos[1][1], "Cow2");
+        enemies[1] = Factory.enemyFactory(EnemyType.COW_BOSS, enemyPos[1][0], enemyPos[1][1], "Cow2");
     }
 
     private void instanceOfAssaultableCats(Npc[] assaultableCats) {
@@ -395,7 +395,6 @@ public class GameHandler implements Runnable {
     public enum GameSound {
         CATMEOW(new Sounds("/music/MEOW.wav")),
         CATCLAW(new Sounds("/music/knife_hit17.wav")),
-        CATDIE(new Sounds("/music/catdie.wav")),
         CLICK(new Sounds("/music/click.wav")),
         DOOR(new Sounds("/music/dooropen.wav")),
         SHOOT(new Sounds("/music/shoot.wav")),
@@ -410,14 +409,32 @@ public class GameHandler implements Runnable {
     }
 
     public void checkIfPlayerGainsLife() {
+/*
+        if(player.getEnergy() <= 1){
+            player.createWasted();
+            player.getWasted().draw();
+            return;
+        }
+        if(wastedExists){
+            if(wastedTimer == 0){
+                wastedTimer = player.getWasted().getY();
+            }
+            player.getWasted().translate(0,-1);
+            if(player.getWasted().getY() <= wastedTimer-10){
+                player.getWasted().delete();
+                wastedExists = false;
+                wastedTimer = 0;
+            }
+        }
+*/
 
         if(player.isAssaultableCatIsDead()){
             player.gainLife();
         }
+
         if(player.isOneUpExists()){
 
-            if(oneUpTimer ==0){
-
+            if(oneUpTimer == 0){
                 oneUpTimer = player.getOneUp().getY();
             }
             player.getOneUp().translate(0,-1);

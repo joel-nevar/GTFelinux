@@ -3,7 +3,7 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -14,9 +14,9 @@ public class Factory extends Picture {
         switch(enemyType) {
             case COP_CAR:
                 return new CopCar(posX,posY, image); //SPECIAL CASE copCars Spawn on Y =350
-             // Lion
+             // CowBoss
             default:
-                return new Lion(posX, posY, image);
+                return new CowBoss(posX, posY, image);
         }
     }
 

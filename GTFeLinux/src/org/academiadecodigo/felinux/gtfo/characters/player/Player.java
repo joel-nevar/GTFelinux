@@ -2,8 +2,8 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -24,7 +24,7 @@ public class Player extends Character {
     private int clawTick = 0;                   //Timer to make the claw disappear from the field
     private boolean clawUsed = false;           //Checks if the claw was used or not
     private boolean dead = false;               //Checks if the player is dead
-    private int energy = 150;                   //Animation scaled to 300
+    private int energy = 300;                   //Animation scaled to 300
     private boolean hasMilk = false;            //Doesn't have Milk yet
     private int clawDamage = 1;                 //Damage when attacking
     private Picture energyBar;                  //Background image for the Energy bar
@@ -36,6 +36,7 @@ public class Player extends Character {
     private int lifeCounter = 0;                //Used to check death of cat and set animation
     private boolean assaultableCatIsDead = false;
     private boolean cowIsDead = false;
+    private Picture wasted;
 
     //These are used for movement
     public static float dx;
@@ -100,16 +101,16 @@ public class Player extends Character {
             return;
         }
 
-        if(interactWith instanceof Lion){
+        if(interactWith instanceof CowBoss){
             if(this.isClawUsed()){
                 //Gives damage to that instance
                 interactWith.setLives( interactWith.getLives() - 1 );
-                ((Lion) interactWith).getGreenLifeBar().grow(-4,0);
-                ((Lion) interactWith).getGreenLifeBar().translate(-6,0);
+                ((CowBoss) interactWith).getGreenLifeBar().grow(-4,0);
+                ((CowBoss) interactWith).getGreenLifeBar().translate(-6,0);
                 //kills the cow and gives hp to the player
                 if(interactWith.getLives() == 0){
                     this.cowIsDead = true;
-                    ((Lion) interactWith).kill();
+                    ((CowBoss) interactWith).kill();
                     this.gainLife();
                 }
                 this.cowIsDead = false;
@@ -118,6 +119,14 @@ public class Player extends Character {
         }
         //In range for interaction, interact with
         interactWith.interact();
+    }
+
+    public Picture createWasted() {
+        return this.wasted = new Picture(this.getArea().getBoundArea().getX(),this.getArea().getBoundArea().getY(),"resources/images/wasted.png");
+    }
+
+    public Picture getWasted() {
+        return wasted;
     }
 
     public boolean isOneUpExists() {
@@ -157,8 +166,8 @@ public class Player extends Character {
         }
         //Energy Bar
         this.loseEnergy();
-        energyAnimation.translate(-0.32, 0);
-        energyAnimation.grow(-0.32, 0);
+        energyAnimation.translate(-0.16, 0);
+        energyAnimation.grow(-0.16, 0);
     }
 
     public void gainLife() {
@@ -179,7 +188,7 @@ public class Player extends Character {
     }
 
     public void energyReset() {
-        this.setEnergy(150);
+        this.setEnergy(300);
         energyAnimation.translate(48, 0);   // 0.16 * 300
         energyAnimation.grow(48, 0);
     }
