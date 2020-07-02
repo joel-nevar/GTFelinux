@@ -443,7 +443,6 @@ public class GameHandler implements Runnable {
         if(player.HasMilk()){
             milk.makeMilkDisappear();
             player.die();
-            System.out.println("YOU WIN!!");
         }
     }
     @Override
@@ -468,7 +467,6 @@ public class GameHandler implements Runnable {
         }
         if(!player.HasMilk()){
             GameSound.BACKMUSIC.sounds.stop();
-            System.out.println("GAME OVER");
         }
     }
 }

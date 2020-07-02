@@ -88,7 +88,6 @@ public abstract class Enemy extends Character {
     //Makes the enemy die
     public void kill() {
         dead = true;
-        System.out.println("Enemy déd");
     }
 
     //Override from character, checks direction to make enemy not walk backwards in case of being a car

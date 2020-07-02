@@ -165,10 +165,8 @@ public class Player extends Character {
         this.oneUpExists = true;
         this.oneUp = new Picture(this.getArea().getBoundArea().getX() + 20, this.getArea().getBoundArea().getY() - 20, "resources/images/1life.png");
         oneUp.draw();
-        System.out.println("Oneup exists");
 
         super.setLives(super.getLives() + 1);
-        System.out.println("Player has " + super.getLives() + " lives");
         this.hpAnimation.translate(7, 0);  // TRANSLATE 7 FOR 7 LIVES OMEGALUL
         this.hpAnimation.grow(7, 0);
     }
@@ -185,7 +183,6 @@ public class Player extends Character {
     public void playerAttackVerification() {
 
         if(clawUsed){
-
             //Attack animation disappear
             clawTick--;
             if(clawTick<=0) {
@@ -240,7 +237,6 @@ public class Player extends Character {
         //If he touches the boss, he dies
         if(attackTarget instanceof CowBoss) {
             takeLethalDamage();
-            System.out.println("hp "  + getLives());
         }
     }
 
