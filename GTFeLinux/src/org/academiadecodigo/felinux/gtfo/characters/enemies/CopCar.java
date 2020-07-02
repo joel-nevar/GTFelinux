@@ -87,7 +87,7 @@ public class CopCar extends Enemy {
                 getArea().getBoundArea().translate(cSpeed, 0);
                 redLifeBar.translate(cSpeed, 0);
                 greenLifeBar.translate(cSpeed, 0);
-                shotLeft(MAX_SPEED+2);
+                //shotLeft(MAX_SPEED+2);
                 return;
             }
             turning = true;
@@ -101,7 +101,7 @@ public class CopCar extends Enemy {
             getArea().getBoundArea().translate(-cSpeed, 0);
             redLifeBar.translate(-cSpeed, 0);
             greenLifeBar.translate(-cSpeed, 0);
-            shotLeft(-(MAX_SPEED+2));
+            //shotLeft(-(MAX_SPEED+2));
 
             return;
         }
@@ -118,7 +118,7 @@ public class CopCar extends Enemy {
             getArea().getBoundArea().translate(0, cSpeed);
             redLifeBar.translate(0, cSpeed);
             greenLifeBar.translate(0, cSpeed);
-            shootRight(MAX_SPEED+2);
+           // shootRight(MAX_SPEED+2);
             return;
 
         }
@@ -126,7 +126,7 @@ public class CopCar extends Enemy {
         getArea().getBoundArea().translate(0, -cSpeed);
         redLifeBar.translate(0, -cSpeed);
         greenLifeBar.translate(0, -cSpeed);
-        shootRight(-(MAX_SPEED+2));
+       // shootRight(-(MAX_SPEED+2));
 
     }
 
