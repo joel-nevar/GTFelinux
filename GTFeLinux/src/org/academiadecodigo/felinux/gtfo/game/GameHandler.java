@@ -20,7 +20,6 @@ import java.util.HashMap;
 
 public class GameHandler implements Runnable {
 
-
     private static Player player;
     private static Enemy[] enemies = new Enemy[10];
     private static Npc[] rats = new Npc[5];
@@ -407,8 +406,9 @@ public class GameHandler implements Runnable {
         GameSound(Sounds sounds) {
             this.sounds = sounds;
         }
+
     }
-    //TODO resolver intanciacao deste draw
+
     public void checkIfPlayerGainsLife() {
 
         if(player.isAssaultableCatIsDead()){
@@ -422,7 +422,7 @@ public class GameHandler implements Runnable {
             }
             player.getOneUp().translate(0,-1);
 
-            if(player.getOneUp().getY() <= oneUpTimer-20){
+            if(player.getOneUp().getY() <= oneUpTimer-15){
 
                 player.getOneUp().delete();
                 player.setOneUpExists(false);
@@ -444,6 +444,7 @@ public class GameHandler implements Runnable {
                 player.playerAttackVerification();
                 checkIfPlayerGainsLife();
 
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (NullPointerException exception){
@@ -452,6 +453,7 @@ public class GameHandler implements Runnable {
             //Moves all the movable classes
             moveAll();
         }
+        GameSound.BACKMUSIC.sounds.stop();
         System.out.println("GAME OVER");
     }
 }

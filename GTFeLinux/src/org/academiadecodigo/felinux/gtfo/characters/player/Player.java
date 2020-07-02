@@ -66,14 +66,6 @@ public class Player extends Character {
         playerArea = new Area(getPlayer().getX(), getPlayer().getY(), getPlayer().getWidth(), getPlayer().getHeight());
     }
 
-    public int getOneUpTimer() {
-        return oneUpTimer;
-    }
-
-    public void setOneUpTimer(int oneUpTimer) {
-        this.oneUpTimer = oneUpTimer;
-    }
-
     /**
      * Call this method to check interactions
      * Remove the milk part, to reuse this
@@ -85,8 +77,6 @@ public class Player extends Character {
 
         //this is to check the default
         if (interactWith instanceof Player) {
-
-
             if (GameHandler.checkMilk()) {
                 this.hasMilk = true;
             }
@@ -126,7 +116,6 @@ public class Player extends Character {
             }
             return;
         }
-
         //In range for interaction, interact with
         interactWith.interact();
     }
@@ -147,20 +136,7 @@ public class Player extends Character {
         return oneUp;
     }
 
-    public int getLifeCounter() {
-        return lifeCounter;
-    }
-
-    public void setLifeCounter(int lifeCounter) {
-        this.lifeCounter = lifeCounter;
-    }
-
-    public void setOneUp(Picture oneUp) {
-        this.oneUp = oneUp;
-    }
-
     public boolean HasMilk(){
-
         return hasMilk;
     }
 
@@ -203,7 +179,7 @@ public class Player extends Character {
     }
 
     public void energyReset() {
-        this.setEnergy(300);
+        this.setEnergy(150);
         energyAnimation.translate(48, 0);   // 0.16 * 300
         energyAnimation.grow(48, 0);
     }
@@ -215,17 +191,17 @@ public class Player extends Character {
     public void playerAttackVerification() throws NullPointerException {
         //Attack animation appear
         if (clawUsed == true) {
-            this.getClawAnimation().draw();
+            this.clawAnimation.draw();
             GameHandler.GameSound.CATCLAW.sounds.play(true);
 
             //Tick to measure animation time
-            this.setClawTick(getClawTick() + 1);
+            this.clawTick += 1;
 
             //Attack animation disappear
-            if (getClawTick() == 4) {
-                this.setClawUsed(false);
-                this.getClawAnimation().delete();
-                this.setClawTick(0);
+            if (clawTick == 4) {
+                this.clawUsed = false;
+                this.clawAnimation.delete();
+                this.clawTick = 0;
             }
         }
     }
@@ -267,16 +243,15 @@ public class Player extends Character {
             return;
         }
 
+        if (interactCollisionCheck(dx,dy)){
+            energyDecay();
+        }
+
+
         if (collisionCheck(dx, dy)) {
 
             dx = 0;
             dy = 0;
-        }
-
-        if (interactCollisionCheck(dx,dy)){
-            
-            energyDecay();
-            energyDecay();
         }
 
         //checkUp
