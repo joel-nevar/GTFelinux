@@ -18,7 +18,7 @@ public class Field extends Picture {
     public static int width;
 
     public Field () {
-        map = new Picture(PADDING_X, PADDING_Y,"resources/images/FirstMap.png");
+        map = new Picture(PADDING_X, PADDING_Y,"resources/FirstMap.png");
         setNotWalkable();
         setNotWalkableMap2();
         height = map.getHeight();

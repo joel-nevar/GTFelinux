@@ -36,7 +36,6 @@ public class Player extends Character {
     private int lifeCounter = 0;                //Used to check death of cat and set animation
     private boolean assaultableCatIsDead = false;
     private boolean cowIsDead = false;
-    private Picture wasted;
     private int loseLife = 6;
     private Picture controls;
     private Picture ourBrand;
@@ -52,11 +51,11 @@ public class Player extends Character {
         super();
         super.setLives(7);
         map = new Field();
-        this.player = new Picture(50, 300, "resources/images/" + name);
-        this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
-        this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
-        this.controls = new Picture(310, 6, "resources/images/controls.png");
-        this.ourBrand = new Picture(1100,6, "resources/images/gtf.png");
+        this.player = new Picture(50, 300, "resources/" + name);
+        this.energyBar = new Picture(5, 5, "resources/EmptyEnergyBar.png");
+        this.hpBar = new Picture(162, 5, "resources/EmptyHpBar.png");
+        this.controls = new Picture(310, 6, "resources/controls.png");
+        this.ourBrand = new Picture(1100,6, "resources/gtf.png");
         this.controls.draw();
         this.ourBrand.draw();
         //ENERGY BAR
@@ -94,17 +93,6 @@ public class Player extends Character {
         interactWith.interact();
     }
 
-    public Picture createWasted() {
-        return this.wasted = new Picture(
-                this.getArea().getBoundArea().getX(),
-                this.getArea().getBoundArea().getY(),
-                "resources/images/wasted.png");
-    }
-
-    public Picture getWasted() {
-        return wasted;
-    }
-//comment
     public boolean isOneUpExists() {
         return oneUpExists;
     }
@@ -163,7 +151,7 @@ public class Player extends Character {
         }
 
         this.oneUpExists = true;
-        this.oneUp = new Picture(this.getArea().getBoundArea().getX() + 20, this.getArea().getBoundArea().getY() - 20, "resources/images/1life.png");
+        this.oneUp = new Picture(this.getArea().getBoundArea().getX() + 20, this.getArea().getBoundArea().getY() - 20, "resources/1life.png");
         oneUp.draw();
 
         super.setLives(super.getLives() + 1);
@@ -199,7 +187,7 @@ public class Player extends Character {
     public void setClawUsed(){
 
         //Attack animation appear
-        clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/images/Claw_attack.png");
+        clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/Claw_attack.png");
         clawAnimation.draw();
         GameHandler.GameSound.CATCLAW.sounds.play(true);
 

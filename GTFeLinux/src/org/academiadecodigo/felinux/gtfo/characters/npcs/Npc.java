@@ -29,7 +29,7 @@ public abstract class Npc extends Character {
     public Npc(int posX, int posY, String spriteName, int direction) {
 
         horizontalVertical = direction;
-        this.npc = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
+        this.npc = new Picture(posX, posY, "resources/" + spriteName + ".png");
         this.area = new Area(getNpc().getX(),getNpc().getY(),getNpc().getWidth(),getNpc().getHeight());
 
         //hp animations

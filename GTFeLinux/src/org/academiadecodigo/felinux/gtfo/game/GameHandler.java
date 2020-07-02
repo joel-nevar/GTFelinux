@@ -3,7 +3,6 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.CatProstitute;
@@ -48,7 +47,7 @@ public class GameHandler implements Runnable {
         //Player
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
-        this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
+        this.oldLady = new Picture(120,70,"resources/OldLady.png");
 
         //interaction
         hashMap = new HashMap<>();
@@ -221,7 +220,7 @@ public class GameHandler implements Runnable {
 
         if (firstMap) {
 
-            Field.map.load("resources/images/SecondMap.png");
+            Field.map.load("resources/SecondMap.png");
             hideAllMap1();
             showAllMap2();
             GameSound.DOOR.sounds.play(true);
@@ -229,7 +228,7 @@ public class GameHandler implements Runnable {
             return;
         }
 
-        Field.map.load("resources/images/FirstMap.png");
+        Field.map.load("resources/FirstMap.png");
         hideAllMap2();
         showAllMap1();
         GameSound.DOOR.sounds.play(true);
@@ -402,12 +401,12 @@ public class GameHandler implements Runnable {
     }
 
     public enum GameSound {
-        CATMEOW(new Sounds("/music/MEOW.wav")),
-        CATCLAW(new Sounds("/music/knife_hit17.wav")),
-        CLICK(new Sounds("/music/click.wav")),
-        DOOR(new Sounds("/music/dooropen.wav")),
-        SHOOT(new Sounds("/music/shoot.wav")),
-        BACKMUSIC(new Sounds("/music/backgroundMusic.wav"));
+        CATMEOW(new Sounds("/resources/MEOW.wav")),
+        CATCLAW(new Sounds("/resources/knife_hit17.wav")),
+        CLICK(new Sounds("/resources/click.wav")),
+        DOOR(new Sounds("/resources/dooropen.wav")),
+        SHOOT(new Sounds("/resources/shoot.wav")),
+        BACKMUSIC(new Sounds("/resources/backgroundMusic.wav"));
 
         public Sounds sounds;
 

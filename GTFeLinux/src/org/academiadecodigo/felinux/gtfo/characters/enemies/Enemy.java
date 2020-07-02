@@ -23,7 +23,7 @@ public abstract class Enemy extends Character {
 
         super.setLives(lifeAmount);
         this.enemyField = enemyField;
-        this.enemy = new Picture(posX, posY, "resources/images/" + spriteName + ".png");
+        this.enemy = new Picture(posX, posY, "resources/" + spriteName + ".png");
         this.area = new Area(getEnemy().getX(), getEnemy().getY(), getEnemy().getWidth(), getEnemy().getHeight());
     }
 
