@@ -75,11 +75,6 @@ public class PlayerKeyboard implements KeyboardHandler {
         attack.setKey(KeyboardEvent.KEY_SPACE);
         attack.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        KeyboardEvent a = new KeyboardEvent();
-        a.setKey(KeyboardEvent.KEY_H);
-        a.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
-
-        keyboard.addEventListener(a);
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
@@ -170,9 +165,6 @@ public class PlayerKeyboard implements KeyboardHandler {
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_E){
             player.interact();
-        }
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_H){
-            GameHandler.changeMap();
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){

@@ -49,6 +49,12 @@ public class Area {
         return boundArea;
     }
 
+    /**
+     * Pure dark magic, DONT FKN TOUCH
+     * @param player the player Area
+     * @param rect the area to compare with
+     * @return true if within interact range, false if not
+     */
     public static boolean checkInteract (Area player, Area rect, int distance){
 
         int xA = ((player.getBoundArea().getX())*2+player.getBoundArea().getWidth())/2;

@@ -43,6 +43,5 @@ public abstract class Character implements Moveable{
     public void addToInteractables(Area area, Character name){
 
         GameHandler.hashMap.put(area, name);
-        System.out.println(area + " " + name);
     }
 }
