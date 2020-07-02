@@ -31,6 +31,8 @@ public abstract class Character extends Picture implements Moveable{
 
     /**
      * Next lvl genius
+     * Override this, and call the overloaded method
+     * To add, this object to the interactables list
      */
     public void addToInteractables(){
 

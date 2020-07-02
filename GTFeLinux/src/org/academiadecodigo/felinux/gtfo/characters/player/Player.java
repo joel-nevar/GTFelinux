@@ -2,6 +2,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
+import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
@@ -249,10 +250,13 @@ public class Player extends Character {
         }
 
         if (collisionCheck(dx, dy)) {
-
             dx = 0;
             dy = 0;
         }
+
+        enemyCollision();
+
+        interactCollisionCheck(dx,dy);
 
         //checkUp
         if ((Field.getPADDING_Y() >= player.getY())) {
@@ -284,6 +288,15 @@ public class Player extends Character {
 
         player.translate(dx, dy);
         playerArea.getBoundArea().translate(dx, dy);
+    }
+
+    public void enemyCollision(){
+
+        Character enemyHit = GameHandler.checkInteraction();
+
+        if(enemyHit instanceof CowBoss||enemyHit instanceof CopCar){
+            takeLethalDamage();
+        }
     }
 
     public Picture getPlayer() {
@@ -348,23 +361,12 @@ public class Player extends Character {
         return playerArea;
     }
 
-    public boolean interactCollisionCheck(float dx, float dy){
+    public void interactCollisionCheck(float dx, float dy){
 
         if(GameHandler.canEnterCastle()){
 
             GameHandler.changeMap();
-
-            return false;
         }
-
-        for (Area area : Field.notWalkableMap2) {
-
-            if (Area.contains(playerArea, area, dx, dy)) {
-
-                return true;
-            }
-        }
-        return false;
     }
 
     public void checkpoint(){
