@@ -34,9 +34,6 @@ public class PlayerKeyboard implements KeyboardHandler {
         /**
          * Key pressed
          */
-        KeyboardEvent hAction = new KeyboardEvent();
-        hAction.setKey(KeyboardEvent.KEY_H);
-        hAction.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent left = new KeyboardEvent();
         left.setKey(KeyboardEvent.KEY_A);
@@ -78,7 +75,6 @@ public class PlayerKeyboard implements KeyboardHandler {
         attack.setKey(KeyboardEvent.KEY_SPACE);
         attack.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
-        keyboard.addEventListener(hAction);
         keyboard.addEventListener(left);
         keyboard.addEventListener(right);
         keyboard.addEventListener(up);
@@ -165,10 +161,6 @@ public class PlayerKeyboard implements KeyboardHandler {
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_S||keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
             Player.dy += moveSpeed;
-        }
-
-        if(keyboardEvent.getKey() == KeyboardEvent.KEY_H){
-            GameHandler.changeMap();
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_E){
