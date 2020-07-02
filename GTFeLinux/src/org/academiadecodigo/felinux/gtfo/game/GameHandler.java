@@ -14,6 +14,7 @@ import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.HashMap;
 
@@ -26,13 +27,14 @@ public class GameHandler implements Runnable {
     private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
+    private  static Picture oldLady ;
     private PlayerKeyboard playerKeyboard;
     private static final int ASSAULTABLE_CATS = 13;
     private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
     public static boolean firstMap = true;
 
 
-    public static HashMap<Area,Character> hashMap;
+    public static HashMap<Area, Character> hashMap;
     private static final int INTERACT_RANGE = 25;
 
     public void init() {
@@ -45,6 +47,10 @@ public class GameHandler implements Runnable {
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
+        this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
+
+
+
 
         //interaction
         hashMap = new HashMap<>();
@@ -64,19 +70,22 @@ public class GameHandler implements Runnable {
 
     private void addInteractables() {
 
-        for (Npc rat: rats) {
+        for (Npc rat : rats) {
             rat.addToInteractables();
         }
 
-        for (Npc cat : assaultableCats ) {
+        for (Npc cat : assaultableCats) {
             cat.addToInteractables();
         }
+
+
     }
 
     private void showAlways() {
 
         /** First Game Map **/
         field.getMap().draw();
+
 
         /**Show Player**/
         player.getPlayer().draw();
@@ -107,8 +116,9 @@ public class GameHandler implements Runnable {
         ((CopCar) enemies[0]).getRedLifeBar().fill();
         ((CopCar) enemies[0]).getGreenLifeBar().fill();
 
-        player.getPlayer().draw();
 
+        player.getPlayer().draw();
+        oldLady.draw();
         /**Assets**/
         for (Area area : field.getNotWalkable()) {
             area.getBoundArea().draw();
@@ -171,6 +181,7 @@ public class GameHandler implements Runnable {
             rats[i].getNpc().draw();
 
         }
+        oldLady.delete();
     }
 
     public static void hideAllMap2() {
@@ -258,7 +269,7 @@ public class GameHandler implements Runnable {
         }
     }
 
-    private void instanceOfEnemies(Enemy[] enemies){
+    private void instanceOfEnemies(Enemy[] enemies) {
 
         int[][] enemyPos = new int[13][2];
         enemyPos[0][0] = 110;
@@ -332,20 +343,21 @@ public class GameHandler implements Runnable {
      *
      * @return Character to interact with,
      * or player reference if no interactible objects in range
-     *
+     * <p>
      * PLAYER BY DEFAULT
      */
-    public static Character checkInteraction(){
+    public static Character checkInteraction() {
 
         Area interactTarget;
 
-        for (Area area : hashMap.keySet()){
+        for (Area area : hashMap.keySet()) {
 
             interactTarget = area;
 
-            if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
+            if (Area.checkInteract(player.getArea(), interactTarget, INTERACT_RANGE)) {
                 return hashMap.get(interactTarget);
             }
+
         }
 
         return player;
@@ -353,14 +365,18 @@ public class GameHandler implements Runnable {
 
     /**
      * Check milk location
+     *
      * @return true if u got it right
      */
-    public static boolean checkMilk(){
+    public static boolean checkMilk() {
 
-        if(!firstMap){
+        if (!firstMap) {
 
-            return Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
+            milk.drinkMeTillIDisappear();
+            Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
+
         }
+
         return false;
     }
 

@@ -1,6 +1,7 @@
 package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -25,6 +26,8 @@ public class Player extends Character{
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
+    private Milk milk;
+
 
     //These are used for movement
     public static float dx;
@@ -68,6 +71,7 @@ public class Player extends Character{
             if(GameHandler.checkMilk()){
                 hasMilk = true;
             }
+
             return;
         }
 
