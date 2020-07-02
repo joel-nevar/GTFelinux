@@ -79,4 +79,8 @@ public class CowBoss extends Enemy {
 
     }
 
+    @Override
+    public void interact() {
+        System.out.println("COW INTERACTABLE");
+    }
 }

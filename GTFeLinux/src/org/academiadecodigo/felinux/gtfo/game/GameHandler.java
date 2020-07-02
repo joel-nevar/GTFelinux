@@ -121,6 +121,7 @@ public class GameHandler implements Runnable {
 
         /**Characters **/
         //Make a for loop when more enemies here
+        oldLady.draw();
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getBoundArea().draw();
         ((CopCar) enemies[0]).getRedLifeBar().fill();
@@ -132,6 +133,7 @@ public class GameHandler implements Runnable {
         /** First Game Map **/
 
         Canvas.getInstance().hide(milk.getMilk());
+
 
         /**NPCs**/
         for (int i = 0; i < assaultableCats.length; i++) {
