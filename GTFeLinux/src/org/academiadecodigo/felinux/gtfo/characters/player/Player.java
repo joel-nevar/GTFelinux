@@ -30,12 +30,12 @@ public class Player extends Character {
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
-    private CheckpointType checkpoint;
-    private int loseLife;
+    public static CheckpointType checkpoint;
     private int lifeCounter = 0;                //Used to check death of cat and set animation
     private boolean assaultableCatIsDead = false;
     private boolean cowIsDead = false;
     private Picture wasted;
+    private int loseLife = 6;
 
     //These are used for movement
     public static float dx;
@@ -115,7 +115,6 @@ public class Player extends Character {
     }
 
     public void energyDecay() {
-
         if (this.energy <= 0) {
             if (super.getLives() <= 1) {
                 this.dead = true;
@@ -124,6 +123,7 @@ public class Player extends Character {
                 hpAnimation.grow(-7, 0);
                 return;
             }
+
             this.takeLethalDamage();
             this.energyReset();
             //HP Bar
@@ -134,6 +134,11 @@ public class Player extends Character {
         this.loseEnergy();
         energyAnimation.translate(-0.16, 0);
         energyAnimation.grow(-0.16, 0);
+
+        if(loseLife == super.getLives()){
+            checkpoint();
+            loseLife--;
+        }
     }
 
     public void gainLife() {
@@ -361,6 +366,9 @@ public class Player extends Character {
     }
 
     public void checkpoint(){
-        player.translate(checkpoint.getDx(),checkpoint.getDy());
+        player.translate(checkpoint.getDx() - playerArea.getBoundArea().getX(),
+                checkpoint.getDy() - playerArea.getBoundArea().getY());
+        playerArea.getBoundArea().translate(checkpoint.getDx() - playerArea.getBoundArea().getX(),
+                checkpoint.getDy() - playerArea.getBoundArea().getY());
     }
 }

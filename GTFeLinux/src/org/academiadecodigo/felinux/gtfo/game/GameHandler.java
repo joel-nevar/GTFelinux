@@ -81,6 +81,10 @@ public class GameHandler implements Runnable {
             cat.addToInteractables();
         }
 
+        for (Npc cat : catProstitute) {
+            cat.addToInteractables();
+        }
+
         /**
          * Game Boss
          */
