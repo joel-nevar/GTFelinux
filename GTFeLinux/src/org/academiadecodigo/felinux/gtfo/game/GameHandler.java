@@ -60,7 +60,7 @@ public class GameHandler implements Runnable {
 
         GameSound.BACKMUSIC.sounds.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
-        //instanceOfCatProstitute(catProstitute);
+        instanceOfCatProstitute(catProstitute);
         instanceOfEnemies(enemies);
         instanceOfRats(rats);
         addInteractables();
@@ -110,9 +110,9 @@ public class GameHandler implements Runnable {
             assaultableCats[i].getGreenLifeBar().fill();
         }
 
-        /*for (int i = 0; i < catProstitute.length; i++) {
+        for (int i = 0; i < catProstitute.length; i++) {
             catProstitute[i].getNpc().draw();
-        }*/
+        }
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -120,7 +120,6 @@ public class GameHandler implements Runnable {
         enemies[0].getEnemyField().getArea().getBoundArea().draw();
         ((CopCar) enemies[0]).getRedLifeBar().fill();
         ((CopCar) enemies[0]).getGreenLifeBar().fill();
-
 
         player.getPlayer().draw();
         oldLady.draw();
@@ -143,9 +142,9 @@ public class GameHandler implements Runnable {
             Canvas.getInstance().hide(assaultableCats[i].getGreenLifeBar());
         }
 
-        /*for (int i = 0; i < catProstitute.length; i++) {
+        for (int i = 0; i < catProstitute.length; i++) {
             Canvas.getInstance().hide(catProstitute[i].getNpc());
-        }*/
+        }
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -249,18 +248,23 @@ public class GameHandler implements Runnable {
         }
     }
 
-    /*private void instanceOfCatProstitute(Npc[] catProstitute) {
-        int[][] catPro = new int[6][2];
+    private void instanceOfCatProstitute(Npc[] catProstitute) {
+
+        int[][] catPro = new int[3][2];
+
+        //TODO Diney arranja aqui as posicoes á tua vontade
+
         catPro[0][0] = 110;
         catPro[0][1] = 350;
         catPro[1][0] = 220;
         catPro[1][1] = 260;
+        catPro[2][0] = 500;
+        catPro[2][1] = 600;
 
-        catProstitute[0] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE,"prostirute1", catPro[0][0], catPro[0][1]);
-        catProstitute[2] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE, ,catPro[1][0], catPro[1][1]);
-        catProstitute[3] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE, ,catPro[2][0], catPro[2][1]);
-
-    }*/
+        for (int i = 0; i < catProstitute.length ; i++) {
+            catProstitute[i] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[i][0], catPro[i][1], 0);
+        }
+    }
 
     private void instanceOfEnemies(Enemy[] enemies){
 
