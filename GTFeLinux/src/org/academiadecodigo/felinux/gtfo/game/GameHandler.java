@@ -126,8 +126,9 @@ public class GameHandler implements Runnable {
 
 
         /**Characters **/
-        //Make a for loop when more enemies here
+
         oldLady.draw();
+
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getBoundArea().draw();
     }
@@ -136,7 +137,6 @@ public class GameHandler implements Runnable {
 
         /** First Game Map **/
 
-        Canvas.getInstance().hide(milk.getMilk());
         Canvas.getInstance().hide(oldLady);
 
         /**NPCs**/
@@ -146,11 +146,9 @@ public class GameHandler implements Runnable {
             Canvas.getInstance().hide(assaultableCats[i].getGreenLifeBar());
         }
 
-
         Canvas.getInstance().hide(catProstitute[0].getNpc());
         Canvas.getInstance().hide(catProstitute[1].getNpc());
         Canvas.getInstance().hide(catProstitute[2].getNpc());
-
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -170,13 +168,13 @@ public class GameHandler implements Runnable {
         }
 
         catProstitute[3].getNpc().draw();
+        milk.drawMilk();
 
         enemies[1].getEnemy().draw();
         enemies[1].getEnemyField().getArea().getBoundArea().draw();
         ((CowBoss) enemies[1]).getRedLifeBar().fill();
         ((CowBoss) enemies[1]).getGreenLifeBar().fill();
 
-        milk.getMilk().draw();
 
         for (int i = 0; i < rats.length; i++) {
             rats[i].getNpc().draw();
@@ -396,15 +394,13 @@ public class GameHandler implements Runnable {
      * @return true if u got it right
      */
     public static boolean checkMilk() {
-
-        if (!firstMap) {
-
-            //THIS IS WRONG
-            //TODO FIX THIS
+        if(player.HasMilk()) {
+            System.out.println("Tenho milk");
             milk.makeMilkDisappear();
             Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
-
+            return true;
         }
+        System.out.println("Nao tenho milk");
         return false;
     }
 

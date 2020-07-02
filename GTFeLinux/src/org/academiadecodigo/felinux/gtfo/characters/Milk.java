@@ -16,9 +16,13 @@ public class Milk extends Picture{
         this.area = new Area(milk.getX(),milk.getY(),milk.getWidth(),milk.getHeight());
     }
 
-    //Used to draw the Milk on the map
     public Picture getMilk() {
         return milk;
+    }
+
+    //Used to draw the Milk on the map
+    public void drawMilk() {
+        milk.draw();
     }
 
     //Used to delete the Milk when the player catches it

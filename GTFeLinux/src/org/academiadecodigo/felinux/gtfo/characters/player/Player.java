@@ -79,7 +79,8 @@ public class Player extends Character {
         //this is to check the default
         if (interactWith instanceof Player) {
             if (GameHandler.checkMilk()) {
-                this.hasMilk = true;
+                dead = true; // para acabar o jogo
+                System.out.println("GAME OVER, YOU WIN");
             }
             return;
         }
@@ -88,7 +89,10 @@ public class Player extends Character {
     }
 
     public Picture createWasted() {
-        return this.wasted = new Picture(this.getArea().getBoundArea().getX(),this.getArea().getBoundArea().getY(),"resources/images/wasted.png");
+        return this.wasted = new Picture(
+                this.getArea().getBoundArea().getX(),
+                this.getArea().getBoundArea().getY(),
+                "resources/images/wasted.png");
     }
 
     public Picture getWasted() {

@@ -28,8 +28,6 @@ public class CowBoss extends Enemy {
             return;
         }
 
-
-
         if(movementCounter < 25) {
             this.moveUp();
             movementCounter++;
