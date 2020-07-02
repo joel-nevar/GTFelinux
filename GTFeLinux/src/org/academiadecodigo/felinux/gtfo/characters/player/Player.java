@@ -226,19 +226,12 @@ public class Player extends Character {
             return;
         }
 
+        //If he touches the boss, he dies
         if(attackTarget instanceof CowBoss) {
-            //Gives damage to that instance
-            attackTarget.setLives(attackTarget.getLives() - 1);
-            ((CowBoss) attackTarget).getGreenLifeBar().grow(-4, 0);
-            ((CowBoss) attackTarget).getGreenLifeBar().translate(-6, 0);
-            //kills the cow and gives hp to the player
-            if (attackTarget.getLives() == 0) {
-                this.cowIsDead = true;
-                ((CowBoss) attackTarget).kill();
-                this.gainLife();
-            }
-            this.cowIsDead = false;
+            takeLethalDamage();
+            System.out.println("hp "  + getLives());
         }
+
     }
 
     public boolean isClawUsed() {
@@ -345,6 +338,10 @@ public class Player extends Character {
         }
 
         return false;
+    }
+
+    public void die() {
+        this.dead = true;
     }
 
     public Area getArea() {

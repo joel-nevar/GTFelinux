@@ -1,10 +1,12 @@
 package org.academiadecodigo.felinux.gtfo.game;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
+import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.CatProstitute;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
@@ -41,6 +43,7 @@ public class GameHandler implements Runnable {
 
         field = new Field();
         GameSound.BACKMUSIC.sounds.play(true);
+
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
 
@@ -150,8 +153,6 @@ public class GameHandler implements Runnable {
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
-        Canvas.getInstance().hide(((CowBoss) enemies[1]).getRedLifeBar());
-        Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
 
     }
 
@@ -168,6 +169,7 @@ public class GameHandler implements Runnable {
         ((CowBoss) enemies[1]).getGreenLifeBar().fill();
 
         milk.getMilk().draw();
+
         for (int i = 0; i < rats.length; i++) {
             rats[i].getNpc().draw();
 
@@ -193,25 +195,29 @@ public class GameHandler implements Runnable {
         Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
     }
 
-    private void moveAll() throws NullPointerException{
+    private void moveAll(){
 
-        player.move();
-        player.energyDecay();
-        enemies[0].move();
 
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
         try {
+
             for (int i = 0; i < assaultableCats.length; i++) {
                 assaultableCats[i].move();
             }
+
+            player.move();
+            player.energyDecay();
+
+            enemies[0].move();
+            enemies[1].move();
+
+            for (int i = 0; i < rats.length; i++) {
+                rats[i].move();
+            }
+
         } catch (Exception e) {
             //do nothing
         }
-
-        for (int i = 0; i < rats.length; i++) {
-            rats[i].move();
-        }
-            enemies[1].move();
     }
 
     public static void changeMap() {
@@ -431,7 +437,7 @@ public class GameHandler implements Runnable {
 
     public void checkIfPlayerHasMilk(){
         if(player.HasMilk()){
-            player.setDead(true);
+            player.die();
             System.out.println("YOU WIN!!");
         }
     }
@@ -449,11 +455,10 @@ public class GameHandler implements Runnable {
                 checkIfPlayerGainsLife();
                 checkIfPlayerHasMilk();
                 moveAll();
-                System.out.println(player.getArea().getBoundArea().getX() + " " + player.getArea().getBoundArea().getY());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //do nothing
             } catch (NullPointerException exception){
-                System.out.println("Garra nao conseguiu ser instanciada ( Por alguma razao )");
+                //do nothing
             }
         }
         if(!player.HasMilk()){
