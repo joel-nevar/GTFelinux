@@ -75,7 +75,7 @@ public class Sounds {
             clip.open(inputStream);
 
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-            System.out.println(ex.getMessage());
+            //fazer nada
         }
     }
 }

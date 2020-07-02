@@ -137,7 +137,7 @@ public class GameHandler implements Runnable {
         /** First Game Map **/
 
         Canvas.getInstance().hide(milk.getMilk());
-
+        Canvas.getInstance().hide(oldLady);
 
         /**NPCs**/
         for (int i = 0; i < assaultableCats.length; i++) {
