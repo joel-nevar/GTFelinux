@@ -38,6 +38,8 @@ public class Player extends Character {
     private boolean cowIsDead = false;
     private Picture wasted;
     private int loseLife = 6;
+    private Picture controls;
+    private Picture ourBrand;
 
     //These are used for movement
     public static float dx;
@@ -47,13 +49,16 @@ public class Player extends Character {
     private Area playerArea;
 
     public Player(String name) {
-
         super();
         super.setLives(7);
         map = new Field();
         this.player = new Picture(50, 300, "resources/images/" + name);
         this.energyBar = new Picture(5, 5, "resources/images/EmptyEnergyBar.png");
         this.hpBar = new Picture(162, 5, "resources/images/EmptyHpBar.png");
+        this.controls = new Picture(310, 6, "resources/images/controls.png");
+        this.ourBrand = new Picture(1100,6, "resources/images/gtf.png");
+        this.controls.draw();
+        this.ourBrand.draw();
         //ENERGY BAR
         this.energyAnimation = new Rectangle(55, 27, 100, 10); //pos x pos y size size
         energyAnimation.setColor(new Color(255, 255, 0));
