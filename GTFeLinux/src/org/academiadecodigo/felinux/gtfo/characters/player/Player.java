@@ -252,11 +252,6 @@ public class Player extends Character {
             return;
         }
 
-        if (interactCollisionCheck(dx,dy)){
-            energyDecay();
-        }
-
-
         if (collisionCheck(dx, dy)) {
 
             dx = 0;

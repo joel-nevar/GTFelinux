@@ -207,11 +207,12 @@ public class GameHandler implements Runnable {
         Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
     }
 
-    private void moveAll() {
+    private void moveAll() throws NullPointerException{
 
         player.move();
         player.energyDecay();
         enemies[0].move();
+
 
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
         try {
@@ -225,6 +226,7 @@ public class GameHandler implements Runnable {
         for (int i = 0; i < rats.length; i++) {
             rats[i].move();
         }
+            enemies[1].move();
     }
 
     public static void changeMap() {
@@ -277,7 +279,7 @@ public class GameHandler implements Runnable {
         enemyPos[0][0] = 110;
         enemyPos[0][1] = 350;
         enemyPos[1][0] = 220;
-        enemyPos[1][1] = 260;
+        enemyPos[1][1] = 200;
 
         enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
         enemies[1] = Factory.enemyFactory(EnemyType.COW_BOSS, enemyPos[1][0], enemyPos[1][1], "Cow2");
@@ -439,15 +441,13 @@ public class GameHandler implements Runnable {
                 //Check if player is attacking
                 player.playerAttackVerification();
                 checkIfPlayerGainsLife();
-
-
+                moveAll();
+                System.out.println(player.getArea().getBoundArea().getX() + " " + player.getArea().getBoundArea().getY());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (NullPointerException exception){
                 System.out.println("Garra nao conseguiu ser instanciada ( Por alguma razao )");
             }
-            //Moves all the movable classes
-            moveAll();
         }
         GameSound.BACKMUSIC.sounds.stop();
         System.out.println("GAME OVER");
