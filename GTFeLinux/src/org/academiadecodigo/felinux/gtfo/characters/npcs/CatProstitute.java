@@ -1,8 +1,12 @@
 package org.academiadecodigo.felinux.gtfo.characters.npcs;
 
+import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
+import org.academiadecodigo.felinux.gtfo.characters.player.Player;
+
 public class CatProstitute extends Npc {
 
         private boolean visited;
+        private CheckpointType checkpoint;
 
 
         @Override
@@ -23,5 +27,8 @@ public class CatProstitute extends Npc {
                 this.visited = visited;
         }
 
+        public CheckpointType getCheckpoint() {
+                return checkpoint;
+        }
 }
 

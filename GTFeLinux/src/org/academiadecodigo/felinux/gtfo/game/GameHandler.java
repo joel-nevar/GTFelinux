@@ -6,6 +6,8 @@ import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
+import org.academiadecodigo.felinux.gtfo.characters.player.Player;
+import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
 import org.academiadecodigo.felinux.gtfo.characters.player.Player;
@@ -26,8 +28,8 @@ public class GameHandler implements Runnable {
     private static Milk milk;
     private static Field field;
     private PlayerKeyboard playerKeyboard;
-    private static final int ASSAULTABLE_CATS = 13;
-    private static Npc[] assaultableCats = new Npc[ASSAULTABLE_CATS];
+    private static Npc[] assaultableCats = new Npc[13];
+    private static Npc[] catProstitute = new Npc[3];
     public static boolean firstMap = true;
 
 
@@ -42,6 +44,7 @@ public class GameHandler implements Runnable {
         this.milk = new Milk();
         // call this on the factory thx, also 350 on Y
         this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
+        //Player
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
 
@@ -53,6 +56,7 @@ public class GameHandler implements Runnable {
 
         GameSound.BACKMUSIC.sounds.play(!player.isDead());
         instanceOfAssaultableCats(assaultableCats);
+        //instanceOfCatProstitute(catProstitute);
         instanceOfEnemies(enemies);
         instanceOfRats(rats);
         addInteractables();
@@ -94,11 +98,15 @@ public class GameHandler implements Runnable {
         //Objects
 
         /**NPCs**/
-        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+        for (int i = 0; i < assaultableCats.length; i++) {
             assaultableCats[i].getNpc().draw();
             assaultableCats[i].getRedLifeBar().fill();
             assaultableCats[i].getGreenLifeBar().fill();
         }
+
+        /*for (int i = 0; i < catProstitute.length; i++) {
+            catProstitute[i].getNpc().draw();
+        }*/
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -106,8 +114,6 @@ public class GameHandler implements Runnable {
         enemies[0].getEnemyField().getArea().getBoundArea().draw();
         ((CopCar) enemies[0]).getRedLifeBar().fill();
         ((CopCar) enemies[0]).getGreenLifeBar().fill();
-
-        player.getPlayer().draw();
 
         /**Assets**/
         for (Area area : field.getNotWalkable()) {
@@ -122,11 +128,15 @@ public class GameHandler implements Runnable {
         Canvas.getInstance().hide(milk.getMilk());
 
         /**NPCs**/
-        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+        for (int i = 0; i < assaultableCats.length; i++) {
             Canvas.getInstance().hide(assaultableCats[i].getNpc());
             Canvas.getInstance().hide(assaultableCats[i].getRedLifeBar());
             Canvas.getInstance().hide(assaultableCats[i].getGreenLifeBar());
         }
+
+        /*for (int i = 0; i < catProstitute.length; i++) {
+            Canvas.getInstance().hide(catProstitute[i].getNpc());
+        }*/
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -140,11 +150,6 @@ public class GameHandler implements Runnable {
         for (Area area : field.getNotWalkable()) {
             Canvas.getInstance().hide(area.getBoundArea());
         }
-        /** User Interface **/
-        player.getEnergyBar().draw();
-        player.getHpBar().draw();
-        player.getEnergyAnimation().fill();
-        player.getHpAnimation().fill();
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
@@ -183,8 +188,6 @@ public class GameHandler implements Runnable {
 
         for (int i = 0; i < rats.length; i++) {
             Canvas.getInstance().hide(rats[i].getNpc());
-            // Canvas.getInstance().hide(((Rat) rats[i]));
-            //nvas.getInstance().hide(((Rat) rats[i]));
         }
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
@@ -200,7 +203,7 @@ public class GameHandler implements Runnable {
         enemies[0].move();
 
         //insert for loop to run enemies with an enemy counter to avoid a Null Pointer
-        for (int i = 0; i < ASSAULTABLE_CATS; i++) {
+        for (int i = 0; i < assaultableCats.length; i++) {
             assaultableCats[i].move();
         }
 
@@ -236,16 +239,29 @@ public class GameHandler implements Runnable {
         }
     }
 
+    /*private void instanceOfCatProstitute(Npc[] catProstitute) {
+        int[][] catPro = new int[6][2];
+        catPro[0][0] = 110;
+        catPro[0][1] = 350;
+        catPro[1][0] = 220;
+        catPro[1][1] = 260;
+
+        catProstitute[0] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE,"prostirute1", catPro[0][0], catPro[0][1]);
+        catProstitute[2] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE, ,catPro[1][0], catPro[1][1]);
+        catProstitute[3] = Factory.enemyFactory(NpcType.CAT_PROSTITUTE, ,catPro[2][0], catPro[2][1]);
+
+    }*/
+
     private void instanceOfEnemies(Enemy[] enemies){
 
-        int[][] enemyPos = new int[13][2];
+        int[][] enemyPos = new int[4][2];
         enemyPos[0][0] = 110;
         enemyPos[0][1] = 350;
         enemyPos[1][0] = 220;
         enemyPos[1][1] = 260;
 
-        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Claw_attack");
-        enemies[1] = Factory.enemyFactory(EnemyType.LION, enemyPos[1][0], enemyPos[1][1], "Cow");
+        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
+        enemies[1] = Factory.enemyFactory(EnemyType.LION, enemyPos[1][0], enemyPos[1][1], "Cow2");
     }
 
     private void instanceOfAssaultableCats(Npc[] assaultableCats) {
@@ -322,7 +338,6 @@ public class GameHandler implements Runnable {
             interactTarget = area;
 
             if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
-
                 //Returns a character
                 return hashMap.get(interactTarget);
 
@@ -339,6 +354,7 @@ public class GameHandler implements Runnable {
     public static boolean checkMilk(){
 
         if(!firstMap){
+
             return Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
         }
         return false;
