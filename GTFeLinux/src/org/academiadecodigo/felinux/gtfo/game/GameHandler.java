@@ -130,7 +130,6 @@ public class GameHandler implements Runnable {
         oldLady.draw();
 
         enemies[0].getEnemy().draw();
-        enemies[0].getEnemyField().getArea().getBoundArea().draw();
     }
 
     private static void hideAllMap1() {
@@ -164,7 +163,6 @@ public class GameHandler implements Runnable {
 
         for (Area area : field.getNotWalkableMap2()) {
             area.getBoundArea().draw();
-
         }
 
         catProstitute[3].getNpc().draw();
@@ -172,15 +170,10 @@ public class GameHandler implements Runnable {
 
         enemies[1].getEnemy().draw();
         enemies[1].getEnemyField().getArea().getBoundArea().draw();
-        ((CowBoss) enemies[1]).getRedLifeBar().fill();
-        ((CowBoss) enemies[1]).getGreenLifeBar().fill();
-
 
         for (int i = 0; i < rats.length; i++) {
             rats[i].getNpc().draw();
-
         }
-        oldLady.delete();
     }
 
     public static void hideAllMap2() {
