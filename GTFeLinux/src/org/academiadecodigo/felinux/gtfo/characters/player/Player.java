@@ -3,7 +3,6 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -69,7 +68,6 @@ public class Player extends Character {
 
     /**
      * Call this method to check interactions
-     * Remove the milk part, to reuse this
      */
     @Override
     public void interact() {
@@ -83,40 +81,7 @@ public class Player extends Character {
             }
             return;
         }
-        //Attacks enemy, or not
-        if(interactWith instanceof AssaultableCat){
-            if(this.isClawUsed()){
-                //Gives damage to that instance
-                interactWith.setLives( interactWith.getLives() - 1 );
-                ((AssaultableCat) interactWith).getGreenLifeBar().grow(-5,0);
-                ((AssaultableCat) interactWith).getGreenLifeBar().translate(-6,0);
-                //kills the cat and gives hp to the player
-                if(interactWith.getLives() == 0){
-                    this.assaultableCatIsDead = true;
-                    ((AssaultableCat) interactWith).kill();
-                    this.gainLife();
-                }
-                this.assaultableCatIsDead = false;
-            }
-            return;
-        }
 
-        if(interactWith instanceof CowBoss){
-            if(this.isClawUsed()){
-                //Gives damage to that instance
-                interactWith.setLives( interactWith.getLives() - 1 );
-                ((CowBoss) interactWith).getGreenLifeBar().grow(-4,0);
-                ((CowBoss) interactWith).getGreenLifeBar().translate(-6,0);
-                //kills the cow and gives hp to the player
-                if(interactWith.getLives() == 0){
-                    this.cowIsDead = true;
-                    ((CowBoss) interactWith).kill();
-                    this.gainLife();
-                }
-                this.cowIsDead = false;
-            }
-            return;
-        }
         //In range for interaction, interact with
         interactWith.interact();
     }
@@ -150,6 +115,7 @@ public class Player extends Character {
     }
 
     public void energyDecay() {
+
         if (this.energy <= 0) {
             if (super.getLives() <= 1) {
                 this.dead = true;
@@ -197,49 +163,76 @@ public class Player extends Character {
         this.assaultableCatIsDead = assaultableCatDead;
     }
 
-    public void playerAttackVerification() throws NullPointerException {
-        //Attack animation appear
-        if (clawUsed == true) {
-            this.clawAnimation.draw();
-            GameHandler.GameSound.CATCLAW.sounds.play(true);
+    /**
+     * Claw Animation managed here
+     */
+    public void playerAttackVerification() {
 
-            //Tick to measure animation time
-            this.clawTick += 1;
+        if(clawUsed) {
 
             //Attack animation disappear
-            if (clawTick == 4) {
-                this.clawUsed = false;
-                this.clawAnimation.delete();
-                this.clawTick = 0;
+            clawTick--;
+            if(clawTick<=0) {
+                clawUsed = false;
+                clawAnimation.delete();
             }
         }
     }
 
-    public void attack(Enemy enemy) {
+    /**
+     * Attack animation and sound goes here
+     */
+    public void setClawUsed(){
 
-        this.clawUsed = true;
+        //Attack animation appear
         clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/images/Claw_attack.png");
+        clawAnimation.draw();
+        GameHandler.GameSound.CATCLAW.sounds.play(true);
 
+        clawUsed = true;
+        clawTick = 20;
     }
+    public void attack(){
 
-    public int getClawTick() {
-        return clawTick;
-    }
+        Character attackTarget = GameHandler.checkInteraction();
 
-    public void setClawTick(int clawTick) {
-        this.clawTick = clawTick;
-    }
+        //this is to check the default
+        if (attackTarget instanceof Player) {
+            return;
+        }
 
-    public void setClawUsed(boolean clawUsed) {
-        this.clawUsed = clawUsed;
+        if(attackTarget instanceof AssaultableCat){
+            //Gives damage to that instance
+            attackTarget.setLives( attackTarget.getLives() - 1 );
+            ((AssaultableCat) attackTarget).getGreenLifeBar().grow(-5,0);
+            ((AssaultableCat) attackTarget).getGreenLifeBar().translate(-6,0);
+            //kills the cat and gives hp to the player
+            if(attackTarget.getLives() == 0){
+                this.assaultableCatIsDead = true;
+                ((AssaultableCat) attackTarget).kill();
+                this.gainLife();
+            }
+            this.assaultableCatIsDead = false;
+            return;
+        }
+
+        if(attackTarget instanceof CowBoss) {
+            //Gives damage to that instance
+            attackTarget.setLives(attackTarget.getLives() - 1);
+            ((CowBoss) attackTarget).getGreenLifeBar().grow(-4, 0);
+            ((CowBoss) attackTarget).getGreenLifeBar().translate(-6, 0);
+            //kills the cow and gives hp to the player
+            if (attackTarget.getLives() == 0) {
+                this.cowIsDead = true;
+                ((CowBoss) attackTarget).kill();
+                this.gainLife();
+            }
+            this.cowIsDead = false;
+        }
     }
 
     public boolean isClawUsed() {
         return clawUsed;
-    }
-
-    public Picture getClawAnimation() throws NullPointerException {
-        return clawAnimation;
     }
 
     /**
@@ -323,21 +316,9 @@ public class Player extends Character {
         this.energy--;
     }
 
-    public int getClawDamage() {
-        return this.clawDamage;
-    }
-
-    public int getEnergy() {
-        return energy;
-    }
-
     @Override
     public int getLives() {
         return super.getLives();
-    }
-
-    public void setDead(boolean dead) {
-        this.dead = dead;
     }
 
     public void setEnergy(int energy) {

@@ -357,8 +357,8 @@ public class GameHandler implements Runnable {
             interactTarget = area;
 
             if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
+
                 //Returns a character
-                System.out.println("interact");
                 return hashMap.get(interactTarget);
             }
         }
