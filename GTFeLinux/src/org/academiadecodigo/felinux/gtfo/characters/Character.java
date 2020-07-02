@@ -4,7 +4,7 @@ import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.game.GameHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public abstract class Character extends Picture implements Moveable{
+public abstract class Character implements Moveable{
 
 
     private int lives = 5;
@@ -48,5 +48,6 @@ public abstract class Character extends Picture implements Moveable{
     public void addToInteractables(Area area, Character name){
 
         GameHandler.hashMap.put(area, name);
+        System.out.println(area + " " + name);
     }
 }
