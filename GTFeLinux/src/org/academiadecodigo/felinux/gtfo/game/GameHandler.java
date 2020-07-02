@@ -15,6 +15,9 @@ import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import java.util.HashMap;
@@ -49,7 +52,7 @@ public class GameHandler implements Runnable {
         //Player
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
-        this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
+        this.oldLady = new Picture(104,110,"resources/images/OldLady.png");
 
 
 
@@ -367,7 +370,8 @@ public class GameHandler implements Runnable {
 
         if (!firstMap) {
 
-            milk.makeMilkDisappear();
+
+                milk.makeMilkDisappear();
             Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
 
         }
