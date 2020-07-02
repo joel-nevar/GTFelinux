@@ -5,20 +5,10 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class CowBoss extends Enemy {
 
-
-    private Rectangle redLifeBar;
-    private Rectangle greenLifeBar;
     private int movementCounter = 0;
 
     public CowBoss(int posX, int posY, String spriteName) {
         super(EnemyAreaType.COW_BOSS, posX, posY, spriteName, 10);
-    }
-    public Rectangle getGreenLifeBar() {
-        return greenLifeBar;
-    }
-
-    public Rectangle getRedLifeBar() {
-        return redLifeBar;
     }
 
     @Override

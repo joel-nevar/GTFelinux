@@ -8,13 +8,8 @@ public abstract class Character implements Moveable{
 
 
     private int lives = 5;
-    private String message;
 
     public void interact() {
-    }
-
-    public String getMessage() {
-        return "Return this string";
     }
 
     public void takeLethalDamage() {

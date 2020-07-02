@@ -188,8 +188,6 @@ public class GameHandler implements Runnable {
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
-        Canvas.getInstance().hide(((CowBoss) enemies[1]).getRedLifeBar());
-        Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
 
         Canvas.getInstance().hide(catProstitute[3].getNpc());
     }

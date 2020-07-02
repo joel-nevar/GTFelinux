@@ -5,7 +5,6 @@ import org.academiadecodigo.felinux.gtfo.characters.player.Player;
 
 public class CatProstitute extends Npc {
 
-        private boolean visited;
         private CheckpointType checkpoint;
 
         public CatProstitute(int posX, int posY, String spriteName, int direction) {
@@ -15,19 +14,6 @@ public class CatProstitute extends Npc {
         @Override
         public void interact() {
                Player.checkpoint  = checkpoint;
-        }
-
-        @Override
-        public String getMessage() {
-                return "";
-        }
-
-        public boolean isVisited() {
-                return visited;
-        }
-
-        public void setVisited(boolean visited) {
-                this.visited = visited;
         }
 
         public void setCheckpoint(CheckpointType checkpoint) {

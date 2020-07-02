@@ -15,10 +15,6 @@ public class Menu implements KeyboardHandler, MouseHandler {
         game.startGame();
     }
 
-    public void instructions(){};
-    public void DLC(){};
-    public void exit(){};
-
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
 

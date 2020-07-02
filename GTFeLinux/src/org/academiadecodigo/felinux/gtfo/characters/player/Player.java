@@ -169,10 +169,6 @@ public class Player extends Character {
         energyAnimation.grow(48, 0);
     }
 
-    public void setAssaultableCatDead(boolean assaultableCatDead) {
-        this.assaultableCatIsDead = assaultableCatDead;
-    }
-
     /**
      * Claw Animation managed here
      */

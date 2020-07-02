@@ -37,18 +37,6 @@ public class Field extends Picture {
         return map;
     }
 
-    /**
-     * fill sprites on the field
-     */
-
-    public int getSizeRow() {
-        return map.getHeight();
-    }
-
-    public int getSizeCol() {
-        return map.getWidth();
-    }
-
     public static int getCellSize() {
         return PIXEL;
     }
@@ -61,27 +49,10 @@ public class Field extends Picture {
         return notWalkableMap2;
     }
 
-    /*
-    public boolean isWalkable(int x, int y) {
-        for (Area area : notWalkable) {
-            if (area.include(x,y)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-     */
-
-
-
     private void addNotWalkable(int xMin, int yMin, int xSize, int ySize){
         Area area =new Area(xMin, yMin, xSize, ySize);
         notWalkable.add(area);
     }
-
-
-
 
     public void setNotWalkable() {
         addNotWalkable(40 + PADDING_X, 99 + PADDING_Y, 105 - 40, 202 - 99); // House Nº1
@@ -122,13 +93,11 @@ public class Field extends Picture {
 
     }
 
-
     private void addNotWalkable2(int xMin, int yMin, int xMax, int yMax){
         Area area =new Area(xMin, yMin, xMax, yMax);
         area.getBoundArea().setColor(Color.RED);
         notWalkableMap2.add(area);
     }
-
 
     public void setNotWalkableMap2() {
     addNotWalkable2(-1 + PADDING_X,-1 + PADDING_Y,1499 - 1,90 -1); // TOP BORDER MAP2
