@@ -98,13 +98,6 @@ public abstract class Npc extends Character {
        routeX = 2;
     }
 
-    /**
-     * Defines this cat direction
-     */
-
-
-
-
     public Picture getNpc() {
         return npc;
     }
@@ -123,6 +116,10 @@ public abstract class Npc extends Character {
 
     public Rectangle getRedLifeBar() {
         return redLifeBar;
+    }
+
+    public void takeDamage(){
+        this.greenLifeBar.translate(-29,0);
     }
 
     public boolean isDead() {

@@ -24,6 +24,13 @@ public class AssaultableCat extends Npc {
         return "I am an Assaultable Cat";
     }
 
+    public void takeDamage(){
+        //Character, lose lives
+        super.takeLethalDamage();
+        //Npc make healthBar decrease
+        super.takeDamage();
+    }
+
 
     public boolean isRobbed() {
         return robbed;

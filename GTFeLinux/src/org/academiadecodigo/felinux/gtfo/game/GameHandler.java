@@ -6,11 +6,10 @@ import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Lion;
-import org.academiadecodigo.felinux.gtfo.characters.player.Player;
-import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
-import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.Npc;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.NpcType;
+import org.academiadecodigo.felinux.gtfo.characters.player.Player;
+import org.academiadecodigo.felinux.gtfo.characters.player.PlayerKeyboard;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.simplegraphics.graphics.Canvas;
@@ -62,6 +61,7 @@ public class GameHandler implements Runnable {
         run();
     }
 
+    //Interact with player
     private void addInteractables() {
 
         for (Npc rat: rats) {
@@ -193,28 +193,6 @@ public class GameHandler implements Runnable {
         Canvas.getInstance().hide(((Lion) enemies[1]).getGreenLifeBar());
     }
 
-    @Override
-    public void run() {
-
-        //Game loop to create everything!
-        while (!player.isDead()) {
-            try {
-
-                Thread.sleep(35);
-
-                //Check if player is attacking
-                player.playerAttackVerification();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //Moves all the movable classes
-            moveAll();
-        }
-        System.out.println("GAME OVER");
-    }
-
-
     private void moveAll() {
 
         player.move();
@@ -344,7 +322,10 @@ public class GameHandler implements Runnable {
             interactTarget = area;
 
             if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
+
+                //Returns a character
                 return hashMap.get(interactTarget);
+
             }
         }
 
@@ -358,7 +339,6 @@ public class GameHandler implements Runnable {
     public static boolean checkMilk(){
 
         if(!firstMap){
-
             return Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
         }
         return false;
@@ -378,6 +358,26 @@ public class GameHandler implements Runnable {
         GameSound(Sounds sounds) {
             this.sounds = sounds;
         }
+    }
+    @Override
+    public void run() {
+
+        //Game loop to create everything!
+        while (!player.isDead()) {
+            try {
+
+                Thread.sleep(35);
+
+                //Check if player is attacking
+                player.playerAttackVerification();
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //Moves all the movable classes
+            moveAll();
+        }
+        System.out.println("GAME OVER");
     }
 }
 

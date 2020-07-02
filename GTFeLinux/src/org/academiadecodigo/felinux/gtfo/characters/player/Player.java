@@ -2,6 +2,7 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.game.GameHandler;
@@ -19,7 +20,8 @@ public class Player extends Character{
     private boolean clawUsed = false;           //Checks if the claw was used or not
     private boolean dead = false;               //Checks if the player is dead
     private int energy = 300;                   //Animation scaled to 300
-    private boolean hasMilk = false;            //Doesn't have Milk yet
+    private boolean hasMilk = false;            //Checks if it has milk
+    private boolean isAttackingAnAssaultableCat = false;        //Checks if it is attacking
     private int clawDamage = 1;                 //Damage when attacking
     private Picture energyBar;                  //Background image for the Energy bar
     private Rectangle energyAnimation;          //The actual energy bar
@@ -66,7 +68,22 @@ public class Player extends Character{
         if(interactWith instanceof Player){
 
             if(GameHandler.checkMilk()){
-                hasMilk = true;
+                this.hasMilk = true;
+            }
+            return;
+        }
+        //Attacks enemy, or not
+        if(interactWith instanceof AssaultableCat){
+            if(this.isClawUsed()){
+                System.out.println("Im attacking an assaultable cat");
+                this.isAttackingAnAssaultableCat = true;
+
+                //Gives damage to that instance
+                interactWith.setLives( interactWith.getLives() - 1 );
+                if(interactWith.getLives() == 0){
+
+                }
+                System.out.println(interactWith.getLives());
             }
             return;
         }
@@ -111,7 +128,7 @@ public class Player extends Character{
         //Attack animation appear
         if (clawUsed == true) {
             this.getClawAnimation().draw();
-           GameHandler.GameSound.CATCLAW.sounds.play(true);
+            GameHandler.GameSound.CATCLAW.sounds.play(true);
 
             //Tick to measure animation time
             this.setClawTick(getClawTick() + 1);
@@ -129,7 +146,7 @@ public class Player extends Character{
 
         this.clawUsed = true;
         clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/images/Claw_attack.png");
-
+/*
         if (200 > (Math.abs(this.getX() - enemy.getEnemy().getX())) && 200 > (Math.abs(this.getY() - enemy.getEnemy().getY()))) {
 
             if (enemy.getLives() <= 1) {
@@ -138,7 +155,7 @@ public class Player extends Character{
             }
             enemy.setLives(enemy.getLives() - 1);
             System.out.println(enemy.getLives());
-        }
+        }*/
     }
 
     public int getClawTick() {
