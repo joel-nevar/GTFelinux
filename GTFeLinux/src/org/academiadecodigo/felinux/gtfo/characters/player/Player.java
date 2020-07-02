@@ -384,7 +384,7 @@ public class Player extends Character {
         return false;
     }
 
-    public void toCheckpoint(){
-
+    public void checkpoint(){
+        player.translate(checkpoint.getDx(),checkpoint.getDy());
     }
 }
