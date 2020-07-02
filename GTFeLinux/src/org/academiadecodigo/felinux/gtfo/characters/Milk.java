@@ -12,7 +12,6 @@ public class Milk extends Picture{
     private Area area;
 
     public Milk(){
-
         this.milk = new Picture(posX, posY,"resources/images/Milk.png");
         this.area = new Area(milk.getX(),milk.getY(),milk.getWidth(),milk.getHeight());
     }

@@ -30,12 +30,12 @@ public class Player extends Character {
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
-    private CheckpointType checkpoint;
-    private int loseLife;
+    public static CheckpointType checkpoint;
     private int lifeCounter = 0;                //Used to check death of cat and set animation
     private boolean assaultableCatIsDead = false;
     private boolean cowIsDead = false;
     private Picture wasted;
+    private int loseLife = 6;
 
     //These are used for movement
     public static float dx;
@@ -115,7 +115,6 @@ public class Player extends Character {
     }
 
     public void energyDecay() {
-
         if (this.energy <= 0) {
             if (super.getLives() <= 1) {
                 this.dead = true;
@@ -124,6 +123,7 @@ public class Player extends Character {
                 hpAnimation.grow(-7, 0);
                 return;
             }
+
             this.takeLethalDamage();
             this.energyReset();
             //HP Bar
@@ -134,6 +134,11 @@ public class Player extends Character {
         this.loseEnergy();
         energyAnimation.translate(-0.16, 0);
         energyAnimation.grow(-0.16, 0);
+
+        if(loseLife == super.getLives()){
+            checkpoint();
+            loseLife--;
+        }
     }
 
     public void gainLife() {
@@ -181,6 +186,7 @@ public class Player extends Character {
 
     /**
      * Attack animation and sound goes here
+     * Claw TIMER IS HERER!!!
      */
     public void setClawUsed(){
 
@@ -190,8 +196,12 @@ public class Player extends Character {
         GameHandler.GameSound.CATCLAW.sounds.play(true);
 
         clawUsed = true;
-        clawTick = 20;
+        clawTick = 10;
     }
+
+    /**
+     * Attack happens here
+     */
     public void attack(){
 
         Character attackTarget = GameHandler.checkInteraction();
@@ -216,19 +226,12 @@ public class Player extends Character {
             return;
         }
 
+        //If he touches the boss, he dies
         if(attackTarget instanceof CowBoss) {
-            //Gives damage to that instance
-            attackTarget.setLives(attackTarget.getLives() - 1);
-            ((CowBoss) attackTarget).getGreenLifeBar().grow(-4, 0);
-            ((CowBoss) attackTarget).getGreenLifeBar().translate(-6, 0);
-            //kills the cow and gives hp to the player
-            if (attackTarget.getLives() == 0) {
-                this.cowIsDead = true;
-                ((CowBoss) attackTarget).kill();
-                this.gainLife();
-            }
-            this.cowIsDead = false;
+            takeLethalDamage();
+            System.out.println("hp "  + getLives());
         }
+
     }
 
     public boolean isClawUsed() {
@@ -337,6 +340,10 @@ public class Player extends Character {
         return false;
     }
 
+    public void die() {
+        this.dead = true;
+    }
+
     public Area getArea() {
         return playerArea;
     }
@@ -361,6 +368,9 @@ public class Player extends Character {
     }
 
     public void checkpoint(){
-        player.translate(checkpoint.getDx(),checkpoint.getDy());
+        player.translate(checkpoint.getDx() - playerArea.getBoundArea().getX(),
+                checkpoint.getDy() - playerArea.getBoundArea().getY());
+        playerArea.getBoundArea().translate(checkpoint.getDx() - playerArea.getBoundArea().getX(),
+                checkpoint.getDy() - playerArea.getBoundArea().getY());
     }
 }
