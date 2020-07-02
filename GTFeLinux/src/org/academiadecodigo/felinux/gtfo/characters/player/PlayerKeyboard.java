@@ -126,6 +126,8 @@ public class PlayerKeyboard implements KeyboardHandler {
         stopDown.setKey(KeyboardEvent.KEY_S);
         stopDown.setKeyboardEventType(KeyboardEventType.KEY_RELEASED);
 
+
+
         keyboard.addEventListener(stopLeft);
         keyboard.addEventListener(stopRight);
         keyboard.addEventListener(stopUp);

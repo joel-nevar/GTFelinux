@@ -25,7 +25,7 @@ public class GameHandler implements Runnable {
     private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
-    private static Picture oldLady ;
+    private  static Picture oldLady ;
     private PlayerKeyboard playerKeyboard;
     private static Npc[] assaultableCats = new Npc[13];
     private static Npc[] catProstitute = new Npc[3];
@@ -44,8 +44,7 @@ public class GameHandler implements Runnable {
         GameSound.BACKMUSIC.sounds.play(true);
         //Creates everything that is visual in the Canvas
         this.milk = new Milk();
-        // call this on the factory thx, also 350 on Y
-        this.enemies[0] = new CopCar(110, 350, "AssaultableCat_1");
+
         //Player
         this.player = new Player("tobias.png");
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
@@ -226,7 +225,6 @@ public class GameHandler implements Runnable {
         for (int i = 0; i < rats.length; i++) {
             rats[i].move();
         }
-
     }
 
     public static void changeMap() {
@@ -409,29 +407,10 @@ public class GameHandler implements Runnable {
     }
 
     public void checkIfPlayerGainsLife() {
-/*
-        if(player.getEnergy() <= 1){
-            player.createWasted();
-            player.getWasted().draw();
-            return;
-        }
-        if(wastedExists){
-            if(wastedTimer == 0){
-                wastedTimer = player.getWasted().getY();
-            }
-            player.getWasted().translate(0,-1);
-            if(player.getWasted().getY() <= wastedTimer-10){
-                player.getWasted().delete();
-                wastedExists = false;
-                wastedTimer = 0;
-            }
-        }
-*/
 
         if(player.isAssaultableCatIsDead()){
             player.gainLife();
         }
-
         if(player.isOneUpExists()){
 
             if(oneUpTimer == 0){
@@ -474,6 +453,3 @@ public class GameHandler implements Runnable {
         System.out.println("GAME OVER");
     }
 }
-
-//com mp3
-

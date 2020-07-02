@@ -54,7 +54,7 @@ public abstract class Npc extends Character {
      * Move all assaultable cat
      */
     @Override
-    public void move() throws ConcurrentModificationException {
+    public void move() throws ConcurrentModificationException, NullPointerException {
 
         if (isDead()) {
             return;
