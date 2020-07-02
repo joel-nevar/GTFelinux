@@ -21,7 +21,6 @@ public class Player extends Character{
     private boolean dead = false;               //Checks if the player is dead
     private int energy = 300;                   //Animation scaled to 300
     private boolean hasMilk = false;            //Checks if it has milk
-    private boolean isAttackingAnAssaultableCat = false;        //Checks if it is attacking
     private int clawDamage = 1;                 //Damage when attacking
     private Picture energyBar;                  //Background image for the Energy bar
     private Rectangle energyAnimation;          //The actual energy bar
@@ -75,18 +74,15 @@ public class Player extends Character{
         //Attacks enemy, or not
         if(interactWith instanceof AssaultableCat){
             if(this.isClawUsed()){
-                System.out.println("Im attacking an assaultable cat");
-                this.isAttackingAnAssaultableCat = true;
-
                 //Gives damage to that instance
                 interactWith.setLives( interactWith.getLives() - 1 );
                 ((AssaultableCat) interactWith).getGreenLifeBar().grow(-4,0);
                 ((AssaultableCat) interactWith).getGreenLifeBar().translate(-6,0);
+                //kills the cat and gives hp to the player
                 if(interactWith.getLives() == 0){
                     ((AssaultableCat) interactWith).kill();
                     this.gainLife();
                 }
-                System.out.println(interactWith.getLives());
             }
             return;
         }
