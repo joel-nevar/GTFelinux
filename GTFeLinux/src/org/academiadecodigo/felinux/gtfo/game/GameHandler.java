@@ -36,6 +36,7 @@ public class GameHandler implements Runnable {
     private static Npc[] assaultableCats = new Npc[13];
     private static Npc[] catProstitute = new Npc[3];
     public static boolean firstMap = true;
+    private int oneUpTimer;
 
 
     public static HashMap<Area, Character> hashMap;
@@ -233,7 +234,7 @@ public class GameHandler implements Runnable {
         }
     }
 
-    }
+
 
     public static void changeMap() {
 
