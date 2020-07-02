@@ -26,7 +26,7 @@ public class GameHandler implements Runnable {
     private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
-    private  static Picture oldLady ;
+    private static Picture oldLady ;
     private PlayerKeyboard playerKeyboard;
     private static Npc[] assaultableCats = new Npc[13];
     private static Npc[] catProstitute = new Npc[3];
@@ -35,6 +35,7 @@ public class GameHandler implements Runnable {
 
     public static HashMap<Area, Character> hashMap;
     private static final int INTERACT_RANGE = 25;
+    private static Area mapArea;
 
     public void init() {
 
@@ -49,11 +50,9 @@ public class GameHandler implements Runnable {
         this.playerKeyboard = new PlayerKeyboard(player, enemies[0]);
         this.oldLady = new Picture(120,70,"resources/images/OldLady.png");
 
-
-
-
         //interaction
         hashMap = new HashMap<>();
+        mapArea = new Area(1169,189,100,100);
     }
 
     public void startGame() {
@@ -79,8 +78,6 @@ public class GameHandler implements Runnable {
         for (Npc cat : assaultableCats) {
             cat.addToInteractables();
         }
-
-
     }
 
     private void showAlways() {
@@ -171,7 +168,6 @@ public class GameHandler implements Runnable {
         for (Area area : field.getNotWalkableMap2()) {
             area.getBoundArea().draw();
 
-
         }
 
         enemies[1].getEnemy().draw();
@@ -220,7 +216,6 @@ public class GameHandler implements Runnable {
             rats[i].move();
         }
     }
-
 
     public static void changeMap() {
 
@@ -357,7 +352,6 @@ public class GameHandler implements Runnable {
             }
         }
 
-
         return player;
     }
 
@@ -369,9 +363,19 @@ public class GameHandler implements Runnable {
 
         if (!firstMap) {
 
+            //THIS IS WRONG
+            //TODO FIX THIS
             milk.makeMilkDisappear();
             Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
 
+        }
+        return false;
+    }
+
+    public static boolean canEnterCastle() {
+
+        if (firstMap) {
+            return(Area.checkInteract(player.getArea(), mapArea, 150));
         }
         return false;
     }

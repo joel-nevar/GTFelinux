@@ -76,6 +76,7 @@ public class Player extends Character {
         //this is to check the default
         if (interactWith instanceof Player) {
 
+
             if (GameHandler.checkMilk()) {
                 this.hasMilk = true;
             }
@@ -122,6 +123,11 @@ public class Player extends Character {
 
     public void setOneUp(Picture oneUp) {
         this.oneUp = oneUp;
+    }
+
+    public boolean HasMilk(){
+
+        return hasMilk;
     }
 
     public void energyDecay() {
@@ -222,6 +228,12 @@ public class Player extends Character {
             dy = 0;
         }
 
+        if (interactCollisionCheck(dx,dy)){
+            
+            energyDecay();
+            energyDecay();
+        }
+
         //checkUp
         if ((Field.getPADDING_Y() >= player.getY())) {
             if (dy <= 0) {
@@ -317,6 +329,22 @@ public class Player extends Character {
             return false;
         }
 
+        return false;
+    }
+
+    public Area getArea() {
+        return playerArea;
+    }
+
+    public boolean interactCollisionCheck(float dx, float dy){
+
+        if(GameHandler.canEnterCastle()){
+
+            GameHandler.changeMap();
+
+            return false;
+        }
+
         for (Area area : Field.notWalkableMap2) {
 
             if (Area.contains(playerArea, area, dx, dy)) {
@@ -325,10 +353,6 @@ public class Player extends Character {
             }
         }
         return false;
-    }
-
-    public Area getArea() {
-        return playerArea;
     }
 
     public void toCheckpoint(){
