@@ -186,6 +186,7 @@ public class Player extends Character {
 
     /**
      * Attack animation and sound goes here
+     * Claw TIMER IS HERER!!!
      */
     public void setClawUsed(){
 
@@ -195,8 +196,12 @@ public class Player extends Character {
         GameHandler.GameSound.CATCLAW.sounds.play(true);
 
         clawUsed = true;
-        clawTick = 20;
+        clawTick = 10;
     }
+
+    /**
+     * Attack happens here
+     */
     public void attack(){
 
         Character attackTarget = GameHandler.checkInteraction();

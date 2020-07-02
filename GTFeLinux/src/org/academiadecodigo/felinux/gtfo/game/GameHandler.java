@@ -3,7 +3,6 @@ package org.academiadecodigo.felinux.gtfo.game;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
@@ -127,8 +126,6 @@ public class GameHandler implements Runnable {
         //Make a for loop when more enemies here
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getBoundArea().draw();
-        ((CopCar) enemies[0]).getRedLifeBar().fill();
-        ((CopCar) enemies[0]).getGreenLifeBar().fill();
     }
 
     private static void hideAllMap1() {
@@ -152,8 +149,6 @@ public class GameHandler implements Runnable {
         //Make a for loop when more enemies here
         Canvas.getInstance().hide(enemies[0].getEnemy());
         Canvas.getInstance().hide(enemies[0].getEnemyField().getArea().getBoundArea());
-        Canvas.getInstance().hide(((CopCar) enemies[0]).getRedLifeBar());
-        Canvas.getInstance().hide(((CopCar) enemies[0]).getGreenLifeBar());
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
