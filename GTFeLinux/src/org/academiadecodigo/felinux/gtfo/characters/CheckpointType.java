@@ -3,10 +3,8 @@ package org.academiadecodigo.felinux.gtfo.characters;
 public enum CheckpointType {
 
     START(50, 300),
-    CHECKPOINT1(1, 1),
-    CHECKPOINT2(2, 2),
-    CHECKPOINT3(3, 3),
-    CHECKPOINT4(4, 4);
+    CHECKPOINT1(390, 540),
+    CHECKPOINT2(90, 800);
 
     int dx;
     int dy;

@@ -2,7 +2,6 @@ package org.academiadecodigo.felinux.gtfo.game;
 
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.Milk;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.EnemyType;
@@ -21,14 +20,14 @@ import java.util.HashMap;
 public class GameHandler implements Runnable {
 
     private static Player player;
-    private static Enemy[] enemies = new Enemy[10];
+    private static Enemy[] enemies = new Enemy[2];
     private static Npc[] rats = new Npc[5];
     private static Milk milk;
     private static Field field;
     private  static Picture oldLady ;
     private PlayerKeyboard playerKeyboard;
     private static Npc[] assaultableCats = new Npc[13];
-    private static Npc[] catProstitute = new Npc[3];
+    private static Npc[] catProstitute = new Npc[2];
     public static boolean firstMap = true;
     private int oneUpTimer;
     private int wastedTimer;
@@ -79,6 +78,10 @@ public class GameHandler implements Runnable {
             cat.addToInteractables();
         }
 
+        for (Npc cat : catProstitute) {
+            cat.addToInteractables();
+        }
+
         /**
          * Game Boss
          */
@@ -121,15 +124,6 @@ public class GameHandler implements Runnable {
         //Make a for loop when more enemies here
         enemies[0].getEnemy().draw();
         enemies[0].getEnemyField().getArea().getBoundArea().draw();
-        ((CopCar) enemies[0]).getRedLifeBar().fill();
-        ((CopCar) enemies[0]).getGreenLifeBar().fill();
-
-        player.getPlayer().draw();
-        oldLady.draw();
-        /**Assets**/
-        for (Area area : field.getNotWalkable()) {
-            area.getBoundArea().draw();
-        }
     }
 
     private static void hideAllMap1() {
@@ -153,14 +147,6 @@ public class GameHandler implements Runnable {
         //Make a for loop when more enemies here
         Canvas.getInstance().hide(enemies[0].getEnemy());
         Canvas.getInstance().hide(enemies[0].getEnemyField().getArea().getBoundArea());
-        Canvas.getInstance().hide(((CopCar) enemies[0]).getRedLifeBar());
-        Canvas.getInstance().hide(((CopCar) enemies[0]).getGreenLifeBar());
-
-
-        /**Assets**/
-        for (Area area : field.getNotWalkable()) {
-            Canvas.getInstance().hide(area.getBoundArea());
-        }
 
         Canvas.getInstance().hide(enemies[1].getEnemy());
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
@@ -207,7 +193,7 @@ public class GameHandler implements Runnable {
         Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
     }
 
-    private void moveAll() {
+    private void moveAll() throws NullPointerException{
 
         player.move();
         player.energyDecay();
@@ -225,6 +211,7 @@ public class GameHandler implements Runnable {
         for (int i = 0; i < rats.length; i++) {
             rats[i].move();
         }
+            enemies[1].move();
     }
 
     public static void changeMap() {
@@ -247,28 +234,43 @@ public class GameHandler implements Runnable {
     }
 
     private void instanceOfRats(Npc[] rats) {
-        for (int index = 0; index < rats.length; index++) {
-            rats[index] = Factory.npcFactory(NpcType.RAT, Randomizer.getRandom(1200, 200),
-                    Randomizer.getRandom(400, 200), index);
+
+        int[][] ratPos = new int[8][2];
+
+        ratPos[0][0] = 110;
+        ratPos[0][1] = 350;
+
+        ratPos[1][0] = 220;
+        ratPos[1][1] = 260;
+
+        ratPos[2][0] = 110;
+        ratPos[2][1] = 350;
+
+        ratPos[3][0] = 220;
+        ratPos[3][1] = 260;
+
+        ratPos[4][0] = 110;
+        ratPos[4][1] = 350;
+
+        for (int i = 0; i < rats.length; i++) {
+            rats[i] = Factory.npcFactory(NpcType.RAT, ratPos[i][0] ,ratPos[i][1], i);
         }
     }
 
     private void instanceOfCatProstitute(Npc[] catProstitute) {
 
-        int[][] catPro = new int[3][2];
+        int[][] catPro = new int[2][2];
 
-        //TODO Diney arranja aqui as posicoes á tua vontade
+        catPro[0][0] = 390;
+        catPro[0][1] = 540;
+        catPro[1][0] = 800;
+        catPro[1][1] = 96;
 
-        catPro[0][0] = 110;
-        catPro[0][1] = 350;
-        catPro[1][0] = 220;
-        catPro[1][1] = 260;
-        catPro[2][0] = 500;
-        catPro[2][1] = 600;
+        catProstitute[0] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[0][0], catPro[0][1], 0);
+        ((CatProstitute)catProstitute[0]).setCheckpoint(CheckpointType.CHECKPOINT1);
+        catProstitute[1] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[1][0], catPro[1][1], 0);
+        ((CatProstitute)catProstitute[0]).setCheckpoint(CheckpointType.CHECKPOINT2);
 
-        for (int i = 0; i < catProstitute.length ; i++) {
-            catProstitute[i] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[i][0], catPro[i][1], 0);
-        }
     }
 
     private void instanceOfEnemies(Enemy[] enemies){
@@ -277,7 +279,7 @@ public class GameHandler implements Runnable {
         enemyPos[0][0] = 110;
         enemyPos[0][1] = 350;
         enemyPos[1][0] = 220;
-        enemyPos[1][1] = 260;
+        enemyPos[1][1] = 200;
 
         enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
         enemies[1] = Factory.enemyFactory(EnemyType.COW_BOSS, enemyPos[1][0], enemyPos[1][1], "Cow2");
@@ -357,8 +359,8 @@ public class GameHandler implements Runnable {
             interactTarget = area;
 
             if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
+
                 //Returns a character
-                System.out.println("interact");
                 return hashMap.get(interactTarget);
             }
         }
@@ -446,15 +448,13 @@ public class GameHandler implements Runnable {
                 player.playerAttackVerification();
                 checkIfPlayerGainsLife();
                 checkIfPlayerHasMilk();
-
-
+                moveAll();
+                System.out.println(player.getArea().getBoundArea().getX() + " " + player.getArea().getBoundArea().getY());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (NullPointerException exception){
                 System.out.println("Garra nao conseguiu ser instanciada ( Por alguma razao )");
             }
-            //Moves all the movable classes
-            moveAll();
         }
         if(!player.HasMilk()){
             GameSound.BACKMUSIC.sounds.stop();

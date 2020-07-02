@@ -8,16 +8,19 @@ public class CatProstitute extends Npc {
         private boolean visited;
         private CheckpointType checkpoint;
 
-
-        @Override
-        public String getMessage() {
-                return "I am a Cat Prostitute";
-        }
-
         public CatProstitute(int posX, int posY, String spriteName, int direction) {
                 super(posX, posY, spriteName, direction);
         }
 
+        @Override
+        public String getMessage() {
+                return "";
+        }
+
+        @Override
+        public void interact() {
+                Player.checkpoint = checkpoint;
+        }
 
         public boolean isVisited() {
                 return visited;
@@ -27,8 +30,8 @@ public class CatProstitute extends Npc {
                 this.visited = visited;
         }
 
-        public CheckpointType getCheckpoint() {
-                return checkpoint;
+        public void setCheckpoint(CheckpointType checkpoint) {
+                this.checkpoint = checkpoint;
         }
 }
 

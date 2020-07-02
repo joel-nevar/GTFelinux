@@ -5,7 +5,7 @@ import org.academiadecodigo.felinux.gtfo.field.Area;
 public enum EnemyAreaType {
 
     //Limites de algures
-    COW_BOSS(5,290,1320,295),
+    COW_BOSS(141,180,1301,281),
 
     //Limites da estrada
     COP_CAR(5,347,1318,35);

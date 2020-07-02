@@ -3,7 +3,6 @@ package org.academiadecodigo.felinux.gtfo.characters.player;
 import org.academiadecodigo.felinux.gtfo.characters.Character;
 import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
-import org.academiadecodigo.felinux.gtfo.characters.enemies.Enemy;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
@@ -31,12 +30,12 @@ public class Player extends Character {
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
-    private CheckpointType checkpoint;
-    private int loseLife;
+    public static CheckpointType checkpoint;
     private int lifeCounter = 0;                //Used to check death of cat and set animation
     private boolean assaultableCatIsDead = false;
     private boolean cowIsDead = false;
     private Picture wasted;
+    private int loseLife = 6;
 
     //These are used for movement
     public static float dx;
@@ -69,7 +68,6 @@ public class Player extends Character {
 
     /**
      * Call this method to check interactions
-     * Remove the milk part, to reuse this
      */
     @Override
     public void interact() {
@@ -83,40 +81,7 @@ public class Player extends Character {
             }
             return;
         }
-        //Attacks enemy, or not
-        if(interactWith instanceof AssaultableCat){
-            if(this.isClawUsed()){
-                //Gives damage to that instance
-                interactWith.setLives( interactWith.getLives() - 1 );
-                ((AssaultableCat) interactWith).getGreenLifeBar().grow(-5,0);
-                ((AssaultableCat) interactWith).getGreenLifeBar().translate(-6,0);
-                //kills the cat and gives hp to the player
-                if(interactWith.getLives() == 0){
-                    this.assaultableCatIsDead = true;
-                    ((AssaultableCat) interactWith).kill();
-                    this.gainLife();
-                }
-                this.assaultableCatIsDead = false;
-            }
-            return;
-        }
 
-        if(interactWith instanceof CowBoss){
-            if(this.isClawUsed()){
-                //Gives damage to that instance
-                interactWith.setLives( interactWith.getLives() - 1 );
-                ((CowBoss) interactWith).getGreenLifeBar().grow(-4,0);
-                ((CowBoss) interactWith).getGreenLifeBar().translate(-6,0);
-                //kills the cow and gives hp to the player
-                if(interactWith.getLives() == 0){
-                    this.cowIsDead = true;
-                    ((CowBoss) interactWith).kill();
-                    this.gainLife();
-                }
-                this.cowIsDead = false;
-            }
-            return;
-        }
         //In range for interaction, interact with
         interactWith.interact();
     }
@@ -158,6 +123,7 @@ public class Player extends Character {
                 hpAnimation.grow(-7, 0);
                 return;
             }
+
             this.takeLethalDamage();
             this.energyReset();
             //HP Bar
@@ -168,6 +134,11 @@ public class Player extends Character {
         this.loseEnergy();
         energyAnimation.translate(-0.16, 0);
         energyAnimation.grow(-0.16, 0);
+
+        if(loseLife == super.getLives()){
+            checkpoint();
+            loseLife--;
+        }
     }
 
     public void gainLife() {
@@ -197,49 +168,81 @@ public class Player extends Character {
         this.assaultableCatIsDead = assaultableCatDead;
     }
 
-    public void playerAttackVerification() throws NullPointerException {
-        //Attack animation appear
-        if (clawUsed == true) {
-            this.clawAnimation.draw();
-            GameHandler.GameSound.CATCLAW.sounds.play(true);
+    /**
+     * Claw Animation managed here
+     */
+    public void playerAttackVerification() {
 
-            //Tick to measure animation time
-            this.clawTick += 1;
+        if(clawUsed) {
 
             //Attack animation disappear
-            if (clawTick == 4) {
-                this.clawUsed = false;
-                this.clawAnimation.delete();
-                this.clawTick = 0;
+            clawTick--;
+            if(clawTick<=0) {
+                clawUsed = false;
+                clawAnimation.delete();
             }
         }
     }
 
-    public void attack(Enemy enemy) {
+    /**
+     * Attack animation and sound goes here
+     * Claw TIMER IS HERER!!!
+     */
+    public void setClawUsed(){
 
-        this.clawUsed = true;
+        //Attack animation appear
         clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/images/Claw_attack.png");
+        clawAnimation.draw();
+        GameHandler.GameSound.CATCLAW.sounds.play(true);
 
+        clawUsed = true;
+        clawTick = 10;
     }
 
-    public int getClawTick() {
-        return clawTick;
-    }
+    /**
+     * Attack happens here
+     */
+    public void attack(){
 
-    public void setClawTick(int clawTick) {
-        this.clawTick = clawTick;
-    }
+        Character attackTarget = GameHandler.checkInteraction();
 
-    public void setClawUsed(boolean clawUsed) {
-        this.clawUsed = clawUsed;
+        //this is to check the default
+        if (attackTarget instanceof Player) {
+            return;
+        }
+
+        if(attackTarget instanceof AssaultableCat){
+            //Gives damage to that instance
+            attackTarget.setLives( attackTarget.getLives() - 1 );
+            ((AssaultableCat) attackTarget).getGreenLifeBar().grow(-5,0);
+            ((AssaultableCat) attackTarget).getGreenLifeBar().translate(-6,0);
+            //kills the cat and gives hp to the player
+            if(attackTarget.getLives() == 0){
+                this.assaultableCatIsDead = true;
+                ((AssaultableCat) attackTarget).kill();
+                this.gainLife();
+            }
+            this.assaultableCatIsDead = false;
+            return;
+        }
+
+        if(attackTarget instanceof CowBoss) {
+            //Gives damage to that instance
+            attackTarget.setLives(attackTarget.getLives() - 1);
+            ((CowBoss) attackTarget).getGreenLifeBar().grow(-4, 0);
+            ((CowBoss) attackTarget).getGreenLifeBar().translate(-6, 0);
+            //kills the cow and gives hp to the player
+            if (attackTarget.getLives() == 0) {
+                this.cowIsDead = true;
+                ((CowBoss) attackTarget).kill();
+                this.gainLife();
+            }
+            this.cowIsDead = false;
+        }
     }
 
     public boolean isClawUsed() {
         return clawUsed;
-    }
-
-    public Picture getClawAnimation() throws NullPointerException {
-        return clawAnimation;
     }
 
     /**
@@ -251,11 +254,6 @@ public class Player extends Character {
         if (isDead()) {
             return;
         }
-
-        if (interactCollisionCheck(dx,dy)){
-            energyDecay();
-        }
-
 
         if (collisionCheck(dx, dy)) {
 
@@ -323,21 +321,9 @@ public class Player extends Character {
         this.energy--;
     }
 
-    public int getClawDamage() {
-        return this.clawDamage;
-    }
-
-    public int getEnergy() {
-        return energy;
-    }
-
     @Override
     public int getLives() {
         return super.getLives();
-    }
-
-    public void setDead(boolean dead) {
-        this.dead = dead;
     }
 
     public void setEnergy(int energy) {
@@ -384,7 +370,10 @@ public class Player extends Character {
         return false;
     }
 
-    public void toCheckpoint(){
-
+    public void checkpoint(){
+        player.translate(checkpoint.getDx() - playerArea.getBoundArea().getX(),
+                checkpoint.getDy() - playerArea.getBoundArea().getY());
+        playerArea.getBoundArea().translate(checkpoint.getDx() - playerArea.getBoundArea().getX(),
+                checkpoint.getDy() - playerArea.getBoundArea().getY());
     }
 }

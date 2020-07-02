@@ -10,7 +10,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 public abstract class Enemy extends Character {
 
 
-    private EnemyAreaType enemyField;
+    protected EnemyAreaType enemyField;
     private boolean dead = false;
     private Picture enemy;
     private Area area;
