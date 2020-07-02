@@ -80,6 +80,11 @@ public class GameHandler implements Runnable {
             cat.addToInteractables();
         }
 
+        /**
+         * Game Boss
+         */
+        enemies[1].addToInteractables();
+
 
     }
 
@@ -97,6 +102,11 @@ public class GameHandler implements Runnable {
         player.getHpBar().draw();
         player.getEnergyAnimation().fill();
         player.getHpAnimation().fill();
+
+        if(player.isOneUpExists()){
+            player.getOneUp().delete();
+            player.setOneUpExists(false);
+        }
     }
 
     private static void showAllMap1() {
@@ -353,6 +363,7 @@ public class GameHandler implements Runnable {
 
             if(Area.checkInteract(player.getArea(),interactTarget, INTERACT_RANGE)){
                 //Returns a character
+                System.out.println("interact");
                 return hashMap.get(interactTarget);
             }
         }
@@ -391,18 +402,21 @@ public class GameHandler implements Runnable {
             this.sounds = sounds;
         }
     }
-//TODO resolver intanciacao deste draw
-    public void checkIfPlayerGainsLife(){
+    //TODO resolver intanciacao deste draw
+    public void checkIfPlayerGainsLife() {
 
         if(player.isAssaultableCatIsDead()){
-            player.getOneUp().draw();
-            player.getOneUp().translate(0,1);
-            System.out.println("Oneup exists");
+            player.gainLife();
         }
+        if(player.isOneUpExists()){
 
-        if(player.getLifeCounter() >= 10){
-            player.setLifeCounter(0);
-            player.getOneUp().delete();
+            player.getOneUp().translate(0,-1);
+
+            if(player.getOneUp().getY() == player.getOneUp().getY()-5){
+
+                player.getOneUp().delete();
+                player.setOneUpExists(false);
+            }
         }
     }
 
@@ -417,7 +431,6 @@ public class GameHandler implements Runnable {
 
                 //Check if player is attacking
                 player.playerAttackVerification();
-
                 checkIfPlayerGainsLife();
 
             } catch (InterruptedException e) {

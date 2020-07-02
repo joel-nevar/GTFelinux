@@ -28,7 +28,6 @@ public class AssaultableCat extends Npc {
         super.takeLethalDamage();
     }
 
-
     public boolean isRobbed() {
         return robbed;
     }

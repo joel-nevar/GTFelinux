@@ -85,7 +85,7 @@ public abstract class Enemy extends Character {
     }
 
     //Makes the enemy die
-    public void setDead() {
+    public void kill() {
         dead = true;
         System.out.println("Enemy déd");
     }
