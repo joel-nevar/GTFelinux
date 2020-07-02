@@ -4,7 +4,10 @@ public enum CheckpointType {
 
     START(50, 300),
     CHECKPOINT1(390, 540),
-    CHECKPOINT2(90, 800);
+    CHECKPOINT2(800, 96),
+    CHECKPOINT3(1124, 465),
+    CHECKPOINTMAP2(974, 339);
+
 
     int dx;
     int dy;

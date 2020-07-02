@@ -5,6 +5,7 @@ import org.academiadecodigo.felinux.gtfo.characters.CheckpointType;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CopCar;
 import org.academiadecodigo.felinux.gtfo.characters.enemies.CowBoss;
 import org.academiadecodigo.felinux.gtfo.characters.npcs.AssaultableCat;
+import org.academiadecodigo.felinux.gtfo.characters.npcs.CatProstitute;
 import org.academiadecodigo.felinux.gtfo.field.Area;
 import org.academiadecodigo.felinux.gtfo.field.Field;
 import org.academiadecodigo.felinux.gtfo.game.GameHandler;
@@ -82,7 +83,6 @@ public class Player extends Character {
             }
             return;
         }
-
         //In range for interaction, interact with
         interactWith.interact();
     }
@@ -174,7 +174,7 @@ public class Player extends Character {
      */
     public void playerAttackVerification() {
 
-        if(clawUsed) {
+        if(clawUsed){
 
             //Attack animation disappear
             clawTick--;

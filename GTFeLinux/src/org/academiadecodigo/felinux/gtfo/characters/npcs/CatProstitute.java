@@ -13,13 +13,13 @@ public class CatProstitute extends Npc {
         }
 
         @Override
-        public String getMessage() {
-                return "";
+        public void interact() {
+               Player.checkpoint  = checkpoint;
         }
 
         @Override
-        public void interact() {
-                Player.checkpoint = checkpoint;
+        public String getMessage() {
+                return "";
         }
 
         public boolean isVisited() {

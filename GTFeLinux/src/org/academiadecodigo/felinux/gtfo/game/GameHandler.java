@@ -29,7 +29,7 @@ public class GameHandler implements Runnable {
     private  static Picture oldLady ;
     private PlayerKeyboard playerKeyboard;
     private static Npc[] assaultableCats = new Npc[13];
-    private static Npc[] catProstitute = new Npc[2];
+    private static Npc[] catProstitute = new Npc[4];
     public static boolean firstMap = true;
     private int oneUpTimer;
     private int wastedTimer;
@@ -119,9 +119,11 @@ public class GameHandler implements Runnable {
             assaultableCats[i].getGreenLifeBar().fill();
         }
 
-        for (int i = 0; i < catProstitute.length; i++) {
-            catProstitute[i].getNpc().draw();
-        }
+
+        catProstitute[0].getNpc().draw();
+        catProstitute[1].getNpc().draw();
+        catProstitute[2].getNpc().draw();
+
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -144,9 +146,11 @@ public class GameHandler implements Runnable {
             Canvas.getInstance().hide(assaultableCats[i].getGreenLifeBar());
         }
 
-        for (int i = 0; i < catProstitute.length; i++) {
-            Canvas.getInstance().hide(catProstitute[i].getNpc());
-        }
+
+        Canvas.getInstance().hide(catProstitute[0].getNpc());
+        Canvas.getInstance().hide(catProstitute[1].getNpc());
+        Canvas.getInstance().hide(catProstitute[2].getNpc());
+
 
         /**Characters **/
         //Make a for loop when more enemies here
@@ -164,6 +168,8 @@ public class GameHandler implements Runnable {
             area.getBoundArea().draw();
 
         }
+
+        catProstitute[3].getNpc().draw();
 
         enemies[1].getEnemy().draw();
         enemies[1].getEnemyField().getArea().getBoundArea().draw();
@@ -195,6 +201,8 @@ public class GameHandler implements Runnable {
         Canvas.getInstance().hide(enemies[1].getEnemyField().getArea().getBoundArea());
         Canvas.getInstance().hide(((CowBoss) enemies[1]).getRedLifeBar());
         Canvas.getInstance().hide(((CowBoss) enemies[1]).getGreenLifeBar());
+
+        Canvas.getInstance().hide(catProstitute[3].getNpc());
     }
 
     private void moveAll(){
@@ -267,17 +275,25 @@ public class GameHandler implements Runnable {
 
     private void instanceOfCatProstitute(Npc[] catProstitute) {
 
-        int[][] catPro = new int[2][2];
+        int[][] catPro = new int[4][2];
 
         catPro[0][0] = 390;
         catPro[0][1] = 540;
         catPro[1][0] = 800;
         catPro[1][1] = 96;
+        catPro[2][0] = 1124;
+        catPro[2][1] = 465;
+        catPro[3][0] = 971;
+        catPro[3][1] = 339;
 
         catProstitute[0] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[0][0], catPro[0][1], 0);
         ((CatProstitute)catProstitute[0]).setCheckpoint(CheckpointType.CHECKPOINT1);
         catProstitute[1] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[1][0], catPro[1][1], 0);
-        ((CatProstitute)catProstitute[0]).setCheckpoint(CheckpointType.CHECKPOINT2);
+        ((CatProstitute)catProstitute[1]).setCheckpoint(CheckpointType.CHECKPOINT2);
+        catProstitute[2] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[2][0], catPro[2][1], 0);
+        ((CatProstitute)catProstitute[2]).setCheckpoint(CheckpointType.CHECKPOINT3);
+        catProstitute[3] = Factory.npcFactory(NpcType.CAT_PROSTITUTE, catPro[3][0], catPro[3][1], 0);
+        ((CatProstitute)catProstitute[3]).setCheckpoint(CheckpointType.CHECKPOINTMAP2);
 
     }
 
