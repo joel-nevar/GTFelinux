@@ -11,7 +11,7 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 
-public class Player extends Character{
+public class Player extends Character {
 
     private Field map;
     private Picture player;                     //Draws player on the field
@@ -20,12 +20,14 @@ public class Player extends Character{
     private boolean clawUsed = false;           //Checks if the claw was used or not
     private boolean dead = false;               //Checks if the player is dead
     private int energy = 300;                   //Animation scaled to 300
-    private boolean hasMilk = false;            //Checks if it has milk
+    private boolean hasMilk = false;            //Doesn't have Milk yet
     private int clawDamage = 1;                 //Damage when attacking
     private Picture energyBar;                  //Background image for the Energy bar
     private Rectangle energyAnimation;          //The actual energy bar
     private Picture hpBar;                      //Background image for the Energy bar
     private Rectangle hpAnimation;              //The actual energy bar
+    private CheckpointType checkpoint;
+    private  int loseLife;
 
     //These are used for movement
     public static float dx;
@@ -49,8 +51,11 @@ public class Player extends Character{
         this.hpAnimation = new Rectangle(207, 26, 100, 10);
         hpAnimation.setColor(new Color(255, 0, 0));
 
+        //set Checckpoint to start
+        checkpoint = CheckpointType.START;
+
         //collisionBox
-        playerArea = new Area(getPlayer().getX(),getPlayer().getY(),getPlayer().getWidth(),getPlayer().getHeight());
+        playerArea = new Area(getPlayer().getX(), getPlayer().getY(), getPlayer().getWidth(), getPlayer().getHeight());
     }
 
 
@@ -64,9 +69,9 @@ public class Player extends Character{
         Character interactWith = GameHandler.checkInteraction();
 
         //this is to check the default
-        if(interactWith instanceof Player){
+        if (interactWith instanceof Player) {
 
-            if(GameHandler.checkMilk()){
+            if (GameHandler.checkMilk()) {
                 this.hasMilk = true;
             }
             return;
@@ -150,16 +155,7 @@ public class Player extends Character{
 
         this.clawUsed = true;
         clawAnimation = new Picture(this.getPlayer().getX(), this.getPlayer().getY(), "resources/images/Claw_attack.png");
-/*
-        if (200 > (Math.abs(this.getX() - enemy.getEnemy().getX())) && 200 > (Math.abs(this.getY() - enemy.getEnemy().getY()))) {
 
-            if (enemy.getLives() <= 1) {
-                enemy.setDead();
-                return;
-            }
-            enemy.setLives(enemy.getLives() - 1);
-            System.out.println(enemy.getLives());
-        }*/
     }
 
     public int getClawTick() {
@@ -192,42 +188,42 @@ public class Player extends Character{
             return;
         }
 
-        if(collisionCheck(dx, dy)){
+        if (collisionCheck(dx, dy)) {
 
-            dx=0;
-            dy=0;
+            dx = 0;
+            dy = 0;
         }
 
         //checkUp
         if ((Field.getPADDING_Y() >= player.getY())) {
-            if(dy<=0){
-                dy=0;
+            if (dy <= 0) {
+                dy = 0;
             }
         }
 
         //checkRight
         if ((Field.width <= player.getMaxX() - Field.getPADDING_X())) {
-            if(dx>=0){
-                dx=0;
+            if (dx >= 0) {
+                dx = 0;
             }
         }
 
         //checkDown
         if ((Field.height <= player.getMaxY() - Field.getPADDING_Y())) {
-            if(dy>=0){
-                dy=0;
+            if (dy >= 0) {
+                dy = 0;
             }
         }
 
         //checkLeft
         if ((Field.getPADDING_X() >= player.getX())) {
-            if(dx<=0){
-                dx=0;
+            if (dx <= 0) {
+                dx = 0;
             }
         }
 
-        player.translate(dx,dy);
-        playerArea.getBoundArea().translate(dx,dy);
+        player.translate(dx, dy);
+        playerArea.getBoundArea().translate(dx, dy);
     }
 
     public Picture getPlayer() {
@@ -279,13 +275,13 @@ public class Player extends Character{
         this.energy = energy;
     }
 
-    public boolean collisionCheck(float dx, float dy){
+    public boolean collisionCheck(float dx, float dy) {
 
-        if(GameHandler.firstMap){
+        if (GameHandler.firstMap) {
 
-            for ( Area area : Field.notWalkable ) {
+            for (Area area : Field.notWalkable) {
 
-                if(Area.contains(playerArea ,area, dx, dy)){
+                if (Area.contains(playerArea, area, dx, dy)) {
 
                     return true;
                 }
@@ -293,7 +289,7 @@ public class Player extends Character{
             return false;
         }
 
-        for ( Area area : Field.notWalkableMap2) {
+        for (Area area : Field.notWalkableMap2) {
 
             if (Area.contains(playerArea, area, dx, dy)) {
 
@@ -305,5 +301,9 @@ public class Player extends Character{
 
     public Area getArea() {
         return playerArea;
+    }
+
+    public void toCheckpoint(){
+
     }
 }
