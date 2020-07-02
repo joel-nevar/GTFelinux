@@ -243,20 +243,20 @@ public class GameHandler implements Runnable {
 
         int[][] ratPos = new int[8][2];
 
-        ratPos[0][0] = 110;
-        ratPos[0][1] = 350;
+        ratPos[0][0] = 566;
+        ratPos[0][1] = 207;
 
-        ratPos[1][0] = 220;
-        ratPos[1][1] = 260;
+        ratPos[1][0] = 488;
+        ratPos[1][1] = 324;
 
-        ratPos[2][0] = 110;
-        ratPos[2][1] = 350;
+        ratPos[2][0] = 986;
+        ratPos[2][1] = 291;
 
-        ratPos[3][0] = 220;
-        ratPos[3][1] = 260;
+        ratPos[3][0] = 785;
+        ratPos[3][1] = 273;
 
-        ratPos[4][0] = 110;
-        ratPos[4][1] = 350;
+        ratPos[4][0] = 466;
+        ratPos[4][1] = 207;
 
         for (int i = 0; i < rats.length; i++) {
             rats[i] = Factory.npcFactory(NpcType.RAT, ratPos[i][0] ,ratPos[i][1], i);
@@ -287,7 +287,7 @@ public class GameHandler implements Runnable {
         enemyPos[1][0] = 220;
         enemyPos[1][1] = 200;
 
-        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
+        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "copCar");
         enemies[1] = Factory.enemyFactory(EnemyType.COW_BOSS, enemyPos[1][0], enemyPos[1][1], "Cow2");
     }
 
