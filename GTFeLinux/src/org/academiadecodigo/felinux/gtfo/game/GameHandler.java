@@ -284,7 +284,7 @@ public class GameHandler implements Runnable {
         enemyPos[1][0] = 220;
         enemyPos[1][1] = 200;
 
-        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "Cow");
+        enemies[0] = Factory.enemyFactory(EnemyType.COP_CAR, enemyPos[0][0], enemyPos[0][1], "copCar");
         enemies[1] = Factory.enemyFactory(EnemyType.COW_BOSS, enemyPos[1][0], enemyPos[1][1], "Cow2");
     }
 
