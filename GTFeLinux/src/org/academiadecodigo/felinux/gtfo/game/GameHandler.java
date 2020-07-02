@@ -88,8 +88,8 @@ public class GameHandler implements Runnable {
         /**
          * Game Boss
          */
+        enemies[0].addToInteractables();
         enemies[1].addToInteractables();
-
     }
 
     private void showAlways() {
@@ -387,6 +387,7 @@ public class GameHandler implements Runnable {
      * @return true if u got it right
      */
     public static boolean checkMilk() {
+
         if(player.HasMilk()) {
             System.out.println("Tenho milk");
             milk.makeMilkDisappear();
@@ -400,7 +401,7 @@ public class GameHandler implements Runnable {
     public static boolean canEnterCastle() {
 
         if (firstMap) {
-            return(Area.checkInteract(player.getArea(), mapArea, 50));
+            return(Area.checkInteract(player.getArea(), mapArea, 75));
         }
         return false;
     }

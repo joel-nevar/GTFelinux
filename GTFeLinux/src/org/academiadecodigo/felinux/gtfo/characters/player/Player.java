@@ -78,6 +78,7 @@ public class Player extends Character {
 
         //this is to check the default
         if (interactWith instanceof Player) {
+
             if (GameHandler.checkMilk()) {
                 dead = true; // para acabar o jogo
                 System.out.println("GAME OVER, YOU WIN");
@@ -236,7 +237,6 @@ public class Player extends Character {
             takeLethalDamage();
             System.out.println("hp "  + getLives());
         }
-
     }
 
     public boolean isClawUsed() {
@@ -253,10 +253,10 @@ public class Player extends Character {
             return;
         }
 
-        if (collisionCheck(dx, dy)) {
-            dx = 0;
-            dy = 0;
-        }
+            if (collisionCheck(dx, dy)) {
+                dx = 0;
+                dy = 0;
+            }
 
         enemyCollision();
 
@@ -368,6 +368,7 @@ public class Player extends Character {
         if(GameHandler.canEnterCastle()){
 
             GameHandler.changeMap();
+            GameHandler.firstMap = false;
         }
     }
 

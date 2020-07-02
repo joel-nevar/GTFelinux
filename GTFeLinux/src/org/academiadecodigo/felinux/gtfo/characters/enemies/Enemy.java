@@ -32,7 +32,8 @@ public abstract class Enemy extends Character {
      */
     @Override
     public void addToInteractables() {
-        super.addToInteractables(area, name);
+
+        super.addToInteractables(area, this);
     }
 
  //a comment
