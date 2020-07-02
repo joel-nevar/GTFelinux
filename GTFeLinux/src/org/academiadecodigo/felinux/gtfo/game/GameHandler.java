@@ -427,6 +427,12 @@ public class GameHandler implements Runnable {
         }
     }
 
+    public void checkIfPlayerHasMilk(){
+        if(player.HasMilk()){
+            player.setDead(true);
+            System.out.println("YOU WIN!!");
+        }
+    }
     @Override
     public void run() {
 
@@ -439,6 +445,7 @@ public class GameHandler implements Runnable {
                 //Check if player is attacking
                 player.playerAttackVerification();
                 checkIfPlayerGainsLife();
+                checkIfPlayerHasMilk();
 
 
             } catch (InterruptedException e) {
@@ -449,7 +456,9 @@ public class GameHandler implements Runnable {
             //Moves all the movable classes
             moveAll();
         }
-        GameSound.BACKMUSIC.sounds.stop();
-        System.out.println("GAME OVER");
+        if(!player.HasMilk()){
+            GameSound.BACKMUSIC.sounds.stop();
+            System.out.println("GAME OVER");
+        }
     }
 }
