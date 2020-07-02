@@ -384,13 +384,12 @@ public class GameHandler implements Runnable {
      */
     public static boolean checkMilk() {
 
-        if(player.HasMilk()) {
-            System.out.println("Tenho milk");
+        if(Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE)){
+            player.setHasMilk();
             milk.makeMilkDisappear();
-            Area.checkInteract(player.getArea(), milk.getArea(), INTERACT_RANGE);
             return true;
         }
-        System.out.println("Nao tenho milk");
+
         return false;
     }
 
@@ -440,7 +439,9 @@ public class GameHandler implements Runnable {
     }
 
     public void checkIfPlayerHasMilk(){
+
         if(player.HasMilk()){
+            milk.makeMilkDisappear();
             player.die();
             System.out.println("YOU WIN!!");
         }

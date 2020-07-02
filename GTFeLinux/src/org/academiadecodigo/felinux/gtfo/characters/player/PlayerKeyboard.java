@@ -172,7 +172,6 @@ public class PlayerKeyboard implements KeyboardHandler {
             player.interact();
         }
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_H){
-            GameHandler.changeMap();
         }
 
         if(keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){

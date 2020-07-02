@@ -116,6 +116,10 @@ public class Player extends Character {
         return oneUp;
     }
 
+    public void setHasMilk() {
+        hasMilk = true;
+    }
+
     public boolean HasMilk(){
         return hasMilk;
     }
