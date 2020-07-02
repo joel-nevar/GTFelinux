@@ -407,7 +407,7 @@ public class GameHandler implements Runnable {
     public static boolean canEnterCastle() {
 
         if (firstMap) {
-            return(Area.checkInteract(player.getArea(), mapArea, 100));
+            return(Area.checkInteract(player.getArea(), mapArea, 50));
         }
         return false;
     }
