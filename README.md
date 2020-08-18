@@ -26,4 +26,4 @@ Java 7, IntelliJ, Ant, OOP, Git, SimpleGFX.
 
 [Eduardo, Dudu](https://github.com/Luis-Trigueiro)
 
-[Patrício]
+[Patrício](https://github.com/Tiago-Patricio)
