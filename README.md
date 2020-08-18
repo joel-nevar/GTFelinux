@@ -19,7 +19,11 @@ Java 7, IntelliJ, Ant, OOP, Git, SimpleGFX.
 ### Team
 
 [Joel](https://github.com/joel-nevar)
+
 [David, Pikachu](https://github.com/thePikachu13)
-[Diney]
-[Eduardo, Dudu]
+
+[Diney](https://github.com/silvaney007)
+
+[Eduardo, Dudu](https://github.com/Luis-Trigueiro)
+
 [Patrício]
